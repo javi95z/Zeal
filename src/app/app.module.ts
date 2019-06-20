@@ -6,13 +6,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
+
+// Components
 import { NavbarComponent } from './pages/layout/navbar/navbar.component';
 import { SidebarComponent } from './pages/layout/sidebar/sidebar.component';
 import { FooterComponent } from './pages/layout/footer/footer.component';
-
-// Components
+import { ContentComponent } from './pages/layout/content/content.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsersAdminComponent } from './pages/admin/users/users.component';
+
+// Modules
+import { LoginModule } from './pages/auth/login/login.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,7 @@ import { UsersAdminComponent } from './pages/admin/users/users.component';
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
+    ContentComponent,
     DashboardComponent,
     UsersAdminComponent
   ],
@@ -29,6 +34,8 @@ import { UsersAdminComponent } from './pages/admin/users/users.component';
     HttpClientModule,
     AppRoutingModule,
     MaterialModule
+    MaterialModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
