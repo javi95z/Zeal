@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default card-view">
+      <div class="panel-heading">
+        <div class="pull-left">
+          <h6 class="panel-title txt-dark">Users</h6>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-wrapper collapse in">
+        <div class="panel-body">
+
+          <div class="table-wrap">
+            <div class="table-responsive" *ngIf="dataSource">
+
+              <table mat-table [dataSource]="dataSource" class="table table-hover display pb-30" matSort>
+                <!-- Name Column -->
+                <ng-container matColumnDef="first_name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                  <!-- <td mat-cell *matCellDef="let element"> {{element.position}} </!-->
+                  <td *matCellDef="let element"> {{ element.first_name }} </td>
+                </ng-container>
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                  <td *matCellDef="let element"> {{ element.email }} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <!-- <table id="datable_1" class="table table-hover display pb-30">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let u of users">
+                    <td>{{ u.first_name }} {{ u.last_name }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>
+                      <a class="btn btn-warning btn-square btn-sm mr-10" href="#"><i class="zmdi zmdi-edit"></i></a>
+                      <a class="btn btn-danger btn-square btn-sm" href="#"><i class="zmdi zmdi-delete"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </!-->
+            </div>
+            <!-- <div class="table-empty" *ngIf="!dataSource">
+              No se han encontrado registros
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
