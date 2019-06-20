@@ -33,7 +33,6 @@ import { LoginModule } from './pages/auth/login/login.module';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    MaterialModule
     MaterialModule,
     LoginModule
   ],
