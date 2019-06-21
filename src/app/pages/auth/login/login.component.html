@@ -13,27 +13,29 @@
                   <h6 class="text-center txt-grey">Enter your details below</h6>
                 </div>
                 <div class="form-wrap">
-                  <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+                  <form [formGroup]="loginForm" (ngSubmit)="logIn()">
                     <!-- Email field -->
-                    <div class="form-group">
+                    <div class="form-group"
+                      [class.has-error]="email.errors && email.dirty">
                       <label class="txt-light mb-10" for="inputEmail">Email address</label>
                       <input type="email" class="form-control"
-                          formControlName="email"
-                          name="email"
-                          id="inputEmail"
-                          placeholder="Enter email" />
+                        formControlName="email"
+                        name="email"
+                        id="inputEmail"
+                        placeholder="Enter email" />
                     </div>
                     <!-- Password field -->
-                    <div class="form-group">
+                    <div class="form-group"
+                      [class.has-error]="email.errors && email.dirty">
                       <div class="clearfix"></div>
                       <a class="txt-zeal block mb-10 pull-right font-12" href="#">Forgot password?</a>
                       <label class="txt-light mb-10" for="inputPassword">Password</label>
                       <input type="password" class="form-control"
-                          formControlName="password"
-                          name="password"
-                          required
-                          id="inputPassword"
-                          placeholder="Enter password">
+                        formControlName="password"
+                        name="password"
+                        required
+                        id="inputPassword"
+                        placeholder="Enter password">
                     </div>
                     <!-- Remember me field -->
                     <div class="form-group">

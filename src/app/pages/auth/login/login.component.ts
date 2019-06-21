@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,20 +10,35 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  // email: string;
-  // password: string;
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required)
-  });
+  loginForm: FormGroup;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private auth: AuthService) { }
 
   ngOnInit() {
+    this.createForm();
   }
 
-  signIn() {
-    this.router.navigate(['/']);
+  private createForm() {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required)
+    });
+  }
+  get email() { return this.loginForm.get('email'); }
+  get password() { return this.loginForm.get('password'); }
+
+
+  /**
+   * Log into the application
+   */
+  logIn() {
+    this.auth.doLogin(this.loginForm.value)
+        .then(
+          res => this.router.navigate(['/']),
+          rej => console.log(rej.error.message)
+        );
   }
 
 }
