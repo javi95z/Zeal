@@ -1,5 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+/**
+ * Zeal styles
+ * Override of Philbert
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: none;
+}
 .btn.btn-zeal {
   background: #ff9900;
   border: solid 1px #ff9900;
+  color: #fff;
+  &:hover,
+  &:focus,
+  &:active {
+    background: rgba(255, 153, 0, 0.70);
+    border: solid 1px rgba(255, 153, 0, 0.1);
+  }
+}
+.txt-zeal {
+  color: #ff9900 !important;
 }

@@ -1,12 +1,23 @@
-:host .auth-page {
-  background-image: url('https://images.unsplash.com/photo-1552573822-af07a7cf1e70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1997&q=80');
-  background-repeat: no-repeat;
-  background-size: cover;
+@mixin full-height {
   height: 100vh;
-  // &:before {
-  //   background-color: rgba(0, 0, 0, 0.7);
-  //   content: "";
-  //   height: 100%;
-  //   width: 100%;
-  // }
+  margin: 0;
+}
+
+:host {
+  @include full-height();
+  .auth-page {
+    background-image: url('https://images.unsplash.com/photo-1552573822-af07a7cf1e70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1997&q=80');
+    background-repeat: no-repeat;
+    background-size: cover;
+    .auth-overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    @include full-height();
+    .table-struct {
+      @include full-height();
+    }
+    .auth-form-wrap {
+      padding: unset;
+    }
+  }
 }

@@ -9,26 +9,25 @@
             <div class="row">
               <div class="col-sm-12 col-xs-12">
                 <div class="mb-30">
-                  <h3 class="text-center txt-dark mb-10">Sign in to Philbert</h3>
-                  <h6 class="text-center nonecase-font txt-grey">Enter your details below</h6>
+                  <h3 class="text-center txt-light mb-10">Welcome to <strong class="txt-zeal">Zeal</strong></h3>
+                  <h6 class="text-center txt-grey">Enter your details below</h6>
                 </div>
                 <div class="form-wrap">
-                  <!-- <form #f="ngForm" (ngSubmit)="signIn()"> -->
                   <form [formGroup]="loginForm" (ngSubmit)="signIn()">
                     <!-- Email field -->
                     <div class="form-group">
-                      <label class="control-label mb-10" for="inputEmail">Email address</label>
+                      <label class="txt-light mb-10" for="inputEmail">Email address</label>
                       <input type="email" class="form-control"
                           formControlName="email"
                           name="email"
                           id="inputEmail"
-                          placeholder="Enter email">
+                          placeholder="Enter email" />
                     </div>
                     <!-- Password field -->
                     <div class="form-group">
-                      <label class="pull-left control-label mb-10" for="inputPassword">Password</label>
-                      <a class="capitalize-font txt-primary block mb-10 pull-right font-12" href="forgot-password.html">forgot password ?</a>
                       <div class="clearfix"></div>
+                      <a class="txt-zeal block mb-10 pull-right font-12" href="#">Forgot password?</a>
+                      <label class="txt-light mb-10" for="inputPassword">Password</label>
                       <input type="password" class="form-control"
                           formControlName="password"
                           name="password"
@@ -36,9 +35,9 @@
                           id="inputPassword"
                           placeholder="Enter password">
                     </div>
-
+                    <!-- Remember me field -->
                     <div class="form-group">
-                      <div class="checkbox checkbox-primary pr-10 pull-left">
+                      <div class="checkbox checkbox-primary pr-10">
                         <input id="checkbox_2" type="checkbox">
                         <label for="checkbox_2"> Keep me logged in</label>
                       </div>
