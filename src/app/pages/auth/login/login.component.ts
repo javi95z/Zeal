@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   logIn() {
     this.auth.doLogin(this.loginForm.value)
         .then(
-          res => this.router.navigate(['/']),
+          res => this.router.navigate(['/content']),
           rej => console.log(rej.error.message)
         );
   }

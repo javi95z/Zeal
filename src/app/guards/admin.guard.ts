@@ -7,10 +7,12 @@ import { CanActivate, Router } from '@angular/router';
 })
 export class AdminGuard implements CanActivate {
 
-  constructor(public auth: AuthService, public router: Router) { }
+  constructor(
+    public auth: AuthService,
+    public router: Router) { }
 
   canActivate(): boolean {
-    return true;
+    return !!this.auth.currentUser.is_admin;
   }
 
 }

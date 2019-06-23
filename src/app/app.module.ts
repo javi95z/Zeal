@@ -8,32 +8,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 
 // Components
-import { NavbarComponent } from './pages/layout/navbar/navbar.component';
-import { SidebarComponent } from './pages/layout/sidebar/sidebar.component';
-import { FooterComponent } from './pages/layout/footer/footer.component';
-import { ContentComponent } from './pages/layout/content/content.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { UsersAdminComponent } from './pages/admin/users/users.component';
 
 // Modules
+import { SharedModule } from './pages/layout/shared.module';
+import { AdminModule } from './pages/admin/admin.module';
 import { LoginModule } from './pages/auth/login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    SidebarComponent,
-    FooterComponent,
-    ContentComponent,
-    DashboardComponent,
-    UsersAdminComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    SharedModule,
     AppRoutingModule,
     MaterialModule,
+    AdminModule,
     LoginModule
   ],
   providers: [],
