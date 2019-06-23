@@ -1,7 +1,7 @@
 import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { environment as env } from '../../environments/environment';
 
@@ -11,7 +11,8 @@ import { environment as env } from '../../environments/environment';
 export class AuthService {
 
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private currentUser: User;
+  currentUser: User;
+  httpHeaders = { headers: new HttpHeaders };
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
@@ -24,22 +25,24 @@ export class AuthService {
 
   /**
    * Login with credentials
-   * @param email Email address
-   * @param password Password
+   * @param loginData Object { user, password }
    */
-  doLogin(user): Promise<User> {
+  doLogin(loginData): Promise<User> {
     return new Promise((resolve, reject) => {
-      this.http.post(env.urlApi + '/auth/login', user)
+      this.http.post<User>(env.urlApi + '/auth/login', loginData)
           .toPromise()
           .then(res => {
-            this.currentUser = res as User;
+            this.currentUser = res;
+            this.httpHeaders.headers = new HttpHeaders({
+              'Authorization': `Bearer ${res.api_token}`
+            });
             this.loggedIn.next(true);
             resolve();
           }, rej => reject(rej) );
     });
   }
 
-  logout() {
+  doLogout() {
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }

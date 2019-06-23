@@ -1,3 +1,4 @@
+import { AdminGuard } from './guards/admin.guard';
 import { ContentComponent } from './pages/layout/content/content.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,9 +16,16 @@ const routes: Routes = [
     canActivate: [ AuthGuard ],
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'admin/users', component: UsersAdminComponent },
-      { path: '**', redirectTo: '/dashboard' },
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+      {
+        path: 'admin',
+        // component: ,
+        canActivate: [ AdminGuard ],
+        children: [
+          { path: 'users', component: UsersAdminComponent },
+          { path: '**', redirectTo: 'users' },
+        ]
+      },
+      { path: '**', redirectTo: 'dashboard' }
     ]
   }
 ];
