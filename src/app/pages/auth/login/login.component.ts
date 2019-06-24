@@ -11,6 +11,7 @@ import { AuthService } from '../../../services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  private loginError = false
 
   constructor(
     private router: Router,

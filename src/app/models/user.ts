@@ -1,4 +1,5 @@
 export interface User {
+  id: number;
   api_token: string;
   background_img: string;
   email: string;

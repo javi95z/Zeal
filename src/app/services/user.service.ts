@@ -11,8 +11,7 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService
-    ) { }
+    private auth: AuthService) { }
 
   /**
    * Get all users
@@ -21,7 +20,18 @@ export class UserService {
     return new Promise((resolve, reject) => {
       this.http.get<User[]>(env.urlApi + '/users', this.auth.httpHeaders)
           .toPromise()
-          .then(res => resolve(res as User[]));
+          .then(res => resolve(res));
+    });
+  }
+
+  /**
+   * Get one user
+   */
+  getUser(id): Promise<User> {
+    return new Promise((resolve, reject) => {
+      this.http.get<User>(`${env.urlApi}/users/${id}`, this.auth.httpHeaders)
+          .toPromise()
+          .then(res => resolve(res));
     });
   }
 }
