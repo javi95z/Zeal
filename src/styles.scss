@@ -27,3 +27,13 @@ h6 {
 .txt-zeal {
   color: #ff9900 !important;
 }
+
+// Panels
+.panel .panel-heading .panel-button {
+  color: #878787;
+  font-size: 14px;
+  i {
+    font-size: 15px;
+    margin-right: 5px;
+  }
+}
