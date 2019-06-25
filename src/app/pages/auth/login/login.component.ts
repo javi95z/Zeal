@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../services';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   logIn() {
     this.auth.doLogin(this.loginForm.value)
         .then(res => {
-          console.log(res);
           sessionStorage.setItem('token', res.access_token);
           // Get user data and enter the app
           this.auth.getUser().then(res => {
