@@ -37,15 +37,14 @@ export class LoginComponent implements OnInit {
     this.auth.doLogin(this.loginForm.value)
         .then(res => {
           sessionStorage.setItem('token', res.access_token);
-          this.auth.getUser()
-              .then(res => {
-                this.auth.userData = res;
-                this.router.navigate(['/content']);
-              });
+          return this.auth.getUser()
         },
           // TODO: Handle exception
           rej => this.loginError = rej.error.message
-        );
+        ).then(res => {
+          this.auth.userData = res;
+          this.router.navigate(['/content']);
+        });
   }
 
 }

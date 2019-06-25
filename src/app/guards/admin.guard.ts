@@ -11,8 +11,12 @@ export class AdminGuard implements CanActivate {
     public auth: AuthService,
     public router: Router) { }
 
-  canActivate(): boolean {
-    return !!this.auth.currentUser.is_admin;
+  canActivate(): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.auth.currentUser
+        .then(res => resolve(!!res.is_admin))
+        .catch(() => resolve(false));
+    });
   }
 
 }

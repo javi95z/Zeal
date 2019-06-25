@@ -14,9 +14,12 @@ export class AuthService {
   
   get isLoggedIn() { return !!sessionStorage.getItem('token'); }
   get currentUser(): Promise<User> {
-    return new Promise((resolve) =>
-      resolve(this.userData ? this.userData : this.getUser())
-    );
+    return new Promise((resolve) => {
+      if (!this.userData)
+        this.getUser().then(res => resolve(this.userData = res));
+      else
+        resolve(this.userData);
+    });
   }
 
   constructor(
