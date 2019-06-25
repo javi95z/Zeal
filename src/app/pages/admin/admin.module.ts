@@ -5,8 +5,7 @@ import { SharedModule } from '../layout/shared.module';
 import { AdminComponent } from './admin.component';
 import { UsersAdminComponent } from './users/users.component';
 import { MaterialModule } from '../../material.module';
-import { AuthGuard } from '../../guards/auth.guard';
-import { AdminGuard } from '../../guards/admin.guard';
+import { AuthGuard, AdminGuard } from '../../guards';
 
 const routes: Routes = [
   {
