@@ -42,7 +42,7 @@
                 <!-- Name Column -->
                 <ng-container matColumnDef="first_name">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                  <td *matCellDef="let element"> {{ element.first_name }} </td>
+                  <td *matCellDef="let element"> {{ element.first_name }} {{ element.last_name }} </td>
                 </ng-container>
 
                 <!-- Email Column -->
@@ -55,9 +55,9 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
             </div>
-            <!-- <div class="table-empty" *ngIf="!dataSource">
-              No se han encontrado registros
-            </div> -->
+            <div class="table-empty" *ngIf="!dataSource">
+              No records found.
+            </div>
           </div>
         </div>
       </div>

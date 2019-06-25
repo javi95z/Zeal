@@ -13,7 +13,7 @@ import { UserService } from '../../../services/user.service';
 })
 export class UsersAdminComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'select', 'first_name', 'email' ];
+  displayedColumns: string[] = ['select', 'first_name', 'email'];
   dataSource: MatTableDataSource<User>;
   selection = new SelectionModel<User>(true, []);
   // @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -24,11 +24,11 @@ export class UsersAdminComponent implements OnInit {
   constructor(private serv: UserService) { }
 
   ngOnInit() {
-    // this.serv.getUsers()
-    //     .then(data => {
-    //       this.dataSource = new MatTableDataSource(data);
-    //       this.dataSource.sort = this.sort;
-    //     });
+    this.serv.getUsers()
+        .then(data => {
+          this.dataSource = new MatTableDataSource(data);
+          this.dataSource.sort = this.sort;
+        });
   }
 
   isAllSelected() {

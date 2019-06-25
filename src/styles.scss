@@ -37,3 +37,10 @@ h6 {
     margin-right: 5px;
   }
 }
+
+// Tables
+.table {
+  .mat-row:last-of-type > td {
+    border-bottom: none;
+  }
+}

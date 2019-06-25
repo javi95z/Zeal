@@ -34,10 +34,8 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.http.post(env.urlApi + '/auth/login', loginData)
           .toPromise()
-          .then(
-            res => resolve(res), 
-            rej => reject(rej)
-          );
+          .then(res => resolve(res),
+            rej => reject(rej));
     });
   }
 

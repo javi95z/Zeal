@@ -1,7 +1,10 @@
 @import '~@angular/material/theming';
-// Plus imports for other components in your app.
 
-@include mat-core();
+// Default font
+$custom-typography: mat-typography-config(
+  $font-family: 'Poppins, sans-serif'
+);
+@include mat-core($custom-typography);
 
 $zeal-palette: (
     50 : #fff3e0,
@@ -39,6 +42,7 @@ $zeal-palette: (
 $app-primary: mat-palette($zeal-palette);
 $app-accent: mat-palette($zeal-palette);
 $app-warn: mat-palette($mat-red);
+
 
 // Create the theme object (a Sass map containing all of the palettes).
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);

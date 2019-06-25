@@ -16,22 +16,22 @@ export class UserService {
   /**
    * Get all users
    */
-  // getUsers(): Promise<User[]> {
-  //   return new Promise((resolve, reject) => {
-  //     this.http.get<User[]>(env.urlApi + '/users', this.auth.httpHeaders)
-  //         .toPromise()
-  //         .then(res => resolve(res));
-  //   });
-  // }
+  getUsers(): Promise<User[]> {
+    return new Promise((resolve, reject) => {
+      this.http.post<User[]>(`${env.urlApi}/users/index`, this.auth.headers)
+          .toPromise()
+          .then(res => resolve(res));
+    });
+  }
 
   /**
    * Get one user
    */
-  // getUser(id): Promise<User> {
-  //   return new Promise((resolve, reject) => {
-  //     this.http.get<User>(`${env.urlApi}/users/${id}`, this.auth.httpHeaders)
-  //         .toPromise()
-  //         .then(res => resolve(res));
-  //   });
-  // }
+  getUser(id): Promise<User> {
+    return new Promise((resolve, reject) => {
+      this.http.post<User>(`${env.urlApi}/users/${id}`, this.auth.headers)
+          .toPromise()
+          .then(res => resolve(res));
+    });
+  }
 }
