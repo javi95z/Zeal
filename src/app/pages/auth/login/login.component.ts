@@ -35,9 +35,16 @@ export class LoginComponent implements OnInit {
    */
   logIn() {
     this.auth.doLogin(this.loginForm.value)
-        .then(
-          res => this.router.navigate(['/content']),
-          rej => console.log(rej.error.message)
+        .then(res => {
+          sessionStorage.setItem('token', res.access_token);
+          this.auth.getUser()
+              .then(res => {
+                this.auth.userData = res;
+                this.router.navigate(['/content']);
+              });
+        },
+          // TODO: Handle exception
+          rej => this.loginError = rej.error.message
         );
   }
 

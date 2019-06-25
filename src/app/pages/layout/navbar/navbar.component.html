@@ -31,7 +31,7 @@
   <div id="mobile_only_nav" class="mobile-only-nav pull-right">
     <ul class="nav navbar-right top-nav pull-right">
       <!-- Admin settings -->
-      <li class="dropdown app-drp" data-toggle="tooltip" title="Default tooltip" *ngIf="currentUser.is_admin">
+      <li class="dropdown app-drp" data-toggle="tooltip" title="Default tooltip" *ngIf="currentUser?.is_admin">
         <a [routerLink]="['/admin']" class="dropdown-toggle" data-toggle="dropdown">
           <i class="zmdi zmdi-settings top-nav-icon"></i>
         </a>
@@ -163,7 +163,10 @@
           </li>
           <li class="divider"></li>
           <li>
-            <a href="#"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
+            <a href="javascript: void(0);" (click)="logOut()">
+              <i class="zmdi zmdi-power"></i>
+              <span>Log Out</span>
+            </a>
           </li>
         </ul>
       </li>

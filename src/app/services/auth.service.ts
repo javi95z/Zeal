@@ -1,8 +1,7 @@
-import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { User } from './../models/user';
 import { environment as env } from '../../environments/environment';
 
 @Injectable({
@@ -10,12 +9,14 @@ import { environment as env } from '../../environments/environment';
 })
 export class AuthService {
 
-  private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  currentUser: User;
-  httpHeaders = { headers: new HttpHeaders };
-
-  get isLoggedIn() {
-    return this.loggedIn.asObservable();
+  headers = { token: sessionStorage.getItem('token') }
+  userData: User;
+  
+  get isLoggedIn() { return !!sessionStorage.getItem('token'); }
+  get currentUser(): Promise<User> {
+    return new Promise((resolve) =>
+      resolve(this.userData ? this.userData : this.getUser())
+    );
   }
 
   constructor(
@@ -26,23 +27,33 @@ export class AuthService {
    * Login with credentials
    * @param loginData Object { user, password }
    */
-  doLogin(loginData): Promise<User> {
+  doLogin(loginData): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.post<User>(env.urlApi + '/auth/login', loginData)
+      this.http.post(env.urlApi + '/auth/login', loginData)
           .toPromise()
-          .then(res => {
-            this.currentUser = res;
-            this.httpHeaders.headers = new HttpHeaders({
-              'Authorization': `Bearer ${res.api_token}`
-            });
-            this.loggedIn.next(true);
-            resolve();
-          }, rej => reject(rej) );
+          .then(
+            res => resolve(res), 
+            rej => reject(rej)
+          );
     });
   }
 
+  /**
+   * Log out of the application
+   */
   doLogout() {
-    this.loggedIn.next(false);
+    this.http.post(`${env.urlApi}/auth/logout`, this.headers)
     this.router.navigate(['/login']);
+  }
+
+  /**
+   * Get logged user data
+   */
+  getUser(): Promise<User> {
+    return new Promise((resolve, reject) => {
+      this.http.post<User>(`${env.urlApi}/auth/me`, this.headers)
+          .toPromise()
+          .then(res => resolve(res));
+    });
   }
 }

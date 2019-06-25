@@ -1,10 +1,10 @@
-import { User } from './../../../models/user';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from './../../../services/user.service';
 // import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { User } from '../../../models/user';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -24,11 +24,11 @@ export class UsersAdminComponent implements OnInit {
   constructor(private serv: UserService) { }
 
   ngOnInit() {
-    this.serv.getUsers()
-        .then(data => {
-          this.dataSource = new MatTableDataSource(data);
-          this.dataSource.sort = this.sort;
-        });
+    // this.serv.getUsers()
+    //     .then(data => {
+    //       this.dataSource = new MatTableDataSource(data);
+    //       this.dataSource.sort = this.sort;
+    //     });
   }
 
   isAllSelected() {
