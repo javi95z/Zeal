@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { AuthHeaderComponent } from '../auth-header/auth-header.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../../../material.module';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    MaterialModule,
     ReactiveFormsModule
   ]
 })
