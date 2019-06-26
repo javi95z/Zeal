@@ -9,10 +9,10 @@ import { environment as env } from '../../../environments/environment';
 })
 export class AuthService {
 
-  headers = { token: sessionStorage.getItem('token') }
   userData: User;
   
-  get isLoggedIn() { return !!sessionStorage.getItem('token'); }
+  get token(): string { return sessionStorage.getItem('token'); }
+  get isLoggedIn(): boolean { return !!this.token; }
   get currentUser(): Promise<User> {
     return new Promise((resolve) => {
       if (!this.userData)
@@ -43,7 +43,7 @@ export class AuthService {
    * Log out of the application
    */
   doLogout() {
-    this.http.post(`${env.urlApi}/auth/logout`, this.headers)
+    this.http.post(`${env.urlApi}/auth/logout`, null)
     this.router.navigate(['/login']);
   }
 
@@ -52,7 +52,7 @@ export class AuthService {
    */
   getUser(): Promise<User> {
     return new Promise((resolve, reject) => {
-      this.http.post<User>(`${env.urlApi}/auth/me`, this.headers)
+      this.http.post<User>(`${env.urlApi}/auth/me`, null)
           .toPromise()
           .then(res => resolve(res));
     });

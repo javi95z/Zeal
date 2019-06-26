@@ -43,10 +43,4 @@ export class UsersAdminComponent implements OnInit {
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  // checkboxLabel(row?: User): string {
-    // if (!row) {
-    //   return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    // }
-    // return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  // }
 }
