@@ -12,6 +12,9 @@ h5,
 h6 {
   text-transform: none !important;
 }
+.page-wrapper {
+  min-height: 100vh;
+}
 .btn.btn-zeal {
   background: #ff9900;
   border: solid 1px #ff9900;
