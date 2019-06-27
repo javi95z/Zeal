@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../layout/shared.module';
 import { GenderIconComponent, LoadingComponent } from '../shared';
 import { AdminComponent } from './admin.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { UsersAdminComponent } from './users/users.component';
 import { MaterialModule } from '../../material.module';
 import { AuthGuard, AdminGuard } from '../../guards';
@@ -23,6 +24,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AdminComponent,
+    SidebarComponent,
     UsersAdminComponent,
     GenderIconComponent,
     LoadingComponent

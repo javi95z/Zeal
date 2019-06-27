@@ -10,7 +10,7 @@
             *ngIf="selection.selected.length == 1">
             <i class="zmdi zmdi-edit"></i><span>Edit</span>
           </a>
-          <a href="#" class="pull-left inline-block panel-button mr-15">
+          <a (click)="deleteUsers()" class="pull-left inline-block panel-button mr-15" href="javascript:void(0)">
             <i class="zmdi zmdi-delete"></i><span>Delete</span>
           </a>
         </div>

@@ -43,4 +43,8 @@ export class UsersAdminComponent implements OnInit {
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
+  deleteUsers() {
+    console.log(this.selection.selected);
+  }
+
 }

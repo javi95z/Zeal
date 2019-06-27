@@ -1,0 +1,29 @@
+<div class="fixed-sidebar-left">
+  <ul class="nav navbar-nav side-nav nicescroll-bar">
+    <li class="navigation-header">
+      <span>Admin</span>
+      <i class="zmdi zmdi-more"></i>
+    </li>
+    <!-- Users -->
+    <li>
+      <a [routerLink]="['users']" routerLinkActive="active">
+        <div class="pull-left">
+          <i class="zmdi zmdi-accounts-alt mr-20"></i>
+          <span class="right-nav-text">Users</span>
+        </div>
+        <div class="clearfix"></div>
+      </a>
+    </li>
+    <!-- Other -->
+    <li>
+      <a [routerLink]="['admin']" routerLinkActive="active">
+        <div class="pull-left">
+          <i class="zmdi zmdi-more mr-20"></i>
+          <span class="right-nav-text">Other</span>
+        </div>
+        <div class="clearfix"></div>
+      </a>
+    </li>
+    <li><hr class="light-grey-hr mb-10"/></li>
+  </ul>
+</div>
