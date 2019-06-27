@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../layout/shared.module';
+import { LoadingComponent } from '../shared';
 import { AdminComponent } from './admin.component';
 import { UsersAdminComponent } from './users/users.component';
 import { MaterialModule } from '../../material.module';
@@ -22,7 +23,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AdminComponent,
-    UsersAdminComponent
+    UsersAdminComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,

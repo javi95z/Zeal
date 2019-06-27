@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-// import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { User } from '../../../models';
 import { UserService } from '../../../services';
@@ -13,22 +11,24 @@ import { UserService } from '../../../services';
 })
 export class UsersAdminComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'first_name', 'email'];
-  dataSource: MatTableDataSource<User>;
+  displayedColumns: string[] = ['select', 'name', 'email'];
+  dataSource = new MatTableDataSource<User>();
   selection = new SelectionModel<User>(true, []);
-  // @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  users: User[];
+  isLoading = true;
+  
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private serv: UserService) { }
 
   ngOnInit() {
     this.serv.getUsers()
-        .then(data => {
-          this.dataSource = new MatTableDataSource(data);
-          this.dataSource.sort = this.sort;
-        });
+      .then(data => {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        setTimeout(() => this.dataSource.paginator = this.paginator);
+      })
+      .finally(() => this.isLoading = false);
   }
 
   isAllSelected() {
