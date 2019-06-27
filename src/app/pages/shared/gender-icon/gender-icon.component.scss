@@ -1,0 +1,17 @@
+i {
+  display: inline-block;
+  font-family: 'Material-Design-Iconic-Font';
+  font-size: 1.5em;
+  line-height: .75em;
+  text-align: center;
+  vertical-align: -15%;
+  width: 1em;
+  &.female {
+    color: #f99dff;
+    &:before { content: '\f20f'; }
+  }
+  &.male {
+    color: #6e9ef6;
+    &:before { content: '\f210'; }
+  }
+}

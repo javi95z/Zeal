@@ -41,13 +41,21 @@
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                  <td *matCellDef="let element"> {{ element.first_name }} {{ element.last_name }} </td>
+                  <td *matCellDef="let element"> {{ element?.first_name }} {{ element?.last_name }} </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="email">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                  <td *matCellDef="let element"> {{ element.email }} </td>
+                  <td *matCellDef="let element"> {{ element?.email }} </td>
+                </ng-container>
+
+                <!-- Gender Column -->
+                <ng-container matColumnDef="gender">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+                  <td *matCellDef="let element">
+                    <z-gender-icon [gender]="element?.gender"></z-gender-icon>
+                  </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
