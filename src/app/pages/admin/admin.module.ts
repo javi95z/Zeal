@@ -6,6 +6,7 @@ import { GenderIconComponent, LoadingComponent } from '../shared';
 import { AdminComponent } from './admin.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { UsersAdminComponent } from './users/users.component';
+import { ProfileComponent } from './users/profile/profile.component';
 import { MaterialModule } from '../../material.module';
 import { AuthGuard, AdminGuard } from '../../guards';
 
@@ -16,6 +17,7 @@ const routes: Routes = [
     canActivate: [ AuthGuard, AdminGuard ],
     children: [
       { path: 'users', component: UsersAdminComponent },
+      { path: 'users/profile/:id', component: ProfileComponent },
       { path: '**', redirectTo: 'users' },
     ]
   }
@@ -27,7 +29,8 @@ const routes: Routes = [
     SidebarComponent,
     UsersAdminComponent,
     GenderIconComponent,
-    LoadingComponent
+    LoadingComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
