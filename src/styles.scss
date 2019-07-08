@@ -12,6 +12,11 @@ h5,
 h6 {
   text-transform: none !important;
 }
+
+.wrapper.theme-1-active.color-zeal
+.fixed-sidebar-left .side-nav > li > a.active {
+  color: #ff9900;
+}
 .page-wrapper {
   min-height: 100vh;
 }
