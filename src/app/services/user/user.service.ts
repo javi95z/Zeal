@@ -18,7 +18,8 @@ export class UserService {
     return new Promise((resolve, reject) => {
       this.http.post<User[]>(`${env.urlApi}/users/index`, null)
           .toPromise()
-          .then(res => resolve(res));
+          .then(res => resolve(res))
+          .catch(rej => reject(rej));
     });
   }
 
@@ -29,7 +30,17 @@ export class UserService {
     return new Promise((resolve, reject) => {
       this.http.post<User>(`${env.urlApi}/users/${id}`, null)
           .toPromise()
-          .then(res => resolve(res));
+          .then(res => resolve(res))
+          .catch(rej => reject(rej));
+    });
+  }
+
+  deleteUser(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(`${env.urlApi}/users/${id}`)
+          .toPromise()
+          .then(res => resolve(res))
+          .catch(rej => reject(rej));
     });
   }
 }

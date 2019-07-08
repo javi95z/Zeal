@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
             this.auth.userData = res;
             this.router.navigate(['/content']);
           });
-        }, rej => this.loginError = rej.error);
+        }, rej => this.loginError = (typeof rej.error === 'string') ? rej.error : 'Unknown error');
   }
-
 }

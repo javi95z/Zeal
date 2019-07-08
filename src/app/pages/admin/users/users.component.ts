@@ -13,7 +13,7 @@ export class UsersAdminComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'name', 'email', 'gender'];
   dataSource = new MatTableDataSource<User>();
-  selection = new SelectionModel<User>(true, []);
+  selection: SelectionModel<User>;
   isLoading = true;
   
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -22,7 +22,12 @@ export class UsersAdminComponent implements OnInit {
   constructor(private serv: UserService) { }
 
   ngOnInit() {
-    this.serv.getUsers()
+    this.initData();
+  }
+
+  initData() {
+    this.selection = new SelectionModel<User>(true, []);
+    this.user.getUsers()
       .then(data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
@@ -37,14 +42,17 @@ export class UsersAdminComponent implements OnInit {
     return numSelected === numRows;
   }
 
-  masterToggle() {    
+  masterToggle() {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  deleteUsers() {
-    console.log(this.selection.selected);
+  deleteUser() {
+    const id = this.selection.selected.reduce((r, o) => r.concat(o.id), []).toString();
+    this.user.deleteUser(id)
+        .then(() => this.initData())
+        .catch(err => console.error(err));
   }
 
 }

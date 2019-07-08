@@ -5,12 +5,11 @@
         <div class="pull-left">
           <h6 class="panel-title txt-dark">Users</h6>
         </div>
-        <div class="pull-right" *ngIf="selection.selected.length">
-          <a href="#" class="pull-left inline-block panel-button mr-15"
-            *ngIf="selection.selected.length == 1">
+        <div class="pull-right" *ngIf="selection.selected.length && selection.selected.length == 1">
+          <a class="pull-left inline-block panel-button mr-15" href="javascript:void(0)">
             <i class="zmdi zmdi-edit"></i><span>Edit</span>
           </a>
-          <a (click)="deleteUsers()" class="pull-left inline-block panel-button mr-15" href="javascript:void(0)">
+          <a (click)="deleteUser()" class="pull-left inline-block panel-button mr-15" href="javascript:void(0)">
             <i class="zmdi zmdi-delete"></i><span>Delete</span>
           </a>
         </div>
