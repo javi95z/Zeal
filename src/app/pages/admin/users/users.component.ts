@@ -15,11 +15,11 @@ export class UsersAdminComponent implements OnInit {
   dataSource = new MatTableDataSource<User>();
   selection: SelectionModel<User>;
   isLoading = true;
-  
+
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-  constructor(private serv: UserService) { }
+  constructor(private user: UserService) { }
 
   ngOnInit() {
     this.initData();
