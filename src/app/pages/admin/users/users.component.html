@@ -64,7 +64,8 @@
               </table>
               <mat-paginator [length]="dataSource.data.length"
                 [pageSize]="8"
-                [pageSizeOptions]="[8, 20, 50, 100]">
+                [pageSizeOptions]="[8, 20, 50, 100]"
+                showFirstLastButtons>
               </mat-paginator>
             </div>
             <div class="table-empty" *ngIf="!dataSource">

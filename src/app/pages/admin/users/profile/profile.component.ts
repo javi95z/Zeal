@@ -11,6 +11,7 @@ import { UserService } from '../../../../services';
 export class ProfileComponent implements OnInit {
 
   user: User;
+  isLoading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,7 +21,8 @@ export class ProfileComponent implements OnInit {
     this.route.params.subscribe(data => {
       if (data.id) {
         this.users.getUser(data.id)
-            .then(res => this.user = res);
+            .then(res => this.user = res)
+            .finally(() => this.isLoading = false);
       }
     })
     
