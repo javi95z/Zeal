@@ -1,25 +1,30 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
-import { User } from '../../../models';
-import { UserService } from '../../../services';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import {
+  MatTableDataSource,
+  MatPaginator,
+  MatSort,
+  MatDialog
+} from "@angular/material";
+import { SelectionModel } from "@angular/cdk/collections";
+import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
+import { User } from "../../../models";
+import { UserService } from "../../../services";
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  selector: "z-admin-users",
+  templateUrl: "./users.component.html",
+  styleUrls: ["./users.component.scss"]
 })
 export class UsersAdminComponent implements OnInit {
-
-  displayedColumns: string[] = ['select', 'name', 'email', 'gender'];
+  displayedColumns: string[] = ["select", "name", "email", "gender"];
   dataSource = new MatTableDataSource<User>();
   selection: SelectionModel<User>;
   isLoading = true;
 
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private user: UserService) { }
+  constructor(public dialog: MatDialog, private user: UserService) {}
 
   ngOnInit() {
     this.initData();
@@ -27,13 +32,14 @@ export class UsersAdminComponent implements OnInit {
 
   initData() {
     this.selection = new SelectionModel<User>(true, []);
-    this.user.getUsers()
+    this.user
+      .getUsers()
       .then(data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
-        setTimeout(() => this.dataSource.paginator = this.paginator);
+        setTimeout(() => (this.dataSource.paginator = this.paginator));
       })
-      .finally(() => this.isLoading = false);
+      .finally(() => (this.isLoading = false));
   }
 
   isAllSelected() {
@@ -43,16 +49,34 @@ export class UsersAdminComponent implements OnInit {
   }
 
   masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
+  editUser() {
+    if (this.selection.selected.length !== 1) return null;
+    const dialogRef = this.dialog.open(EditUserDialog, {
+      width: "600px",
+      data: this.selection.selected[0]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+    });
+  }
+
+  /**
+   * Remove user from table
+   * API request for deletion
+   */
   deleteUser() {
-    const id = this.selection.selected.reduce((r, o) => r.concat(o.id), []).toString();
-    this.user.deleteUser(id)
-        .then(() => this.initData())
-        .catch(err => console.error(err));
+    const id = this.selection.selected
+      .reduce((r, o) => r.concat(o.id), [])
+      .toString();
+    this.user
+      .deleteUser(id)
+      .then(() => this.initData())
+      .catch(err => console.error(err));
   }
-
 }

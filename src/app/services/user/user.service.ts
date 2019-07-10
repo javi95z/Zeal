@@ -43,12 +43,4 @@ export class UserService {
     });
   }
 
-  removeUser(id): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.http.delete<User>(`${env.urlApi}/users/${id}`, null)
-          .toPromise()
-          .then(res => resolve(res))
-          .catch(rej => reject(rej));
-    });
-  }
 }

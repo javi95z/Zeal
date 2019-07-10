@@ -9,6 +9,7 @@ import { UsersAdminComponent } from './users/users.component';
 import { ProfileComponent } from './users/profile/profile.component';
 import { MaterialModule } from '../../material.module';
 import { AuthGuard, AdminGuard } from '../../guards';
+import { EditUserDialog } from './users/edit-dialog/edit-dialog.component';
 
 const routes: Routes = [
   {
@@ -30,13 +31,17 @@ const routes: Routes = [
     UsersAdminComponent,
     GenderIconComponent,
     LoadingComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditUserDialog
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
     MaterialModule
+  ],
+  entryComponents: [
+    EditUserDialog
   ]
 })
 export class AdminModule { }
