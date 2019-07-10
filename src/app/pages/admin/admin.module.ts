@@ -1,25 +1,23 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../layout/shared.module';
-import { GenderIconComponent, LoadingComponent } from '../shared';
-import { AdminComponent } from './admin.component';
-import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { UsersAdminComponent } from './users/users.component';
-import { ProfileComponent } from './users/profile/profile.component';
-import { MaterialModule } from '../../material.module';
-import { AuthGuard, AdminGuard } from '../../guards';
-import { EditUserDialog } from './users/edit-dialog/edit-dialog.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule, Routes } from "@angular/router";
+import { UsersAdminComponent, ProfileComponent, EditUserDialog } from "./users";
+import { GenderIconComponent, LoadingComponent } from "../shared";
+import { AdminComponent } from "./admin.component";
+import { SidebarComponent } from "./layout/sidebar/sidebar.component";
+import { SharedModule } from "../layout/shared.module";
+import { MaterialModule } from "../../material.module";
+import { AuthGuard, AdminGuard } from "../../guards";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: AdminComponent,
-    canActivate: [ AuthGuard, AdminGuard ],
+    canActivate: [AuthGuard, AdminGuard],
     children: [
-      { path: 'users', component: UsersAdminComponent },
-      { path: 'users/profile/:id', component: ProfileComponent },
-      { path: '**', redirectTo: 'users' },
+      { path: "users", component: UsersAdminComponent },
+      { path: "users/profile/:id", component: ProfileComponent },
+      { path: "**", redirectTo: "users" }
     ]
   }
 ];
@@ -40,8 +38,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MaterialModule
   ],
-  entryComponents: [
-    EditUserDialog
-  ]
+  entryComponents: [EditUserDialog]
 })
-export class AdminModule { }
+export class AdminModule {}
