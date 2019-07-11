@@ -1,4 +1,4 @@
-export interface User {
+interface User {
   id: number;
   api_token: string;
   background_img: string;

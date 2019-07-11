@@ -7,7 +7,6 @@ import {
 } from "@angular/material";
 import { SelectionModel } from "@angular/cdk/collections";
 import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
-import { User } from "../../../models";
 import { UserService } from "../../../services";
 
 @Component({
