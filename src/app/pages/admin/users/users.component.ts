@@ -56,7 +56,7 @@ export class UsersAdminComponent implements OnInit {
   editUser() {
     if (this.selection.selected.length !== 1) return null;
     const dialogRef = this.dialog.open(EditUserDialog, {
-      width: "600px",
+      panelClass: "modal-dialog-box",
       data: this.selection.selected[0]
     });
 

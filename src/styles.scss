@@ -14,7 +14,10 @@ h6 {
 }
 
 .wrapper.theme-1-active.color-zeal
-.fixed-sidebar-left .side-nav > li > a.active {
+  .fixed-sidebar-left
+  .side-nav
+  > li
+  > a.active {
   color: #ff9900;
 }
 .page-wrapper {
@@ -27,7 +30,7 @@ h6 {
   &:hover,
   &:focus,
   &:active {
-    background: rgba(255, 153, 0, 0.70);
+    background: rgba(255, 153, 0, 0.7);
     border: solid 1px rgba(255, 153, 0, 0.1);
     color: #fff;
   }
@@ -51,4 +54,11 @@ h6 {
   .mat-row:last-of-type > td {
     border-bottom: none;
   }
+}
+
+// Modals
+.modal-dialog-box {
+  height: 70vh;
+  max-width: 80vw;
+  width: 600px;
 }

@@ -1,30 +1,26 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { ContentComponent } from "./content/content.component";
 import { FooterComponent } from "./footer/footer.component";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { CapitalizePipe } from '../../pipes/capitalize/capitalize.pipe';
+
+const components = [
+  ContentComponent,
+  NavbarComponent,
+  SidebarComponent,
+  FooterComponent,
+  CapitalizePipe
+];
 
 @NgModule({
-  declarations: [
-    ContentComponent,
-    NavbarComponent,
-    SidebarComponent,
-    FooterComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+  declarations: components,
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   exports: [
-    ContentComponent,
-    NavbarComponent,
-    SidebarComponent,
-    FooterComponent,
+    ...components,
     FormsModule,
     ReactiveFormsModule
   ]
