@@ -1,3 +1,14 @@
 mat-form-field {
   width: 100%;
 }
+
+button {
+  .zmdi {
+    display: block;
+    font-size: 30px;
+    margin-top: 10px;
+  }
+  bottom: 25px;
+  position: absolute;
+  right: 25px;
+}
