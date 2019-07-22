@@ -53,7 +53,7 @@ export class UsersAdminComponent implements OnInit {
       : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  editUser() {
+  editUserDialog() {
     if (this.selection.selected.length !== 1) return null;
     const dialogRef = this.dialog.open(EditUserDialog, {
       panelClass: "modal-dialog-box",
@@ -61,8 +61,23 @@ export class UsersAdminComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: User) => {
-      console.log(result);
+      if (result) this.updateUser(result);
     });
+  }
+
+  /**
+   * Update user from table
+   * API request for modification
+   * @param user 
+   */
+  updateUser(user: User) {
+    const id = this.selection.selected
+      .reduce((r, o) => r.concat(o.id), [])
+      .toString();
+    this.user
+      .updateUser(id, user)
+      .then(() => this.initData())
+      .catch(err => console.error(err));
   }
 
   /**

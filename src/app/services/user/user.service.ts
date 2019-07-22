@@ -22,7 +22,7 @@ export class UserService {
   }
 
   /**
-   * Get one user
+   * Get one user by id
    * @param id 
    */
   getUser(id): Promise<User> {
@@ -35,7 +35,21 @@ export class UserService {
   }
 
   /**
-   * Delete one user
+   * Update one user by id
+   * @param id 
+   * @param user 
+   */
+  updateUser(id, user: User): Promise<User> {
+    return new Promise((resolve, reject) => {
+      this.http.put<User>(`${env.urlApi}/users/${id}`, user)
+          .toPromise()
+          .then(res => resolve(res))
+          .catch(rej => reject(rej));
+    });
+  }
+
+  /**
+   * Delete one user by id
    * @param id 
    */
   deleteUser(id): Promise<any> {

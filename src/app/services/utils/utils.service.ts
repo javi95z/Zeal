@@ -23,7 +23,6 @@ export class UtilsService {
           type: typeof item[1] === "string" ? "text" : "number"
         });
     });
-    console.log(result);
     return result;
   }
 }
