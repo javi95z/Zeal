@@ -4,7 +4,7 @@ interface User {
   background_img: string;
   email: string;
   first_name: string;
-  gender: string;
+  gender: "female" | "male";
   is_admin: boolean;
   last_name: string;
   profile_img: string;

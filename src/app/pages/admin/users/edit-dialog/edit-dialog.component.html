@@ -1,3 +1,10 @@
-<p>
-  {{ user | json }}
-</p>
+<form novalidate [formGroup]="form">
+  <ng-container *ngFor="let item of fieldsForm"> 
+    <mat-form-field *ngIf="['text', 'number'].includes(item.type)">
+      <input matInput [type]="item.type"
+        [formControlName]="item.name"
+        [placeholder]="item.name | capitalize">
+    </mat-form-field>
+  </ng-container>
+  <button mat-raised-button class="pull-right" (click)="onSubmit()">Submit</button>
+</form>

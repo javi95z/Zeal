@@ -60,8 +60,8 @@ export class UsersAdminComponent implements OnInit {
       data: this.selection.selected[0]
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");
+    dialogRef.afterClosed().subscribe((result: User) => {
+      console.log(result);
     });
   }
 

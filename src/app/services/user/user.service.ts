@@ -23,6 +23,7 @@ export class UserService {
 
   /**
    * Get one user
+   * @param id 
    */
   getUser(id): Promise<User> {
     return new Promise((resolve, reject) => {
@@ -33,6 +34,10 @@ export class UserService {
     });
   }
 
+  /**
+   * Delete one user
+   * @param id 
+   */
   deleteUser(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.delete(`${env.urlApi}/users/${id}`)
