@@ -1,8 +1,14 @@
 <form novalidate [formGroup]="form">
   <ng-container *ngFor="let item of fieldsForm">
-    <mat-form-field *ngIf="['text', 'number'].includes(item.type)">
-      <input matInput [type]="item.type" [formControlName]="item.name" [placeholder]="item.name | capitalize">
+    <mat-form-field *ngIf="item.type === 'string'">
+      <input matInput type="text" [formControlName]="item.name" [placeholder]="item.name | capitalize">
     </mat-form-field>
+    <mat-form-field *ngIf="item.type === 'number'">
+      <input matInput type="number" [formControlName]="item.name" [placeholder]="item.name | capitalize">
+    </mat-form-field>
+    <section class="mb-20" *ngIf="item.type === 'boolean'">
+      <mat-checkbox [formControlName]="item.name">{{ item.name | capitalize }}</mat-checkbox>
+    </section>
   </ng-container>
   <button mat-raised-button class="pull-right" (click)="onSubmit()" *ngIf="form.dirty">
     <i class="zmdi zmdi-check"></i>

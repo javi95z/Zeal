@@ -76,7 +76,7 @@ export class UsersAdminComponent implements OnInit {
       .toString();
     this.user
       .updateUser(id, user)
-      .then(() => this.initData())
+      .then(() => this.onUserUpdated())
       .catch(err => console.error(err));
   }
 
@@ -90,7 +90,17 @@ export class UsersAdminComponent implements OnInit {
       .toString();
     this.user
       .deleteUser(id)
-      .then(() => this.initData())
+      .then(() => this.onUserDeleted())
       .catch(err => console.error(err));
+  }
+
+  onUserUpdated() {
+    // TODO: Notification
+    this.initData();
+  }
+
+  onUserDeleted() {
+    // TODO: Notification
+    this.initData();
   }
 }
