@@ -51,6 +51,12 @@
                   <td *matCellDef="let element"> {{ element?.email }} </td>
                 </ng-container>
 
+                <!-- Role Column -->
+                <ng-container matColumnDef="role">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+                  <td *matCellDef="let element"> {{ element.role?.name }} </td>
+                </ng-container>
+
                 <!-- Gender Column -->
                 <ng-container matColumnDef="gender">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>

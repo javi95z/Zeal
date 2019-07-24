@@ -15,7 +15,7 @@ import { UserService } from "../../../services";
   styleUrls: ["./users.component.scss"]
 })
 export class UsersAdminComponent implements OnInit {
-  displayedColumns: string[] = ["select", "name", "email", "gender"];
+  displayedColumns: string[] = ["select", "name", "email", "role", "gender"];
   dataSource = new MatTableDataSource<User>();
   selection: SelectionModel<User>;
   isLoading = true;
