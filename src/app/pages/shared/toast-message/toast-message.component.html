@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <div *ngFor="let item of messages | async" [class]="item.style">
+    <aside *ngIf="!item.dismissed">
+      <p>
+        <button type="button" class="close" (click)="removeToast(item)">×</button>
+        {{ item.content }}
+      </p>
+    </aside>
+  </div>
+</div>
