@@ -14,4 +14,8 @@ export class ToastMessageComponent implements OnInit {
   ngOnInit() {
     this.messages = this.toast.getMessages();
   }
+
+  remove(message) {
+    this.toast.removeToast(message);
+  }
 }

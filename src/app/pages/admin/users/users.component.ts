@@ -7,7 +7,7 @@ import {
 } from "@angular/material";
 import { SelectionModel } from "@angular/cdk/collections";
 import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
-import { UserService } from "../../../services";
+import { UserService, ToastService } from "../../../services";
 
 @Component({
   selector: "z-admin-users",
@@ -23,7 +23,11 @@ export class UsersAdminComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(public dialog: MatDialog, private user: UserService) {}
+  constructor(
+    private user: UserService,
+    private toast: ToastService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.initData();
@@ -54,14 +58,18 @@ export class UsersAdminComponent implements OnInit {
   }
 
   editUserDialog() {
-    if (this.selection.selected.length !== 1) { return null; }
+    if (this.selection.selected.length !== 1) {
+      return null;
+    }
     const dialogRef = this.dialog.open(EditUserDialog, {
       panelClass: "modal-dialog-box",
       data: this.selection.selected[0]
     });
 
     dialogRef.afterClosed().subscribe((result: User) => {
-      if (result) { this.updateUser(result); }
+      if (result) {
+        this.updateUser(result);
+      }
     });
   }
 
@@ -88,9 +96,12 @@ export class UsersAdminComponent implements OnInit {
     const id = this.selection.selected
       .reduce((r, o) => r.concat(o.id), [])
       .toString();
+    const name = this.selection.selected
+      .reduce((r, o) => r.concat(`${o.first_name} ${o.last_name}`), [])
+      .toString();
     this.user
       .deleteUser(id)
-      .then(() => this.onUserDeleted())
+      .then(() => this.onUserDeleted(name))
       .catch(err => console.error(err));
   }
 
@@ -99,8 +110,8 @@ export class UsersAdminComponent implements OnInit {
     this.initData();
   }
 
-  onUserDeleted() {
-    // TODO: Notification
+  onUserDeleted(name: string) {
+    this.toast.setMessage(`User ${name} deleted successfully.`);
     this.initData();
   }
 }

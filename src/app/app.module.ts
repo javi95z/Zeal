@@ -11,10 +11,19 @@ import { RequestInterceptor } from "./guards/request.interceptor";
 // Components
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 
+// Services
+import { ToastService } from "./services";
+
 // Modules
 import { SharedModule } from "./pages/layout/shared.module";
 import { AdminModule } from "./pages/admin/admin.module";
 import { LoginModule } from "./pages/auth/login/login.module";
+
+const httpProvider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: RequestInterceptor,
+  multi: true
+};
 
 @NgModule({
   declarations: [AppComponent, DashboardComponent],
@@ -28,13 +37,7 @@ import { LoginModule } from "./pages/auth/login/login.module";
     AdminModule,
     LoginModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RequestInterceptor,
-      multi: true
-    }
-  ],
+  providers: [httpProvider, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
