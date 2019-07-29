@@ -84,7 +84,7 @@ export class UsersAdminComponent implements OnInit {
       .toString();
     this.user
       .updateUser(id, user)
-      .then(() => this.onUserUpdated())
+      .then(() => this.onUserUpdated(`${user.first_name} ${user.last_name}`))
       .catch(err => console.error(err));
   }
 
@@ -105,8 +105,8 @@ export class UsersAdminComponent implements OnInit {
       .catch(err => console.error(err));
   }
 
-  onUserUpdated() {
-    // TODO: Notification
+  onUserUpdated(name: string) {
+    this.toast.setMessage(`User ${name} updated successfully.`);
     this.initData();
   }
 
