@@ -9,4 +9,6 @@ interface User {
   last_name: string;
   profile_img: string;
   suffix: string;
+  updated_at?: string | Date;
+  created_at?: string | Date;
 }

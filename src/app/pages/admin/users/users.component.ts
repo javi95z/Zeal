@@ -54,21 +54,21 @@ export class UsersAdminComponent implements OnInit {
   }
 
   editUserDialog() {
-    if (this.selection.selected.length !== 1) return null;
+    if (this.selection.selected.length !== 1) { return null; }
     const dialogRef = this.dialog.open(EditUserDialog, {
       panelClass: "modal-dialog-box",
       data: this.selection.selected[0]
     });
 
     dialogRef.afterClosed().subscribe((result: User) => {
-      if (result) this.updateUser(result);
+      if (result) { this.updateUser(result); }
     });
   }
 
   /**
    * Update user from table
    * API request for modification
-   * @param user 
+   * @param user User
    */
   updateUser(user: User) {
     const id = this.selection.selected

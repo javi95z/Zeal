@@ -3,10 +3,15 @@
     <div class="panel panel-default card-view">
       <div class="panel-heading">
         <div class="pull-left">
-          <h6 class="panel-title txt-dark">{{ user?.first_name }} {{ user?.last_name }}</h6>
+          <h6 class="panel-title txt-dark">
+            {{ user?.first_name }} {{ user?.last_name }}
+          </h6>
         </div>
         <div class="pull-right">
-          <a [routerLink]="['users']" class="pull-left inline-block panel-button mr-15">
+          <a
+            [routerLink]="['users']"
+            class="pull-left inline-block panel-button mr-15"
+          >
             <i class="zmdi zmdi-arrow-left"></i><span>Back</span>
           </a>
         </div>
@@ -20,31 +25,31 @@
             <div class="table-responsive">
               <table class="table display pb-30">
                 <tr>
-                  <td> Suffix </td>
+                  <td>Suffix</td>
                   <td>{{ user?.suffix }}</td>
                 </tr>
                 <tr>
-                  <td> Fullname </td>
+                  <td>Fullname</td>
                   <td>{{ user?.first_name }} {{ user?.last_name }}</td>
                 </tr>
                 <tr>
-                  <td> Email </td>
+                  <td>Email</td>
                   <td>{{ user?.email }}</td>
                 </tr>
                 <tr>
-                  <td> Gender </td>
+                  <td>Gender</td>
                   <td>
                     <z-gender-icon [gender]="user?.gender"></z-gender-icon>
                     {{ user?.gender }}
                   </td>
                 </tr>
                 <tr>
-                  <td> Created at </td>
-                  <td>{{ user?.created_at | date:"dd/MM/yyyy H:m:s" }}</td>
+                  <td>Created at</td>
+                  <td>{{ user?.created_at | date: "dd/MM/yyyy H:m:s" }}</td>
                 </tr>
                 <tr>
-                  <td> Updated at </td>
-                  <td>{{ user?.updated_at | date:"dd/MM/yyyy H:m:s" }}</td>
+                  <td>Updated at</td>
+                  <td>{{ user?.updated_at | date: "dd/MM/yyyy H:m:s" }}</td>
                 </tr>
               </table>
             </div>
