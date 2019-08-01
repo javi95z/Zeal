@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { AuthGuard, AdminGuard } from "../../guards";
 import { AdminComponent } from "./admin.component";
 import { UsersAdminComponent, ProfileComponent } from "./users";
+import { ProjectsComponent } from './projects';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,7 @@ export const routes: Routes = [
     children: [
       { path: "users", component: UsersAdminComponent },
       { path: "users/profile/:id", component: ProfileComponent },
+      { path: "projects", component: ProjectsComponent },
       { path: "**", redirectTo: "users" }
     ]
   }

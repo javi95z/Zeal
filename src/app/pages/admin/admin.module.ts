@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { UsersAdminComponent, ProfileComponent, EditUserDialog } from "./users";
+import { ProjectsComponent } from './projects';
 import { GenderIconComponent, LoadingComponent } from "../shared";
 import { AdminComponent } from "./admin.component";
 import { SidebarComponent } from "./layout/sidebar/sidebar.component";
@@ -17,7 +18,8 @@ import { routes } from './admin-routing';
     GenderIconComponent,
     LoadingComponent,
     ProfileComponent,
-    EditUserDialog
+    EditUserDialog,
+    ProjectsComponent
   ],
   imports: [
     CommonModule,
