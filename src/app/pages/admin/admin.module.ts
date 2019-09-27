@@ -1,14 +1,12 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { RouterModule } from "@angular/router";
-import { UsersAdminComponent, ProfileComponent, EditUserDialog } from "./users";
-import { ProjectsComponent } from './projects';
-import { GenderIconComponent, LoadingComponent } from "../shared";
-import { AdminComponent } from "./admin.component";
-import { SidebarComponent } from "./layout/sidebar/sidebar.component";
-import { SharedModule } from "../layout/shared.module";
-import { MaterialModule } from "../../material.module";
-import { routes } from './admin-routing';
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {RouterModule} from "@angular/router";
+import {EditUserDialog, ProfileComponent, ProjectsComponent, SidebarComponent, UsersAdminComponent} from "./";
+import {GenderIconComponent, LoadingComponent} from "../shared";
+import {AdminComponent} from "./admin.component";
+import {SharedModule} from "../layout/shared.module";
+import {MaterialModule} from "../../material.module";
+import {routes} from "./admin-routing";
 
 @NgModule({
   declarations: [
@@ -29,4 +27,5 @@ import { routes } from './admin-routing';
   ],
   entryComponents: [EditUserDialog]
 })
-export class AdminModule {}
+export class AdminModule {
+}
