@@ -8,6 +8,7 @@ import {
 import { SelectionModel } from "@angular/cdk/collections";
 import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
 import { UserService, ToastService } from "../../../services";
+import {User} from "../../../models";
 
 @Component({
   selector: "z-admin-users",

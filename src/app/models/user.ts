@@ -1,4 +1,4 @@
-interface User {
+export class User {
   id: number;
   api_token: string;
   background_img: string;
@@ -11,4 +11,12 @@ interface User {
   suffix: string;
   updated_at?: string | Date;
   created_at?: string | Date;
+
+  constructor(values: User) {
+    Object.assign(this, values);
+  }
+
+  getFullName(): string {
+    return `${this.first_name} ${this.last_name}`;
+  }
 }
