@@ -16,7 +16,7 @@ export class User {
     Object.assign(this, values);
   }
 
-  getFullName(): string {
+  get fullName(): string {
     return `${this.first_name} ${this.last_name}`;
   }
 }

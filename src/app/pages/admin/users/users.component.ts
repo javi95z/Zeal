@@ -8,7 +8,7 @@ import {
 import { SelectionModel } from "@angular/cdk/collections";
 import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
 import { UserService, ToastService } from "../../../services";
-import {User} from "../../../models";
+import { User } from "../../../models";
 
 @Component({
   selector: "z-admin-users",
@@ -96,11 +96,13 @@ export class UsersAdminComponent implements OnInit {
   /**
    * Remove user from table
    * API request for deletion
+   * @param u User
+   * @param i Index
    */
-  deleteUser(user: User) {
+  deleteUser(u: User, i: number) {
     this.user
-      .deleteUser(user.id)
-      .then(() => this.onUserDeleted(user))
+      .deleteUser(u.id)
+      .then(() => this.onUserDeleted(new User(u), i))
       .catch(err => console.error(err));
   }
 
@@ -109,10 +111,9 @@ export class UsersAdminComponent implements OnInit {
     this.initData();
   }
 
-  onUserDeleted(u: User) {
-    this.toast.setMessage(
-      `User ${u.first_name} ${u.last_name} deleted successfully.`
-    );
-    this.initData();
+  onUserDeleted(u: User, i: number) {
+    this.toast.setMessage(`User ${u.fullName} deleted successfully.`);
+    this.dataSource.data.splice(i, 1);
+    this.dataSource._updateChangeSubscription();
   }
 }

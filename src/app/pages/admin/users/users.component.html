@@ -59,11 +59,11 @@
                 <!-- Actions Column -->
                 <ng-container matColumnDef="actions">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                  <td *matCellDef="let element" class="action-buttons">
+                  <td *matCellDef="let element; let i = index" class="action-buttons">
                     <button mat-raised-button matTooltip="Edit" (click)="editUserDialog(element)">
                       <i class="zmdi zmdi-edit"></i>
                     </button>
-                    <button mat-raised-button color="warn" matTooltip="Delete" (click)="deleteUser(element)">
+                    <button mat-raised-button color="warn" matTooltip="Delete" (click)="deleteUser(element, i)">
                       <i class="zmdi zmdi-delete"></i>
                     </button>
                   </td>
