@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { User } from "../../models";
 import { environment as env } from "../../../environments/environment";
-import {User} from "../../models";
 
 @Injectable({
   providedIn: "root"
@@ -41,10 +41,10 @@ export class UserService {
    * @param id Id
    * @param user User
    */
-  updateUser(id, user: User): Promise<User> {
+  updateUser(user: User): Promise<User> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<User>(`${env.urlApi}/users/${id}`, user)
+        .put<User>(`${env.urlApi}/users/${user.id}`, user)
         .toPromise()
         .then(res => resolve(res))
         .catch(rej => reject(rej));

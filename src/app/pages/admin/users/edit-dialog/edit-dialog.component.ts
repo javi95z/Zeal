@@ -9,33 +9,31 @@ import { User } from "../../../../models";
   styleUrls: ["./edit-dialog.component.scss"]
 })
 export class EditUserDialog implements OnInit {
-  form: FormGroup;
-  fieldsForm: any[] = [];
+  form = new FormGroup({
+    active: new FormControl(),
+    email: new FormControl(),
+    first_name: new FormControl(),
+    last_name: new FormControl(),
+  });
 
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<EditUserDialog>,
-    private utils: UtilsService,
-    @Inject(MAT_DIALOG_DATA) public user: any[]
-  ) {
+    @Inject(MAT_DIALOG_DATA) public user: User
+  ) {}
+
+  ngOnInit() {
+    Object.keys(this.form.controls).forEach(key => {
+      this.form.controls[key].setValue(this.user[key]);
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  onSubmit() {
-    this.dialogRef.close(this.form.value);
-  }
-
-  ngOnInit() {
-    this.form = new FormGroup({});
-    const fields = this.utils.processFieldKeys(this.user as User[]);
-    // Populate the form
-    fields.forEach(field => {
-      const fc = new FormControl(field.value);
-      this.form.addControl(field.name, fc);
-      this.fieldsForm.push(field);
-    });
+  onSubmit(): void {
+    const updated = Object.assign(this.user, this.form.value);
+    this.dialogRef.close(updated);
   }
 }

@@ -73,6 +73,7 @@ export class UsersAdminComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: User) => {
       if (result) {
+        console.log(result);
         this.updateUser(result);
       }
     });
@@ -88,8 +89,8 @@ export class UsersAdminComponent implements OnInit {
       .reduce((r, o) => r.concat(o.id), [])
       .toString();
     this.user
-      .updateUser(id, user)
-      .then(() => this.onUserUpdated(`${user.first_name} ${user.last_name}`))
+      .updateUser(user)
+      .then(() => this.onUserUpdated(new User(user)))
       .catch(err => console.error(err));
   }
 
@@ -106,8 +107,9 @@ export class UsersAdminComponent implements OnInit {
       .catch(err => console.error(err));
   }
 
-  onUserUpdated(name: string) {
-    this.toast.setMessage(`User ${name} updated successfully.`);
+  onUserUpdated(u: User) {
+    this.toast.setMessage(`User ${u.fullName} updated successfully.`);
+    // TODO
     this.initData();
   }
 

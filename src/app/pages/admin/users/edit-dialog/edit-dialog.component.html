@@ -1,17 +1,25 @@
 <form novalidate [formGroup]="form">
-  <ng-container *ngFor="let item of fieldsForm">
-    <mat-form-field *ngIf="item.type === 'string'">
-      <input matInput type="text" [formControlName]="item.name" [placeholder]="item.name | capitalize">
-    </mat-form-field>
-    <mat-form-field *ngIf="item.type === 'number'">
-      <input matInput type="number" [formControlName]="item.name" [placeholder]="item.name | capitalize">
-    </mat-form-field>
-    <section class="mb-20" *ngIf="item.type === 'boolean'">
-      <mat-checkbox [formControlName]="item.name">{{ item.name | capitalize }}</mat-checkbox>
-    </section>
-  </ng-container>
+  <!-- First Name -->
+  <mat-form-field>
+    <input matInput type="text" formControlName="first_name" placeholder="First Name">
+  </mat-form-field>
+
+  <!-- Last Name -->
+  <mat-form-field>
+    <input matInput type="text" formControlName="last_name" placeholder="Last Name">
+  </mat-form-field>
+
+  <!-- Email -->
+  <mat-form-field>
+    <input matInput type="email" formControlName="email" placeholder="Email">
+  </mat-form-field>
+
+  <!-- Active -->
+  <section class="mb-20">
+    <mat-checkbox formControlName="active">Active</mat-checkbox>
+  </section>
+
   <button mat-raised-button class="pull-right" (click)="onSubmit()" *ngIf="form.dirty">
-    <i class="zmdi zmdi-check"></i>
-    Submit
+    <i class="zmdi zmdi-check"></i> Submit
   </button>
 </form>
