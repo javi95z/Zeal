@@ -16,7 +16,14 @@ import {User} from "../../../models";
   styleUrls: ["./users.component.scss"]
 })
 export class UsersAdminComponent implements OnInit {
-  displayedColumns: string[] = ["select", "name", "email", "role", "gender"];
+  displayedColumns: string[] = [
+    "select",
+    "name",
+    "email",
+    "role",
+    "gender",
+    "actions"
+  ];
   dataSource = new MatTableDataSource<User>();
   selection: SelectionModel<User>;
   isLoading = true;
@@ -58,13 +65,10 @@ export class UsersAdminComponent implements OnInit {
       : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  editUserDialog() {
-    if (this.selection.selected.length !== 1) {
-      return null;
-    }
+  editUserDialog(user: User) {
     const dialogRef = this.dialog.open(EditUserDialog, {
       panelClass: "modal-dialog-box",
-      data: this.selection.selected[0]
+      data: user
     });
 
     dialogRef.afterClosed().subscribe((result: User) => {
@@ -93,16 +97,10 @@ export class UsersAdminComponent implements OnInit {
    * Remove user from table
    * API request for deletion
    */
-  deleteUser() {
-    const id = this.selection.selected
-      .reduce((r, o) => r.concat(o.id), [])
-      .toString();
-    const name = this.selection.selected
-      .reduce((r, o) => r.concat(`${o.first_name} ${o.last_name}`), [])
-      .toString();
+  deleteUser(user: User) {
     this.user
-      .deleteUser(id)
-      .then(() => this.onUserDeleted(name))
+      .deleteUser(user.id)
+      .then(() => this.onUserDeleted(user))
       .catch(err => console.error(err));
   }
 
@@ -111,8 +109,10 @@ export class UsersAdminComponent implements OnInit {
     this.initData();
   }
 
-  onUserDeleted(name: string) {
-    this.toast.setMessage(`User ${name} deleted successfully.`);
+  onUserDeleted(u: User) {
+    this.toast.setMessage(
+      `User ${u.first_name} ${u.last_name} deleted successfully.`
+    );
     this.initData();
   }
 }

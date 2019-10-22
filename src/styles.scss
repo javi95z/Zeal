@@ -51,8 +51,21 @@ h6 {
 
 // Tables
 .table {
-  .mat-row:last-of-type > td {
-    border-bottom: none;
+  .mat-row {
+    td.action-buttons {
+      padding: 0;
+      button {
+        margin-right: 10px;
+        min-width: 40px;
+        visibility: hidden;
+      }
+    }
+    &:hover > td.action-buttons button {
+      visibility: visible;
+    }
+    &:last-of-type > td {
+      border-bottom: none;
+    }
   }
 }
 

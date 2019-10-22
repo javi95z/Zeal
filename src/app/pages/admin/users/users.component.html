@@ -5,14 +5,6 @@
         <div class="pull-left">
           <h6 class="panel-title txt-dark">Users</h6>
         </div>
-        <div class="pull-right" *ngIf="selection.selected.length && selection.selected.length == 1">
-          <a (click)="editUserDialog()" class="pull-left inline-block panel-button mr-15" href="javascript:void(0)">
-            <i class="zmdi zmdi-edit"></i><span>Edit</span>
-          </a>
-          <a (click)="deleteUser()" class="pull-left inline-block panel-button mr-15" href="javascript:void(0)">
-            <i class="zmdi zmdi-delete"></i><span>Delete</span>
-          </a>
-        </div>
         <div class="clearfix"></div>
       </div>
       <div class="panel-wrapper collapse in">
@@ -30,8 +22,7 @@
                     </mat-checkbox>
                   </th>
                   <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()"
-                      (change)="$event ? selection.toggle(row) : null"
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
                       [checked]="selection.isSelected(row)">
                     </mat-checkbox>
                   </td>
@@ -65,12 +56,23 @@
                   </td>
                 </ng-container>
 
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                  <td *matCellDef="let element" class="action-buttons">
+                    <button mat-raised-button matTooltip="Edit" (click)="editUserDialog(element)">
+                      <i class="zmdi zmdi-edit"></i>
+                    </button>
+                    <button mat-raised-button color="warn" matTooltip="Delete" (click)="deleteUser(element)">
+                      <i class="zmdi zmdi-delete"></i>
+                    </button>
+                  </td>
+                </ng-container>
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
-              <mat-paginator [length]="dataSource.data.length"
-                [pageSize]="8"
-                [pageSizeOptions]="[8, 20, 50, 100]"
+              <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
                 showFirstLastButtons>
               </mat-paginator>
             </div>
