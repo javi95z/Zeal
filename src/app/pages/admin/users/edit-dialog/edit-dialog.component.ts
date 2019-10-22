@@ -1,8 +1,7 @@
-import {Component, Inject, OnInit} from "@angular/core";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
-import {FormControl, FormGroup} from "@angular/forms";
-import {UtilsService} from "../../../../services";
-import {User} from "../../../../models";
+import { Component, Inject, OnInit } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
+import { FormControl, FormGroup } from "@angular/forms";
+import { User } from "../../../../models";
 
 @Component({
   selector: "z-user-edit-dialog",
