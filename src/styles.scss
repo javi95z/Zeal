@@ -56,12 +56,11 @@ h6 {
       padding: 0;
       button {
         margin-right: 10px;
-        min-width: 40px;
-        visibility: hidden;
+        opacity: 0;
       }
     }
     &:hover > td.action-buttons button {
-      visibility: visible;
+      opacity: 1;
     }
     &:last-of-type > td {
       border-bottom: none;
