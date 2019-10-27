@@ -13,6 +13,7 @@ export class EditUserDialog implements OnInit {
     active: new FormControl(),
     email: new FormControl(),
     first_name: new FormControl(),
+    gender: new FormControl(),
     last_name: new FormControl(),
   });
 
