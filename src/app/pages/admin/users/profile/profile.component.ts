@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {UserService} from "../../../../services";
-import {User} from "../../../../models";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { UserService } from "../../../../services";
+import { User } from "../../../../models";
 
 @Component({
   selector: "z-profile",
@@ -12,9 +12,7 @@ export class ProfileComponent implements OnInit {
   user: User;
   isLoading = true;
 
-  constructor(private route: ActivatedRoute,
-              private users: UserService) {
-  }
+  constructor(private route: ActivatedRoute, private users: UserService) {}
 
   ngOnInit() {
     this.route.params.subscribe(data => {
@@ -22,7 +20,10 @@ export class ProfileComponent implements OnInit {
         this.users
           .getUser(data.id)
           .then(res => (this.user = new User(res)))
-          .finally(() => (this.isLoading = false));
+          .finally(() => {
+            this.isLoading = false;
+            console.log(this.user);
+          });
       }
     });
   }
