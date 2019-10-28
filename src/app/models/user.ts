@@ -1,5 +1,8 @@
+import { Role } from "./role";
+
 export class User {
   id: number;
+  active: boolean;
   api_token: string;
   background_img: string;
   email: string;
@@ -8,6 +11,7 @@ export class User {
   is_admin: boolean;
   last_name: string;
   profile_img: string;
+  role: Role;
   suffix: string;
   updated_at?: string | Date;
   created_at?: string | Date;
