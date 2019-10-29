@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material";
-import { EditUserDialog } from "../";
+import { EditUserDialog } from "../edit-dialog/edit-dialog.component";
 import { UserService, ToastService } from "../../../../services";
 import { User } from "../../../../models";
 
@@ -56,16 +56,7 @@ export class ProfileComponent implements OnInit {
   updateUser(user: User) {
     this.service
       .updateUser(user)
-      .then(() => this.onUserUpdated(new User(user)))
+      .then(() => this.service.onUserUpdated(new User(user)))
       .catch(err => console.error(err));
-  }
-
-  /**
-   * Actions to perform
-   * when user is updated
-   * @param u User
-   */
-  onUserUpdated(u: User) {
-    this.toast.setMessage(`User ${u.fullName} updated successfully.`);
   }
 }

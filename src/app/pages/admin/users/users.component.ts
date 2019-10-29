@@ -31,11 +31,7 @@ export class UsersAdminComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(
-    private service: UserService,
-    private toast: ToastService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private service: UserService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.initData();
@@ -86,7 +82,7 @@ export class UsersAdminComponent implements OnInit {
   updateUser(user: User) {
     this.service
       .updateUser(user)
-      .then(() => this.onUserUpdated(new User(user)))
+      .then(() => this.service.onUserUpdated(new User(user)))
       .catch(err => console.error(err));
   }
 
@@ -99,28 +95,11 @@ export class UsersAdminComponent implements OnInit {
   deleteUser(u: User, i: number) {
     this.service
       .deleteUser(u.id)
-      .then(() => this.onUserDeleted(new User(u), i))
+      .then(() => {
+        this.service.onUserDeleted(new User(u));
+        this.dataSource.data.splice(i, 1);
+        this.dataSource._updateChangeSubscription();
+      })
       .catch(err => console.error(err));
-  }
-
-  /**
-   * Actions to perform
-   * when user is updated
-   * @param u User
-   */
-  onUserUpdated(u: User) {
-    this.toast.setMessage(`User ${u.fullName} updated successfully.`);
-  }
-
-  /**
-   * Actions to perform
-   * when user is deleted
-   * @param u User
-   * @param i Index
-   */
-  onUserDeleted(u: User, i: number) {
-    this.toast.setMessage(`User ${u.fullName} deleted successfully.`);
-    this.dataSource.data.splice(i, 1);
-    this.dataSource._updateChangeSubscription();
   }
 }

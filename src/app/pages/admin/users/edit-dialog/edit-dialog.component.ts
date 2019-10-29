@@ -15,6 +15,7 @@ export class EditUserDialog implements OnInit {
     first_name: new FormControl(),
     gender: new FormControl(),
     last_name: new FormControl(),
+    suffix: new FormControl(),
   });
 
   constructor(

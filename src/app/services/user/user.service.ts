@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { ToastService } from "../toast/toast.service";
 import { User } from "../../models";
 import { environment as env } from "../../../environments/environment";
 
@@ -7,7 +8,7 @@ import { environment as env } from "../../../environments/environment";
   providedIn: "root"
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toast: ToastService) {}
 
   /**
    * Get all users
@@ -39,12 +40,12 @@ export class UserService {
   /**
    * Update one user by id
    * @param id Id
-   * @param user User
+   * @param u User
    */
-  updateUser(user: User): Promise<User> {
+  updateUser(u: User): Promise<User> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<User>(`${env.urlApi}/users/${user.id}`, user)
+        .put<User>(`${env.urlApi}/users/${u.id}`, u)
         .toPromise()
         .then(res => resolve(res))
         .catch(rej => reject(rej));
@@ -63,5 +64,24 @@ export class UserService {
         .then(res => resolve(res as boolean))
         .catch(rej => reject(rej));
     });
+  }
+
+  /**
+   * Actions to perform
+   * when user is updated
+   * @param u User
+   */
+  onUserUpdated(u: User) {
+    this.toast.setMessage(`User ${u.fullName} updated successfully.`);
+  }
+
+  /**
+   * Actions to perform
+   * when user is deleted
+   * @param u User
+   * @param i Index
+   */
+  onUserDeleted(u: User) {
+    this.toast.setMessage(`User ${u.fullName} deleted successfully.`);
   }
 }
