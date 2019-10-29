@@ -42,7 +42,12 @@ h6 {
 // Panels
 .panel .panel-heading .panel-button {
   color: #878787;
+  cursor: pointer;
+  display: inline-block;
   font-size: 14px;
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
   i {
     font-size: 15px;
     margin-right: 5px;
