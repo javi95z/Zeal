@@ -7,6 +7,10 @@
           <h6 class="panel-title txt-dark">{{ user.fullName }}</h6>
         </div>
         <div class="pull-right">
+          <!-- TODO: Refactor classes -->
+          <a href="javascipt:void" (click)="editUserDialog(user)" class="pull-left inline-block panel-button mr-15">
+            <i class="zmdi zmdi-edit"></i><span>Edit</span>
+          </a>
           <a [routerLink]="['users']" class="pull-left inline-block panel-button mr-15">
             <i class="zmdi zmdi-arrow-left"></i><span>Back to Users list</span>
           </a>

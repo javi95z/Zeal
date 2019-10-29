@@ -32,7 +32,7 @@ export class UsersAdminComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(
-    private user: UserService,
+    private service: UserService,
     private toast: ToastService,
     private dialog: MatDialog
   ) {}
@@ -43,7 +43,7 @@ export class UsersAdminComponent implements OnInit {
 
   initData() {
     this.selection = new SelectionModel<User>(true, []);
-    this.user
+    this.service
       .getUsers()
       .then(data => {
         this.dataSource = new MatTableDataSource(data);
@@ -84,7 +84,7 @@ export class UsersAdminComponent implements OnInit {
    * @param user User
    */
   updateUser(user: User) {
-    this.user
+    this.service
       .updateUser(user)
       .then(() => this.onUserUpdated(new User(user)))
       .catch(err => console.error(err));
@@ -97,7 +97,7 @@ export class UsersAdminComponent implements OnInit {
    * @param i Index
    */
   deleteUser(u: User, i: number) {
-    this.user
+    this.service
       .deleteUser(u.id)
       .then(() => this.onUserDeleted(new User(u), i))
       .catch(err => console.error(err));

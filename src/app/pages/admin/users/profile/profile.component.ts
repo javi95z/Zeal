@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { UserService } from "../../../../services";
+import { MatDialog } from "@angular/material";
+import { EditUserDialog } from "../";
+import { UserService, ToastService } from "../../../../services";
 import { User } from "../../../../models";
 
 @Component({
@@ -12,12 +14,17 @@ export class ProfileComponent implements OnInit {
   user: User;
   isLoading = true;
 
-  constructor(private route: ActivatedRoute, private users: UserService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private service: UserService,
+    private toast: ToastService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(data => {
       if (data.id) {
-        this.users
+        this.service
           .getUser(data.id)
           .then(res => (this.user = new User(res)))
           .finally(() => {
@@ -26,5 +33,39 @@ export class ProfileComponent implements OnInit {
           });
       }
     });
+  }
+
+  editUserDialog(user: User) {
+    const dialogRef = this.dialog.open(EditUserDialog, {
+      panelClass: "modal-dialog-box",
+      data: user
+    });
+
+    dialogRef.afterClosed().subscribe((result: User) => {
+      if (result) {
+        this.updateUser(result);
+      }
+    });
+  }
+
+  /**
+   * Update user from table
+   * API request for modification
+   * @param user User
+   */
+  updateUser(user: User) {
+    this.service
+      .updateUser(user)
+      .then(() => this.onUserUpdated(new User(user)))
+      .catch(err => console.error(err));
+  }
+
+  /**
+   * Actions to perform
+   * when user is updated
+   * @param u User
+   */
+  onUserUpdated(u: User) {
+    this.toast.setMessage(`User ${u.fullName} updated successfully.`);
   }
 }
