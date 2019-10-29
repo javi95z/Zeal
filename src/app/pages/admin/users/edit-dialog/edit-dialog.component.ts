@@ -11,6 +11,7 @@ import { populateFormFields } from "../../../../utils";
   styleUrls: ["./edit-dialog.component.scss"]
 })
 export class EditUserDialog implements OnInit {
+  isLoading = true;
   availableRoles: Role[];
   form = new FormGroup({
     active: new FormControl(),
@@ -19,7 +20,7 @@ export class EditUserDialog implements OnInit {
     gender: new FormControl(),
     last_name: new FormControl(),
     role: new FormControl(),
-    suffix: new FormControl(),
+    suffix: new FormControl()
   });
 
   constructor(
@@ -30,15 +31,22 @@ export class EditUserDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getRoles();
-    this.form = populateFormFields(this.user, this.form);
+    this.getRoles().finally(() => {
+      this.form = populateFormFields(this.user, this.form);
+      this.isLoading = false;
+    });
   }
 
-  private getRoles(): void {
-    this.role
+  /**
+   * Get roles list and return
+   * true when finished
+   */
+  private async getRoles(): Promise<true> {
+    await this.role
       .getRoles()
       .then((data: Role[]) => (this.availableRoles = data))
       .catch(err => console.error(err));
+    return true;
   }
 
   onNoClick(): void {

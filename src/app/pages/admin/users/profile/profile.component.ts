@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material";
 import { EditUserDialog } from "../edit-dialog/edit-dialog.component";
-import { UserService, ToastService } from "../../../../services";
+import { UserService } from "../../../../services";
 import { User } from "../../../../models";
 
 @Component({
@@ -17,7 +17,6 @@ export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: UserService,
-    private toast: ToastService,
     private dialog: MatDialog
   ) {}
 

@@ -1,4 +1,5 @@
-<form novalidate [formGroup]="form">
+<z-loading *ngIf="isLoading"></z-loading>
+<form novalidate [formGroup]="form" *ngIf="!isLoading">
   <!-- First Name -->
   <mat-form-field>
     <input matInput type="text" formControlName="suffix" placeholder="Suffix">
