@@ -45,6 +45,14 @@
                     <td>Role</td>
                     <td>{{ user.role.name }}</td>
                   </tr>
+                  <tr *ngIf="user.teams">
+                    <td>Teams</td>
+                    <td>
+                      <span *ngFor="let item of user.teams; let last = last">
+                        {{ item.name }} <span *ngIf="!last">, </span>
+                      </span>
+                    </td>
+                  </tr>
                   <tr>
                     <td>Active</td>
                     <td>

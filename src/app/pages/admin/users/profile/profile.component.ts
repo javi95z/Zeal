@@ -27,10 +27,7 @@ export class ProfileComponent implements OnInit {
         this.service
           .getUser(data.id)
           .then(res => (this.user = new User(res)))
-          .finally(() => {
-            this.isLoading = false;
-            console.log(this.user);
-          });
+          .finally(() => (this.isLoading = false));
       }
     });
   }

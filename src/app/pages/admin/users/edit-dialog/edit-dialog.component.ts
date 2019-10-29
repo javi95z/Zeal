@@ -2,7 +2,8 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup } from "@angular/forms";
 import { RoleService } from "../../../../services";
-import { User } from "../../../../models";
+import { User, Role } from "../../../../models";
+import { populateFormFields } from "../../../../utils";
 
 @Component({
   selector: "z-user-edit-dialog",
@@ -10,6 +11,7 @@ import { User } from "../../../../models";
   styleUrls: ["./edit-dialog.component.scss"]
 })
 export class EditUserDialog implements OnInit {
+  availableRoles: Role[];
   form = new FormGroup({
     active: new FormControl(),
     email: new FormControl(),
@@ -28,9 +30,15 @@ export class EditUserDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    Object.keys(this.form.controls).forEach(key => {
-      this.form.controls[key].setValue(this.user[key]);
-    });
+    this.getRoles();
+    this.form = populateFormFields(this.user, this.form);
+  }
+
+  private getRoles(): void {
+    this.role
+      .getRoles()
+      .then((data: Role[]) => (this.availableRoles = data))
+      .catch(err => console.error(err));
   }
 
   onNoClick(): void {
