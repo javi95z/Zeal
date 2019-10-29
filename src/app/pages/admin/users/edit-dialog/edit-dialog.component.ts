@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup } from "@angular/forms";
+import { RoleService } from "../../../../services";
 import { User } from "../../../../models";
 
 @Component({
@@ -15,16 +16,18 @@ export class EditUserDialog implements OnInit {
     first_name: new FormControl(),
     gender: new FormControl(),
     last_name: new FormControl(),
+    role: new FormControl(),
     suffix: new FormControl(),
   });
 
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<EditUserDialog>,
+    private role: RoleService,
     @Inject(MAT_DIALOG_DATA) public user: User
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     Object.keys(this.form.controls).forEach(key => {
       this.form.controls[key].setValue(this.user[key]);
     });
