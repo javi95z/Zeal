@@ -1,4 +1,5 @@
 import { Role } from "./role";
+import { Team } from "./team";
 
 export class User {
   id: number;
@@ -11,7 +12,8 @@ export class User {
   is_admin: boolean;
   last_name: string;
   profile_img: string;
-  role: Role;
+  role?: Role;
+  teams?: Team[];
   suffix: string;
   updated_at?: string | Date;
   created_at?: string | Date;
