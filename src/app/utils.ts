@@ -6,10 +6,10 @@ import { FormGroup } from "@angular/forms";
  * @param form FormGroup to populate
  */
 export const populateFormFields = (model: any, form: FormGroup): FormGroup => {
-  Object.keys(form.controls).map(i =>
+  Object.keys(form.controls).map(i => {
     form.controls[i].setValue(
       typeof model[i] !== "object" ? model[i] : model[i].id
-    )
-  );
+    );
+  });
   return form;
 };

@@ -71,7 +71,7 @@ export class UserService {
    * when user is updated
    * @param u User
    */
-  onUserUpdated(u: User) {
+  onUserUpdated(u: User): void {
     this.toast.setMessage(`User ${u.fullName} updated successfully.`);
   }
 
@@ -81,7 +81,7 @@ export class UserService {
    * @param u User
    * @param i Index
    */
-  onUserDeleted(u: User) {
+  onUserDeleted(u: User): void {
     this.toast.setMessage(`User ${u.fullName} deleted successfully.`);
   }
 }
