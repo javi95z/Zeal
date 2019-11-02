@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../services';
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthService } from "../../../services";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
-  loginError = false;
 
-  constructor(
-    private router: Router,
-    private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit() {
     this.createForm();
@@ -23,25 +19,28 @@ export class LoginComponent implements OnInit {
 
   private createForm() {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required)
+      email: new FormControl("", [Validators.required, Validators.email]),
+      password: new FormControl("", Validators.required)
     });
   }
-  get email() { return this.loginForm.get('email'); }
-  get password() { return this.loginForm.get('password'); }
+  get email() {
+    return this.loginForm.get("email");
+  }
+  get password() {
+    return this.loginForm.get("password");
+  }
 
   /**
    * Log into the application
    */
   logIn() {
-    this.auth.doLogin(this.loginForm.value)
-        .then(res => {
-          sessionStorage.setItem('token', res.access_token);
-          // Get user data and enter the app
-          this.auth.getUser().then(res => {
-            this.auth.userData = res;
-            this.router.navigate(['/content']);
-          });
-        }, rej => this.loginError = (typeof rej.error === 'string') ? rej.error : 'Unknown error');
+    this.auth.doLogin(this.loginForm.value).then(res => {
+      sessionStorage.setItem("token", res.access_token);
+      // Get user data and enter the app
+      this.auth.getUser().then(user => {
+        this.auth.userData = user;
+        this.router.navigate(["/content"]);
+      });
+    });
   }
 }

@@ -17,7 +17,7 @@ import { ToastService } from "./services";
 // Modules
 import { SharedModule } from "./pages/layout/shared.module";
 import { AdminModule } from "./pages/admin/admin.module";
-import { LoginModule } from "./pages/auth/login/login.module";
+import { LoginModule } from "./pages/auth/login.module";
 
 const httpProvider = {
   provide: HTTP_INTERCEPTORS,
