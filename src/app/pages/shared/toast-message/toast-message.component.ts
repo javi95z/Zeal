@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ToastService } from "../../../services";
+import { ToastService, Message } from "../../../services";
 
 @Component({
   selector: "z-notifications",
@@ -15,7 +15,7 @@ export class ToastMessageComponent implements OnInit {
     this.messages = this.toast.getMessages();
   }
 
-  remove(message) {
+  remove(message: Message) {
     this.toast.removeToast(message);
   }
 }

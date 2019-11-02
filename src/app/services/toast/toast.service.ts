@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 
-class Message {
+export class Message {
   content: string;
   style: string;
   dismissed = false;
 
-  constructor(content, style?) {
+  constructor(content: string, style?: string) {
     this.content = content;
     this.style = style || "info";
   }
@@ -22,7 +22,7 @@ export class ToastService {
     return new Promise((res, rej) => res(this.messages));
   }
 
-  setMessage(content, style = "info"): Message {
+  setMessage(content: string, style: string = "info"): Message {
     const msg = new Message(content, style);
     this.messages.push(msg);
     this.setCountdown();
