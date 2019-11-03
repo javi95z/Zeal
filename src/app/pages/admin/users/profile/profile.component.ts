@@ -50,9 +50,14 @@ export class ProfileComponent implements OnInit {
    * @param user User
    */
   updateUser(user: User) {
+    this.isLoading = true;
     this.service
       .updateUser(user)
-      .then(() => this.service.onUserUpdated(new User(user)))
-      .catch(err => console.error(err));
+      .then(res => {
+        this.user = new User(res);
+        this.service.onUserUpdated(new User(res));
+      })
+      .catch(err => console.error(err))
+      .finally(() => this.isLoading = false);
   }
 }
