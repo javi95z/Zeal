@@ -31,7 +31,7 @@ export class RequestInterceptor implements HttpInterceptor {
         (err: HttpErrorResponse) => {
           // Logout when unauthorized or error
           if (!err.status) {
-            this.toast.setMessage("Unknown error", "error");
+            this.toast.setMessage(err.statusText, "error");
             this.auth.doLogout();
           }
           if (err.status === 401) {

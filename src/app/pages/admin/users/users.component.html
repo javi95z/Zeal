@@ -61,11 +61,11 @@
                   <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                   <td *matCellDef="let element; let i = index" class="action-buttons">
                     <button class="btn btn-default btn-icon-anim btn-circle btn-sm" matTooltip="Edit"
-                      (click)="editUserDialog(element)">
+                      (click)="editUserDialog(element, i)">
                       <i class="zmdi zmdi-edit"></i>
                     </button>
                     <button class="btn btn-danger btn-icon-anim btn-circle btn-sm" matTooltip="Delete"
-                      (click)="deleteUser(element, i)">
+                      (click)="deleteUser(element)">
                       <i class="zmdi zmdi-delete"></i>
                     </button>
                   </td>

@@ -55,6 +55,7 @@ export class EditUserDialog implements OnInit {
 
   onSubmit(): void {
     const updated = Object.assign(this.user, this.form.value);
+    updated.role = this.availableRoles.find(r => r.id === updated.role);
     this.dialogRef.close(updated);
   }
 }

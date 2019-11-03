@@ -7,7 +7,7 @@ import {
 } from "@angular/material";
 import { SelectionModel } from "@angular/cdk/collections";
 import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
-import { UserService, ToastService } from "../../../services";
+import { UserService } from "../../../services";
 import { User } from "../../../models";
 
 @Component({
@@ -37,7 +37,7 @@ export class UsersAdminComponent implements OnInit {
     this.initData();
   }
 
-  initData() {
+  initData(): void {
     this.selection = new SelectionModel<User>(true, []);
     this.service
       .getUsers()
@@ -49,13 +49,13 @@ export class UsersAdminComponent implements OnInit {
       .finally(() => (this.isLoading = false));
   }
 
-  isAllSelected() {
+  isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  masterToggle() {
+  masterToggle(): void {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.data.forEach(row => this.selection.select(row));
