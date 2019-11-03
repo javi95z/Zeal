@@ -37,6 +37,14 @@
     </mat-select>
   </mat-form-field>
 
+  <!-- Teams -->
+  <mat-form-field>
+    <mat-label>Teams</mat-label>
+    <mat-select formControlName="teams" multiple>
+      <mat-option *ngFor="let item of availableTeams" [value]="item.id">{{ item.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <!-- Active -->
   <section class="mb-20">
     <mat-checkbox formControlName="active">Active</mat-checkbox>

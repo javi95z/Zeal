@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup } from "@angular/forms";
-import { RoleService } from "../../../../services";
-import { User, Role } from "../../../../models";
+import { RoleService, TeamService } from "../../../../services";
+import { User, Role, Team } from "../../../../models";
 import { populateFormFields } from "../../../../utils";
 
 @Component({
@@ -13,6 +13,7 @@ import { populateFormFields } from "../../../../utils";
 export class EditUserDialog implements OnInit {
   isLoading = true;
   availableRoles: Role[];
+  availableTeams: Team[];
   form = new FormGroup({
     active: new FormControl(),
     email: new FormControl(),
@@ -20,18 +21,20 @@ export class EditUserDialog implements OnInit {
     gender: new FormControl(),
     last_name: new FormControl(),
     role: new FormControl(),
-    suffix: new FormControl()
+    suffix: new FormControl(),
+    teams: new FormControl()
   });
 
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<EditUserDialog>,
     private role: RoleService,
+    private team: TeamService,
     @Inject(MAT_DIALOG_DATA) public user: User
   ) {}
 
   ngOnInit(): void {
-    this.getRoles().finally(() => {
+    Promise.all([this.getRoles(), this.getTeams()]).finally(() => {
       this.form = populateFormFields(this.user, this.form);
       this.isLoading = false;
     });
@@ -45,6 +48,18 @@ export class EditUserDialog implements OnInit {
     await this.role
       .getRoles()
       .then((data: Role[]) => (this.availableRoles = data))
+      .catch(err => console.error(err));
+    return true;
+  }
+
+  /**
+   * Get teams list and return
+   * true when finished
+   */
+  private async getTeams(): Promise<true> {
+    await this.team
+      .getTeams()
+      .then((data: Team[]) => (this.availableTeams = data))
       .catch(err => console.error(err));
     return true;
   }
