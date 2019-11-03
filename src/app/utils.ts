@@ -7,9 +7,13 @@ import { FormGroup } from "@angular/forms";
  */
 export const populateFormFields = (model: any, form: FormGroup): FormGroup => {
   Object.keys(form.controls).map(i => {
-    form.controls[i].setValue(
-      typeof model[i] !== "object" ? model[i] : model[i].id
-    );
+    if (model[i] instanceof Array) {
+      form.controls[i].setValue(model[i].map(e => e.id));
+    } else if (model[i] instanceof Object) {
+      form.controls[i].setValue(model[i].id);
+    } else {
+      form.controls[i].setValue(model[i]);
+    }
   });
   return form;
 };
