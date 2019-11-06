@@ -70,7 +70,8 @@ export class EditUserDialog implements OnInit {
 
   onSubmit(): void {
     const updated = Object.assign(this.user, this.form.value);
-    updated.role = this.availableRoles.find(r => r.id === updated.role);
+    updated.role = this.availableRoles.find(o => o.id === updated.role);
+    // updated.teams = this.availableTeams.filter(o => updated.teams.includes(o.id));
     this.dialogRef.close(updated);
   }
 }
