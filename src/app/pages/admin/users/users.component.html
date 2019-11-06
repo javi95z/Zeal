@@ -48,6 +48,16 @@
                   <td *matCellDef="let element"> {{ element.role?.name }} </td>
                 </ng-container>
 
+                <!-- Teams Column -->
+                <ng-container matColumnDef="teams">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> teams </th>
+                  <td *matCellDef="let element">
+                    <span *ngFor="let item of element.teams; let last = last">
+                      {{ item.name }}<span *ngIf="!last">, </span>
+                    </span>
+                  </td>
+                </ng-container>
+
                 <!-- Gender Column -->
                 <ng-container matColumnDef="gender">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
