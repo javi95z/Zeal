@@ -17,3 +17,14 @@ export const populateFormFields = (model: any, form: FormGroup): FormGroup => {
   });
   return form;
 };
+
+export const parseRelationships = (model: any) => {
+  Object.keys(model).map(i => {
+    if (model[i] instanceof Array) {
+      model[i] = model[i].map(e => e.id);
+    } else if (model[i] instanceof Object) {
+      model[i] = model[i]["id"];
+    }
+  });
+  return model;
+};
