@@ -53,7 +53,7 @@
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> teams </th>
                   <td *matCellDef="let element">
                     <span *ngFor="let item of element.teams; let last = last">
-                      {{ item.name }}<span *ngIf="!last">, </span>
+                      {{ item?.name }}<span *ngIf="!last">, </span>
                     </span>
                   </td>
                 </ng-container>
@@ -75,7 +75,7 @@
                       <i class="zmdi zmdi-edit"></i>
                     </button>
                     <button class="btn btn-danger btn-icon-anim btn-circle btn-sm" matTooltip="Delete"
-                      (click)="deleteUser(element)">
+                      (click)="deleteUser(element, i)">
                       <i class="zmdi zmdi-delete"></i>
                     </button>
                   </td>
