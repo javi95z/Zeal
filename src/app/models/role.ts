@@ -3,8 +3,9 @@ export class Role {
   color: string;
   description: string;
   name: string;
-  updated_at?: string | Date;
-  created_at?: string | Date;
+  private updated_at?: string | Date;
+  private created_at?: string | Date;
+  private deleted_at?: string | Date;
 
   constructor(values: Role) {
     Object.assign(this, values);
