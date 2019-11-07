@@ -15,9 +15,8 @@ export class User {
   role?: Role;
   teams?: Team[];
   suffix: string;
-  private updated_at?: string | Date;
-  private created_at?: string | Date;
-  private deleted_at?: string | Date;
+  updated_at?: string | Date;
+  created_at?: string | Date;
 
   constructor(values: User) {
     Object.assign(this, values);
