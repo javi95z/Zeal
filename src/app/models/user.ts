@@ -23,6 +23,6 @@ export class User {
   }
 
   get fullName(): string {
-    return `${this.first_name} ${this.last_name}`;
+    return `${this.first_name || ""} ${this.last_name || ""}`;
   }
 }

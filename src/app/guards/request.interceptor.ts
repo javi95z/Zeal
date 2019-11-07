@@ -34,6 +34,10 @@ export class RequestInterceptor implements HttpInterceptor {
             this.toast.setMessage(err.statusText, "error");
             this.auth.doLogout();
           }
+          if (err.status === 400) {
+            this.toast.setMessage("Bad request error", "error");
+            this.auth.doLogout();
+          }
           if (err.status === 401) {
             this.toast.setMessage("Unauthorized", "error");
             this.auth.doLogout();

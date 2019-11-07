@@ -39,6 +39,8 @@ export class ProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: User) => {
       if (result) {
+        console.log(result);
+        this.isLoading = true;
         this.updateUser(result);
       }
     });
@@ -50,7 +52,6 @@ export class ProfileComponent implements OnInit {
    * @param user User
    */
   updateUser(user: User) {
-    this.isLoading = true;
     this.service
       .updateUser(user)
       .then(res => {
