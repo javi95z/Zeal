@@ -50,7 +50,7 @@
 
                 <!-- Teams Column -->
                 <ng-container matColumnDef="teams">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> teams </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Teams </th>
                   <td *matCellDef="let element">
                     <span *ngFor="let item of element.teams; let last = last">
                       {{ item?.name }}<span *ngIf="!last">, </span>

@@ -69,10 +69,7 @@ export class UsersAdminComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: User) => {
-      if (result) {
-        console.log(result);
-        this.updateUser(result);
-      }
+      if (result) this.updateUser(result);
     });
   }
 
