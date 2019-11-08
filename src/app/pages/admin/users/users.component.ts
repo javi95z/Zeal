@@ -38,7 +38,7 @@ export class UsersAdminComponent implements OnInit {
     this.initData();
   }
 
-  initData(): void {
+  private initData(): void {
     this.selection = new SelectionModel<User>(true, []);
     this.service
       .getUsers()
@@ -62,14 +62,16 @@ export class UsersAdminComponent implements OnInit {
       : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  editUserDialog(user: User) {
+  editUserDialog(user: User, i: number) {
     const dialogRef = this.dialog.open(EditUserDialog, {
       panelClass: "modal-dialog-box",
       data: user
     });
 
     dialogRef.afterClosed().subscribe((result: User) => {
-      if (result) this.updateUser(result);
+      if (result) {
+        this.updateUser(result, i);
+      }
     });
   }
 
@@ -78,10 +80,14 @@ export class UsersAdminComponent implements OnInit {
    * API request for modification
    * @param user User
    */
-  updateUser(user: User) {
+  updateUser(user: User, i: number) {
     this.service
-      .updateUser(user)
-      .then(() => this.service.onUserUpdated(new User(user)))
+      .updateUser(new User(user))
+      .then(res => {
+        this.dataSource.data[i] = res;
+        this.dataSource._updateChangeSubscription();
+        this.service.onUserUpdated(new User(res));
+      })
       .catch(err => console.error(err));
   }
 
