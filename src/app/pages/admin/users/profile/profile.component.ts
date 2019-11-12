@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material";
 import { EditUserDialog } from "../edit-dialog/edit-dialog.component";
-import { UserService } from "../../../../services";
+import { UserService, ToastService } from "../../../../services";
 import { User } from "../../../../models";
 
 @Component({
@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: UserService,
+    private toast: ToastService,
     private dialog: MatDialog
   ) {}
 
@@ -53,7 +54,7 @@ export class ProfileComponent implements OnInit {
       .updateUser(user)
       .then(res => {
         this.user = new User(res);
-        this.service.onUserUpdated(new User(res));
+        this.toast.setMessage(`User ${user.fullName} updated successfully.`);
       })
       .catch(err => console.error(err))
       .finally(() => this.isLoading = false);
