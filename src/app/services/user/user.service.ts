@@ -28,7 +28,7 @@ export class UserService {
    * Get one user by id
    * @param id Id
    */
-  getUser(id): Promise<User> {
+  getUser(id: number): Promise<User> {
     return new Promise((resolve, reject) => {
       this.http
         .post<User>(`${env.urlApi}/users/${id}`, null)
@@ -46,7 +46,6 @@ export class UserService {
   updateUser(u: User): Promise<User> {
     return new Promise((resolve, reject) => {
       this.http
-        // .put<User>(`${env.urlApi}/users/${u.id}`, u)
         .put<User>(`${env.urlApi}/users/${u.id}`, parseRelationships(u))
         .toPromise()
         .then(res => resolve(res))
@@ -58,7 +57,7 @@ export class UserService {
    * Delete one user by id
    * @param id Id
    */
-  deleteUser(id): Promise<boolean> {
+  deleteUser(id: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.http
         .delete(`${env.urlApi}/users/${id}`)

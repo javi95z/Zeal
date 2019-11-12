@@ -10,6 +10,7 @@ import { RequestInterceptor } from "./guards/request.interceptor";
 
 // Components
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
+import { ConfirmationDialogComponent } from "./pages/shared";
 
 // Services
 import { ToastService } from "./services";
@@ -26,7 +27,7 @@ const httpProvider = {
 };
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [AppComponent, DashboardComponent, ConfirmationDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -38,6 +39,7 @@ const httpProvider = {
     LoginModule
   ],
   providers: [httpProvider, ToastService],
+  entryComponents: [ConfirmationDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

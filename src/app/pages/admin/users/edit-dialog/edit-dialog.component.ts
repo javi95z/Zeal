@@ -24,6 +24,7 @@ export class EditUserDialog implements OnInit {
     suffix: new FormControl(),
     teams: new FormControl()
   });
+  result: User;
 
   constructor(
     public dialog: MatDialog,
@@ -34,8 +35,9 @@ export class EditUserDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.result = this.user;
     Promise.all([this.getRoles(), this.getTeams()]).finally(() => {
-      this.form = populateFormFields(this.user, this.form);
+      this.form = populateFormFields(this.result, this.form);
       this.isLoading = false;
     });
   }
@@ -69,7 +71,7 @@ export class EditUserDialog implements OnInit {
   }
 
   onSubmit(): void {
-    const updated = Object.assign(this.user, this.form.value);
+    const updated = Object.assign(this.result, this.form.value);
     const user = new User(updated);
     user.role = this.availableRoles.find(o => o.id === updated.role);
     user.teams = this.availableTeams.filter(o => updated.teams.includes(o.id));
