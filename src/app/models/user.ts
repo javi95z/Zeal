@@ -25,4 +25,8 @@ export class User {
   get fullName(): string {
     return `${this.first_name || ""} ${this.last_name || ""}`;
   }
+
+  get imagePath(): string {
+    return this.profile_img || `assets/img/avatar/default.png`;
+  }
 }
