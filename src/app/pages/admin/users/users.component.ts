@@ -22,7 +22,6 @@ export class UsersAdminComponent implements OnInit {
     "name",
     "email",
     "role",
-    "teams",
     "gender",
     "actions"
   ];
@@ -48,6 +47,7 @@ export class UsersAdminComponent implements OnInit {
     this.service
       .getUsers()
       .then(data => {
+        data.forEach(u => new User(u)); // test
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
         setTimeout(() => (this.dataSource.paginator = this.paginator));
@@ -96,6 +96,17 @@ export class UsersAdminComponent implements OnInit {
       .catch(err => console.error(err));
   }
 
+  onAction(action: string, user: User, index: number) {
+    switch (action) {
+      case "EDIT":
+        this.editUserDialog(user, index);
+        break;
+      case "DELETE":
+        this.deleteUserDialog(user, index);
+        break;
+    }
+  }
+
   /**
    * Confirmation dialog to
    * remove user from table
@@ -116,7 +127,9 @@ export class UsersAdminComponent implements OnInit {
           .then(() => {
             this.dataSource.data.splice(i, 1);
             this.dataSource._updateChangeSubscription();
-            this.toast.setMessage(`User ${user.fullName} deleted successfully.`);
+            this.toast.setMessage(
+              `User ${user.fullName} deleted successfully.`
+            );
           })
           .catch(err => console.error(err));
       }

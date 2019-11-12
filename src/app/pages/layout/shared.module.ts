@@ -6,7 +6,7 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { ContentComponent } from "./content/content.component";
 import { FooterComponent } from "./footer/footer.component";
-import { ToastMessageComponent } from "../shared";
+import { ToastMessageComponent, ActionTableMenuComponent } from "../shared";
 import { CapitalizePipe } from "../../pipes/capitalize/capitalize.pipe";
 
 const components = [
@@ -15,6 +15,7 @@ const components = [
   SidebarComponent,
   FooterComponent,
   ToastMessageComponent,
+  ActionTableMenuComponent,
   CapitalizePipe
 ];
 

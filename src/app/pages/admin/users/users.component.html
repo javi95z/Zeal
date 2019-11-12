@@ -48,16 +48,6 @@
                   <td *matCellDef="let element"> {{ element.role?.name }} </td>
                 </ng-container>
 
-                <!-- Teams Column -->
-                <ng-container matColumnDef="teams">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Teams </th>
-                  <td *matCellDef="let element">
-                    <span *ngFor="let item of element.teams; let last = last">
-                      {{ item?.name }}<span *ngIf="!last">, </span>
-                    </span>
-                  </td>
-                </ng-container>
-
                 <!-- Gender Column -->
                 <ng-container matColumnDef="gender">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
@@ -70,14 +60,8 @@
                 <ng-container matColumnDef="actions">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                   <td *matCellDef="let element; let i = index" class="action-buttons">
-                    <button class="btn btn-default btn-icon-anim btn-circle btn-sm" matTooltip="Edit"
-                      (click)="editUserDialog(element, i)">
-                      <i class="zmdi zmdi-edit"></i>
-                    </button>
-                    <button class="btn btn-danger btn-icon-anim btn-circle btn-sm" matTooltip="Delete"
-                      (click)="deleteUserDialog(element, i)">
-                      <i class="zmdi zmdi-delete"></i>
-                    </button>
+                    <z-action-table-menu [details]="['profile', element.id]" (event)="onAction($event, element, i)">
+                    </z-action-table-menu>
                   </td>
                 </ng-container>
 
