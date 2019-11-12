@@ -1,31 +1,20 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {RouterModule} from "@angular/router";
-import {EditUserDialog, ProfileComponent, ProjectsComponent, SidebarComponent, UsersAdminComponent} from "./";
-import {GenderIconComponent, LoadingComponent} from "../shared";
-import {AdminComponent} from "./admin.component";
-import {SharedModule} from "../layout/shared.module";
-import {MaterialModule} from "../../material.module";
-import {routes} from "./admin-routing";
+import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { routes } from "./admin-routing";
+import { SidebarComponent } from "./";
+import { AdminComponent } from "./admin.component";
+import { SharedModule } from "../shared/shared.module";
+import { LayoutModule } from "../layout/layout.module";
+import { ProjectsAdminModule, UsersAdminModule } from "./";
 
 @NgModule({
-  declarations: [
-    AdminComponent,
-    SidebarComponent,
-    UsersAdminComponent,
-    GenderIconComponent,
-    LoadingComponent,
-    ProfileComponent,
-    EditUserDialog,
-    ProjectsComponent
-  ],
+  declarations: [AdminComponent, SidebarComponent],
   imports: [
-    CommonModule,
+    LayoutModule,
     SharedModule,
-    RouterModule.forChild(routes),
-    MaterialModule
-  ],
-  entryComponents: [EditUserDialog]
+    ProjectsAdminModule,
+    UsersAdminModule,
+    RouterModule.forChild(routes)
+  ]
 })
-export class AdminModule {
-}
+export class AdminModule {}
