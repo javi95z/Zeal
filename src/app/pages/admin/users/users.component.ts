@@ -7,6 +7,7 @@ import {
 } from "@angular/material";
 import { SelectionModel } from "@angular/cdk/collections";
 import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
+import { ConfirmationDialogComponent } from "../../shared";
 import { UserService } from "../../../services";
 import { User } from "../../../models";
 
@@ -92,19 +93,29 @@ export class UsersAdminComponent implements OnInit {
   }
 
   /**
-   * Remove user from table
-   * API request for deletion
-   * @param u User
+   * Confirmation dialog to
+   * remove user from table
+   * @param user User
    * @param i Index
    */
-  deleteUser(u: User, i: number) {
-    this.service
-      .deleteUser(u.id)
-      .then(() => {
-        this.service.onUserDeleted(new User(u));
-        this.dataSource.data.splice(i, 1);
-        this.dataSource._updateChangeSubscription();
-      })
-      .catch(err => console.error(err));
+  deleteUserDialog(u: User, i: number) {
+    const user = new User(u);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "400px",
+      data: `Do you confirm the deletion of ${user.fullName}`
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // API request for deletion
+        this.service
+          .deleteUser(user.id)
+          .then(() => {
+            this.service.onUserDeleted(new User(user));
+            this.dataSource.data.splice(i, 1);
+            this.dataSource._updateChangeSubscription();
+          })
+          .catch(err => console.error(err));
+      }
+    });
   }
 }

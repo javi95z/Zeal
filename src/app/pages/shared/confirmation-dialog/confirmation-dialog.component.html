@@ -1,0 +1,9 @@
+<div mat-dialog-content>{{message}}</div>
+<div mat-dialog-actions>
+  <div class="col-md-6">
+    <button mat-raised-button (click)="onNoClick()">No</button>
+  </div>
+  <div class="col-md-6">
+    <button mat-raised-button color="warn" [mat-dialog-close]="true" class="pull-right">Yes</button>
+  </div>
+</div>
