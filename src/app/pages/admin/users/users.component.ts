@@ -8,7 +8,7 @@ import {
 import { SelectionModel } from "@angular/cdk/collections";
 import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
 import { ConfirmationDialogComponent } from "../../shared";
-import { UserService } from "../../../services";
+import { UserService, ToastService } from "../../../services";
 import { User } from "../../../models";
 
 @Component({
@@ -33,7 +33,11 @@ export class UsersAdminComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private service: UserService, private dialog: MatDialog) {}
+  constructor(
+    private service: UserService,
+    private toast: ToastService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.initData();
@@ -87,7 +91,7 @@ export class UsersAdminComponent implements OnInit {
       .then(res => {
         this.dataSource.data[i] = res;
         this.dataSource._updateChangeSubscription();
-        this.service.onUserUpdated(new User(res));
+        this.toast.setMessage(`User ${user.fullName} updated successfully.`);
       })
       .catch(err => console.error(err));
   }
@@ -110,9 +114,9 @@ export class UsersAdminComponent implements OnInit {
         this.service
           .deleteUser(user.id)
           .then(() => {
-            this.service.onUserDeleted(new User(user));
             this.dataSource.data.splice(i, 1);
             this.dataSource._updateChangeSubscription();
+            this.toast.setMessage(`User ${user.fullName} deleted successfully.`);
           })
           .catch(err => console.error(err));
       }

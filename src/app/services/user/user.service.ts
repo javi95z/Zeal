@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ToastService } from "../toast/toast.service";
 import { User } from "../../models";
 import { parseRelationships } from "../../utils";
 import { environment as env } from "../../../environments/environment";
@@ -9,7 +8,7 @@ import { environment as env } from "../../../environments/environment";
   providedIn: "root"
 })
 export class UserService {
-  constructor(private http: HttpClient, private toast: ToastService) {}
+  constructor(private http: HttpClient) {}
 
   /**
    * Get all users
@@ -65,24 +64,5 @@ export class UserService {
         .then(res => resolve(res as boolean))
         .catch(rej => reject(rej));
     });
-  }
-
-  /**
-   * Actions to perform
-   * when user is updated
-   * @param u User
-   */
-  onUserUpdated(u: User): void {
-    this.toast.setMessage(`User ${u.fullName} updated successfully.`);
-  }
-
-  /**
-   * Actions to perform
-   * when user is deleted
-   * @param u User
-   * @param i Index
-   */
-  onUserDeleted(u: User): void {
-    this.toast.setMessage(`User ${u.fullName} deleted successfully.`);
   }
 }
