@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 i {
   display: inline-block;
   font-family: 'Material-Design-Iconic-Font';
@@ -7,11 +9,11 @@ i {
   vertical-align: -15%;
   width: 1em;
   &.female {
-    color: #f99dff;
+    color: $pink;
     &:before { content: '\f20f'; }
   }
   &.male {
-    color: #6e9ef6;
+    color: $lightblue;
     &:before { content: '\f210'; }
   }
 }

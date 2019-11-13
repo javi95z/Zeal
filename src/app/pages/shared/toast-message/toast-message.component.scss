@@ -1,4 +1,5 @@
 @import "~@angular/material/theming";
+@import "../../../variables";
 
 :host {
   position: absolute;
@@ -17,9 +18,9 @@ aside {
   padding: 5px 15px;
   width: 300px;
   .error & {
-    background-color: #ed6f56;
+    background-color: $danger;
   }
   .info & {
-    background-color: #2ecd99;
+    background-color: $success;
   }
 }

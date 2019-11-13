@@ -3,6 +3,7 @@
  * Override of Philbert
  */
 @import "theme.scss";
+@import "app/variables";
 
 h1,
 h2,
@@ -18,14 +19,14 @@ h6 {
   .side-nav
   > li
   > a.active {
-  color: #ff9900;
+  color: $zeal;
 }
 .page-wrapper {
   min-height: 100vh;
 }
 .btn.btn-zeal {
-  background: #ff9900;
-  border: solid 1px #ff9900;
+  background: $zeal;
+  border: solid 1px $zeal;
   color: #fff;
   &:hover,
   &:focus,
@@ -36,7 +37,7 @@ h6 {
   }
 }
 .txt-zeal {
-  color: #ff9900 !important;
+  color: $zeal !important;
 }
 
 // Panels

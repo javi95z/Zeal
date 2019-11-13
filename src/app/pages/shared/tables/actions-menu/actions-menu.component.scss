@@ -1,7 +1,15 @@
+@import "../../../../variables";
+
 .dropdown {
   width: 35px;
   ul {
     left: auto;
     right: 0;
+    .divider + li {
+      background-color: $danger;
+      a {
+        color: $white;
+      }
+    }
   }
 }
