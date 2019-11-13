@@ -13,8 +13,8 @@ export class User {
   last_name: string;
   profile_img: string;
   role?: Role;
-  teams?: Team[];
   suffix: string;
+  teams?: Team[];
   updated_at?: string | Date;
   created_at?: string | Date;
 
