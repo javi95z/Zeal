@@ -60,8 +60,8 @@
                 <ng-container matColumnDef="actions">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                   <td *matCellDef="let element; let i = index" class="action-buttons">
-                    <z-action-table-menu [details]="['profile', element.id]" (event)="onAction($event, element, i)">
-                    </z-action-table-menu>
+                    <z-actions-menu [details]="['profile', element.id]" (event)="onAction($event, element, i)">
+                    </z-actions-menu>
                   </td>
                 </ng-container>
 
@@ -72,9 +72,7 @@
                 showFirstLastButtons>
               </mat-paginator>
             </div>
-            <div class="table-empty" *ngIf="!dataSource">
-              No records found.
-            </div>
+            <z-no-results *ngIf="!dataSource"></z-no-results>
           </div>
         </div>
       </div>

@@ -47,7 +47,6 @@ export class UsersAdminComponent implements OnInit {
     this.service
       .getUsers()
       .then(data => {
-        data.forEach(u => new User(u)); // test
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
         setTimeout(() => (this.dataSource.paginator = this.paginator));

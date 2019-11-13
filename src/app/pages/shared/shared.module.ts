@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
-  ActionTableMenuComponent,
   ConfirmationDialogComponent,
   GenderIconComponent,
   LoadingComponent,
@@ -10,10 +10,9 @@ import {
 } from "./";
 import { CapitalizePipe } from "../../pipes";
 import { MaterialModule } from "../../material.module";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { TablesSharedModule } from "./tables/tables-shared.module";
 
 const components = [
-  ActionTableMenuComponent,
   CapitalizePipe,
   ConfirmationDialogComponent,
   GenderIconComponent,
@@ -26,7 +25,8 @@ const modules = [
   FormsModule,
   MaterialModule,
   ReactiveFormsModule,
-  RouterModule
+  RouterModule,
+  TablesSharedModule
 ];
 
 @NgModule({
