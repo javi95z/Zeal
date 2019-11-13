@@ -2,6 +2,15 @@
 $zeal: #ff9900;
 $white: #ffffff;
 $success: #2ecd99;
-$danger: #e43a3a;
+$danger: #bf2424;
 $pink: #f99dff;
+$blue: #0e3b84;
 $lightblue: #6e9ef6;
+
+@function set-text-color($color) {
+  @if (lightness($color) > 50) {
+    @return #000000;
+  } @else {
+    @return #ffffff;
+  }
+}

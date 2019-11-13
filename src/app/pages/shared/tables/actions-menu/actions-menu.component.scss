@@ -8,7 +8,7 @@
     .divider + li {
       background-color: $danger;
       a {
-        color: $white;
+        color: set-text-color($danger);
       }
     }
   }
