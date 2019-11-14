@@ -1,9 +1,10 @@
 import { NgModule } from "@angular/core";
 import { ProjectsComponent } from "./";
-import { SharedModule } from "../../shared/shared.module";
+import { SharedModule } from "@pages/shared/shared.module";
+import { ProjectStatusDirective } from "@directives";
 
 @NgModule({
-  declarations: [ProjectsComponent],
+  declarations: [ProjectsComponent, ProjectStatusDirective],
   imports: [SharedModule]
 })
 export class ProjectsAdminModule {}
