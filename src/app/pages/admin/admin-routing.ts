@@ -1,8 +1,8 @@
 import { Routes } from "@angular/router";
 import { AdminGuard, AuthGuard } from "@guards";
 import { AdminComponent } from "./admin.component";
-import { ProfileComponent, UsersAdminComponent } from "./users";
-import { ProjectsComponent } from "./projects";
+import { UserProfileAdminComponent, UsersAdminComponent } from "./users";
+import { ProjectProfileAdminComponent, ProjectsAdminComponent } from "./projects";
 
 export const routes: Routes = [
   {
@@ -11,8 +11,9 @@ export const routes: Routes = [
     canActivate: [AuthGuard, AdminGuard],
     children: [
       { path: "users", component: UsersAdminComponent },
-      { path: "users/profile/:id", component: ProfileComponent },
-      { path: "projects", component: ProjectsComponent },
+      { path: "users/profile/:id", component: UserProfileAdminComponent },
+      { path: "projects", component: ProjectsAdminComponent },
+      { path: "projects/profile/:id", component: ProjectProfileAdminComponent },
       { path: "**", redirectTo: "/admin/users" }
     ]
   }

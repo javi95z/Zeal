@@ -1,9 +1,17 @@
 import { NgModule } from "@angular/core";
-import { UsersAdminComponent, ProfileComponent, EditUserDialog } from "./";
+import {
+  UsersAdminComponent,
+  UserProfileAdminComponent,
+  EditUserDialog
+} from "./";
 import { SharedModule } from "@pages/shared/shared.module";
 
 @NgModule({
-  declarations: [UsersAdminComponent, ProfileComponent, EditUserDialog],
+  declarations: [
+    UsersAdminComponent,
+    UserProfileAdminComponent,
+    EditUserDialog
+  ],
   imports: [SharedModule],
   entryComponents: [EditUserDialog]
 })

@@ -6,11 +6,11 @@ import { UserService, ToastService } from "@services";
 import { User } from "@models";
 
 @Component({
-  selector: "z-profile",
+  selector: "z-admin-user-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"]
 })
-export class ProfileComponent implements OnInit {
+export class UserProfileAdminComponent implements OnInit {
   user: User;
   isLoading = true;
 
@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.route.url.subscribe(data => console.log(data));
     this.route.params.subscribe(data => {
       if (data.id) {
         this.service
@@ -57,6 +58,6 @@ export class ProfileComponent implements OnInit {
         this.toast.setMessage(`User ${user.fullName} updated successfully.`);
       })
       .catch(err => console.error(err))
-      .finally(() => this.isLoading = false);
+      .finally(() => (this.isLoading = false));
   }
 }

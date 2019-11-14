@@ -9,7 +9,7 @@ import { SelectionModel } from "@angular/cdk/collections";
   templateUrl: "./projects.component.html",
   styleUrls: ["./projects.component.scss"]
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsAdminComponent implements OnInit {
   displayedColumns: string[] = [
     "select",
     "name",
