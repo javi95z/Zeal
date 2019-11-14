@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ToastService, Message } from "../../../services";
+import { ToastService, Message } from "@services";
 
 @Component({
   selector: "z-notifications",

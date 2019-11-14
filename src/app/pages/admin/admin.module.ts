@@ -3,8 +3,8 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./admin-routing";
 import { SidebarComponent } from "./";
 import { AdminComponent } from "./admin.component";
-import { SharedModule } from "../shared/shared.module";
-import { LayoutModule } from "../layout/layout.module";
+import { SharedModule } from "@pages/shared/shared.module";
+import { LayoutModule } from "@pages/layout/layout.module";
 import { ProjectsAdminModule, UsersAdminModule } from "./";
 
 @NgModule({

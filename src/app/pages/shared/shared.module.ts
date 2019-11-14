@@ -8,8 +8,8 @@ import {
   LoadingComponent,
   ToastMessageComponent
 } from "./";
-import { CapitalizePipe } from "../../pipes";
-import { MaterialModule } from "../../material.module";
+import { CapitalizePipe } from "@pipes";
+import { MaterialModule } from "@zeal/material.module";
 import { TablesSharedModule } from "./tables/tables-shared.module";
 
 const components = [

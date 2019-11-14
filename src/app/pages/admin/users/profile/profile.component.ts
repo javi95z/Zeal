@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material";
 import { EditUserDialog } from "../edit-dialog/edit-dialog.component";
-import { UserService, ToastService } from "../../../../services";
-import { User } from "../../../../models";
+import { UserService, ToastService } from "@services";
+import { User } from "@models";
 
 @Component({
   selector: "z-profile",

@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup } from "@angular/forms";
-import { RoleService, TeamService } from "../../../../services";
-import { User, Role, Team } from "../../../../models";
-import { populateFormFields } from "../../../../utils";
+import { RoleService, TeamService } from "@services";
+import { User, Role, Team } from "@models";
+import { populateFormFields } from "@zeal/utils";
 
 @Component({
   selector: "z-user-edit-dialog",

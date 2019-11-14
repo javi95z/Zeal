@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { AdminGuard, AuthGuard } from "../../guards";
+import { AdminGuard, AuthGuard } from "@guards";
 import { AdminComponent } from "./admin.component";
 import { ProfileComponent, UsersAdminComponent } from "./users";
 import { ProjectsComponent } from "./projects";

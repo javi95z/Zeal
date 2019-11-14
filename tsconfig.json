@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src/",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -11,12 +11,24 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@zeal/*": ["app/*"],
+      "@directives": ["app/directives/"],
+      "@directives/*": ["app/directives/*"],
+      "@env": ["environments/"],
+      "@env/*": ["environments/*"],
+      "@guards": ["app/guards/"],
+      "@guards/*": ["app/guards/*"],
+      "@models": ["app/models/"],
+      "@models/*": ["app/models/*"],
+      "@pages": ["app/pages/"],
+      "@pages/*": ["app/pages/*"],
+      "@pipes": ["app/pipes/"],
+      "@pipes/*": ["app/pipes/*"],
+      "@services": ["app/services/"],
+      "@services/*": ["app/services/*"]
+    }
   }
 }

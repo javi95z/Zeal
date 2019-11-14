@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { LoginComponent, AuthHeaderComponent } from "./";
-import { LayoutModule } from "../layout/layout.module";
-import { SharedModule } from "../shared/shared.module";
+import { LayoutModule } from "@pages/layout/layout.module";
+import { SharedModule } from "@pages/shared/shared.module";
 
 @NgModule({
   declarations: [LoginComponent, AuthHeaderComponent],

@@ -6,10 +6,9 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from "@angular/common/http";
+import { AuthService, ToastService } from "@services";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
-
-import { AuthService, ToastService } from "../services";
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {

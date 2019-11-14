@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { AuthService } from "../../../services";
-import { User } from "../../../models";
+import { AuthService } from "@services";
+import { User } from "@models";
 
 @Component({
   selector: "z-navbar",

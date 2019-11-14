@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { User } from "../../models";
-import { parseRelationships } from "../../utils";
-import { environment as env } from "../../../environments/environment";
+import { User } from "@models";
+import { parseRelationships } from "@zeal/utils";
+import { environment as env } from "@env/environment";
 
 @Injectable({
   providedIn: "root"

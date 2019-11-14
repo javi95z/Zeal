@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material";
-import { User } from "../../models";
-import { environment as env } from "../../../environments/environment";
+import { User } from "@models";
+import { environment as env } from "@env/environment";
 
 @Injectable({
   providedIn: "root"
