@@ -13,6 +13,7 @@ export class ProjectsComponent implements OnInit {
   displayedColumns: string[] = [
     "select",
     "name",
+    "contact",
     "status",
     "start_date",
     "end_date",

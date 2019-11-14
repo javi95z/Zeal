@@ -1,10 +1,10 @@
-import { User } from "./user";
+import { Contact, User } from "./";
 
 export class Project {
   id: number;
   code?: string;
   // comments: Comment[];
-  // contact: Contact;
+  contact: Contact;
   description?: string;
   end_date?: string | Date;
   name: string;

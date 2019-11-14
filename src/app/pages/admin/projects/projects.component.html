@@ -36,6 +36,14 @@
                   </td>
                 </ng-container>
 
+                <!-- Contact Column -->
+                <ng-container matColumnDef="contact">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
+                  <td *matCellDef="let element">
+                    <a [routerLink]="['/contacts/profile', element.id]">{{ element?.contact.name }}</a>
+                  </td>
+                </ng-container>
+
                 <!-- Status Column -->
                 <ng-container matColumnDef="status">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>

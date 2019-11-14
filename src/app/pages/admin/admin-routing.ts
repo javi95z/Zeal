@@ -13,7 +13,7 @@ export const routes: Routes = [
       { path: "users", component: UsersAdminComponent },
       { path: "users/profile/:id", component: ProfileComponent },
       { path: "projects", component: ProjectsComponent },
-      { path: "**", redirectTo: "users" }
+      { path: "**", redirectTo: "/admin/users" }
     ]
   }
 ];
