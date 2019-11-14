@@ -21,4 +21,18 @@ export class ProjectService {
         .catch(rej => reject(rej));
     });
   }
+
+  /**
+   * Get one project by id
+   * @param id Id
+   */
+  getProject(id: number): Promise<Project> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .post<Project>(`${env.urlApi}/projects/${id}`, null)
+        .toPromise()
+        .then(res => resolve(res))
+        .catch(rej => reject(rej));
+    });
+  }
 }

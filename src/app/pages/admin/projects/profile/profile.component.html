@@ -1,0 +1,50 @@
+<z-loading *ngIf="isLoading"></z-loading>
+<z-header></z-header>
+<div class="row" *ngIf="project && !isLoading">
+  <div class="col-sm-12">
+    <div class="panel panel-default card-view">
+      <div class="panel-heading">
+        <div class="pull-left">
+          <h6 class="panel-title txt-dark">{{ project.name }}</h6>
+        </div>
+        <div class="pull-right">
+          <a (click)="editprojectDialog(project)" class="panel-button">
+            <i class="zmdi zmdi-edit"></i><span>Edit</span>
+          </a>
+          <a [routerLink]="['projects']" class="panel-button">
+            <i class="zmdi zmdi-arrow-left"></i><span>Back to projects list</span>
+          </a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-wrapper collapse in">
+        <div class="panel-body row">
+          <div class="table-wrap">
+            <div class="table-responsive">
+              <table class="table display pb-30">
+                <tbody>
+                  <tr *ngIf="project.name">
+                    <td>Name</td>
+                    <td>{{ project.name }}</td>
+                  </tr>
+                  <tr *ngIf="project.email">
+                    <td>Email</td>
+                    <td>{{ project.email }}</td>
+                  </tr>
+                  <tr *ngIf="project.created_at">
+                    <td>Created at</td>
+                    <td>{{ project.created_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                  </tr>
+                  <tr *ngIf="project.updated_at">
+                    <td>Updated at</td>
+                    <td>{{ project.updated_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
