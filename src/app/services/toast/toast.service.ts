@@ -18,7 +18,7 @@ export class ToastService {
 
   constructor() {}
 
-  getMessages() {
+  getMessages(): Promise<Message[]> {
     return new Promise((res, rej) => res(this.messages));
   }
 

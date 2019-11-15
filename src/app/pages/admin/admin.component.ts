@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'z-admin',
-  templateUrl: './admin.component.html',
+  selector: "z-admin",
+  templateUrl: "./admin.component.html",
   styles: []
 })
 export class AdminComponent implements OnInit {

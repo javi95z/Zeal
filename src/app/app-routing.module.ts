@@ -1,7 +1,7 @@
-import { ContentComponent } from "./pages/layout/content/content.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "@guards";
+import { ContentComponent } from "@pages/layout";
 import { LoginComponent } from "@pages/auth/login/login.component";
 import { DashboardComponent } from "@pages/dashboard/dashboard.component";
 

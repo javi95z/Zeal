@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material";
-import { EditUserDialog } from "../edit-dialog/edit-dialog.component";
+import { EditUserDialog } from "@pages/admin/users";
 import { UserService, ToastService } from "@services";
 import { User } from "@models";
 

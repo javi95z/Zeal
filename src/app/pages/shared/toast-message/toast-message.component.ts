@@ -7,7 +7,7 @@ import { ToastService, Message } from "@services";
   styleUrls: ["./toast-message.component.scss"]
 })
 export class ToastMessageComponent implements OnInit {
-  messages: Promise<any>;
+  messages: Promise<Message[]>;
 
   constructor(private toast: ToastService) {}
 
