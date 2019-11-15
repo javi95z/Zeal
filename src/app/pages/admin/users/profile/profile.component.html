@@ -1,3 +1,4 @@
+<z-header title="User page" [current]="user?.fullName"></z-header>
 <z-loading *ngIf="isLoading"></z-loading>
 <div class="row" *ngIf="user && !isLoading">
   <div class="col-sm-12">

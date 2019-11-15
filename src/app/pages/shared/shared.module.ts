@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   ConfirmationDialogComponent,
   GenderIconComponent,
+  HeaderComponent,
   LoadingComponent,
   ToastMessageComponent
 } from "./";
@@ -16,6 +17,7 @@ const components = [
   CapitalizePipe,
   ConfirmationDialogComponent,
   GenderIconComponent,
+  HeaderComponent,
   LoadingComponent,
   ToastMessageComponent
 ];
