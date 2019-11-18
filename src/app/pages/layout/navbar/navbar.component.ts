@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AuthService } from "@services";
+import { AuthService, SidebarService } from "@services";
 import { User } from "@models";
 
 @Component({
@@ -9,13 +9,21 @@ import { User } from "@models";
 })
 export class NavbarComponent {
   currentUser: User;
+  isCollapsed: boolean;
 
-  constructor(public auth: AuthService) {
+  constructor(public auth: AuthService, private sidebar: SidebarService) {
     this.auth.currentUser.then(res => (this.currentUser = new User(res)));
+    this.sidebar
+      .getSidebarCollapsed()
+      .subscribe(res => (this.isCollapsed = res));
   }
 
   // TODO: Make it into a route
   logOut() {
     this.auth.doLogout();
+  }
+
+  collapseSidebar() {
+    this.sidebar.setSidebarCollapsed(!this.isCollapsed);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { SidebarService } from "@zeal/services";
 
 @Component({
   selector: "z-admin",
@@ -6,10 +7,13 @@ import { Component, OnInit } from "@angular/core";
   styles: []
 })
 export class AdminComponent implements OnInit {
+  sidebarCollapsed: boolean;
 
-  constructor() { }
+  constructor(private sidebar: SidebarService) {}
 
   ngOnInit() {
+    this.sidebar
+      .getSidebarCollapsed()
+      .subscribe(res => (this.sidebarCollapsed = res));
   }
-
 }
