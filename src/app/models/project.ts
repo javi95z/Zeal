@@ -1,16 +1,20 @@
 import { Contact, User } from "./";
+import { PROJECT_PRIORITY, PROJECT_STATUS } from "@zeal/variables";
+
+type Priority = typeof PROJECT_PRIORITY[number];
+type Status = typeof PROJECT_STATUS[number];
 
 export class Project {
   id: number;
   code?: string;
   // comments: Comment[];
-  contact: Contact;
+  contact?: Contact;
   description?: string;
   end_date?: string | Date;
   name: string;
-  priority: "low" | "medium" | "high";
+  priority: Priority;
   start_date?: string | Date;
-  status: "open" | "completed" | "canceled";
+  status: Status;
   // tasks: Task[];
   users?: User[];
   updated_at?: string | Date;
