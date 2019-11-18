@@ -66,7 +66,18 @@ export class UsersAdminComponent implements OnInit {
       : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  editUserDialog(user: User, i: number) {
+  onAction(action: string, user: User, index: number) {
+    switch (action) {
+      case "EDIT":
+        this.editUserDialog(user, index);
+        break;
+      case "DELETE":
+        this.deleteUserDialog(user, index);
+        break;
+    }
+  }
+
+  private editUserDialog(user: User, i: number) {
     const dialogRef = this.dialog.open(EditUserDialog, {
       panelClass: "modal-dialog-box",
       data: user
@@ -93,17 +104,6 @@ export class UsersAdminComponent implements OnInit {
         this.toast.setMessage(`User ${user.fullName} updated successfully.`);
       })
       .catch(err => console.error(err));
-  }
-
-  onAction(action: string, user: User, index: number) {
-    switch (action) {
-      case "EDIT":
-        this.editUserDialog(user, index);
-        break;
-      case "DELETE":
-        this.deleteUserDialog(user, index);
-        break;
-    }
   }
 
   /**

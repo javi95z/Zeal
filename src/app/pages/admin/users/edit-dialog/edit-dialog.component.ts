@@ -12,8 +12,9 @@ import { populateFormFields } from "@zeal/utils";
 })
 export class EditUserDialog implements OnInit {
   isLoading = true;
-  availableRoles: Role[];
-  availableTeams: Team[];
+  roleList: Role[];
+  teamList: Team[];
+  result: User;
   form = new FormGroup({
     active: new FormControl(),
     email: new FormControl(),
@@ -24,7 +25,6 @@ export class EditUserDialog implements OnInit {
     suffix: new FormControl(),
     teams: new FormControl()
   });
-  result: User;
 
   constructor(
     public dialog: MatDialog,
@@ -49,7 +49,7 @@ export class EditUserDialog implements OnInit {
   private async getRoles(): Promise<true> {
     await this.role
       .getRoles()
-      .then(res => (this.availableRoles = res.data))
+      .then(res => (this.roleList = res.data))
       .catch(err => console.error(err));
     return true;
   }
@@ -61,7 +61,7 @@ export class EditUserDialog implements OnInit {
   private async getTeams(): Promise<true> {
     await this.team
       .getTeams()
-      .then(res => (this.availableTeams = res.data))
+      .then(res => (this.teamList = res.data))
       .catch(err => console.error(err));
     return true;
   }
@@ -73,8 +73,8 @@ export class EditUserDialog implements OnInit {
   onSubmit(): void {
     const updated = Object.assign(this.result, this.form.value);
     const user = new User(updated);
-    user.role = this.availableRoles.find(o => o.id === updated.role);
-    user.teams = this.availableTeams.filter(o => updated.teams.includes(o.id));
+    user.role = this.roleList.find(o => o.id === updated.role);
+    user.teams = this.teamList.filter(o => updated.teams.includes(o.id));
     this.dialogRef.close(user);
   }
 }

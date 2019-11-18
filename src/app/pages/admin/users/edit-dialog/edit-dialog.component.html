@@ -33,7 +33,7 @@
   <mat-form-field>
     <mat-label>Role</mat-label>
     <mat-select formControlName="role">
-      <mat-option *ngFor="let item of availableRoles" [value]="item.id">{{ item.name }}</mat-option>
+      <mat-option *ngFor="let item of roleList" [value]="item.id">{{ item.name }}</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -41,7 +41,7 @@
   <mat-form-field>
     <mat-label>Teams</mat-label>
     <mat-select formControlName="teams" multiple>
-      <mat-option *ngFor="let item of availableTeams" [value]="item.id">{{ item.name }}</mat-option>
+      <mat-option *ngFor="let item of teamList" [value]="item.id">{{ item.name }}</mat-option>
     </mat-select>
   </mat-form-field>
 

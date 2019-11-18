@@ -2,8 +2,10 @@ import { NgModule } from "@angular/core";
 import {
   MatButtonModule,
   MatCheckboxModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatInputModule,
+  MatNativeDateModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSelectModule,
@@ -16,8 +18,10 @@ import {
   exports: [
     MatButtonModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatInputModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ApiResponse, Project } from "@models";
+import { parseRelationships } from "@zeal/utils";
 import { environment as env } from "@env/environment";
 
 @Injectable({
@@ -30,6 +31,21 @@ export class ProjectService {
     return new Promise((resolve, reject) => {
       this.http
         .post<Project>(`${env.urlApi}/projects/${id}`, null)
+        .toPromise()
+        .then(res => resolve(res))
+        .catch(rej => reject(rej));
+    });
+  }
+
+  /**
+   * Update one user by id
+   * @param id Id
+   * @param u User
+   */
+  updateProject(p: Project): Promise<Project> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .put<Project>(`${env.urlApi}/projects/${p.id}`, parseRelationships(p))
         .toPromise()
         .then(res => resolve(res))
         .catch(rej => reject(rej));

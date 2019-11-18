@@ -1,5 +1,9 @@
 import { NgModule } from "@angular/core";
-import { ProjectsAdminComponent, ProjectProfileAdminComponent } from "./";
+import {
+  ProjectsAdminComponent,
+  ProjectProfileAdminComponent,
+  EditProjectDialog
+} from "./";
 import { SharedModule } from "@pages/shared/shared.module";
 import { ProjectStatusDirective } from "@directives";
 
@@ -7,8 +11,10 @@ import { ProjectStatusDirective } from "@directives";
   declarations: [
     ProjectsAdminComponent,
     ProjectStatusDirective,
-    ProjectProfileAdminComponent
+    ProjectProfileAdminComponent,
+    EditProjectDialog
   ],
-  imports: [SharedModule]
+  imports: [SharedModule],
+  entryComponents: [EditProjectDialog]
 })
 export class ProjectsAdminModule {}
