@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { SelectionModel } from "@angular/cdk/collections";
 import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
 import { Project } from "@models";
 import { ProjectService } from "@services";
-import { SelectionModel } from "@angular/cdk/collections";
 
 @Component({
   selector: "app-projects",
@@ -42,5 +42,17 @@ export class ProjectsAdminComponent implements OnInit {
         setTimeout(() => (this.dataSource.paginator = this.paginator));
       })
       .finally(() => (this.isLoading = false));
+  }
+
+  isAllSelected(): boolean {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle(): void {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 }

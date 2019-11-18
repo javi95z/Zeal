@@ -20,10 +20,7 @@ export class ProjectProfileAdminComponent implements OnInit {
         this.service
           .getProject(data.id)
           .then(res => (this.project = new Project(res)))
-          .finally(() => {
-            this.isLoading = false;
-            console.log(this.project);
-          });
+          .finally(() => (this.isLoading = false));
       }
     });
   }

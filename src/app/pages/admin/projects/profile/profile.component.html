@@ -31,6 +31,18 @@
                     <td>Email</td>
                     <td>{{ project.email }}</td>
                   </tr>
+                  <tr *ngIf="project.description">
+                    <td>Description</td>
+                    <td>{{ project.description }}</td>
+                  </tr>
+                  <tr *ngIf="project.start_date">
+                    <td>Start Date</td>
+                    <td>{{ project.start_date | date }}</td>
+                  </tr>
+                  <tr *ngIf="project.end_date">
+                    <td>End Date</td>
+                    <td>{{ project.end_date | date }}</td>
+                  </tr>
                   <tr *ngIf="project.created_at">
                     <td>Created at</td>
                     <td>{{ project.created_at | date: "dd/MM/yyyy H:m:s" }}</td>
