@@ -49,7 +49,7 @@ export class EditUserDialog implements OnInit {
   private async getRoles(): Promise<true> {
     await this.role
       .getRoles()
-      .then((data: Role[]) => (this.availableRoles = data))
+      .then(res => (this.availableRoles = res.data))
       .catch(err => console.error(err));
     return true;
   }
@@ -61,7 +61,7 @@ export class EditUserDialog implements OnInit {
   private async getTeams(): Promise<true> {
     await this.team
       .getTeams()
-      .then((data: Team[]) => (this.availableTeams = data))
+      .then(res => (this.availableTeams = res.data))
       .catch(err => console.error(err));
     return true;
   }

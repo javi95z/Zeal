@@ -36,8 +36,8 @@ export class ProjectsAdminComponent implements OnInit {
     this.selection = new SelectionModel<Project>(true, []);
     this.service
       .getProjects()
-      .then(data => {
-        this.dataSource = new MatTableDataSource(data);
+      .then(res => {
+        this.dataSource = new MatTableDataSource(res.data);
         this.dataSource.sort = this.sort;
         setTimeout(() => (this.dataSource.paginator = this.paginator));
       })

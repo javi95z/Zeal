@@ -22,7 +22,6 @@ export class UserProfileAdminComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.url.subscribe(data => console.log(data));
     this.route.params.subscribe(data => {
       if (data.id) {
         this.service
