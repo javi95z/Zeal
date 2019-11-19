@@ -34,8 +34,8 @@
   <div id="mobile_only_nav" class="mobile-only-nav pull-right">
     <ul class="nav navbar-right top-nav pull-right">
       <!-- Admin settings -->
-      <li class="dropdown app-drp" matTooltip="Administration" *ngIf="currentUser?.is_admin">
-        <a [routerLink]="['/admin']" class="dropdown-toggle" data-toggle="dropdown">
+      <li matTooltip="Administration" *ngIf="currentUser?.is_admin">
+        <a [routerLink]="['/admin']">
           <i class="zmdi zmdi-settings top-nav-icon"></i>
         </a>
       </li>
