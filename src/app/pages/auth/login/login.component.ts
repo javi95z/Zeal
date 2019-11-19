@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
    */
   logIn() {
     this.auth.doLogin(this.loginForm.value).then(res => {
-      sessionStorage.setItem("token", res.access_token);
+      this.auth.token = res.access_token;
       // Get user data and enter the app
       this.auth.getUser().then(user => {
         this.auth.userData = user;

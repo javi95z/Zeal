@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material";
 import { User } from "@models";
 import { environment as env } from "@env/environment";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +13,10 @@ export class AuthService {
   userData: User;
 
   get token(): string {
-    return sessionStorage.getItem("token");
+    return sessionStorage.getItem("token") || "";
+  }
+  set token(val: string) {
+    sessionStorage.setItem("token", val);
   }
   get isLoggedIn(): boolean {
     return !!this.token;
@@ -42,7 +46,10 @@ export class AuthService {
       this.http
         .post(env.urlApi + "/auth/login", loginData)
         .toPromise()
-        .then(res => resolve(res), rej => reject(rej));
+        .then(
+          res => resolve(res),
+          rej => reject(rej)
+        );
     });
   }
 
@@ -65,5 +72,13 @@ export class AuthService {
         .toPromise()
         .then(res => resolve(res));
     });
+  }
+
+  /**
+   * Refresh token
+   */
+  // TODO: To promise
+  refreshToken(): Observable<any> {
+    return this.http.post(`${env.urlApi}/auth/refresh`, null);
   }
 }
