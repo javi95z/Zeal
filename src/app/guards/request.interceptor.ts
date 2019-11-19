@@ -7,8 +7,8 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { AuthService, ToastService } from "@services";
-import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
+import { Observable, throwError, defer, from } from "rxjs";
+import { tap, catchError, mergeMap } from "rxjs/operators";
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
@@ -19,30 +19,42 @@ export class RequestInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // Set token header
-    request = request.clone({
-      setHeaders: { Authorization: `Bearer ${this.auth.token}` }
+    const handler = defer(() => {
+      const authReq = request.clone({
+        headers: request.headers.set(
+          "Authorization",
+          `Bearer ${this.auth.token}`
+        )
+      });
+      // Execute
+      return next.handle(authReq);
     });
 
-    return next.handle(request).pipe(
-      tap(
-        null,
-        // (event: HttpEvent<any>) => { if (event instanceof HttpResponse) { } },
-        (err: HttpErrorResponse) => {
-          // Logout when unauthorized or error
-          if (!err.status) {
-            this.toast.setMessage(err.statusText, "error");
-            this.auth.doLogout();
-          }
-          if (err.status === 400) {
-            this.toast.setMessage("Bad request error", "error");
-            this.auth.doLogout();
-          }
-          if (err.status === 401) {
-            this.toast.setMessage("Unauthorized", "error");
-            this.auth.doLogout();
-          }
+    return handler.pipe(
+      catchError((error: HttpErrorResponse, retryRequest) => {
+        if (error.status === 401) {
+          // Refresh token on Unauthorized 401 response
+          return from(
+            this.auth.refreshToken().pipe(
+              tap(res => (this.auth.token = res.access_token)),
+              catchError(() => {
+                this.toast.setMessage("Unauthorized", "error");
+                this.auth.doLogout();
+                return throwError("refresh_token failed");
+              }),
+              mergeMap(() => retryRequest)
+            )
+          );
+        } else if (error.status === 400) {
+          this.toast.setMessage("Bad request error", "error");
+          return throwError(error);
+        } else if (!error.status) {
+          this.toast.setMessage(error.statusText, "error");
+          this.auth.doLogout();
+        } else {
+          return throwError(error);
         }
-      )
+      })
     );
   }
 }
