@@ -4,32 +4,12 @@
       <span>Admin</span>
       <i class="zmdi zmdi-more"></i>
     </li>
-    <!-- Users -->
-    <li>
-      <a [routerLink]="['users']" routerLinkActive="active">
+    <!-- Menu items -->
+    <li *ngFor="let item of menuItems">
+      <a [routerLink]="[item.link]" routerLinkActive="active">
         <div class="pull-left">
-          <i class="zmdi zmdi-accounts-alt mr-20"></i>
-          <span class="right-nav-text">Users</span>
-        </div>
-        <div class="clearfix"></div>
-      </a>
-    </li>
-    <!-- Projects -->
-    <li>
-      <a [routerLink]="['projects']" routerLinkActive="active">
-        <div class="pull-left">
-          <i class="zmdi zmdi-case mr-20"></i>
-          <span class="right-nav-text">Projects</span>
-        </div>
-        <div class="clearfix"></div>
-      </a>
-    </li>
-    <!-- Other -->
-    <li>
-      <a [routerLink]="['admin']" routerLinkActive="active">
-        <div class="pull-left">
-          <i class="zmdi zmdi-more mr-20"></i>
-          <span class="right-nav-text">Other</span>
+          <i class="zmdi zmdi-{{ item.icon }} mr-20"></i>
+          <span class="right-nav-text">{{ item.name }}</span>
         </div>
         <div class="clearfix"></div>
       </a>

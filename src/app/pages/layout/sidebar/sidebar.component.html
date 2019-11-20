@@ -4,12 +4,12 @@
       <span>Main</span>
       <i class="zmdi zmdi-more"></i>
     </li>
-    <!-- Home -->
-    <li>
-      <a [routerLink]="['dashboard']" routerLinkActive="active">
+    <!-- Menu items -->
+    <li *ngFor="let item of menuItems">
+      <a [routerLink]="[item.link]" routerLinkActive="active">
         <div class="pull-left">
-          <i class="zmdi zmdi-view-dashboard mr-20"></i>
-          <span class="right-nav-text">Dashboard</span>
+          <i class="zmdi zmdi-{{ item.icon }} mr-20"></i>
+          <span class="right-nav-text">{{ item.name }}</span>
         </div>
         <div class="clearfix"></div>
       </a>
