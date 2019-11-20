@@ -1,3 +1,4 @@
+export * from "./back-button/back-button.component";
 export * from "./tables/actions-menu/actions-menu.component";
 export * from "./confirmation-dialog/confirmation-dialog.component";
 export * from "./gender-icon/gender-icon.component";

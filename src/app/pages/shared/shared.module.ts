@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
+  BackButtonComponent,
   ConfirmationDialogComponent,
   GenderIconComponent,
   HeaderComponent,
@@ -14,6 +15,7 @@ import { MaterialModule } from "@zeal/material.module";
 import { TablesSharedModule } from "./tables/tables-shared.module";
 
 const components = [
+  BackButtonComponent,
   CapitalizePipe,
   ConfirmationDialogComponent,
   GenderIconComponent,
