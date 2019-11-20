@@ -15,59 +15,106 @@ h6 {
 }
 
 // Helper classes
-.text-zeal { color: $zeal; }
-.text-white { color: $white; }
-.text-success { color: $success; }
-.text-danger {color: $danger; }
-.text-pink { color: $pink; }
-.text-blue { color: $blue; }
-.text-lightblue { color: $lightblue; }
+.text-zeal {
+  color: $zeal !important;
+}
+.text-white {
+  color: $white !important;
+}
+.text-success {
+  color: $success !important;
+}
+.text-danger {
+  color: $danger !important;
+}
+.text-pink {
+  color: $pink !important;
+}
+.text-blue {
+  color: $blue !important;
+}
+.text-lightblue {
+  color: $lightblue !important;
+}
 .bg-zeal {
-  background-color: $zeal;
-  color: set-text-color($zeal);
+  background-color: $zeal !important;
+  color: set-text-color($zeal) !important;
 }
 .bg-white {
-  background-color: $white;
-  color: set-text-color($white);
+  background-color: $white !important;
+  color: set-text-color($white) !important;
 }
 .bg-success {
-  background-color: $success;
-  color: set-text-color($success);
+  background-color: $success !important;
+  color: set-text-color($success) !important;
 }
 .bg-danger {
-  background-color: $danger;
-  color: set-text-color($danger);
+  background-color: $danger !important;
+  color: set-text-color($danger) !important;
 }
 .bg-pink {
-  background-color: $pink;
-  color: set-text-color($pink);
+  background-color: $pink !important;
+  color: set-text-color($pink) !important;
 }
-.bg-blue { 
-  background-color: $blue;
-  color: set-text-color($blue);
+.bg-blue {
+  background-color: $blue !important;
+  color: set-text-color($blue) !important;
 }
 .bg-lightblue {
-  background-color: $lightblue;
-  color: set-text-color($lightblue);
+  background-color: $lightblue !important;
+  color: set-text-color($lightblue) !important;
 }
-.fw-200 { font-weight: 200; }
-.fw-300 { font-weight: 300; }
-.fw-400 { font-weight: 400; }
-.fw-500 { font-weight: 500; }
-.fw-600 { font-weight: 600; }
-.fw-800 { font-weight: 800; }
-.fs-xxsm { font-size: xx-small; }
-.fs-xsm { font-size: x-small; }
-.fs-smr { font-size: smaller; }
-.fs-sm { font-size: small; }
-.fs-md { font-size: medium; }
-.fs-lg { font-size: large; }
-.fs-lgr { font-size: larger; }
-.fs-xlg { font-size: x-large; }
-.fs-xxlg { font-size: xx-large; }
-.ws-normal { white-space: normal; }
-.ws-nowrap { white-space: nowrap; }
-
+.fw-200 {
+  font-weight: 200 !important;
+}
+.fw-300 {
+  font-weight: 300 !important;
+}
+.fw-400 {
+  font-weight: 400 !important;
+}
+.fw-500 {
+  font-weight: 500 !important;
+}
+.fw-600 {
+  font-weight: 600 !important;
+}
+.fw-800 {
+  font-weight: 800 !important;
+}
+.fs-xxsm {
+  font-size: xx-small !important;
+}
+.fs-xsm {
+  font-size: x-small !important;
+}
+.fs-smr {
+  font-size: smaller !important;
+}
+.fs-sm {
+  font-size: small !important;
+}
+.fs-md {
+  font-size: medium !important;
+}
+.fs-lg {
+  font-size: large !important;
+}
+.fs-lgr {
+  font-size: larger !important;
+}
+.fs-xlg {
+  font-size: x-large !important;
+}
+.fs-xxlg {
+  font-size: xx-large !important;
+}
+.ws-normal {
+  white-space: normal !important;
+}
+.ws-nowrap {
+  white-space: nowrap !important;
+}
 
 .wrapper.color-zeal .fixed-sidebar-left .side-nav > li > a.active {
   color: $zeal;
@@ -127,4 +174,10 @@ h6 {
   max-height: 70vh;
   max-width: 80vw;
   width: 600px;
+}
+
+// Forms
+mat-calendar .mat-calendar-body-selected {
+  background-color: $zeal !important;
+  color: set-text-color($zeal) !important;
 }

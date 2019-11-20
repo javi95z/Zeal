@@ -1,4 +1,5 @@
-import { Contact, User } from "./";
+import { Contact } from "./contact";
+import { User } from "./user";
 import { PROJECT_PRIORITY, PROJECT_STATUS } from "@zeal/variables";
 
 type Priority = typeof PROJECT_PRIORITY[number];
@@ -22,5 +23,7 @@ export class Project {
 
   constructor(values: Project) {
     Object.assign(this, values);
+    this.users = values.users.map(o => new User(o));
+    this.contact = new Contact(values.contact);
   }
 }

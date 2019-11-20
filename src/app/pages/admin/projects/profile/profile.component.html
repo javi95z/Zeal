@@ -34,7 +34,7 @@
                   </tr>
                   <tr *ngIf="project.description">
                     <td>Description</td>
-                    <td>{{ project.description }}</td>
+                    <td class="ws-normal">{{ project.description }}</td>
                   </tr>
                   <tr *ngIf="project.start_date">
                     <td>Start Date</td>
@@ -43,6 +43,16 @@
                   <tr *ngIf="project.end_date">
                     <td>End Date</td>
                     <td>{{ project.end_date | date }}</td>
+                  </tr>
+                  <tr *ngIf="project.users.length">
+                    <td>Members</td>
+                    <td>                      
+                      <span *ngFor="let item of project.users; let last = last">
+                        <a [routerLink]="['/admin', 'users', 'profile', item.id]">
+                          {{ item.fullName }}<span *ngIf="!last">, </span>
+                        </a>
+                      </span>
+                    </td>
                   </tr>
                   <tr *ngIf="project.created_at">
                     <td>Created at</td>
