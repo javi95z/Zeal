@@ -181,3 +181,12 @@ mat-calendar .mat-calendar-body-selected {
   background-color: $zeal !important;
   color: set-text-color($zeal) !important;
 }
+
+// Scrollbar
+::-webkit-scrollbar-thumb {
+  background-color: $dark;
+  border-radius: 4px;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}

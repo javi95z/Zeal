@@ -28,9 +28,9 @@
                     <td>Name</td>
                     <td>{{ project.name }}</td>
                   </tr>
-                  <tr *ngIf="project.email">
-                    <td>Email</td>
-                    <td>{{ project.email }}</td>
+                  <tr *ngIf="project.code">
+                    <td>Code</td>
+                    <td>{{ project.code }}</td>
                   </tr>
                   <tr *ngIf="project.description">
                     <td>Description</td>
@@ -46,7 +46,7 @@
                   </tr>
                   <tr *ngIf="project.users.length">
                     <td>Members</td>
-                    <td>                      
+                    <td>
                       <span *ngFor="let item of project.users; let last = last">
                         <a [routerLink]="['/admin', 'users', 'profile', item.id]">
                           {{ item.fullName }}<span *ngIf="!last">, </span>
