@@ -14,28 +14,14 @@ h6 {
   text-transform: none !important;
 }
 
-// Colors
-.text-zeal {
-  color: $zeal;
-}
-.text-white {
-  color: $white;
-}
-.text-success {
-  color: $success;
-}
-.text-danger {
-  color: $danger;
-}
-.text-pink {
-  color: $pink;
-}
-.text-blue {
-  color: $blue;
-}
-.text-lightblue {
-  color: $lightblue;
-}
+// Helper classes
+.text-zeal { color: $zeal; }
+.text-white { color: $white; }
+.text-success { color: $success; }
+.text-danger {color: $danger; }
+.text-pink { color: $pink; }
+.text-blue { color: $blue; }
+.text-lightblue { color: $lightblue; }
 .bg-zeal {
   background-color: $zeal;
   color: set-text-color($zeal);
@@ -56,7 +42,7 @@ h6 {
   background-color: $pink;
   color: set-text-color($pink);
 }
-.bg-blue {
+.bg-blue { 
   background-color: $blue;
   color: set-text-color($blue);
 }
@@ -64,6 +50,24 @@ h6 {
   background-color: $lightblue;
   color: set-text-color($lightblue);
 }
+.fw-200 { font-weight: 200; }
+.fw-300 { font-weight: 300; }
+.fw-400 { font-weight: 400; }
+.fw-500 { font-weight: 500; }
+.fw-600 { font-weight: 600; }
+.fw-800 { font-weight: 800; }
+.fs-xxsm { font-size: xx-small; }
+.fs-xsm { font-size: x-small; }
+.fs-smr { font-size: smaller; }
+.fs-sm { font-size: small; }
+.fs-md { font-size: medium; }
+.fs-lg { font-size: large; }
+.fs-lgr { font-size: larger; }
+.fs-xlg { font-size: x-large; }
+.fs-xxlg { font-size: xx-large; }
+.ws-normal { white-space: normal; }
+.ws-nowrap { white-space: nowrap; }
+
 
 .wrapper.color-zeal .fixed-sidebar-left .side-nav > li > a.active {
   color: $zeal;
