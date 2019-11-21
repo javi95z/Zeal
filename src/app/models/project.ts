@@ -23,7 +23,7 @@ export class Project {
 
   constructor(values: Project) {
     Object.assign(this, values);
-    this.users = values.users.map(o => new User(o));
-    this.contact = new Contact(values.contact);
+    this.users = values.users ? values.users.map(o => new User(o)) : null;
+    this.contact = values.contact ? new Contact(values.contact) : null;
   }
 }

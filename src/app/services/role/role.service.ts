@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ApiResponse, Role } from "@models";
+import { ApiCollection, Role } from "@models";
 import { environment as env } from "@env/environment";
 
 @Injectable({
@@ -12,10 +12,10 @@ export class RoleService {
   /**
    * Get all roles
    */
-  getRoles(): Promise<ApiResponse<Role>> {
+  getRoles(): Promise<ApiCollection<Role>> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<ApiResponse<Role>>(`${env.urlApi}/roles/index`, null)
+        .post<ApiCollection<Role>>(`${env.urlApi}/roles/index`, null)
         .toPromise()
         .then(res => resolve(res))
         .catch(rej => reject(rej));

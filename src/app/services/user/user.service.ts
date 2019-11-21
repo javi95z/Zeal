@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ApiResponse, User } from "@models";
+import { ApiCollection, ApiResource, User } from "@models";
 import { parseRelationships } from "@zeal/utils";
 import { environment as env } from "@env/environment";
 
@@ -13,10 +13,10 @@ export class UserService {
   /**
    * Get all users
    */
-  getUsers(): Promise<ApiResponse<User>> {
+  getUsers(): Promise<ApiCollection<User>> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<ApiResponse<User>>(`${env.urlApi}/users/index`, null)
+        .post<ApiCollection<User>>(`${env.urlApi}/users/index`, null)
         .toPromise()
         .then(res => resolve(res))
         .catch(rej => reject(rej));
@@ -27,12 +27,12 @@ export class UserService {
    * Get one user by id
    * @param id Id
    */
-  getUser(id: number): Promise<User> {
+  getUser(id: number): Promise<ApiResource<User>> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<User>(`${env.urlApi}/users/${id}`, null)
+        .post<ApiResource<User>>(`${env.urlApi}/users/${id}`, null)
         .toPromise()
-        .then(res => resolve(res["data"]))
+        .then(res => resolve(res))
         .catch(rej => reject(rej));
     });
   }

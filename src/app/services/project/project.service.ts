@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ApiResponse, Project } from "@models";
+import { ApiCollection, ApiResource, Project } from "@models";
 import { parseRelationships } from "@zeal/utils";
 import { environment as env } from "@env/environment";
 
@@ -13,10 +13,10 @@ export class ProjectService {
   /**
    * Get all projects
    */
-  getProjects(): Promise<ApiResponse<Project>> {
+  getProjects(): Promise<ApiCollection<Project>> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<ApiResponse<Project>>(`${env.urlApi}/projects/index`, null)
+        .post<ApiCollection<Project>>(`${env.urlApi}/projects/index`, null)
         .toPromise()
         .then(res => resolve(res))
         .catch(rej => reject(rej));

@@ -32,21 +32,10 @@ export class EditProjectDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.result = this.project;
     this.form = populateFormFields(this.project, this.form);
     this.isLoading = false;
   }
-
-  /**
-   * Get teams list and return
-   * true when finished
-   */
-  // private async getTeams(): Promise<true> {
-  // await this.team
-  //   .getTeams()
-  //   .then(res => (this.availableTeams = res.data))
-  //   .catch(err => console.error(err));
-  // return true;
-  // }
 
   onNoClick(): void {
     this.dialogRef.close();

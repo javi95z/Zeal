@@ -8,11 +8,11 @@
           <h6 class="panel-title txt-dark">{{ project.name }}</h6>
         </div>
         <div class="pull-right">
-<!--          <a (click)="editprojectDialog(project)" class="panel-button">-->
-<!--            <i class="zmdi zmdi-edit"></i><span>Edit</span>-->
-<!--          </a>-->
+          <a (click)="editProject(project)" class="panel-button">
+            <i class="zmdi zmdi-edit"></i><span>Edit</span>
+          </a>
           <a [routerLink]="['/admin', 'projects']" class="panel-button">
-            <i class="zmdi zmdi-view-list-alt"></i><span>Go to projects list</span>
+            <i class="zmdi zmdi-view-list-alt"></i><span>Go to Projects list</span>
           </a>
           <z-back-button [defClass]="'panel-button'"></z-back-button>
         </div>

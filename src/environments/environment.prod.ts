@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  urlApi: "https://zeal-api.herokuapp.com/api"
 };
