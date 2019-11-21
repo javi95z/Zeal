@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { Project } from "@models";
 import { populateFormFields } from "@zeal/utils";
 import { PROJECT_PRIORITY, PROJECT_STATUS } from "@zeal/variables";
+import { ProjectService } from "@zeal/services";
 
 @Component({
   selector: "z-project-edit-dialog",
@@ -28,13 +29,27 @@ export class EditProjectDialog implements OnInit {
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<EditProjectDialog>,
-    @Inject(MAT_DIALOG_DATA) public project: Project
+    private project: ProjectService,
+    @Inject(MAT_DIALOG_DATA) public data: number
   ) {}
 
   ngOnInit(): void {
-    this.result = this.project;
-    this.form = populateFormFields(this.project, this.form);
-    this.isLoading = false;
+    Promise.all([this.getProject(this.data)]).finally(() => {
+      this.form = populateFormFields(this.result, this.form);
+      this.isLoading = false;
+    });
+  }
+
+  /**
+   * Get project and return
+   * true when finished
+   */
+  private async getProject(id: number): Promise<true> {
+    await this.project
+      .getProject(id)
+      .then(res => (this.result = res.data))
+      .catch(err => console.error(err));
+    return true;
   }
 
   onNoClick(): void {

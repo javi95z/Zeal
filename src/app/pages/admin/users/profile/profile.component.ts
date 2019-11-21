@@ -26,16 +26,16 @@ export class UserProfileAdminComponent implements OnInit {
       if (data.id) {
         this.service
           .getUser(data.id)
-          .then(res => (this.user = new User(res)))
+          .then(res => (this.user = new User(res.data)))
           .finally(() => (this.isLoading = false));
       }
     });
   }
 
-  editUserDialog(user: User) {
+  editUserDialog(userId: number) {
     const dialogRef = this.dialog.open(EditUserDialog, {
       panelClass: "modal-dialog-box",
-      data: user
+      data: userId
     });
 
     dialogRef.afterClosed().subscribe((result: User) => {

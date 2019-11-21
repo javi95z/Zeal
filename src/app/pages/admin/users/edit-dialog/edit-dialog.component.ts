@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup } from "@angular/forms";
-import { RoleService, TeamService } from "@services";
+import { RoleService, TeamService, UserService } from "@services";
 import { User, Role, Team } from "@models";
 import { populateFormFields } from "@zeal/utils";
 
@@ -29,17 +29,33 @@ export class EditUserDialog implements OnInit {
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<EditUserDialog>,
+    private user: UserService,
     private role: RoleService,
     private team: TeamService,
-    @Inject(MAT_DIALOG_DATA) public user: User
+    @Inject(MAT_DIALOG_DATA) public data: number
   ) {}
 
   ngOnInit(): void {
-    this.result = this.user;
-    Promise.all([this.getRoles(), this.getTeams()]).finally(() => {
+    Promise.all([
+      this.getRoles(),
+      this.getTeams(),
+      this.getUser(this.data)
+    ]).finally(() => {
       this.form = populateFormFields(this.result, this.form);
       this.isLoading = false;
     });
+  }
+
+  /**
+   * Get user and return
+   * true when finished
+   */
+  private async getUser(id: number): Promise<true> {
+    await this.user
+      .getUser(id)
+      .then(res => (this.result = res.data))
+      .catch(err => console.error(err));
+    return true;
   }
 
   /**

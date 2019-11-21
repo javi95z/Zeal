@@ -69,7 +69,7 @@ export class ProjectsAdminComponent implements OnInit {
   onAction(action: string, project: Project, index: number) {
     switch (action) {
       case "EDIT":
-        this.editProjectDialog(project, index);
+        this.editProjectDialog(project.id, index);
         break;
       // case "DELETE":
       //   this.deleteProjectDialog(project, index);
@@ -77,10 +77,10 @@ export class ProjectsAdminComponent implements OnInit {
     }
   }
 
-  private editProjectDialog(project: Project, i: number) {
+  private editProjectDialog(projectId: number, i: number) {
     const dialogRef = this.dialog.open(EditProjectDialog, {
       panelClass: "modal-dialog-box",
-      data: project
+      data: projectId
     });
 
     dialogRef.afterClosed().subscribe((result: Project) => {
@@ -91,9 +91,9 @@ export class ProjectsAdminComponent implements OnInit {
   }
 
   /**
-   * Update user from table
+   * Update project from table
    * API request for modification
-   * @param user User
+   * @param project Project
    */
   private updateProject(project: Project, i: number) {
     this.service

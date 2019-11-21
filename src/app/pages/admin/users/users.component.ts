@@ -69,7 +69,7 @@ export class UsersAdminComponent implements OnInit {
   onAction(action: string, user: User, index: number) {
     switch (action) {
       case "EDIT":
-        this.editUserDialog(user, index);
+        this.editUserDialog(user.id, index);
         break;
       case "DELETE":
         this.deleteUserDialog(user, index);
@@ -77,10 +77,10 @@ export class UsersAdminComponent implements OnInit {
     }
   }
 
-  private editUserDialog(user: User, i: number) {
+  private editUserDialog(userId: number, i: number) {
     const dialogRef = this.dialog.open(EditUserDialog, {
       panelClass: "modal-dialog-box",
-      data: user
+      data: userId
     });
 
     dialogRef.afterClosed().subscribe((result: User) => {
@@ -95,7 +95,7 @@ export class UsersAdminComponent implements OnInit {
    * API request for modification
    * @param user User
    */
-  updateUser(user: User, i: number) {
+  private updateUser(user: User, i: number) {
     this.service
       .updateUser(new User(user))
       .then(res => {
@@ -112,8 +112,8 @@ export class UsersAdminComponent implements OnInit {
    * @param user User
    * @param i Index
    */
-  deleteUserDialog(u: User, i: number) {
-    const user = new User(u);
+  deleteUserDialog(userId: User, i: number) {
+    const user = new User(userId);
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: "400px",
       data: `Do you confirm the deletion of ${user.fullName}`
