@@ -38,9 +38,8 @@ export class ProjectService {
   }
 
   /**
-   * Update one user by id
-   * @param id Id
-   * @param u User
+   * Update one project
+   * @param p Project
    */
   updateProject(p: Project): Promise<Project> {
     return new Promise((resolve, reject) => {

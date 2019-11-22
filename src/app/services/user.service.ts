@@ -38,8 +38,7 @@ export class UserService {
   }
 
   /**
-   * Update one user by id
-   * @param id Id
+   * Update one user
    * @param u User
    */
   updateUser(u: User): Promise<User> {
