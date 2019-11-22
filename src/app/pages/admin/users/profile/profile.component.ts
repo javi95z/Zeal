@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { MatDialog } from "@angular/material";
+import { Location } from "@angular/common";
 import { EditUserDialog } from "@pages/admin/users/edit-dialog/edit-dialog.component";
 import { UserService, ToastService } from "@services";
 import { User } from "@models";
+import { DialogService } from "@zeal/services";
 
 @Component({
   selector: "z-admin-user-profile",
@@ -18,7 +19,8 @@ export class UserProfileAdminComponent implements OnInit {
     private route: ActivatedRoute,
     private service: UserService,
     private toast: ToastService,
-    private dialog: MatDialog
+    private dialog: DialogService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -32,31 +34,48 @@ export class UserProfileAdminComponent implements OnInit {
     });
   }
 
-  editUserDialog(userId: number) {
-    const dialogRef = this.dialog.open(EditUserDialog, {
-      panelClass: "modal-dialog-box",
-      data: userId
-    });
-
-    dialogRef.afterClosed().subscribe((result: User) => {
-      if (result) this.updateUser(result);
+  /**
+   * Show dialog and return updated user
+   * Send API request for modification
+   * @param userId Id
+   */
+  editUser(userId: number) {
+    this.dialog.editDialog<User>(userId, EditUserDialog).subscribe(user => {
+      if (user) {
+        this.isLoading = true;
+        this.service
+          .updateUser(user)
+          .then(res => {
+            this.user = new User(res);
+            this.toast.setMessage(
+              `User ${user.fullName} updated successfully.`
+            );
+          })
+          .catch(err => console.error(err))
+          .finally(() => (this.isLoading = false));
+      }
     });
   }
 
   /**
-   * Update user from table
-   * API request for modification
-   * @param user User
+   * Show confirm dialog
+   * Send API request for deletion
+   * @param u User
    */
-  updateUser(user: User) {
-    this.isLoading = true;
-    this.service
-      .updateUser(user)
-      .then(res => {
-        this.user = new User(res);
-        this.toast.setMessage(`User ${user.fullName} updated successfully.`);
-      })
-      .catch(err => console.error(err))
-      .finally(() => (this.isLoading = false));
+  deleteUser(u: User) {
+    const user = new User(u);
+    this.dialog.deleteDialog(user.fullName).subscribe(res => {
+      if (res) {
+        this.service
+          .deleteUser(user.id)
+          .then(() => {
+            this.location.back();
+            this.toast.setMessage(
+              `User ${user.fullName} deleted successfully.`
+            );
+          })
+          .catch(err => console.error(err));
+      }
+    });
   }
 }

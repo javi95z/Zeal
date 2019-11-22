@@ -1,14 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import {
-  MatTableDataSource,
-  MatPaginator,
-  MatSort,
-  MatDialog
-} from "@angular/material";
+import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
 import { SelectionModel } from "@angular/cdk/collections";
 import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
-import { ConfirmationDialogComponent } from "@pages/shared";
-import { UserService, ToastService } from "@services";
+import { UserService, ToastService, DialogService } from "@services";
 import { User } from "@models";
 
 @Component({
@@ -35,7 +29,7 @@ export class UsersAdminComponent implements OnInit {
   constructor(
     private service: UserService,
     private toast: ToastService,
-    private dialog: MatDialog
+    private dialog: DialogService
   ) {}
 
   ngOnInit() {
@@ -69,58 +63,47 @@ export class UsersAdminComponent implements OnInit {
   onAction(action: string, user: User, index: number) {
     switch (action) {
       case "EDIT":
-        this.editUserDialog(user.id, index);
+        this.editUser(user.id, index);
         break;
       case "DELETE":
-        this.deleteUserDialog(user, index);
+        this.deleteUser(user, index);
         break;
     }
   }
 
-  private editUserDialog(userId: number, i: number) {
-    const dialogRef = this.dialog.open(EditUserDialog, {
-      panelClass: "modal-dialog-box",
-      data: userId
-    });
-
-    dialogRef.afterClosed().subscribe((result: User) => {
-      if (result) {
-        this.updateUser(result, i);
+  /**
+   * Show dialog and return updated user
+   * Send API request for modification
+   * @param userId Id
+   * @param i Table index
+   */
+  private editUser(userId: number, i: number) {
+    this.dialog.editDialog<User>(userId, EditUserDialog).subscribe(user => {
+      if (user) {
+        this.service
+          .updateUser(new User(user))
+          .then(res => {
+            this.dataSource.data[i] = res;
+            this.dataSource._updateChangeSubscription();
+            this.toast.setMessage(
+              `User ${user.fullName} updated successfully.`
+            );
+          })
+          .catch(err => console.error(err));
       }
     });
   }
 
   /**
-   * Update user from table
-   * API request for modification
-   * @param user User
-   */
-  private updateUser(user: User, i: number) {
-    this.service
-      .updateUser(new User(user))
-      .then(res => {
-        this.dataSource.data[i] = res;
-        this.dataSource._updateChangeSubscription();
-        this.toast.setMessage(`User ${user.fullName} updated successfully.`);
-      })
-      .catch(err => console.error(err));
-  }
-
-  /**
    * Confirmation dialog to
    * remove user from table
-   * @param user User
+   * @param u User
    * @param i Index
    */
-  deleteUserDialog(userId: User, i: number) {
-    const user = new User(userId);
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: "400px",
-      data: `Do you confirm the deletion of ${user.fullName}`
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // API request for deletion
+  private deleteUser(u: User, i: number) {
+    const user = new User(u);
+    this.dialog.deleteDialog(user.fullName).subscribe(res => {
+      if (res) {
         this.service
           .deleteUser(user.id)
           .then(() => {

@@ -8,8 +8,11 @@
           <h6 class="panel-title txt-dark">{{ user.fullName }}</h6>
         </div>
         <div class="pull-right">
-          <a (click)="editUserDialog(user.id)" class="panel-button">
+          <a (click)="editUser(user.id)" class="panel-button">
             <i class="zmdi zmdi-edit"></i><span>Edit</span>
+          </a>
+          <a (click)="deleteUser(user)" class="panel-button">
+            <i class="zmdi zmdi-delete"></i><span>Delete</span>
           </a>
           <a [routerLink]="['/admin', 'users']" class="panel-button">
             <i class="zmdi zmdi-view-list-alt"></i><span>Go to Users list</span>
