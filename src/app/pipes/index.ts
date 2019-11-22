@@ -1,1 +1,1 @@
-export { CapitalizePipe } from "./capitalize/capitalize.pipe";
+export { CapitalizePipe } from "./capitalize.pipe";
