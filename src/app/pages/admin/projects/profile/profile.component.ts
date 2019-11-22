@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { MatDialog } from "@angular/material";
 import { EditProjectDialog } from "@pages/admin/projects/edit-dialog/edit-dialog.component";
-import { ProjectService } from "@services";
+import { ProjectService, DialogService, ToastService } from "@services";
 import { Project } from "@models";
 
 @Component({
@@ -17,7 +16,8 @@ export class ProjectProfileAdminComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: ProjectService,
-    private dialog: MatDialog
+    private toast: ToastService,
+    private dialog: DialogService
   ) {}
 
   ngOnInit() {
@@ -31,14 +31,28 @@ export class ProjectProfileAdminComponent implements OnInit {
     });
   }
 
-  editProjectDialog(projectId: number) {
-    const dialogRef = this.dialog.open(EditProjectDialog, {
-      panelClass: "modal-dialog-box",
-      data: projectId
-    });
-
-    dialogRef.afterClosed().subscribe((result: Project) => {
-      // if (result) this.updateProject(result);
-    });
+  /**
+   * Show dialog and return updated project
+   * Send API request for modification
+   * @param projectId Id
+   */
+  editProject(projectId: number) {
+    this.dialog
+      .editDialog<Project>(projectId, EditProjectDialog)
+      .subscribe(project => {
+        if (project) {
+          this.isLoading = true;
+          this.service
+            .updateProject(project)
+            .then(res => {
+              this.project = new Project(res);
+              this.toast.setMessage(
+                `Project ${project.name} updated successfully.`
+              );
+            })
+            .catch(err => console.error(err))
+            .finally(() => (this.isLoading = false));
+        }
+      });
   }
 }

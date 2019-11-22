@@ -2,9 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { EditUserDialog } from "@pages/admin/users/edit-dialog/edit-dialog.component";
-import { UserService, ToastService } from "@services";
+import { UserService, DialogService, ToastService } from "@services";
 import { User } from "@models";
-import { DialogService } from "@zeal/services";
 
 @Component({
   selector: "z-admin-user-profile",
