@@ -50,7 +50,7 @@
     <mat-checkbox formControlName="active">Active</mat-checkbox>
   </section>
 
-  <button mat-raised-button class="pull-right" (click)="onSubmit()" *ngIf="form.dirty">
+  <button mat-raised-button class="pull-right" (click)="onSubmit()" *ngIf="form.dirty && form.valid">
     <i class="zmdi zmdi-check"></i> Submit
   </button>
 </form>

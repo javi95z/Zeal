@@ -1,5 +1,9 @@
 <z-loading *ngIf="isLoading"></z-loading>
 <form novalidate [formGroup]="form" *ngIf="!isLoading">
+  <div *ngFor="let item of errors" class="alert alert-danger alert-dismissable">
+    <p>{{ item }}</p>
+  </div>
+
   <!-- Code -->
   <mat-form-field>
     <input matInput type="text" formControlName="code" placeholder="Code">
@@ -45,7 +49,7 @@
     <mat-datepicker #endDatePicker></mat-datepicker>
   </mat-form-field>
 
-  <button mat-raised-button class="pull-right" (click)="onSubmit()" *ngIf="form.dirty">
+  <button mat-raised-button class="pull-right" (click)="onSubmit()" *ngIf="form.dirty && form.valid">
     <i class="zmdi zmdi-check"></i> Submit
   </button>
 </form>

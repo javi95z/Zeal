@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, Validators, FormGroup } from "@angular/forms";
 import { Project } from "@models";
-import { populateFormFields } from "@zeal/utils";
-import { PROJECT_PRIORITY, PROJECT_STATUS } from "@zeal/variables";
 import { ProjectService } from "@zeal/services";
+import { populateFormFields, formValidationErrors } from "@zeal/utils";
+import { PROJECT_PRIORITY, PROJECT_STATUS } from "@zeal/variables";
 
 @Component({
   selector: "z-project-edit-dialog",
@@ -16,12 +16,13 @@ export class EditProjectDialog implements OnInit {
   statusList = PROJECT_STATUS;
   isLoading = true;
   result: Project;
+  errors: string[];
   form = new FormGroup({
-    code: new FormControl(),
-    name: new FormControl(),
+    code: new FormControl("", Validators.maxLength(6)),
+    name: new FormControl("", Validators.required),
     description: new FormControl(),
     priority: new FormControl(),
-    status: new FormControl(),
+    status: new FormControl("", Validators.required),
     start_date: new FormControl(),
     end_date: new FormControl()
   });
@@ -31,7 +32,11 @@ export class EditProjectDialog implements OnInit {
     public dialogRef: MatDialogRef<EditProjectDialog>,
     private project: ProjectService,
     @Inject(MAT_DIALOG_DATA) public data: number
-  ) {}
+  ) {
+    this.form.valueChanges.subscribe(
+      () => (this.errors = formValidationErrors(this.form))
+    );
+  }
 
   ngOnInit(): void {
     Promise.all([this.getProject(this.data)]).finally(() => {
