@@ -20,6 +20,7 @@ export class ProjectsAdminComponent implements OnInit {
     "select",
     "name",
     "contact",
+    "priority",
     "status",
     "start_date",
     "end_date",

@@ -1,0 +1,4 @@
+<div [matTooltip]="priority | capitalize">
+  <i class="zmdi zmdi-{{icon}} {{color}} mr-5"></i>
+  <span *ngIf="!hideLabel">{{ priority | capitalize }}</span>
+</div>

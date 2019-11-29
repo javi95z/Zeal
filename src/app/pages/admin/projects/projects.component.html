@@ -39,6 +39,14 @@
                   </td>
                 </ng-container>
 
+                <!-- Priority Column -->
+                <ng-container matColumnDef="priority">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
+                  <td *matCellDef="let element" class="text-center">
+                    <z-project-priority [priority]="element.priority" [hideLabel]="true"></z-project-priority>
+                  </td>
+                </ng-container>
+
                 <!-- Status Column -->
                 <ng-container matColumnDef="status">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>

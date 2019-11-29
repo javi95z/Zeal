@@ -6,3 +6,4 @@ export * from "./header/header.component";
 export * from "./loading/loading.component";
 export * from "./tables/actions-menu/actions-menu.component";
 export * from "./toast-message/toast-message.component";
+export * from "./project-priority/project-priority.component";

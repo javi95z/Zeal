@@ -9,6 +9,7 @@ import {
   GenderIconComponent,
   HeaderComponent,
   LoadingComponent,
+  ProjectPriorityComponent,
   ToastMessageComponent
 } from "./";
 import { CapitalizePipe } from "@pipes";
@@ -23,6 +24,7 @@ const components = [
   GenderIconComponent,
   HeaderComponent,
   LoadingComponent,
+  ProjectPriorityComponent,
   ToastMessageComponent
 ];
 

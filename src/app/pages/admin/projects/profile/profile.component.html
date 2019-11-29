@@ -36,6 +36,12 @@
                     <td>Description</td>
                     <td class="ws-normal">{{ project.description }}</td>
                   </tr>
+                  <tr *ngIf="project.priority">
+                    <td>Priority</td>
+                    <td>
+                      <z-project-priority [priority]="project.priority"></z-project-priority>
+                    </td>
+                  </tr>
                   <tr *ngIf="project.start_date">
                     <td>Start Date</td>
                     <td>{{ project.start_date | date }}</td>
