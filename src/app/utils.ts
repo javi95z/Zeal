@@ -29,16 +29,3 @@ export const parseRelationships = (model: any) => {
   });
   return model;
 };
-
-export const formValidationErrors = (form: FormGroup): string[] => {
-  const result = [];
-  Object.keys(form.controls).forEach(key => {
-    const ctrlErrors: ValidationErrors = form.get(key).errors;
-    if (ctrlErrors != null) {
-      Object.keys(ctrlErrors).forEach(err =>
-        result.push(`${key}: ${VALIDATION_ERRORS[err]}`)
-      );
-    }
-  });
-  return result;
-};

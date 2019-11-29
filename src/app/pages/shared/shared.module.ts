@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   BackButtonComponent,
   ConfirmationDialogComponent,
+  FormErrorsComponent,
   GenderIconComponent,
   HeaderComponent,
   LoadingComponent,
@@ -18,6 +19,7 @@ const components = [
   BackButtonComponent,
   CapitalizePipe,
   ConfirmationDialogComponent,
+  FormErrorsComponent,
   GenderIconComponent,
   HeaderComponent,
   LoadingComponent,

@@ -1,5 +1,7 @@
 <z-loading *ngIf="isLoading"></z-loading>
 <form novalidate [formGroup]="form" *ngIf="!isLoading">
+  <z-form-errors [form]="form"></z-form-errors>
+
   <!-- Suffix -->
   <mat-form-field>
     <input matInput type="text" formControlName="suffix" placeholder="Suffix">

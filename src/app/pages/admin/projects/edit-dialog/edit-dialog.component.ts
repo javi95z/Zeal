@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
 import { Project } from "@models";
 import { ProjectService } from "@zeal/services";
-import { populateFormFields, formValidationErrors } from "@zeal/utils";
+import { populateFormFields } from "@zeal/utils";
 import { PROJECT_PRIORITY, PROJECT_STATUS } from "@zeal/variables";
 
 @Component({
@@ -16,7 +16,6 @@ export class EditProjectDialog implements OnInit {
   statusList = PROJECT_STATUS;
   isLoading = true;
   result: Project;
-  errors: string[];
   form = new FormGroup({
     code: new FormControl("", Validators.maxLength(6)),
     name: new FormControl("", Validators.required),
@@ -32,11 +31,7 @@ export class EditProjectDialog implements OnInit {
     public dialogRef: MatDialogRef<EditProjectDialog>,
     private project: ProjectService,
     @Inject(MAT_DIALOG_DATA) public data: number
-  ) {
-    this.form.valueChanges.subscribe(
-      () => (this.errors = formValidationErrors(this.form))
-    );
-  }
+  ) {}
 
   ngOnInit(): void {
     Promise.all([this.getProject(this.data)]).finally(() => {

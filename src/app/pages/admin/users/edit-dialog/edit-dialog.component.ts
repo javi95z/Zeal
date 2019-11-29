@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { RoleService, TeamService, UserService } from "@services";
 import { User, Role, Team } from "@models";
 import { populateFormFields } from "@zeal/utils";
@@ -16,13 +16,13 @@ export class EditUserDialog implements OnInit {
   teamList: Team[];
   result: User;
   form = new FormGroup({
-    active: new FormControl(),
-    email: new FormControl(),
-    first_name: new FormControl(),
+    active: new FormControl("", Validators.required),
+    email: new FormControl("", Validators.required),
+    first_name: new FormControl("", Validators.maxLength(50)),
     gender: new FormControl(),
-    last_name: new FormControl(),
+    last_name: new FormControl("", Validators.maxLength(50)),
     role: new FormControl(),
-    suffix: new FormControl(),
+    suffix: new FormControl("", Validators.maxLength(10)),
     teams: new FormControl()
   });
 
