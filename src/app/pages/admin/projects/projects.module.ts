@@ -4,7 +4,7 @@ import {
   ProjectProfileAdminComponent,
   EditProjectDialog
 } from "./";
-import { SharedModule } from "@pages/shared/shared.module";
+import { CoreModule } from "@core/core.module";
 import { ProjectStatusDirective } from "@directives";
 
 @NgModule({
@@ -14,7 +14,7 @@ import { ProjectStatusDirective } from "@directives";
     ProjectProfileAdminComponent,
     EditProjectDialog
   ],
-  imports: [SharedModule],
+  imports: [CoreModule],
   entryComponents: [EditProjectDialog]
 })
 export class ProjectsAdminModule {}

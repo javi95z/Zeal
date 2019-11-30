@@ -5,7 +5,7 @@ import {
   ContentComponent,
   FooterComponent
 } from "./";
-import { SharedModule } from "@pages/shared/shared.module";
+import { CoreModule } from "@core/core.module";
 
 const components = [
   ContentComponent,
@@ -16,7 +16,7 @@ const components = [
 
 @NgModule({
   declarations: components,
-  imports: [SharedModule],
+  imports: [CoreModule],
   exports: components
 })
 export class LayoutModule {}

@@ -15,6 +15,8 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "@zeal/*": ["app/*"],
+      "@core": ["app/core/"],
+      "@core/*": ["app/core/*"],
       "@directives": ["app/directives/"],
       "@directives/*": ["app/directives/*"],
       "@env": ["environments/"],

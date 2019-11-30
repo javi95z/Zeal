@@ -3,7 +3,7 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./admin-routing";
 import { SidebarComponent, NavbarComponent } from "./";
 import { AdminComponent } from "./admin.component";
-import { SharedModule } from "@pages/shared/shared.module";
+import { CoreModule } from "@core/core.module";
 import { LayoutModule } from "@pages/layout/layout.module";
 import { ProjectsAdminModule, UsersAdminModule } from "./";
 
@@ -11,7 +11,7 @@ import { ProjectsAdminModule, UsersAdminModule } from "./";
   declarations: [AdminComponent, SidebarComponent, NavbarComponent],
   imports: [
     LayoutModule,
-    SharedModule,
+    CoreModule,
     ProjectsAdminModule,
     UsersAdminModule,
     RouterModule.forChild(routes)

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { ComponentType } from "@angular/cdk/portal";
-import { ConfirmationDialogComponent } from "@zeal/pages/shared/confirmation-dialog/confirmation-dialog.component";
+import { ConfirmationDialogComponent } from "@core/components/confirmation-dialog/confirmation-dialog.component";
 import { Observable } from "rxjs";
 
 @Injectable({

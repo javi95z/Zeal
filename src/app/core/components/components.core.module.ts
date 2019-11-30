@@ -3,20 +3,22 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
+  ActionsMenuComponent,
   BackButtonComponent,
   ConfirmationDialogComponent,
   FormErrorsComponent,
   GenderIconComponent,
   HeaderComponent,
   LoadingComponent,
+  NoResultsComponent,
   ProjectPriorityComponent,
   ToastMessageComponent
 } from "./";
 import { CapitalizePipe } from "@pipes";
 import { MaterialModule } from "@zeal/material.module";
-import { TablesSharedModule } from "./tables/tables-shared.module";
 
 const components = [
+  ActionsMenuComponent,
   BackButtonComponent,
   CapitalizePipe,
   ConfirmationDialogComponent,
@@ -24,6 +26,7 @@ const components = [
   GenderIconComponent,
   HeaderComponent,
   LoadingComponent,
+  NoResultsComponent,
   ProjectPriorityComponent,
   ToastMessageComponent
 ];
@@ -33,8 +36,7 @@ const modules = [
   FormsModule,
   MaterialModule,
   ReactiveFormsModule,
-  RouterModule,
-  TablesSharedModule
+  RouterModule
 ];
 
 @NgModule({
@@ -43,4 +45,4 @@ const modules = [
   exports: [components, modules],
   entryComponents: [ConfirmationDialogComponent]
 })
-export class SharedModule {}
+export class ComponentsCoreModule {}

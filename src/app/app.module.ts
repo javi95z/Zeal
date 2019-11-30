@@ -13,7 +13,7 @@ import { DashboardComponent } from "@pages/dashboard/dashboard.component";
 import { ToastService } from "@services";
 
 // Modules
-import { SharedModule } from "@pages/shared/shared.module";
+import { CoreModule } from "@core/core.module";
 import { LayoutModule } from "@pages/layout/layout.module";
 import { AdminModule } from "@pages/admin/admin.module";
 import { LoginModule } from "@pages/auth/login.module";
@@ -31,7 +31,7 @@ const httpProvider = {
     BrowserAnimationsModule,
     HttpClientModule,
     LayoutModule,
-    SharedModule,
+    CoreModule,
     AppRoutingModule,
     AdminModule,
     LoginModule
