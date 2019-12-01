@@ -11,7 +11,6 @@ import {
   HeaderComponent,
   LoadingComponent,
   NoResultsComponent,
-  ProjectPriorityComponent,
   ToastMessageComponent
 } from "./";
 import { CapitalizePipe } from "@pipes";
@@ -27,7 +26,6 @@ const components = [
   HeaderComponent,
   LoadingComponent,
   NoResultsComponent,
-  ProjectPriorityComponent,
   ToastMessageComponent
 ];
 

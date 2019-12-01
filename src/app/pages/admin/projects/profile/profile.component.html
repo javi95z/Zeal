@@ -12,7 +12,8 @@
             <i class="zmdi zmdi-edit"></i><span>Edit</span>
           </a>
           <a [routerLink]="['/admin', 'projects']" class="panel-button">
-            <i class="zmdi zmdi-view-list-alt"></i><span>Go to Projects list</span>
+            <i class="zmdi zmdi-view-list-alt"></i
+            ><span>Go to Projects list</span>
           </a>
           <z-back-button [defClass]="'panel-button'"></z-back-button>
         </div>
@@ -39,7 +40,7 @@
                   <tr *ngIf="project.priority">
                     <td>Priority</td>
                     <td>
-                      <z-project-priority [priority]="project.priority"></z-project-priority>
+                      <div zPriority [value]="project.priority"></div>
                     </td>
                   </tr>
                   <tr *ngIf="project.start_date">
@@ -54,7 +55,9 @@
                     <td>Members</td>
                     <td>
                       <span *ngFor="let item of project.users; let last = last">
-                        <a [routerLink]="['/admin', 'users', 'profile', item.id]">
+                        <a
+                          [routerLink]="['/admin', 'users', 'profile', item.id]"
+                        >
                           {{ item.fullName }}<span *ngIf="!last">, </span>
                         </a>
                       </span>
