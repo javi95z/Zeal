@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
 @Directive({
   selector: "[zStatus]"
 })
-export class ProjectStatusDirective implements OnInit {
+export class StatusDirective implements OnInit {
   @Input() value: string;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}

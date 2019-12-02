@@ -14,7 +14,7 @@ import {
   NoResultsComponent,
   ToastMessageComponent
 } from "./components";
-import { PriorityDirective, ProjectStatusDirective } from "./directives";
+import { PriorityDirective, StatusDirective } from "./directives";
 import { CapitalizePipe } from "@pipes";
 import { MaterialModule } from "@zeal/material.module";
 
@@ -30,7 +30,7 @@ const components = [
   LoadingComponent,
   NoResultsComponent,
   PriorityDirective,
-  ProjectStatusDirective,
+  StatusDirective,
   ToastMessageComponent
 ];
 

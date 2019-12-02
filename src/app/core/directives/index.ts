@@ -1,2 +1,2 @@
-export * from "./project-status.directive";
+export * from "./status.directive";
 export * from "./priority.directive";
