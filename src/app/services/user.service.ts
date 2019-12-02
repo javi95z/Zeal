@@ -52,7 +52,13 @@ export class UserService {
           this.toast.setMessage(`User ${user.fullName} updated successfully.`);
           resolve(user);
         })
-        .catch(rej => reject(rej));
+        .catch(rej => {
+          this.toast.setMessage(
+            `Failed to update user ${u.fullName}.`,
+            "error"
+          );
+          reject(rej);
+        });
     });
   }
 
@@ -70,7 +76,13 @@ export class UserService {
           this.toast.setMessage(`User ${user.fullName} deleted successfully.`);
           resolve(res as boolean);
         })
-        .catch(rej => reject(rej));
+        .catch(rej => {
+          this.toast.setMessage(
+            `Failed to delete user ${u.fullName}.`,
+            "error"
+          );
+          reject(rej);
+        });
     });
   }
 }

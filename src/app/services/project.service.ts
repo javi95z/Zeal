@@ -51,7 +51,10 @@ export class ProjectService {
           this.toast.setMessage(`Project ${res.name} updated successfully.`);
           resolve(res);
         })
-        .catch(rej => reject(rej));
+        .catch(rej => {
+          this.toast.setMessage(`Failed to update project ${p.name}.`, "error");
+          reject(rej);
+        });
     });
   }
 }
