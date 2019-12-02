@@ -1,10 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
-import { EditUserDialog } from "@pages/admin/users/edit-dialog/edit-dialog.component";
 import { UserService, DialogService } from "@services";
 import { User } from "@models";
-import { PanelAction, PANEL_ACTIONS } from "@zeal/variables";
+import { PanelAction, PANEL_ACTIONS, USER_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-admin-user-profile",
@@ -68,7 +67,10 @@ export class UserProfileAdminComponent implements OnInit {
    */
   editUser() {
     this.dialog
-      .editDialogOld<User>(this.user.id, EditUserDialog)
+      .editDialog<User>({
+        object: this.user,
+        fields: USER_FIELDS
+      })
       .subscribe(user => {
         if (user) {
           this.isLoading = true;

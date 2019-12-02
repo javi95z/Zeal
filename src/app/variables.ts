@@ -2,6 +2,7 @@ import { ApiCollection, ApiResource } from "@models";
 
 export const PROJECT_PRIORITY = ["low", "medium", "high"];
 export const PROJECT_STATUS = ["open", "completed", "canceled"];
+export const GENDER = ["female", "male"];
 export const STANDARD_MENU = [
   {
     name: "Dashboard",
@@ -34,7 +35,7 @@ export const ADMIN_MENU = [
 export interface Field {
   key: string;
   label: string;
-  type: "text" | "textarea" | "select" | "boolean" | "date";
+  type: "text" | "email" | "textarea" | "select" | "boolean" | "date";
   options?: any;
 }
 export const PROJECT_FIELDS: Field[] = [
@@ -74,6 +75,39 @@ export const PROJECT_FIELDS: Field[] = [
     key: "end_date",
     label: "End date",
     type: "date"
+  }
+];
+export const USER_FIELDS: Field[] = [
+  {
+    key: "suffix",
+    label: "Suffix",
+    type: "text"
+  },
+  {
+    key: "first_name",
+    label: "First Name",
+    type: "text"
+  },
+  {
+    key: "last_name",
+    label: "Last Name",
+    type: "text"
+  },
+  {
+    key: "email",
+    label: "Email",
+    type: "email"
+  },
+  {
+    key: "gender",
+    label: "Gender",
+    type: "select",
+    options: GENDER
+  },
+  {
+    key: "active",
+    label: "Active",
+    type: "boolean"
   }
 ];
 export interface PanelAction {

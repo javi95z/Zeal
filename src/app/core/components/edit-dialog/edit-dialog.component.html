@@ -3,9 +3,14 @@
 
   <div *ngFor="let field of data.fields">
     <div [ngSwitch]="field.type">
-      <!-- Text fields -->     
+      <!-- Text fields -->
       <mat-form-field *ngSwitchCase="'text'">
         <input matInput type="text" [formControlName]="field.key" [placeholder]="field.label">
+      </mat-form-field>
+
+      <!-- Email fields -->
+      <mat-form-field *ngSwitchCase="'email'">
+        <input matInput type="email" [formControlName]="field.key" [placeholder]="field.label">
       </mat-form-field>
 
       <!-- Textarea fields -->
