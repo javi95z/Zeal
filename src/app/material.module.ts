@@ -11,6 +11,7 @@ import {
   MatSelectModule,
   MatSortModule,
   MatTableModule,
+  MatTabsModule,
   MatTooltipModule
 } from "@angular/material";
 
@@ -27,6 +28,7 @@ import {
     MatSelectModule,
     MatSortModule,
     MatTableModule,
+    MatTabsModule,
     MatTooltipModule
   ]
 })

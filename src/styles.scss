@@ -136,17 +136,35 @@ h6 {
 }
 
 // Panels
-.panel .panel-heading .panel-button {
-  color: #878787;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  &:not(:last-child) {
-    margin-right: 15px;
+.panel {
+  @include mat-elevation(2);
+  .panel-heading .panel-button {
+    color: #878787;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+    i {
+      font-size: 15px;
+      margin-right: 5px;
+    }
   }
-  i {
-    font-size: 15px;
-    margin-right: 5px;
+}
+
+// Tabs
+mat-tab-group {
+  mat-tab-body {
+    margin-top: 10px;
+    .mat-tab-body-content {
+      height: auto;
+      margin-bottom: 20px;
+      overflow: unset;
+      .table > tbody > tr:first-child > td {
+        border: 0;
+      }
+    }
   }
 }
 
