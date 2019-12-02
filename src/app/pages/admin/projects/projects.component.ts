@@ -1,14 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { SelectionModel } from "@angular/cdk/collections";
-import {
-  MatTableDataSource,
-  MatPaginator,
-  MatSort,
-  MatDialog
-} from "@angular/material";
-import { EditProjectDialog } from "./edit-dialog/edit-dialog.component";
-import { ProjectService } from "@services";
+import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
+import { ProjectService, DialogService } from "@services";
 import { Project } from "@models";
+import { PROJECT_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "app-projects",
@@ -33,7 +28,7 @@ export class ProjectsAdminComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private service: ProjectService, private dialog: MatDialog) {}
+  constructor(private service: ProjectService, private dialog: DialogService) {}
 
   ngOnInit() {
     this.initData();
@@ -66,7 +61,7 @@ export class ProjectsAdminComponent implements OnInit {
   onAction(action: string, project: Project, index: number) {
     switch (action) {
       case "EDIT":
-        this.editProjectDialog(project.id, index);
+        this.editProject(project, index);
         break;
       // case "DELETE":
       //   this.deleteProjectDialog(project, index);
@@ -74,31 +69,30 @@ export class ProjectsAdminComponent implements OnInit {
     }
   }
 
-  private editProjectDialog(projectId: number, i: number) {
-    const dialogRef = this.dialog.open(EditProjectDialog, {
-      panelClass: "modal-dialog-box",
-      data: projectId
-    });
-
-    dialogRef.afterClosed().subscribe((result: Project) => {
-      if (result) {
-        this.updateProject(result, i);
-      }
-    });
-  }
-
   /**
-   * Update project from table
-   * API request for modification
+   * Show dialog and return updated project
+   * Send API request for modification
    * @param project Project
+   * @param i Index
    */
-  private updateProject(project: Project, i: number) {
-    this.service
-      .updateProject(new Project(project))
-      .then(res => {
-        this.dataSource.data[i] = res;
-        this.dataSource._updateChangeSubscription();
+  private editProject(project: Project, i: number) {
+    this.dialog
+      .editDialog<Project>({
+        object: project,
+        fields: PROJECT_FIELDS
       })
-      .catch(err => console.error(err));
+      .subscribe(result => {
+        if (result) {
+          this.isLoading = true;
+          this.service
+            .updateProject(new Project(project))
+            .then(res => {
+              this.dataSource.data[i] = res;
+              this.dataSource._updateChangeSubscription();
+            })
+            .catch(err => console.error(err))
+            .finally(() => (this.isLoading = false));
+        }
+      });
   }
 }

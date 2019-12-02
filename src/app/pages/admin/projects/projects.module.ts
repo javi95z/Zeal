@@ -1,18 +1,9 @@
 import { NgModule } from "@angular/core";
-import {
-  ProjectsAdminComponent,
-  ProjectProfileAdminComponent,
-  EditProjectDialog
-} from "./";
+import { ProjectsAdminComponent, ProjectProfileAdminComponent } from "./";
 import { CoreModule } from "@core/core.module";
 
 @NgModule({
-  declarations: [
-    ProjectsAdminComponent,
-    ProjectProfileAdminComponent,
-    EditProjectDialog
-  ],
-  imports: [CoreModule],
-  entryComponents: [EditProjectDialog]
+  declarations: [ProjectsAdminComponent, ProjectProfileAdminComponent],
+  imports: [CoreModule]
 })
 export class ProjectsAdminModule {}
