@@ -11,7 +11,7 @@
         <i class="zmdi zmdi-{{item.icon}}"></i><span>{{ item.name }}</span>
       </a>
     </ng-container>
-    <z-back-button [defClass]="'panel-button'"></z-back-button>
+    <z-back-button [defClass]="'panel-button'" *ngIf="!hideBack"></z-back-button>
   </div>
   <div class="clearfix"></div>
 </div>

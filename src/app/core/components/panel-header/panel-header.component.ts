@@ -7,8 +7,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 })
 export class PanelHeaderComponent implements OnInit {
   @Input() title: string;
-  @Input() titleLink?: string;
-  @Input() menu?: any[];
+  @Input() titleLink: string;
+  @Input() menu: any[];
+  @Input() hideBack: boolean;
   @Output() action: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {}

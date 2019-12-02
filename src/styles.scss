@@ -151,6 +151,13 @@ h6 {
       margin-right: 5px;
     }
   }
+  .panel-footer {
+    padding: 10px 20px;
+    text-align: right;
+    a {
+      color: $gray;
+    }
+  }
 }
 
 // Tabs

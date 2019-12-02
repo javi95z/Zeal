@@ -57,11 +57,21 @@
             </div>
           </mat-tab>
           <!-- Members tab -->
-          <mat-tab label="Members">
+          <mat-tab label="Members ({{project.users.length}})">
             <div *ngFor="let item of project.users" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
               <div class="panel panel-default card-view">
                 <z-panel-header [title]="item.fullName" [titleLink]="['/admin', 'users', 'profile', item.id]">
                 </z-panel-header>
+                <div class="panel-wrapper collapse in">
+                  <div class="panel-body">
+                    <p>asfdadfs</p>
+                  </div>
+                  <div class="panel-footer">
+                    <a [routerLink]="" (click)="removeMember(item.id)">
+                      <i class="zmdi zmdi-delete"></i> Remove
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </mat-tab>

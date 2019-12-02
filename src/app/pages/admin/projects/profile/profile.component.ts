@@ -86,4 +86,9 @@ export class ProjectProfileAdminComponent implements OnInit {
         }
       });
   }
+
+  removeMember(id: number) {
+    // TODO
+    console.log("Remove user", id, "from project");
+  }
 }
