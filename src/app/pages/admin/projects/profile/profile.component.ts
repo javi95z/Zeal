@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProjectService, DialogService } from "@services";
 import { Project } from "@models";
-import { PROJECT_FIELDS } from "@zeal/variables";
+import { PanelAction, PROJECT_FIELDS, PANEL_ACTIONS } from "@zeal/variables";
 
 @Component({
   selector: "z-admin-project-profile",
@@ -12,7 +12,7 @@ import { PROJECT_FIELDS } from "@zeal/variables";
 export class ProjectProfileAdminComponent implements OnInit {
   project: Project;
   isLoading = true;
-  menu: any[];
+  menu: PanelAction[];
 
   constructor(
     private route: ActivatedRoute,
@@ -35,19 +35,9 @@ export class ProjectProfileAdminComponent implements OnInit {
     });
   }
 
-  buildMenu(): any[] {
-    return [
-      {
-        name: "Edit",
-        icon: "edit",
-        action: "EDIT"
-      },
-      {
-        name: "Go to Projects list",
-        icon: "view-list-alt",
-        action: "LIST"
-      }
-    ];
+  buildMenu(): PanelAction[] {
+    const actions = ["EDIT", "LIST"];
+    return PANEL_ACTIONS.filter(o => actions.includes(o.action));
   }
 
   /**

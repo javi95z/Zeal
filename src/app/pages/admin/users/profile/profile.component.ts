@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 import { EditUserDialog } from "@pages/admin/users/edit-dialog/edit-dialog.component";
 import { UserService, DialogService } from "@services";
 import { User } from "@models";
+import { PanelAction, PANEL_ACTIONS } from "@zeal/variables";
 
 @Component({
   selector: "z-admin-user-profile",
@@ -13,7 +14,7 @@ import { User } from "@models";
 export class UserProfileAdminComponent implements OnInit {
   user: User;
   isLoading = true;
-  menu: any[];
+  menu: PanelAction[];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,24 +38,9 @@ export class UserProfileAdminComponent implements OnInit {
     });
   }
 
-  buildMenu(): any[] {
-    return [
-      {
-        name: "Edit",
-        icon: "edit",
-        action: "EDIT"
-      },
-      {
-        name: "Delete",
-        icon: "delete",
-        action: "DELETE"
-      },
-      {
-        name: "Go to Users list",
-        icon: "view-list-alt",
-        action: "LIST"
-      }
-    ];
+  buildMenu(): PanelAction[] {
+    const actions = ["EDIT", "LIST", "DELETE"];
+    return PANEL_ACTIONS.filter(o => actions.includes(o.action));
   }
 
   /**

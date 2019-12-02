@@ -76,3 +76,25 @@ export const PROJECT_FIELDS: Field[] = [
     type: "date"
   }
 ];
+export interface PanelAction {
+  name: string;
+  icon: string;
+  action: string;
+}
+export const PANEL_ACTIONS: PanelAction[] = [
+  {
+    name: "Edit",
+    icon: "edit",
+    action: "EDIT"
+  },
+  {
+    name: "Go to list",
+    icon: "view-list-alt",
+    action: "LIST"
+  },
+  {
+    name: "Delete",
+    icon: "delete",
+    action: "DELETE"
+  }
+];
