@@ -24,10 +24,7 @@
                   </tr>
                   <tr *ngIf="user.gender">
                     <td>Gender</td>
-                    <td>
-                      <z-gender-icon [gender]="user.gender"></z-gender-icon>
-                      {{ user.gender }}
-                    </td>
+                    <td zGender [value]="user.gender"></td>
                   </tr>
                   <tr *ngIf="user.role">
                     <td>Role</td>

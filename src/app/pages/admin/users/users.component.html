@@ -46,8 +46,7 @@
                 <!-- Gender Column -->
                 <ng-container matColumnDef="gender">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-                  <td *matCellDef="let element">
-                    <z-gender-icon [gender]="element?.gender"></z-gender-icon>
+                  <td *matCellDef="let element" zGender [value]="element?.gender" hideLabel="true">
                   </td>
                 </ng-container>
 

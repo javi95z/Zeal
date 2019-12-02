@@ -7,7 +7,7 @@ import { CapitalizePipe } from "@pipes";
 })
 export class PriorityDirective implements OnInit {
   @Input() value: string;
-  @Input() hideLabel: string;
+  @Input() hideLabel: boolean;
 
   constructor(
     private el: ElementRef,

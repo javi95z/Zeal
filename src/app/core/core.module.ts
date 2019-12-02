@@ -8,14 +8,17 @@ import {
   ConfirmationDialogComponent,
   EditDialogComponent,
   FormErrorsComponent,
-  GenderIconComponent,
   HeaderComponent,
   LoadingComponent,
   NoResultsComponent,
   PanelHeaderComponent,
   ToastMessageComponent
 } from "./components";
-import { PriorityDirective, StatusDirective } from "./directives";
+import {
+  GenderDirective,
+  PriorityDirective,
+  StatusDirective
+} from "./directives";
 import { CapitalizePipe } from "@pipes";
 import { MaterialModule } from "@zeal/material.module";
 
@@ -26,7 +29,7 @@ const components = [
   ConfirmationDialogComponent,
   EditDialogComponent,
   FormErrorsComponent,
-  GenderIconComponent,
+  GenderDirective,
   HeaderComponent,
   LoadingComponent,
   NoResultsComponent,

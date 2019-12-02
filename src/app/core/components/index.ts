@@ -1,7 +1,6 @@
 export * from "./back-button/back-button.component";
 export * from "./confirmation-dialog/confirmation-dialog.component";
 export * from "./form-errors/form-errors.component";
-export * from "./gender-icon/gender-icon.component";
 export * from "./header/header.component";
 export * from "./loading/loading.component";
 export * from "./panel-header/panel-header.component";
