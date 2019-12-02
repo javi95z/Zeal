@@ -8,7 +8,6 @@
           <h6 class="panel-title txt-dark">{{ project.name }}</h6>
         </div>
         <div class="pull-right">
-          <!-- <a (click)="editProject(project.id)" class="panel-button"> -->
           <a (click)="editProject(project)" class="panel-button">
             <i class="zmdi zmdi-edit"></i><span>Edit</span>
           </a>
@@ -22,6 +21,9 @@
       </div>
       <div class="panel-wrapper collapse in">
         <div class="panel-body row">
+          <div>
+
+          </div>
           <div class="table-wrap">
             <div class="table-responsive">
               <table class="table display pb-30">
@@ -40,13 +42,11 @@
                   </tr>
                   <tr *ngIf="project.priority">
                     <td>Priority</td>
-                    <td>
-                      <div zPriority [value]="project.priority"></div>
-                    </td>
+                    <td zPriority [value]="project.priority"></td>
                   </tr>
                   <tr *ngIf="project.status">
                     <td>Status</td>
-                    <td>{{ project.status | capitalize }}</td>
+                    <td zStatus [value]="project.status"></td>
                   </tr>
                   <tr *ngIf="project.start_date">
                     <td>Start Date</td>

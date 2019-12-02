@@ -50,9 +50,7 @@
                 <!-- Status Column -->
                 <ng-container matColumnDef="status">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                  <td *matCellDef="let element">
-                    <span zProjectStatus [value]="element.status">{{ element?.status | capitalize }}</span>
-                  </td>
+                  <td *matCellDef="let element" zStatus [value]="element.status"></td>
                 </ng-container>
 
                 <!-- Start date Column -->

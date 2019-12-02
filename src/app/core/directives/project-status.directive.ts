@@ -1,24 +1,30 @@
-import { Directive, ElementRef, Input, OnInit } from "@angular/core";
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
 
 @Directive({
-  selector: "[zProjectStatus]"
+  selector: "[zStatus]"
 })
 export class ProjectStatusDirective implements OnInit {
   @Input() value: string;
-  el: ElementRef;
 
-  constructor(el: ElementRef) {
-    this.el = el;
-  }
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    const color = this.getColor(this.value);
-    this.el.nativeElement.classList.add("label");
-    this.el.nativeElement.classList.add(`bg-${color}`);
+    const element = this.createLabel();
+    this.renderer.appendChild(this.el.nativeElement, element);
   }
 
-  private getColor(status: string): string {
-    switch (status) {
+  private createLabel(): HTMLElement {
+    let container: HTMLElement;
+    container = this.renderer.createElement("span");
+    const color = this.getColor();
+    container.classList.add("label");
+    container.classList.add(`bg-${color}`);
+    container.textContent = this.value;
+    return container;
+  }
+
+  private getColor(): string {
+    switch (this.value) {
       case "open":
         return "blue";
       case "completed":
