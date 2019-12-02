@@ -3,84 +3,69 @@
 <div class="row" *ngIf="project && !isLoading">
   <div class="col-sm-12">
     <div class="panel panel-default card-view">
-      <div class="panel-heading">
-        <div class="pull-left">
-          <h6 class="panel-title txt-dark">{{ project.name }}</h6>
-        </div>
-        <div class="pull-right">
-          <a (click)="editProject(project)" class="panel-button">
-            <i class="zmdi zmdi-edit"></i><span>Edit</span>
-          </a>
-          <a [routerLink]="['/admin', 'projects']" class="panel-button">
-            <i class="zmdi zmdi-view-list-alt"></i
-            ><span>Go to Projects list</span>
-          </a>
-          <z-back-button [defClass]="'panel-button'"></z-back-button>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="panel-wrapper collapse in">
-        <div class="panel-body row">
-          <div>
+      <z-panel-header [title]="project.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
 
-          </div>
-          <div class="table-wrap">
-            <div class="table-responsive">
-              <table class="table display pb-30">
-                <tbody>
-                  <tr *ngIf="project.name">
-                    <td>Name</td>
-                    <td>{{ project.name }}</td>
-                  </tr>
-                  <tr *ngIf="project.code">
-                    <td>Code</td>
-                    <td>{{ project.code }}</td>
-                  </tr>
-                  <tr *ngIf="project.description">
-                    <td>Description</td>
-                    <td class="ws-normal">{{ project.description }}</td>
-                  </tr>
-                  <tr *ngIf="project.priority">
-                    <td>Priority</td>
-                    <td zPriority [value]="project.priority"></td>
-                  </tr>
-                  <tr *ngIf="project.status">
-                    <td>Status</td>
-                    <td zStatus [value]="project.status"></td>
-                  </tr>
-                  <tr *ngIf="project.start_date">
-                    <td>Start Date</td>
-                    <td>{{ project.start_date | date }}</td>
-                  </tr>
-                  <tr *ngIf="project.end_date">
-                    <td>End Date</td>
-                    <td>{{ project.end_date | date }}</td>
-                  </tr>
-                  <tr *ngIf="project.users.length">
-                    <td>Members</td>
-                    <td>
-                      <span *ngFor="let item of project.users; let last = last">
-                        <a
-                          [routerLink]="['/admin', 'users', 'profile', item.id]"
-                        >
-                          {{ item.fullName }}<span *ngIf="!last">, </span>
-                        </a>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr *ngIf="project.created_at">
-                    <td>Created at</td>
-                    <td>{{ project.created_at | date: "dd/MM/yyyy H:m:s" }}</td>
-                  </tr>
-                  <tr *ngIf="project.updated_at">
-                    <td>Updated at</td>
-                    <td>{{ project.updated_at | date: "dd/MM/yyyy H:m:s" }}</td>
-                  </tr>
-                </tbody>
-              </table>
+      <div class="panel-wrapper collapse in">
+        <mat-tab-group animationDuration="0ms">
+          <!-- Details tab -->
+          <mat-tab label="Details">
+            <div class="panel-body row">
+              <div class="table-wrap">
+                <div class="table-responsive">
+                  <table class="table display pb-30">
+                    <tbody>
+                      <tr *ngIf="project.name">
+                        <td>Name</td>
+                        <td>{{ project.name }}</td>
+                      </tr>
+                      <tr *ngIf="project.code">
+                        <td>Code</td>
+                        <td>{{ project.code }}</td>
+                      </tr>
+                      <tr *ngIf="project.description">
+                        <td>Description</td>
+                        <td class="ws-normal">{{ project.description }}</td>
+                      </tr>
+                      <tr *ngIf="project.priority">
+                        <td>Priority</td>
+                        <td zPriority [value]="project.priority"></td>
+                      </tr>
+                      <tr *ngIf="project.status">
+                        <td>Status</td>
+                        <td zStatus [value]="project.status"></td>
+                      </tr>
+                      <tr *ngIf="project.start_date">
+                        <td>Start Date</td>
+                        <td>{{ project.start_date | date }}</td>
+                      </tr>
+                      <tr *ngIf="project.end_date">
+                        <td>End Date</td>
+                        <td>{{ project.end_date | date }}</td>
+                      </tr>
+                      <tr *ngIf="project.created_at">
+                        <td>Created at</td>
+                        <td>{{ project.created_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                      </tr>
+                      <tr *ngIf="project.updated_at">
+                        <td>Updated at</td>
+                        <td>{{ project.updated_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </mat-tab>
+          <!-- Members tab -->
+          <mat-tab label="Members">
+            <div *ngFor="let item of project.users" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="panel panel-default card-view">
+                <z-panel-header [title]="item.fullName" [titleLink]="['/admin', 'users', 'profile', item.id]">
+                </z-panel-header>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
       </div>
     </div>
   </div>

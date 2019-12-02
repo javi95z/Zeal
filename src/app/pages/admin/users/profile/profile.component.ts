@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { EditUserDialog } from "@pages/admin/users/edit-dialog/edit-dialog.component";
 import { UserService, DialogService } from "@services";
@@ -13,12 +13,14 @@ import { User } from "@models";
 export class UserProfileAdminComponent implements OnInit {
   user: User;
   isLoading = true;
+  menu: any[];
 
   constructor(
     private route: ActivatedRoute,
     private service: UserService,
     private dialog: DialogService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -27,9 +29,50 @@ export class UserProfileAdminComponent implements OnInit {
         this.service
           .getUser(data.id)
           .then(res => (this.user = new User(res.data)))
-          .finally(() => (this.isLoading = false));
+          .finally(() => {
+            this.isLoading = false;
+            this.menu = this.buildMenu();
+          });
       }
     });
+  }
+
+  buildMenu(): any[] {
+    return [
+      {
+        name: "Edit",
+        icon: "edit",
+        action: "EDIT"
+      },
+      {
+        name: "Delete",
+        icon: "delete",
+        action: "DELETE"
+      },
+      {
+        name: "Go to Users list",
+        icon: "view-list-alt",
+        action: "LIST"
+      }
+    ];
+  }
+
+  /**
+   * Execute action depending on element clicked
+   * @param event Named action from panel header
+   */
+  onAction(event: string) {
+    switch (event) {
+      case "LIST":
+        this.router.navigate(["/admin", "users"]);
+        break;
+      case "DELETE":
+        this.deleteUser();
+        break;
+      case "EDIT":
+        this.editUser();
+        break;
+    }
   }
 
   /**
@@ -37,17 +80,19 @@ export class UserProfileAdminComponent implements OnInit {
    * Send API request for modification
    * @param userId Id
    */
-  editUser(userId: number) {
-    this.dialog.editDialogOld<User>(userId, EditUserDialog).subscribe(user => {
-      if (user) {
-        this.isLoading = true;
-        this.service
-          .updateUser(user)
-          .then(res => (this.user = res))
-          .catch(err => console.error(err))
-          .finally(() => (this.isLoading = false));
-      }
-    });
+  editUser() {
+    this.dialog
+      .editDialogOld<User>(this.user.id, EditUserDialog)
+      .subscribe(user => {
+        if (user) {
+          this.isLoading = true;
+          this.service
+            .updateUser(user)
+            .then(res => (this.user = res))
+            .catch(err => console.error(err))
+            .finally(() => (this.isLoading = false));
+        }
+      });
   }
 
   /**
@@ -55,12 +100,11 @@ export class UserProfileAdminComponent implements OnInit {
    * Send API request for deletion
    * @param u User
    */
-  deleteUser(u: User) {
-    const user = new User(u);
-    this.dialog.deleteDialog(user.fullName).subscribe(res => {
+  deleteUser() {
+    this.dialog.deleteDialog(this.user.fullName).subscribe(res => {
       if (res) {
         this.service
-          .deleteUser(user)
+          .deleteUser(this.user)
           .then(() => this.location.back())
           .catch(err => console.error(err));
       }

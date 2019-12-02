@@ -12,6 +12,7 @@ import {
   HeaderComponent,
   LoadingComponent,
   NoResultsComponent,
+  PanelHeaderComponent,
   ToastMessageComponent
 } from "./components";
 import { PriorityDirective, StatusDirective } from "./directives";
@@ -29,6 +30,7 @@ const components = [
   HeaderComponent,
   LoadingComponent,
   NoResultsComponent,
+  PanelHeaderComponent,
   PriorityDirective,
   StatusDirective,
   ToastMessageComponent
