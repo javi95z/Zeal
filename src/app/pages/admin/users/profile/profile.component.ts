@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { EditUserDialog } from "@pages/admin/users/edit-dialog/edit-dialog.component";
-import { UserService, DialogService, ToastService } from "@services";
+import { UserService, DialogService } from "@services";
 import { User } from "@models";
 
 @Component({
@@ -17,7 +17,6 @@ export class UserProfileAdminComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: UserService,
-    private toast: ToastService,
     private dialog: DialogService,
     private location: Location
   ) {}
@@ -39,17 +38,12 @@ export class UserProfileAdminComponent implements OnInit {
    * @param userId Id
    */
   editUser(userId: number) {
-    this.dialog.editDialog<User>(userId, EditUserDialog).subscribe(user => {
+    this.dialog.editDialogOld<User>(userId, EditUserDialog).subscribe(user => {
       if (user) {
         this.isLoading = true;
         this.service
           .updateUser(user)
-          .then(res => {
-            this.user = new User(res);
-            this.toast.setMessage(
-              `User ${user.fullName} updated successfully.`
-            );
-          })
+          .then(res => (this.user = res))
           .catch(err => console.error(err))
           .finally(() => (this.isLoading = false));
       }
@@ -66,13 +60,8 @@ export class UserProfileAdminComponent implements OnInit {
     this.dialog.deleteDialog(user.fullName).subscribe(res => {
       if (res) {
         this.service
-          .deleteUser(user.id)
-          .then(() => {
-            this.location.back();
-            this.toast.setMessage(
-              `User ${user.fullName} deleted successfully.`
-            );
-          })
+          .deleteUser(user)
+          .then(() => this.location.back())
           .catch(err => console.error(err));
       }
     });

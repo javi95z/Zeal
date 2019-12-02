@@ -1,0 +1,42 @@
+<form novalidate [formGroup]="form">
+  <!-- <z-form-errors [form]="form"></z-form-errors> -->
+
+  <div *ngFor="let field of data.fields">
+    <div [ngSwitch]="field.type">
+      <!-- Text fields -->     
+      <mat-form-field *ngSwitchCase="'text'">
+        <input matInput type="text" [formControlName]="field.key" [placeholder]="field.label">
+      </mat-form-field>
+
+      <!-- Textarea fields -->
+      <mat-form-field *ngSwitchCase="'textarea'">
+        <textarea matInput type="text" [formControlName]="field.key" [placeholder]="field.label"></textarea>
+      </mat-form-field>
+
+      <!-- Select fields -->
+      <mat-form-field *ngSwitchCase="'select'">
+        <mat-label>{{ field.label }}</mat-label>
+        <mat-select [formControlName]="field.key">
+          <mat-option *ngFor="let item of field.options" [value]="item">{{ item | capitalize }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Date fields -->
+      <mat-form-field *ngSwitchCase="'date'">
+        <input matInput [matDatepicker]="endDatePicker" [placeholder]="field.label" [formControlName]="field.key">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Boolean fields -->
+      <section *ngSwitchCase="'boolean'" class="mb-20">
+        <mat-checkbox [formControlName]="field.key">{{ field.label }}</mat-checkbox>
+      </section>
+    </div>
+
+  </div>
+
+  <button mat-raised-button class="pull-right" (click)="onSubmit()" *ngIf="form.dirty && form.valid">
+    <i class="zmdi zmdi-check"></i> Submit
+  </button>
+</form>

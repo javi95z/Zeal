@@ -2,13 +2,14 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ApiCollection, ApiResource, Project } from "@models";
 import { parseRelationships } from "@zeal/utils";
+import { ToastService } from "./toast.service";
 import { environment as env } from "@env/environment";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProjectService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toast: ToastService) {}
 
   /**
    * Get all projects
@@ -46,7 +47,10 @@ export class ProjectService {
       this.http
         .put<Project>(`${env.urlApi}/projects/${p.id}`, parseRelationships(p))
         .toPromise()
-        .then(res => resolve(res))
+        .then(res => {
+          this.toast.setMessage(`Project ${res.name} updated successfully.`);
+          resolve(res);
+        })
         .catch(rej => reject(rej));
     });
   }

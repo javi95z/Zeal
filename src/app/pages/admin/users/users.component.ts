@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
 import { SelectionModel } from "@angular/cdk/collections";
 import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
-import { UserService, ToastService, DialogService } from "@services";
+import { UserService, DialogService } from "@services";
 import { User } from "@models";
 
 @Component({
@@ -26,11 +26,7 @@ export class UsersAdminComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(
-    private service: UserService,
-    private toast: ToastService,
-    private dialog: DialogService
-  ) {}
+  constructor(private service: UserService, private dialog: DialogService) {}
 
   ngOnInit() {
     this.initData();
@@ -78,16 +74,13 @@ export class UsersAdminComponent implements OnInit {
    * @param i Table index
    */
   private editUser(userId: number, i: number) {
-    this.dialog.editDialog<User>(userId, EditUserDialog).subscribe(user => {
+    this.dialog.editDialogOld<User>(userId, EditUserDialog).subscribe(user => {
       if (user) {
         this.service
           .updateUser(new User(user))
           .then(res => {
             this.dataSource.data[i] = res;
             this.dataSource._updateChangeSubscription();
-            this.toast.setMessage(
-              `User ${user.fullName} updated successfully.`
-            );
           })
           .catch(err => console.error(err));
       }
@@ -105,13 +98,10 @@ export class UsersAdminComponent implements OnInit {
     this.dialog.deleteDialog(user.fullName).subscribe(res => {
       if (res) {
         this.service
-          .deleteUser(user.id)
+          .deleteUser(user)
           .then(() => {
             this.dataSource.data.splice(i, 1);
             this.dataSource._updateChangeSubscription();
-            this.toast.setMessage(
-              `User ${user.fullName} deleted successfully.`
-            );
           })
           .catch(err => console.error(err));
       }

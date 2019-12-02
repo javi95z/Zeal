@@ -7,7 +7,7 @@ import {
   MatDialog
 } from "@angular/material";
 import { EditProjectDialog } from "./edit-dialog/edit-dialog.component";
-import { ProjectService, ToastService } from "@services";
+import { ProjectService } from "@services";
 import { Project } from "@models";
 
 @Component({
@@ -33,11 +33,7 @@ export class ProjectsAdminComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(
-    private service: ProjectService,
-    private toast: ToastService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private service: ProjectService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.initData();
@@ -102,7 +98,6 @@ export class ProjectsAdminComponent implements OnInit {
       .then(res => {
         this.dataSource.data[i] = res;
         this.dataSource._updateChangeSubscription();
-        this.toast.setMessage(`Project ${project.name} updated successfully.`);
       })
       .catch(err => console.error(err));
   }

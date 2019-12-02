@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { EditProjectDialog } from "@pages/admin/projects/edit-dialog/edit-dialog.component";
-import { ProjectService, DialogService, ToastService } from "@services";
+import { ProjectService, DialogService } from "@services";
 import { Project } from "@models";
+import { PROJECT_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-admin-project-profile",
@@ -16,7 +16,6 @@ export class ProjectProfileAdminComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: ProjectService,
-    private toast: ToastService,
     private dialog: DialogService
   ) {}
 
@@ -36,20 +35,18 @@ export class ProjectProfileAdminComponent implements OnInit {
    * Send API request for modification
    * @param projectId Id
    */
-  editProject(projectId: number) {
+  editProject(project: Project) {
     this.dialog
-      .editDialog<Project>(projectId, EditProjectDialog)
-      .subscribe(project => {
-        if (project) {
+      .editDialog<Project>({
+        object: project,
+        fields: PROJECT_FIELDS
+      })
+      .subscribe(result => {
+        if (result) {
           this.isLoading = true;
           this.service
-            .updateProject(project)
-            .then(res => {
-              this.project = new Project(res);
-              this.toast.setMessage(
-                `Project ${project.name} updated successfully.`
-              );
-            })
+            .updateProject(result)
+            .then(res => (this.project = res))
             .catch(err => console.error(err))
             .finally(() => (this.isLoading = false));
         }

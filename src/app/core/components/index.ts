@@ -7,3 +7,6 @@ export * from "./loading/loading.component";
 export * from "./tables/actions-menu/actions-menu.component";
 export * from "./tables/no-results/no-results.component";
 export * from "./toast-message/toast-message.component";
+
+// ! TEMP
+export * from "./edit-dialog/edit-dialog.component";

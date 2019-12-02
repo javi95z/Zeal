@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material";
-import { ComponentType } from "@angular/cdk/portal";
 import { ConfirmationDialogComponent } from "@core/components/confirmation-dialog/confirmation-dialog.component";
+import { EditDialogComponent } from "@core/components/edit-dialog/edit-dialog.component";
+import { Field } from "@zeal/variables";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -10,7 +11,18 @@ import { Observable } from "rxjs";
 export class DialogService {
   constructor(private dialog: MatDialog) {}
 
-  editDialog<T>(id: number, dialog: ComponentType<any>): Observable<T> {
+  editDialog<T>(data: { object: any; fields: Field[] }): Observable<T> {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      panelClass: "modal-dialog-box",
+      data: data
+    });
+    return dialogRef.afterClosed();
+  }
+
+  /**
+   * TODO: To be replaced by the one above
+   */
+  editDialogOld<T>(id: number, dialog: any): Observable<T> {
     const dialogRef = this.dialog.open(dialog, {
       panelClass: "modal-dialog-box",
       data: id
