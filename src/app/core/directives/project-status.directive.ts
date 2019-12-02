@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Input, OnInit } from "@angular/core";
 
 @Directive({
-  selector: "[projectStatus]"
+  selector: "[zProjectStatus]"
 })
 export class ProjectStatusDirective implements OnInit {
-  @Input() projectStatus: string;
+  @Input() value: string;
   el: ElementRef;
 
   constructor(el: ElementRef) {
@@ -12,12 +12,12 @@ export class ProjectStatusDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    const color = this.getColor(this.projectStatus);
+    const color = this.getColor(this.value);
     this.el.nativeElement.classList.add("label");
     this.el.nativeElement.classList.add(`bg-${color}`);
   }
 
-  getColor(status: string): string {
+  private getColor(status: string): string {
     switch (status) {
       case "open":
         return "blue";
