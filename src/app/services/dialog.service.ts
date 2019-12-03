@@ -30,10 +30,10 @@ export class DialogService {
     return dialogRef.afterClosed();
   }
 
-  deleteDialog(title: string): Observable<boolean> {
+  deleteDialog(title: string, altText?: string): Observable<boolean> {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: "400px",
-      data: `Do you confirm the deletion of ${title}`
+      data: altText || `Are you sure you want to delete ${title}?`
     });
     return dialogRef.afterClosed();
   }
