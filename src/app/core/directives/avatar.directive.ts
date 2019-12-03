@@ -6,6 +6,7 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
 export class AvatarDirective implements OnInit {
   @Input("zAvatar") image: string;
   @Input() circled: number;
+  @Input() extraClasses: string[];
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
@@ -24,6 +25,9 @@ export class AvatarDirective implements OnInit {
       image.classList.add("img-circle");
       image.style.height = `${this.circled}px`;
       image.style.width = `${this.circled}px`;
+    }
+    if (this.extraClasses) {
+      this.extraClasses.forEach(o => image.classList.add(o));
     }
     return image;
   }

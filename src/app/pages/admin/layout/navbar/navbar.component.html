@@ -42,11 +42,11 @@
       <!-- User panel -->
       <li class="dropdown auth-drp">
         <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
-          <img [src]="currentUser?.imagePath" alt="user_auth" class="user-auth-img img-circle" />
+          <div [zAvatar]="currentUser?.imagePath" circled="40" [extraClasses]="['user-auth-img']"></div>
           <span class="user-online-status"></span>
         </a>
         <ul class="dropdown-menu user-auth-dropdown">
-          <li>
+          <!-- <li>
             <a href="profile.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
           </li>
           <li>
@@ -55,23 +55,7 @@
           <li>
             <a href="#"><i class="zmdi zmdi-settings"></i><span>Settings</span></a>
           </li>
-          <li class="divider"></li>
-          <li class="sub-menu show-on-hover">
-            <a href="#" class="dropdown-toggle pr-0 level-2-drp"><i class="zmdi zmdi-check text-success"></i>
-              available</a>
-            <ul class="dropdown-menu open-left-side">
-              <li>
-                <a href="#"><i class="zmdi zmdi-check text-success"></i><span>available</span></a>
-              </li>
-              <li>
-                <a href="#"><i class="zmdi zmdi-circle-o text-warning"></i><span>busy</span></a>
-              </li>
-              <li>
-                <a href="#"><i class="zmdi zmdi-minus-circle-outline text-danger"></i><span>offline</span></a>
-              </li>
-            </ul>
-          </li>
-          <li class="divider"></li>
+          <li class="divider"></li> -->
           <li>
             <a (click)="logOut()" [routerLink]="">
               <i class="zmdi zmdi-power"></i>
