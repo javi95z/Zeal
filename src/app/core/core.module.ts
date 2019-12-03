@@ -16,6 +16,7 @@ import {
 } from "./components";
 import {
   GenderDirective,
+  PanelButtonDirective,
   PriorityDirective,
   StatusDirective
 } from "./directives";
@@ -33,6 +34,7 @@ const components = [
   HeaderComponent,
   LoadingComponent,
   NoResultsComponent,
+  PanelButtonDirective,
   PanelHeaderComponent,
   PriorityDirective,
   StatusDirective,
