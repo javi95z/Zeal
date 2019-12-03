@@ -22,7 +22,17 @@
       <mat-form-field *ngSwitchCase="'select'">
         <mat-label>{{ field.label }}</mat-label>
         <mat-select [formControlName]="field.key">
-          <mat-option *ngFor="let item of field.options" [value]="item">{{ item | capitalize }}</mat-option>
+          <mat-option *ngFor="let item of field.options" [value]="item.key || item">
+            {{ item.label || item | capitalize }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Multiple fields -->
+      <mat-form-field *ngSwitchCase="'multiple'">
+        <mat-label>{{ field.label }}</mat-label>
+        <mat-select [formControlName]="field.key" multiple>
+          <mat-option *ngFor="let item of field.options" [value]="item.key || item">
+            {{ item.label || item | capitalize }}</mat-option>
         </mat-select>
       </mat-form-field>
 

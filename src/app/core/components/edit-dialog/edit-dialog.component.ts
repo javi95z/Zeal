@@ -28,9 +28,10 @@ export class EditDialogComponent<T> implements OnInit {
   }
 
   onSubmit(): void {
-    const updated = Object.assign(this.data.object, this.form.value);
+    const updated = this.data.object
+      ? Object.assign(this.data.object, this.form.value)
+      : this.form.value;
     const result = updated as T;
-    // TODO: Relationships
     this.dialogRef.close(result);
   }
 
@@ -38,6 +39,9 @@ export class EditDialogComponent<T> implements OnInit {
     const group: any = {};
     fields.forEach(f => (group[f.key] = new FormControl()));
     const fg = new FormGroup(group);
-    return populateFormFields(this.data.object, fg);
+    if (this.data.object) {
+      return populateFormFields(this.data.object, fg);
+    }
+    return fg;
   }
 }

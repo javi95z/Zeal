@@ -35,8 +35,15 @@ export const ADMIN_MENU = [
 export interface Field {
   key: string;
   label: string;
-  type: "text" | "email" | "textarea" | "select" | "boolean" | "date";
-  options?: any;
+  type:
+    | "text"
+    | "email"
+    | "textarea"
+    | "select"
+    | "multiple"
+    | "boolean"
+    | "date";
+  options?: any[];
 }
 export const PROJECT_FIELDS: Field[] = [
   {

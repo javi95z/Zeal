@@ -11,7 +11,7 @@ import { Observable } from "rxjs";
 export class DialogService {
   constructor(private dialog: MatDialog) {}
 
-  editDialog<T>(data: { object: any; fields: Field[] }): Observable<T> {
+  editDialog<T>(data: { fields: Field[]; object?: any }): Observable<T> {
     const dialogRef = this.dialog.open(EditDialogComponent, {
       panelClass: "modal-dialog-box",
       data: data

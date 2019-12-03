@@ -29,3 +29,19 @@ export const parseRelationships = (model: any) => {
   });
   return model;
 };
+
+/**
+ * Pluck Id field and label field from array
+ * In order to populate select fields
+ * @param array Whole array of objects
+ * @param label Name of the label field
+ */
+export const pluckFields = (array: any[], label?: string) => {
+  return array.map(item => {
+    if (label) {
+      return { key: item["id"], label: item[label] };
+    } else {
+      return item.id;
+    }
+  });
+};
