@@ -15,6 +15,7 @@ import {
   ToastMessageComponent
 } from "./components";
 import {
+  AvatarDirective,
   GenderDirective,
   PanelButtonDirective,
   PriorityDirective,
@@ -25,6 +26,7 @@ import { MaterialModule } from "@zeal/material.module";
 
 const components = [
   ActionsMenuComponent,
+  AvatarDirective,
   BackButtonComponent,
   CapitalizePipe,
   ConfirmationDialogComponent,

@@ -64,8 +64,9 @@
                 <z-panel-header [title]="item.fullName" [titleLink]="['/admin', 'users', 'profile', item.id]">
                 </z-panel-header>
                 <div class="panel-wrapper collapse in">
-                  <div class="panel-body">
-                    <p>asfdadfs</p>
+                  <div class="panel-body text-center">
+                    <div [zAvatar]="item.imagePath" circled="80"></div>
+                    <p class="mt-10">{{ item.email }}</p>
                   </div>
                   <div class="panel-footer">
                     <a [routerLink]="" (click)="removeMember([item])">
