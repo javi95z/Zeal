@@ -9,6 +9,8 @@ import { environment as env } from "@env/environment";
   providedIn: "root"
 })
 export class UserService {
+  private urlApi = `${env.urlApi}/users`;
+  
   constructor(private http: HttpClient, private toast: ToastService) {}
 
   /**
@@ -17,7 +19,7 @@ export class UserService {
   getUsers(): Promise<ApiCollection<User>> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<ApiCollection<User>>(`${env.urlApi}/users/index`, null)
+        .post<ApiCollection<User>>(`${this.urlApi}/index`, null)
         .toPromise()
         .then(res => resolve(res))
         .catch(rej => reject(rej));
@@ -31,7 +33,7 @@ export class UserService {
   getUser(id: number): Promise<ApiResource<User>> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<ApiResource<User>>(`${env.urlApi}/users/${id}`, null)
+        .post<ApiResource<User>>(`${this.urlApi}/${id}`, null)
         .toPromise()
         .then(res => resolve(res))
         .catch(rej => reject(rej));
@@ -45,7 +47,7 @@ export class UserService {
   updateUser(u: User): Promise<User> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<User>(`${env.urlApi}/users/${u.id}`, parseRelationships(u))
+        .put<User>(`${this.urlApi}/${u.id}`, parseRelationships(u))
         .toPromise()
         .then(res => {
           const user = new User(res);
@@ -69,7 +71,7 @@ export class UserService {
   deleteUser(u: User): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.http
-        .delete(`${env.urlApi}/users/${u.id}`)
+        .delete(`${this.urlApi}/${u.id}`)
         .toPromise()
         .then(res => {
           const user = new User(u);

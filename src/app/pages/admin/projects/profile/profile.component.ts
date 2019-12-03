@@ -77,8 +77,17 @@ export class ProjectProfileAdminComponent implements OnInit {
       });
   }
 
-  removeMember(id: number) {
-    // TODO
-    console.log("Remove user", id, "from project");
+  /**
+   * Remove members from project
+   * @param ids User ids
+   */
+  removeMember(ids: number[]) {
+    this.isLoading = true;
+    this.service
+      .removeMember(this.project.id, ids)
+      .then(o => (this.project = o.data))
+      .finally(() => (this.isLoading = false));
+  }
+
   }
 }
