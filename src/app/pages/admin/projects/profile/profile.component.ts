@@ -18,6 +18,7 @@ import { pluckFields } from "@zeal/utils";
 export class ProjectProfileAdminComponent implements OnInit {
   private _project: Project;
   isLoading = true;
+  error: boolean;
   menu: PanelAction[];
   availableUsers: User[] = [];
 
@@ -42,6 +43,7 @@ export class ProjectProfileAdminComponent implements OnInit {
         this.service
           .getProject(data.id)
           .then(res => (this.project = res.data))
+          .catch(() => (this.error = true))
           .finally(() => {
             this.isLoading = false;
             this.menu = this.buildMenu();

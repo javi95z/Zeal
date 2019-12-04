@@ -1,8 +1,9 @@
 <z-header title="User page" [current]="user?.fullName"></z-header>
 <z-loading *ngIf="isLoading"></z-loading>
-<div class="row" *ngIf="user && !isLoading">
+<z-error-message *ngIf="error"></z-error-message>
+<div class="row" *ngIf="!isLoading">
   <div class="col-sm-12">
-    <div class="panel panel-default card-view">
+    <div class="panel panel-default card-view" *ngIf="!error">
       <z-panel-header [title]="user.fullName" [menu]="menu" (action)="onAction($event)"></z-panel-header>
       <div class="panel-wrapper collapse in">
         <mat-tab-group animationDuration="0ms">

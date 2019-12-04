@@ -13,6 +13,7 @@ import { PanelAction, PANEL_ACTIONS, USER_FIELDS } from "@zeal/variables";
 export class UserProfileAdminComponent implements OnInit {
   private _user: User;
   isLoading = true;
+  error: boolean;
   menu: PanelAction[];
 
   get user(): User {
@@ -36,6 +37,7 @@ export class UserProfileAdminComponent implements OnInit {
         this.service
           .getUser(data.id)
           .then(res => (this.user = res.data))
+          .catch(() => (this.error = true))
           .finally(() => {
             this.isLoading = false;
             this.menu = this.buildMenu();
@@ -96,9 +98,7 @@ export class UserProfileAdminComponent implements OnInit {
   deleteUser() {
     this.dialog.deleteDialog(this.user.fullName).subscribe(res => {
       if (res) {
-        this.service
-          .deleteUser(this.user)
-          .then(() => this.location.back());
+        this.service.deleteUser(this.user).then(() => this.location.back());
       }
     });
   }
