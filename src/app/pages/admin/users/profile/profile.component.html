@@ -5,59 +5,84 @@
     <div class="panel panel-default card-view">
       <z-panel-header [title]="user.fullName" [menu]="menu" (action)="onAction($event)"></z-panel-header>
       <div class="panel-wrapper collapse in">
-        <div class="panel-body row">
-          <div class="table-wrap">
-            <div class="table-responsive">
-              <table class="table display pb-30">
-                <tbody>
-                  <tr *ngIf="user.suffix">
-                    <td>Suffix</td>
-                    <td>{{ user.suffix }}</td>
-                  </tr>
-                  <tr *ngIf="user.fullName">
-                    <td>Fullname</td>
-                    <td>{{ user.fullName }}</td>
-                  </tr>
-                  <tr *ngIf="user.email">
-                    <td>Email</td>
-                    <td>{{ user.email }}</td>
-                  </tr>
-                  <tr *ngIf="user.gender">
-                    <td>Gender</td>
-                    <td zGender [value]="user.gender"></td>
-                  </tr>
-                  <tr *ngIf="user.role">
-                    <td>Role</td>
-                    <td>{{ user.role.name }}</td>
-                  </tr>
-                  <tr *ngIf="user.teams.length">
-                    <td>Teams</td>
-                    <td>
-                      <span *ngFor="let item of user.teams; let last = last">
-                        {{ item.name }}<span *ngIf="!last">, </span>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Active</td>
-                    <td>
-                      <span *ngIf="user.active">Yes</span>
-                      <span *ngIf="!user.active">No</span>
-                    </td>
-                  </tr>
-                  <tr *ngIf="user.created_at">
-                    <td>Created at</td>
-                    <td>{{ user.created_at | date: "dd/MM/yyyy H:m:s" }}</td>
-                  </tr>
-                  <tr *ngIf="user.updated_at">
-                    <td>Updated at</td>
-                    <td>{{ user.updated_at | date: "dd/MM/yyyy H:m:s" }}</td>
-                  </tr>
-                </tbody>
-              </table>
+        <mat-tab-group animationDuration="0ms">
+          <!-- Details tab -->
+          <mat-tab label="Details">
+            <div class="panel-body row">
+              <div class="table-wrap">
+                <div class="table-responsive">
+                  <table class="table display pb-30">
+                    <tbody>
+                      <tr *ngIf="user.suffix">
+                        <td>Suffix</td>
+                        <td>{{ user.suffix }}</td>
+                      </tr>
+                      <tr *ngIf="user.fullName">
+                        <td>Fullname</td>
+                        <td>{{ user.fullName }}</td>
+                      </tr>
+                      <tr *ngIf="user.email">
+                        <td>Email</td>
+                        <td>{{ user.email }}</td>
+                      </tr>
+                      <tr *ngIf="user.gender">
+                        <td>Gender</td>
+                        <td zGender [value]="user.gender"></td>
+                      </tr>
+                      <tr *ngIf="user.role">
+                        <td>Role</td>
+                        <td>{{ user.role.name }}</td>
+                      </tr>
+                      <tr *ngIf="user.teams.length">
+                        <td>Teams</td>
+                        <td>
+                          <span *ngFor="let item of user.teams; let last = last">
+                            {{ item.name }}<span *ngIf="!last">, </span>
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Active</td>
+                        <td>
+                          <span *ngIf="user.active">Yes</span>
+                          <span *ngIf="!user.active">No</span>
+                        </td>
+                      </tr>
+                      <tr *ngIf="user.created_at">
+                        <td>Created at</td>
+                        <td>{{ user.created_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                      </tr>
+                      <tr *ngIf="user.updated_at">
+                        <td>Updated at</td>
+                        <td>{{ user.updated_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </mat-tab>
+          <!-- Teams tab -->
+          <mat-tab label="Teams ({{user.teams.length}})">
+            <button mat-button zPanelButton>Add team</button>
+            <div *ngFor="let item of user.teams" class="col-sm-4 col-xs-12">
+              <div class="panel panel-default card-view">
+                <z-panel-header [title]="item.name" [titleLink]="['/admin', 'teams', 'profile', item.id]">
+                </z-panel-header>
+                <div class="panel-wrapper collapse in">
+                  <div class="panel-body text-center">
+                    <p class="mt-10">{{ item.description }}</p>
+                  </div>
+                  <div class="panel-footer">
+                    <a [routerLink]="">
+                      <i class="zmdi zmdi-delete"></i> Remove
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
       </div>
     </div>
   </div>

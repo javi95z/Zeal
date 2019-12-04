@@ -10,7 +10,7 @@ import { environment as env } from "@env/environment";
 })
 export class UserService {
   private urlApi = `${env.urlApi}/users`;
-  
+
   constructor(private http: HttpClient, private toast: ToastService) {}
 
   /**

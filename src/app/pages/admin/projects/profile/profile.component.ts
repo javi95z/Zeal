@@ -67,6 +67,7 @@ export class ProjectProfileAdminComponent implements OnInit {
       case "EDIT":
         this.editProject();
         break;
+      // TODO: Delete action
     }
   }
 

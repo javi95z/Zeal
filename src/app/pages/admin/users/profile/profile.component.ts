@@ -11,9 +11,16 @@ import { PanelAction, PANEL_ACTIONS, USER_FIELDS } from "@zeal/variables";
   styleUrls: ["./profile.component.scss"]
 })
 export class UserProfileAdminComponent implements OnInit {
-  user: User;
+  private _user: User;
   isLoading = true;
   menu: PanelAction[];
+
+  get user(): User {
+    return this._user;
+  }
+  set user(value: User) {
+    this._user = new User(value);
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +35,7 @@ export class UserProfileAdminComponent implements OnInit {
       if (data.id) {
         this.service
           .getUser(data.id)
-          .then(res => (this.user = new User(res.data)))
+          .then(res => (this.user = res.data))
           .finally(() => {
             this.isLoading = false;
             this.menu = this.buildMenu();
@@ -63,7 +70,6 @@ export class UserProfileAdminComponent implements OnInit {
   /**
    * Show dialog and return updated user
    * Send API request for modification
-   * @param userId Id
    */
   editUser() {
     this.dialog
@@ -77,7 +83,6 @@ export class UserProfileAdminComponent implements OnInit {
           this.service
             .updateUser(user)
             .then(res => (this.user = res))
-            .catch(err => console.error(err))
             .finally(() => (this.isLoading = false));
         }
       });
@@ -93,8 +98,7 @@ export class UserProfileAdminComponent implements OnInit {
       if (res) {
         this.service
           .deleteUser(this.user)
-          .then(() => this.location.back())
-          .catch(err => console.error(err));
+          .then(() => this.location.back());
       }
     });
   }
