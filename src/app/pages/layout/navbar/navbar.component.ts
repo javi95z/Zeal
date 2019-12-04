@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AuthService, SidebarService } from "@services";
+import { AuthService, LayoutService } from "@services";
 import { User } from "@models";
 
 @Component({
@@ -9,13 +9,13 @@ import { User } from "@models";
 })
 export class NavbarComponent {
   currentUser: User;
-  isCollapsed: boolean;
+  sidebarCollapsed: boolean;
+  mobileNavCollapsed: boolean;
 
-  constructor(public auth: AuthService, private sidebar: SidebarService) {
+  constructor(public auth: AuthService, private ui: LayoutService) {
     this.auth.currentUser.then(res => (this.currentUser = new User(res)));
-    this.sidebar
-      .getSidebarCollapsed()
-      .subscribe(res => (this.isCollapsed = res));
+    this.ui.getSidebar().subscribe(res => (this.sidebarCollapsed = res));
+    this.ui.getMobileNav().subscribe(res => (this.mobileNavCollapsed = res));
   }
 
   // TODO: Make it into a route
@@ -24,6 +24,10 @@ export class NavbarComponent {
   }
 
   collapseSidebar() {
-    this.sidebar.setSidebarCollapsed(!this.isCollapsed);
+    this.ui.setSidebar(!this.sidebarCollapsed);
+  }
+
+  collapseMobileNav() {
+    this.ui.setMobileNav(!this.mobileNavCollapsed);
   }
 }

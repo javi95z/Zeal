@@ -12,11 +12,10 @@
       [routerLink]="">
       <i class="zmdi zmdi-menu"></i>
     </a>
-    <a id="toggle_mobile_search" data-toggle="collapse" data-target="#search_form" class="mobile-only-view"
-      [routerLink]="">
+    <a id="toggle_mobile_search" data-toggle="collapse" data-target="#search_form" class="mobile-only-view">
       <i class="zmdi zmdi-search"></i>
     </a>
-    <a id="toggle_mobile_nav" class="mobile-only-view" [routerLink]="">
+    <a id="toggle_mobile_nav" class="mobile-only-view" (click)="collapseMobileNav()" [routerLink]="">
       <i class="zmdi zmdi-more"></i>
     </a>
     <form id="search_form" role="search" class="top-nav-search collapse pull-left">

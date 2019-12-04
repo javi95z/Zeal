@@ -1,4 +1,5 @@
-<div class="wrapper theme-1-active color-zeal" [ngClass]="{'slide-nav-toggle': sidebarCollapsed}">
+<div class="wrapper theme-1-active color-zeal" [class.silde-nav-toggle]="sidebarCollapsed"
+  [class.mobile-nav-open]="mobileNavCollapsed">
   <z-navbar></z-navbar>
   <z-sidebar></z-sidebar>
   <div class="page-wrapper">

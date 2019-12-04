@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { SidebarService } from "@zeal/services";
+import { LayoutService } from "@services";
 
 @Component({
   selector: "app-content",
@@ -8,12 +8,12 @@ import { SidebarService } from "@zeal/services";
 })
 export class ContentComponent implements OnInit {
   sidebarCollapsed: boolean;
+  mobileNavCollapsed: boolean;
 
-  constructor(private sidebar: SidebarService) {}
+  constructor(private ui: LayoutService) {}
 
   ngOnInit() {
-    this.sidebar
-      .getSidebarCollapsed()
-      .subscribe(res => (this.sidebarCollapsed = res));
+    this.ui.getSidebar().subscribe(res => (this.sidebarCollapsed = res));
+    this.ui.getMobileNav().subscribe(res => (this.mobileNavCollapsed = res));
   }
 }
