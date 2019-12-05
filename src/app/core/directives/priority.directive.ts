@@ -1,5 +1,5 @@
 import { Directive, Input, ElementRef, Renderer2, OnInit } from "@angular/core";
-import { CapitalizePipe } from "@pipes";
+import { CapitalizePipe } from "@core/pipes";
 
 @Directive({
   selector: "[zPriority]",

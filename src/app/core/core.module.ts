@@ -22,7 +22,7 @@ import {
   PriorityDirective,
   StatusDirective
 } from "./directives";
-import { CapitalizePipe } from "@pipes";
+import { CapitalizePipe } from "./pipes";
 import { MaterialModule } from "@zeal/material.module";
 
 const components = [

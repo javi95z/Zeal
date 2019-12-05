@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
-import { CapitalizePipe } from "@pipes";
+import { CapitalizePipe } from "@core/pipes";
 
 @Directive({
   selector: "[zGender]",

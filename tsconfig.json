@@ -17,8 +17,6 @@
       "@zeal/*": ["app/*"],
       "@core": ["app/core/"],
       "@core/*": ["app/core/*"],
-      "@directives": ["app/directives/"],
-      "@directives/*": ["app/directives/*"],
       "@env": ["environments/"],
       "@env/*": ["environments/*"],
       "@guards": ["app/guards/"],
@@ -27,8 +25,6 @@
       "@models/*": ["app/models/*"],
       "@pages": ["app/pages/"],
       "@pages/*": ["app/pages/*"],
-      "@pipes": ["app/pipes/"],
-      "@pipes/*": ["app/pipes/*"],
       "@services": ["app/services/"],
       "@services/*": ["app/services/*"]
     }
