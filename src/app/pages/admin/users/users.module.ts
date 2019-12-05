@@ -1,18 +1,9 @@
 import { NgModule } from "@angular/core";
-import {
-  UsersAdminComponent,
-  UserProfileAdminComponent,
-  EditUserDialog
-} from "./";
+import { UsersAdminComponent, UserProfileAdminComponent } from "./";
 import { CoreModule } from "@core/core.module";
 
 @NgModule({
-  declarations: [
-    UsersAdminComponent,
-    UserProfileAdminComponent,
-    EditUserDialog
-  ],
-  imports: [CoreModule],
-  entryComponents: [EditUserDialog]
+  declarations: [UsersAdminComponent, UserProfileAdminComponent],
+  imports: [CoreModule]
 })
 export class UsersAdminModule {}

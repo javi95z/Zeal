@@ -83,15 +83,10 @@ export class ProjectsAdminComponent implements OnInit {
       })
       .subscribe(result => {
         if (result) {
-          this.isLoading = true;
-          this.service
-            .updateProject(new Project(project))
-            .then(res => {
-              this.dataSource.data[i] = res;
-              this.dataSource._updateChangeSubscription();
-            })
-            .catch(err => console.error(err))
-            .finally(() => (this.isLoading = false));
+          this.service.updateProject(new Project(project)).then(res => {
+            this.dataSource.data[i] = res;
+            this.dataSource._updateChangeSubscription();
+          });
         }
       });
   }

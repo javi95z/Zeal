@@ -19,17 +19,6 @@ export class DialogService {
     return dialogRef.afterClosed();
   }
 
-  /**
-   * TODO: To be replaced by the one above
-   */
-  editDialogOld<T>(id: number, dialog: any): Observable<T> {
-    const dialogRef = this.dialog.open(dialog, {
-      panelClass: "modal-dialog-box",
-      data: id
-    });
-    return dialogRef.afterClosed();
-  }
-
   deleteDialog(title: string, altText?: string): Observable<boolean> {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: "400px",

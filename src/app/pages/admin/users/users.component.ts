@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
 import { SelectionModel } from "@angular/cdk/collections";
-import { EditUserDialog } from "./edit-dialog/edit-dialog.component";
 import { UserService, DialogService } from "@services";
 import { User } from "@models";
+import { USER_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-admin-users",
@@ -59,7 +59,7 @@ export class UsersAdminComponent implements OnInit {
   onAction(action: string, user: User, index: number) {
     switch (action) {
       case "EDIT":
-        this.editUser(user.id, index);
+        this.editUser(user, index);
         break;
       case "DELETE":
         this.deleteUser(user, index);
@@ -70,21 +70,23 @@ export class UsersAdminComponent implements OnInit {
   /**
    * Show dialog and return updated user
    * Send API request for modification
-   * @param userId Id
+   * @param user User
    * @param i Table index
    */
-  private editUser(userId: number, i: number) {
-    this.dialog.editDialogOld<User>(userId, EditUserDialog).subscribe(user => {
-      if (user) {
-        this.service
-          .updateUser(new User(user))
-          .then(res => {
+  private editUser(user: User, i: number) {
+    this.dialog
+      .editDialog<User>({
+        object: user,
+        fields: USER_FIELDS
+      })
+      .subscribe(result => {
+        if (result) {
+          this.service.updateUser(new User(user)).then(res => {
             this.dataSource.data[i] = res;
             this.dataSource._updateChangeSubscription();
-          })
-          .catch(err => console.error(err));
-      }
-    });
+          });
+        }
+      });
   }
 
   /**
