@@ -1,12 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
-import { UserService, DialogService } from "@services";
-import { User } from "@models";
-import { PanelAction, PANEL_ACTIONS, USER_FIELDS } from "@zeal/variables";
+import { UserService, DialogService, TeamService } from "@services";
+import { User, Team } from "@models";
+import {
+  PanelAction,
+  Field,
+  USER_FIELDS,
+  PANEL_ACTIONS
+} from "@zeal/variables";
+import { pluckFields } from "@zeal/utils";
 
 @Component({
-  selector: "z-admin-user-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"]
 })
@@ -15,6 +20,7 @@ export class UserProfileAdminComponent implements OnInit {
   isLoading = true;
   error: boolean;
   menu: PanelAction[];
+  availableTeams: Team[];
 
   get user(): User {
     return this._user;
@@ -26,6 +32,7 @@ export class UserProfileAdminComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: UserService,
+    private teams: TeamService,
     private dialog: DialogService,
     private location: Location,
     private router: Router
@@ -101,5 +108,38 @@ export class UserProfileAdminComponent implements OnInit {
         this.service.deleteUser(this.user).then(() => this.location.back());
       }
     });
+  }
+
+  /**
+   * Add teams to user
+   */
+  async addTeam() {
+    // Fetch teams
+    this.availableTeams = [];
+    await this.teams
+      .getTeams()
+      .then(o => o.data.filter(t => this.availableTeams.push(new Team(t))));
+
+    // Filter out current teams
+    const members = pluckFields(this.user.teams);
+    const teamsList = this.availableTeams.filter(o => !members.includes(o.id));
+
+    const teamsField: Field = {
+      key: "teams",
+      label: "Teams",
+      type: "multiple",
+      options: pluckFields(teamsList, "name")
+    };
+    this.dialog
+      .editDialog<any>({ fields: [teamsField] })
+      .subscribe(result => {
+        if (result) {
+          this.isLoading = true;
+          this.service
+            .addTeam(this.user.id, result.teams)
+            .then(o => (this.user = o.data))
+            .finally(() => (this.isLoading = false));
+        }
+      });
   }
 }

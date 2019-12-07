@@ -11,7 +11,6 @@ import {
 import { pluckFields } from "@zeal/utils";
 
 @Component({
-  selector: "z-admin-project-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"]
 })
@@ -20,7 +19,7 @@ export class ProjectProfileAdminComponent implements OnInit {
   isLoading = true;
   error: boolean;
   menu: PanelAction[];
-  availableUsers: User[] = [];
+  availableUsers: User[];
 
   get project(): Project {
     return this._project;
@@ -117,6 +116,7 @@ export class ProjectProfileAdminComponent implements OnInit {
    */
   async addMember() {
     // Fetch users
+    this.availableUsers = [];
     await this.user
       .getUsers()
       .then(o => o.data.filter(u => this.availableUsers.push(new User(u))));

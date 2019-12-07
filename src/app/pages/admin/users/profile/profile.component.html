@@ -65,7 +65,7 @@
           </mat-tab>
           <!-- Teams tab -->
           <mat-tab label="Teams ({{user.teams.length}})">
-            <button mat-button zPanelButton>Add team</button>
+            <button mat-button (click)="addTeam()" zPanelButton>Add team</button>
             <div *ngFor="let item of user.teams" class="col-sm-4 col-xs-12">
               <div class="panel panel-default card-view">
                 <z-panel-header [title]="item.name" [titleLink]="['/admin', 'teams', 'profile', item.id]">

@@ -87,4 +87,27 @@ export class UserService {
         });
     });
   }
+
+  /**
+   * Add user to teams
+   * @param id Project id
+   * @param teams Teams ids
+   */
+  addTeam(id: number, teams: number[]): Promise<ApiResource<User>> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .put<ApiResource<User>>(`${this.urlApi}/${id}/addteam`, {
+          teams: teams
+        })
+        .toPromise()
+        .then(res => {
+          this.toast.setMessage(`User added to the team.`);
+          resolve(res);
+        })
+        .catch(rej => {
+          this.toast.setMessage(rej.error.error, "error");
+          reject(rej);
+        });
+    });
+  }
 }
