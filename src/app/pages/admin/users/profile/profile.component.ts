@@ -2,13 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { UserService, DialogService, TeamService } from "@services";
-import { User, Team } from "@models";
-import {
-  PanelAction,
-  Field,
-  USER_FIELDS,
-  PANEL_ACTIONS
-} from "@zeal/variables";
+import { User, Team, PanelAction, Field, Tabs } from "@models";
+import { USER_FIELDS, PANEL_ACTIONS } from "@zeal/variables";
 import { pluckFields } from "@zeal/utils";
 
 @Component({
@@ -21,6 +16,7 @@ export class UserProfileAdminComponent implements OnInit {
   error: boolean;
   menu: PanelAction[];
   availableTeams: Team[];
+  tabs = new Tabs();
 
   get user(): User {
     return this._user;

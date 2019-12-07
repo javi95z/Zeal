@@ -7,7 +7,11 @@
       <z-panel-header [title]="project.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
 
       <div class="panel-wrapper collapse in">
-        <mat-tab-group animationDuration="0ms">
+        <mat-tab-group
+          animationDuration="0ms"
+          [selectedIndex]="tabs.selectedTab"
+          (selectedIndexChange)="tabs.tabChanged($event)"
+        >
           <!-- Details tab -->
           <mat-tab label="Details">
             <div class="panel-body row">

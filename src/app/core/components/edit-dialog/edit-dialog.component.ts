@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { FormGroup, FormControl } from "@angular/forms";
-import { Field } from "@zeal/variables";
+import { Field } from "@models";
 import { populateFormFields } from "@zeal/utils";
 
 @Component({

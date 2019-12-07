@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { ConfirmationDialogComponent } from "@core/components/confirmation-dialog/confirmation-dialog.component";
 import { EditDialogComponent } from "@core/components/edit-dialog/edit-dialog.component";
-import { Field } from "@zeal/variables";
+import { Field } from "@models";
 import { Observable } from "rxjs";
 
 @Injectable({

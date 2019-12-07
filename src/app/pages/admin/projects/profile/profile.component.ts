@@ -1,13 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProjectService, DialogService, UserService } from "@services";
-import { Project, User } from "@models";
-import {
-  PanelAction,
-  Field,
-  PROJECT_FIELDS,
-  PANEL_ACTIONS
-} from "@zeal/variables";
+import { Project, User, PanelAction, Field, Tabs } from "@models";
+import { PROJECT_FIELDS, PANEL_ACTIONS } from "@zeal/variables";
 import { pluckFields } from "@zeal/utils";
 
 @Component({
@@ -20,6 +15,7 @@ export class ProjectProfileAdminComponent implements OnInit {
   error: boolean;
   menu: PanelAction[];
   availableUsers: User[];
+  tabs = new Tabs();
 
   get project(): Project {
     return this._project;

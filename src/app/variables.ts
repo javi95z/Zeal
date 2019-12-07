@@ -1,4 +1,4 @@
-import { ApiCollection, ApiResource } from "@models";
+import { Field, PanelAction } from "@models";
 
 export const PROJECT_PRIORITY = ["low", "medium", "high"];
 export const PROJECT_STATUS = ["open", "completed", "canceled"];
@@ -32,19 +32,6 @@ export const ADMIN_MENU = [
     icon: "more"
   }
 ];
-export interface Field {
-  key: string;
-  label: string;
-  type:
-    | "text"
-    | "email"
-    | "textarea"
-    | "select"
-    | "multiple"
-    | "boolean"
-    | "date";
-  options?: any[];
-}
 export const PROJECT_FIELDS: Field[] = [
   {
     key: "code",
@@ -117,11 +104,6 @@ export const USER_FIELDS: Field[] = [
     type: "boolean"
   }
 ];
-export interface PanelAction {
-  name: string;
-  icon: string;
-  action: string;
-}
 export const PANEL_ACTIONS: PanelAction[] = [
   {
     name: "Edit",
