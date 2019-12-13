@@ -138,4 +138,22 @@ export class UserProfileAdminComponent implements OnInit {
         }
       });
   }
+
+  /**
+   * Remove user from teams
+   * @param ids User ids
+   */
+  removeTeam(teams: Team[]) {
+    const names = teams.length > 1 ? "selected teams" : teams[0].name;
+    const text = `Are you sure you want to remove the user ${this.user.fullName} from ${names}`;
+    this.dialog.deleteDialog(null, text).subscribe(res => {
+      if (res) {
+        this.isLoading = true;
+        this.service
+          .removeTeam(this.user.id, pluckFields(teams))
+          .then(o => (this.user = o.data))
+          .finally(() => (this.isLoading = false));
+      }
+    });
+  }
 }

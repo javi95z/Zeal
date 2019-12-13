@@ -101,7 +101,34 @@ export class UserService {
         })
         .toPromise()
         .then(res => {
-          this.toast.setMessage(`User added to the team.`);
+          this.toast.setMessage(
+            `User added to the ${teams.length > 1 ? "teams" : "team"}.`
+          );
+          resolve(res);
+        })
+        .catch(rej => {
+          this.toast.setMessage(rej.error.error, "error");
+          reject(rej);
+        });
+    });
+  }
+
+  /**
+   * Remove teams from user
+   * @param id User id
+   * @param teams Teams ids
+   */
+  removeTeam(id: number, teams: number[]): Promise<ApiResource<User>> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .put<ApiResource<User>>(`${this.urlApi}/${id}/removeteam`, {
+          teams: teams
+        })
+        .toPromise()
+        .then(res => {
+          this.toast.setMessage(
+            `User removed from the ${teams.length > 1 ? "teams" : "team"}.`
+          );
           resolve(res);
         })
         .catch(rej => {

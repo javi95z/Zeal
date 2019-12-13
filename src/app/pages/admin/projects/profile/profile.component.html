@@ -27,6 +27,12 @@
                         <td>Code</td>
                         <td>{{ project.code }}</td>
                       </tr>
+                      <tr *ngIf="project.contact">
+                        <td>Contact</td>
+                        <td>
+                          <a [routerLink]="">{{ project.contact.name }}</a>
+                        </td>
+                      </tr>
                       <tr *ngIf="project.description">
                         <td>Description</td>
                         <td class="ws-normal">{{ project.description }}</td>
