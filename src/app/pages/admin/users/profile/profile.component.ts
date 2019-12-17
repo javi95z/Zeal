@@ -172,7 +172,9 @@ export class UserProfileAdminComponent implements OnInit {
       .then(o => o.data.filter(r => this.availableRoles.push(new Role(r))));
 
     // Filter out current role
-    const roleList = this.availableRoles.filter(o => this.user.role.id !== o.id);
+    const roleList = this.availableRoles.filter(
+      o => this.user.role.id !== o.id
+    );
 
     const roleField: Field = {
       key: "role",
@@ -184,9 +186,11 @@ export class UserProfileAdminComponent implements OnInit {
       .editDialog<any>({ fields: [roleField] })
       .subscribe(result => {
         if (result) {
-          console.log(result);
-          // this.isLoading = true;
-          // Change role in API
+          this.isLoading = true;
+          this.service
+            .editRole(this.user.id, result.role)
+            .then(o => (this.user = o.data))
+            .finally(() => (this.isLoading = false));
         }
       });
   }
