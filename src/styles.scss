@@ -192,6 +192,16 @@ mat-tab-group {
       border-bottom: none;
     }
   }
+  td .table-button {
+    border-bottom: 1px dashed $darkgray;
+    color: $darkgray;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 20px;
+    i {
+      margin-right: 5px;
+    }
+  }
 }
 
 // Modals

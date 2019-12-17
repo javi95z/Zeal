@@ -6,11 +6,8 @@
     <div class="panel panel-default card-view" *ngIf="!error">
       <z-panel-header [title]="user.fullName" [menu]="menu" (action)="onAction($event)"></z-panel-header>
       <div class="panel-wrapper collapse in">
-        <mat-tab-group
-          animationDuration="0ms"
-          [selectedIndex]="tabs.selectedTab"
-          (selectedIndexChange)="tabs.tabChanged($event)"
-        >
+        <mat-tab-group animationDuration="0ms" [selectedIndex]="tabs.selectedTab"
+          (selectedIndexChange)="tabs.tabChanged($event)">
           <!-- Details tab -->
           <mat-tab label="Details">
             <div class="panel-body row">
@@ -36,14 +33,11 @@
                       </tr>
                       <tr *ngIf="user.role">
                         <td>Role</td>
-                        <td>{{ user.role.name }}</td>
-                      </tr>
-                      <tr *ngIf="user.teams.length">
-                        <td>Teams</td>
                         <td>
-                          <span *ngFor="let item of user.teams; let last = last">
-                            {{ item.name }}<span *ngIf="!last">, </span>
-                          </span>
+                          {{ user.role.name }}
+                          <a class="table-button" (click)="editRole()">
+                            <i class="zmdi zmdi-edit"></i>change
+                          </a>
                         </td>
                       </tr>
                       <tr>
