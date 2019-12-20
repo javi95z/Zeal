@@ -96,9 +96,7 @@ export class UserService {
   addTeam(id: number, teams: number[]): Promise<ApiResource<User>> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<ApiResource<User>>(`${this.urlApi}/${id}/addteam`, {
-          teams: teams
-        })
+        .put<ApiResource<User>>(`${this.urlApi}/${id}/addteam`, { teams })
         .toPromise()
         .then(res => {
           this.toast.setMessage(
@@ -121,14 +119,28 @@ export class UserService {
   removeTeam(id: number, teams: number[]): Promise<ApiResource<User>> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<ApiResource<User>>(`${this.urlApi}/${id}/removeteam`, {
-          teams: teams
-        })
+        .put<ApiResource<User>>(`${this.urlApi}/${id}/removeteam`, { teams })
         .toPromise()
         .then(res => {
           this.toast.setMessage(
             `User removed from the ${teams.length > 1 ? "teams" : "team"}.`
           );
+          resolve(res);
+        })
+        .catch(rej => {
+          this.toast.setMessage(rej.error.error, "error");
+          reject(rej);
+        });
+    });
+  }
+
+  editRole(id: number, role: number): Promise<ApiResource<User>> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .put<ApiResource<User>>(`${this.urlApi}/${id}/changerole`, { role })
+        .toPromise()
+        .then(res => {
+          this.toast.setMessage(`User role changed updated successfully`);
           resolve(res);
         })
         .catch(rej => {

@@ -1,8 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
-import { UserService, DialogService, TeamService } from "@services";
-import { User, Team, PanelAction, Field, Tabs } from "@models";
+import {
+  UserService,
+  DialogService,
+  TeamService,
+  RoleService
+} from "@services";
+import { User, Team, PanelAction, Field, Tabs, Role } from "@models";
 import { USER_FIELDS, PANEL_ACTIONS } from "@zeal/variables";
 import { pluckFields } from "@zeal/utils";
 
@@ -16,6 +21,7 @@ export class UserProfileAdminComponent implements OnInit {
   error: boolean;
   menu: PanelAction[];
   availableTeams: Team[];
+  availableRoles: Role[];
   tabs = new Tabs();
 
   get user(): User {
@@ -29,6 +35,7 @@ export class UserProfileAdminComponent implements OnInit {
     private route: ActivatedRoute,
     private service: UserService,
     private teams: TeamService,
+    private roles: RoleService,
     private dialog: DialogService,
     private location: Location,
     private router: Router
@@ -155,5 +162,36 @@ export class UserProfileAdminComponent implements OnInit {
           .finally(() => (this.isLoading = false));
       }
     });
+  }
+
+  async editRole() {
+    // Fetch roles
+    this.availableRoles = [];
+    await this.roles
+      .getRoles()
+      .then(o => o.data.filter(r => this.availableRoles.push(new Role(r))));
+
+    // Filter out current role
+    const roleList = this.availableRoles.filter(
+      o => this.user.role.id !== o.id
+    );
+
+    const roleField: Field = {
+      key: "role",
+      label: "Role",
+      type: "select",
+      options: pluckFields(roleList, "name")
+    };
+    this.dialog
+      .editDialog<any>({ fields: [roleField] })
+      .subscribe(result => {
+        if (result) {
+          this.isLoading = true;
+          this.service
+            .editRole(this.user.id, result.role)
+            .then(o => (this.user = o.data))
+            .finally(() => (this.isLoading = false));
+        }
+      });
   }
 }
