@@ -13,21 +13,16 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private auth: AuthService) {}
 
-  ngOnInit() {
-    this.createForm();
-  }
-
-  private createForm() {
-    this.loginForm = new FormGroup({
-      email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", Validators.required)
-    });
-  }
   get email() {
     return this.loginForm.get("email");
   }
+
   get password() {
     return this.loginForm.get("password");
+  }
+
+  ngOnInit() {
+    this.createForm();
   }
 
   /**
@@ -41,6 +36,13 @@ export class LoginComponent implements OnInit {
         this.auth.userData = user;
         this.router.navigate(["/content"]);
       });
+    });
+  }
+
+  private createForm() {
+    this.loginForm = new FormGroup({
+      email: new FormControl("", [Validators.required, Validators.email]),
+      password: new FormControl("", Validators.required)
     });
   }
 }

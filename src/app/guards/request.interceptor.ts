@@ -48,6 +48,9 @@ export class RequestInterceptor implements HttpInterceptor {
         } else if (error.status === 400) {
           this.toast.setMessage("Bad request error", "error");
           return throwError(error);
+        } else if (error.status === 500) {
+          this.toast.setMessage("Internal server error", "error");
+          return throwError(error);
         } else if (!error.status) {
           this.toast.setMessage(error.statusText, "error");
           this.auth.doLogout();
