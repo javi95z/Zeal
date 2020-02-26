@@ -84,7 +84,7 @@ export class UsersAdminComponent implements OnInit {
       .subscribe(result => {
         if (result) {
           this.service.updateUser(new User(user)).then(res => {
-            this.dataSource.data[i] = res;
+            this.dataSource.data[i] = res.data;
             this.dataSource._updateChangeSubscription();
           });
         }

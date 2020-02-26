@@ -94,7 +94,7 @@ export class UserProfileAdminComponent implements OnInit {
           this.isLoading = true;
           this.service
             .updateUser(user)
-            .then(res => (this.user = res))
+            .then(res => (this.user = res.data))
             .finally(() => (this.isLoading = false));
         }
       });

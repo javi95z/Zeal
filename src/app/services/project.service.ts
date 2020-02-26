@@ -44,13 +44,13 @@ export class ProjectService {
    * Update one project
    * @param p Project
    */
-  updateProject(p: Project): Promise<Project> {
+  updateProject(p: Project): Promise<ApiResource<Project>> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<Project>(`${this.urlApi}/${p.id}`, parseRelationships(p))
+        .put<ApiResource<Project>>(`${this.urlApi}/${p.id}`, parseRelationships(p))
         .toPromise()
         .then(res => {
-          this.toast.setMessage(`Project ${res.name} updated successfully.`);
+          this.toast.setMessage(`Project ${res.data.name} updated successfully.`);
           resolve(res);
         })
         .catch(rej => {

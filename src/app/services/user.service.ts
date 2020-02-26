@@ -44,15 +44,15 @@ export class UserService {
    * Update one user
    * @param u User
    */
-  updateUser(u: User): Promise<User> {
+  updateUser(u: User): Promise<ApiResource<User>> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<User>(`${this.urlApi}/${u.id}`, parseRelationships(u))
+        .put<ApiResource<User>>(`${this.urlApi}/${u.id}`, parseRelationships(u))
         .toPromise()
         .then(res => {
-          const user = new User(res);
+          const user = new User(res.data);
           this.toast.setMessage(`User ${user.fullName} updated successfully.`);
-          resolve(user);
+          resolve(res);
         })
         .catch(rej => {
           this.toast.setMessage(
