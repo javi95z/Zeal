@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { SelectionModel } from "@angular/cdk/collections";
-import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
 import { ProjectService, DialogService } from "@services";
 import { Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
