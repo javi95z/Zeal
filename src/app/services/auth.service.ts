@@ -18,6 +18,12 @@ export class AuthService {
   set token(val: string) {
     sessionStorage.setItem("token", val);
   }
+  get locale(): string {
+    return localStorage.getItem("locale") || "en";
+  }
+  set locale(val: string) {
+    localStorage.setItem("locale", val);
+  }
   get isLoggedIn(): boolean {
     return !!this.token;
   }

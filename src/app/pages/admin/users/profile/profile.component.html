@@ -40,6 +40,10 @@
                           </a>
                         </td>
                       </tr>
+                      <tr *ngIf="user.locale">
+                        <td>Locale</td>
+                        <td>{{ user.locale }}</td>
+                      </tr>
                       <tr>
                         <td>Active</td>
                         <td>
@@ -49,11 +53,11 @@
                       </tr>
                       <tr *ngIf="user.created_at">
                         <td>Created at</td>
-                        <td>{{ user.created_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                        <td>{{ user.created_at | date: "long" }}</td>
                       </tr>
                       <tr *ngIf="user.updated_at">
                         <td>Updated at</td>
-                        <td>{{ user.updated_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                        <td>{{ user.updated_at | date: "long" }}</td>
                       </tr>
                     </tbody>
                   </table>

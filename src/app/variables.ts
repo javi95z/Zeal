@@ -99,6 +99,11 @@ export const USER_FIELDS: Field[] = [
     options: GENDER
   },
   {
+    key: "locale",
+    label: "Locale",
+    type: "text"
+  },
+  {
     key: "active",
     label: "Active",
     type: "boolean"

@@ -18,7 +18,7 @@ import { MAT_DATE_LOCALE } from "@angular/material/core";
   providers: [
     {
       provide: MAT_DATE_LOCALE,
-      useValue: "en-GB"
+      useValue: localStorage.getItem("locale") || "en"
     }
   ],
   exports: [

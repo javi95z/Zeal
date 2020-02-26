@@ -15,6 +15,7 @@ export class User {
   role?: Role;
   suffix: string;
   teams?: Team[];
+  locale: string;
   updated_at?: string | Date;
   created_at?: string | Date;
 

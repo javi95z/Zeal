@@ -57,7 +57,7 @@
                 <ng-container matColumnDef="start_date">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Start date </th>
                   <td *matCellDef="let element">
-                    <span>{{ element?.start_date | date:"dd/MM/yyyy" }}</span>
+                    <span>{{ element?.start_date | date: "shortDate" }}</span>
                   </td>
                 </ng-container>
 
@@ -65,7 +65,7 @@
                 <ng-container matColumnDef="end_date">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> End date </th>
                   <td *matCellDef="let element">
-                    <span>{{ element?.end_date | date:"dd/MM/yyyy" }}</span>
+                    <span>{{ element?.end_date | date: "shortDate" }}</span>
                   </td>
                 </ng-container>
 

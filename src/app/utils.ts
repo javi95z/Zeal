@@ -1,5 +1,4 @@
-import { FormGroup, ValidationErrors } from "@angular/forms";
-import { VALIDATION_ERRORS } from "./dict";
+import { FormGroup } from "@angular/forms";
 
 /**
  * Populate the form values from a model

@@ -34,6 +34,8 @@ export class LoginComponent implements OnInit {
       // Get user data and enter the app
       this.auth.getUser().then(user => {
         this.auth.userData = user;
+        // Set user locale
+        this.auth.locale = user.locale;
         this.router.navigate(["/content"]);
       });
     });
