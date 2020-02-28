@@ -30,6 +30,24 @@ export const parseRelationships = (model: any) => {
 };
 
 /**
+ * Format date to string yyyy-mm-dd format
+ * @param raw Date in JS format
+ */
+export const formatDate = (raw): string => {
+  if (raw instanceof Date) {
+    const result = raw
+      .toLocaleDateString("ja-JP", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      })
+      .replace(/\//gi, "-");
+    return result;
+  }
+  return raw;
+};
+
+/**
  * Pluck Id field and label field from array
  * In order to populate select fields
  * @param array Whole array of objects

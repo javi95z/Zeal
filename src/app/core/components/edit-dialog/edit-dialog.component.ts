@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormGroup, FormControl } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Field } from "@models";
-import { populateFormFields } from "@zeal/utils";
+import { populateFormFields, formatDate } from "@zeal/utils";
 
 @Component({
   selector: "z-edit-dialog",
@@ -10,7 +10,6 @@ import { populateFormFields } from "@zeal/utils";
   styleUrls: ["./edit-dialog.component.scss"]
 })
 export class EditDialogComponent<T> implements OnInit {
-  isLoading = true;
   form: FormGroup;
 
   constructor(
@@ -31,6 +30,11 @@ export class EditDialogComponent<T> implements OnInit {
     const updated = this.data.object
       ? Object.assign(this.data.object, this.form.value)
       : this.form.value;
+
+    // Transform dates to be sent to API
+    this.data.fields.forEach(e =>
+      e.type === "date" ? (updated[e.key] = formatDate(updated[e.key])) : null
+    );
     const result = updated as T;
     this.dialogRef.close(result);
   }

@@ -7,11 +7,8 @@
       <z-panel-header [title]="project.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
 
       <div class="panel-wrapper collapse in">
-        <mat-tab-group
-          animationDuration="0ms"
-          [selectedIndex]="tabs.selectedTab"
-          (selectedIndexChange)="tabs.tabChanged($event)"
-        >
+        <mat-tab-group animationDuration="0ms" [selectedIndex]="tabs.selectedTab"
+          (selectedIndexChange)="tabs.tabChanged($event)">
           <!-- Details tab -->
           <mat-tab label="Details">
             <div class="panel-body row">
@@ -55,11 +52,11 @@
                       </tr>
                       <tr *ngIf="project.created_at">
                         <td>Created at</td>
-                        <td>{{ project.created_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                        <td>{{ project.created_at | date: "long" }}</td>
                       </tr>
                       <tr *ngIf="project.updated_at">
                         <td>Updated at</td>
-                        <td>{{ project.updated_at | date: "dd/MM/yyyy H:m:s" }}</td>
+                        <td>{{ project.updated_at | date: "long" }}</td>
                       </tr>
                     </tbody>
                   </table>
