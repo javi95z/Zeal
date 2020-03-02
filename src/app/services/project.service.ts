@@ -60,6 +60,8 @@ export class ProjectService {
     });
   }
 
+  // TODO: Delete project request
+
   /**
    * Add members to project
    * @param id Project id

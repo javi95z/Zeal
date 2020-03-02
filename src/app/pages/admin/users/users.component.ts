@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { SelectionModel } from "@angular/cdk/collections";
+import { Component, OnInit } from "@angular/core";
 import { UserService, DialogService } from "@services";
+import { TableClass } from "@core/classes/table.class";
 import { User } from "@models";
 import { USER_FIELDS } from "@zeal/variables";
 
@@ -12,7 +9,7 @@ import { USER_FIELDS } from "@zeal/variables";
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"]
 })
-export class UsersAdminComponent implements OnInit {
+export class UsersAdminComponent extends TableClass<User> implements OnInit {
   displayedColumns: string[] = [
     "select",
     "name",
@@ -21,41 +18,13 @@ export class UsersAdminComponent implements OnInit {
     "gender",
     "actions"
   ];
-  dataSource = new MatTableDataSource<User>();
-  selection: SelectionModel<User>;
-  isLoading = true;
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-
-  constructor(private service: UserService, private dialog: DialogService) {}
+  constructor(private service: UserService, private dialog: DialogService) {
+    super();
+  }
 
   ngOnInit() {
-    this.initData();
-  }
-
-  private initData(): void {
-    this.selection = new SelectionModel<User>(true, []);
-    this.service
-      .getUsers()
-      .then(res => {
-        this.dataSource = new MatTableDataSource(res.data);
-        this.dataSource.sort = this.sort;
-        setTimeout(() => (this.dataSource.paginator = this.paginator));
-      })
-      .finally(() => (this.isLoading = false));
-  }
-
-  isAllSelected(): boolean {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  masterToggle(): void {
-    this.isAllSelected()
-      ? this.selection.clear()
-      : this.dataSource.data.forEach(row => this.selection.select(row));
+    this.initData(this.service.getUsers());
   }
 
   onAction(action: string, user: User, index: number) {
@@ -81,19 +50,14 @@ export class UsersAdminComponent implements OnInit {
         object: user,
         fields: USER_FIELDS
       })
-      .subscribe(result => {
-        if (result) {
-          this.service.updateUser(new User(user)).then(res => {
-            this.dataSource.data[i] = res.data;
-            this.dataSource._updateChangeSubscription();
-          });
-        }
-      });
+      .subscribe(result =>
+        super.updateData(this.service.updateUser(new User(result)), i)
+      );
   }
 
   /**
-   * Confirmation dialog to
-   * remove user from table
+   * Confirmation dialog
+   * to remove user
    * @param u User
    * @param i Index
    */
@@ -101,13 +65,7 @@ export class UsersAdminComponent implements OnInit {
     const user = new User(u);
     this.dialog.deleteDialog(user.fullName).subscribe(res => {
       if (res) {
-        this.service
-          .deleteUser(user)
-          .then(() => {
-            this.dataSource.data.splice(i, 1);
-            this.dataSource._updateChangeSubscription();
-          })
-          .catch(err => console.error(err));
+        super.deleteData(this.service.deleteUser(user), i);
       }
     });
   }

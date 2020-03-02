@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { SelectionModel } from "@angular/cdk/collections";
-import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
+import { Component, OnInit } from "@angular/core";
 import { ProjectService, DialogService } from "@services";
+import { TableClass } from "@core/classes/table.class";
 import { Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
 
@@ -12,7 +9,8 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   templateUrl: "./projects.component.html",
   styleUrls: ["./projects.component.scss"]
 })
-export class ProjectsAdminComponent implements OnInit {
+export class ProjectsAdminComponent extends TableClass<Project>
+  implements OnInit {
   displayedColumns: string[] = [
     "select",
     "name",
@@ -23,41 +21,13 @@ export class ProjectsAdminComponent implements OnInit {
     "end_date",
     "actions"
   ];
-  dataSource = new MatTableDataSource<Project>();
-  selection: SelectionModel<Project>;
-  isLoading = true;
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-
-  constructor(private service: ProjectService, private dialog: DialogService) {}
+  constructor(private service: ProjectService, private dialog: DialogService) {
+    super();
+  }
 
   ngOnInit() {
-    this.initData();
-  }
-
-  private initData(): void {
-    this.selection = new SelectionModel<Project>(true, []);
-    this.service
-      .getProjects()
-      .then(res => {
-        this.dataSource = new MatTableDataSource(res.data);
-        this.dataSource.sort = this.sort;
-        setTimeout(() => (this.dataSource.paginator = this.paginator));
-      })
-      .finally(() => (this.isLoading = false));
-  }
-
-  isAllSelected(): boolean {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  masterToggle(): void {
-    this.isAllSelected()
-      ? this.selection.clear()
-      : this.dataSource.data.forEach(row => this.selection.select(row));
+    this.initData(this.service.getProjects());
   }
 
   onAction(action: string, project: Project, index: number) {
@@ -65,9 +35,9 @@ export class ProjectsAdminComponent implements OnInit {
       case "EDIT":
         this.editProject(project, index);
         break;
-      // case "DELETE":
-      //   this.deleteProjectDialog(project, index);
-      //   break;
+      case "DELETE":
+        this.deleteProject(project, index);
+        break;
     }
   }
 
@@ -83,13 +53,23 @@ export class ProjectsAdminComponent implements OnInit {
         object: project,
         fields: PROJECT_FIELDS
       })
-      .subscribe(result => {
-        if (result) {
-          this.service.updateProject(new Project(project)).then(res => {
-            this.dataSource.data[i] = res.data;
-            this.dataSource._updateChangeSubscription();
-          });
-        }
-      });
+      .subscribe(result =>
+        super.updateData(this.service.updateProject(new Project(result)), i)
+      );
+  }
+
+  /**
+   * Confirmation dialog
+   * to remove project
+   * @param p User
+   * @param i Index
+   */
+  private deleteProject(p: Project, i: number) {
+    const project = new Project(p);
+    // this.dialog.deleteDialog(project.name).subscribe(res => {
+    //   if (res) {
+    //     super.deleteData(this.service.deleteProject(project), i);
+    //   }
+    // });
   }
 }
