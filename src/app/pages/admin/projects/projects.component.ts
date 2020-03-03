@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ProjectService, DialogService } from "@services";
-import { TableClass } from "@core/classes/table.class";
+import { AdminListPageClass } from "@core/classes/adminlistpage";
 import { Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
 
@@ -9,7 +9,7 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   templateUrl: "./projects.component.html",
   styleUrls: ["./projects.component.scss"]
 })
-export class ProjectsAdminComponent extends TableClass<Project>
+export class ProjectsAdminComponent extends AdminListPageClass<Project>
   implements OnInit {
   displayedColumns: string[] = [
     "select",
@@ -54,7 +54,7 @@ export class ProjectsAdminComponent extends TableClass<Project>
         fields: PROJECT_FIELDS
       })
       .subscribe(result =>
-        super.updateData(this.service.updateProject(new Project(result)), i)
+        this.updateData(this.service.updateProject(new Project(result)), i)
       );
   }
 
@@ -66,10 +66,10 @@ export class ProjectsAdminComponent extends TableClass<Project>
    */
   private deleteProject(p: Project, i: number) {
     const project = new Project(p);
-    // this.dialog.deleteDialog(project.name).subscribe(res => {
-    //   if (res) {
-    //     super.deleteData(this.service.deleteProject(project), i);
-    //   }
-    // });
+    this.dialog.deleteDialog(project.name).subscribe(res => {
+      if (res) {
+        this.deleteData(this.service.deleteProject(project), i);
+      }
+    });
   }
 }

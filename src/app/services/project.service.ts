@@ -47,10 +47,15 @@ export class ProjectService {
   updateProject(p: Project): Promise<ApiResource<Project>> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<ApiResource<Project>>(`${this.urlApi}/${p.id}`, parseRelationships(p))
+        .put<ApiResource<Project>>(
+          `${this.urlApi}/${p.id}`,
+          parseRelationships(p)
+        )
         .toPromise()
         .then(res => {
-          this.toast.setMessage(`Project ${res.data.name} updated successfully.`);
+          this.toast.setMessage(
+            `Project ${res.data.name} updated successfully.`
+          );
           resolve(res);
         })
         .catch(rej => {
@@ -60,7 +65,25 @@ export class ProjectService {
     });
   }
 
-  // TODO: Delete project request
+  /**
+   * Delete one project
+   * @param p Project
+   */
+  deleteProject(p: Project): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .delete(`${this.urlApi}/${p.id}`)
+        .toPromise()
+        .then(res => {
+          this.toast.setMessage(`Project ${p.name} deleted successfully.`);
+          resolve(res as boolean);
+        })
+        .catch(rej => {
+          this.toast.setMessage(`Failed to delete project ${p.name}.`, "error");
+          reject(rej);
+        });
+    });
+  }
 
   /**
    * Add members to project

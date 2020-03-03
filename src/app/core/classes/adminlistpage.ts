@@ -4,7 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 
-export class TableClass<T> {
+export class AdminListPageClass<T> {
   selection: SelectionModel<T>;
   dataSource = new MatTableDataSource<T>();
   isLoading = true;

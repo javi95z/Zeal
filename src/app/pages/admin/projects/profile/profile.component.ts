@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Location } from "@angular/common";
 import { ProjectService, DialogService, UserService } from "@services";
 import { Project, User, PanelAction, Field, Tabs } from "@models";
 import { PROJECT_FIELDS, PANEL_ACTIONS } from "@zeal/variables";
@@ -29,6 +30,7 @@ export class ProjectProfileAdminComponent implements OnInit {
     private service: ProjectService,
     private user: UserService,
     private dialog: DialogService,
+    private location: Location,
     private router: Router
   ) {}
 
@@ -48,7 +50,7 @@ export class ProjectProfileAdminComponent implements OnInit {
   }
 
   buildMenu(): PanelAction[] {
-    const actions = ["EDIT", "LIST"];
+    const actions = ["EDIT", "LIST", "DELETE"];
     return PANEL_ACTIONS.filter(o => actions.includes(o.action));
   }
 
@@ -64,7 +66,9 @@ export class ProjectProfileAdminComponent implements OnInit {
       case "EDIT":
         this.editProject();
         break;
-      // TODO: Delete action
+      case "DELETE":
+        this.deleteProject();
+        break;
     }
   }
 
@@ -87,6 +91,21 @@ export class ProjectProfileAdminComponent implements OnInit {
             .finally(() => (this.isLoading = false));
         }
       });
+  }
+
+  /**
+   * Show confirm dialog
+   * Send API request for deletion
+   * @param p Project
+   */
+  deleteProject() {
+    this.dialog.deleteDialog(this.project.name).subscribe(res => {
+      if (res) {
+        this.service
+          .deleteProject(this.project)
+          .then(() => this.location.back());
+      }
+    });
   }
 
   /**
