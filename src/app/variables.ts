@@ -108,7 +108,7 @@ export const USER_FIELDS: Field[] = [
   {
     key: "active",
     label: "Active",
-    type: "boolean"
+    type: "toggle"
   }
 ];
 export const PANEL_ACTIONS: PanelAction[] = [

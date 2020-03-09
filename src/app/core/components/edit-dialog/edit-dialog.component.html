@@ -46,6 +46,11 @@
         <mat-datepicker #endDatePicker></mat-datepicker>
       </mat-form-field>
 
+      <!-- Toggle fields -->
+      <section *ngSwitchCase="'toggle'" class="mb-20">
+        <mat-slide-toggle [formControlName]="field.key" [required]="field.required">{{ field.label }}</mat-slide-toggle>
+      </section>
+
       <!-- Boolean fields -->
       <section *ngSwitchCase="'boolean'" class="mb-20">
         <mat-checkbox [formControlName]="field.key" [required]="field.required">{{ field.label }}</mat-checkbox>

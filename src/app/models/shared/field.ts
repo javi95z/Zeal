@@ -8,6 +8,7 @@ export interface Field {
     | "select"
     | "multiple"
     | "boolean"
+    | "toggle"
     | "date";
   required?: boolean;
   options?: any[];

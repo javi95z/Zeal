@@ -8,6 +8,7 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelectModule } from "@angular/material/select";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatTabsModule } from "@angular/material/tabs";
@@ -31,6 +32,7 @@ import { MAT_DATE_LOCALE } from "@angular/material/core";
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatSlideToggleModule,
     MatSortModule,
     MatTableModule,
     MatTabsModule,
