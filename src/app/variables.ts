@@ -85,12 +85,14 @@ export const USER_FIELDS: Field[] = [
   {
     key: "last_name",
     label: "Last Name",
-    type: "text"
+    type: "text",
+    required: true
   },
   {
     key: "email",
     label: "Email",
-    type: "email"
+    type: "email",
+    required: true
   },
   {
     key: "gender",
