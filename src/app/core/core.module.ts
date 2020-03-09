@@ -18,6 +18,7 @@ import {
 import {
   AvatarDirective,
   GenderDirective,
+  HeaderButtonDirective,
   PanelButtonDirective,
   PriorityDirective,
   StatusDirective
@@ -39,6 +40,7 @@ const components = [
   LoadingComponent,
   NoResultsComponent,
   PanelButtonDirective,
+  HeaderButtonDirective,
   PanelHeaderComponent,
   PriorityDirective,
   StatusDirective,
