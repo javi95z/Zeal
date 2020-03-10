@@ -1,6 +1,7 @@
 import { Contact } from "./contact";
 import { User } from "./user";
 import { PROJECT_PRIORITY, PROJECT_STATUS } from "@zeal/variables";
+import { reduceObject } from "@zeal/utils";
 
 type Priority = typeof PROJECT_PRIORITY[number];
 type Status = typeof PROJECT_STATUS[number];
@@ -22,7 +23,7 @@ export class Project {
   created_at?: string | Date;
 
   constructor(values: Project) {
-    Object.assign(this, values);
+    Object.assign(this, reduceObject(values));
     this.users = values.users ? values.users.map(o => new User(o)) : null;
     this.contact = values.contact ? new Contact(values.contact) : null;
   }

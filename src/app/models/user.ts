@@ -1,9 +1,10 @@
 import { Role } from "./role";
 import { Team } from "./team";
+import { reduceObject } from "@zeal/utils";
 
 export class User {
   id: number;
-  active: boolean;
+  active = false;
   api_token: string;
   background_img: string;
   email: string;
@@ -20,7 +21,7 @@ export class User {
   created_at?: string | Date;
 
   constructor(values: User) {
-    Object.assign(this, values);
+    Object.assign(this, reduceObject(values));
   }
 
   get fullName(): string {

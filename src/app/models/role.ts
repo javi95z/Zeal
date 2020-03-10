@@ -1,3 +1,5 @@
+import { reduceObject } from "@zeal/utils";
+
 export class Role {
   id: number;
   color: string;
@@ -7,6 +9,6 @@ export class Role {
   created_at?: string | Date;
 
   constructor(values: Role) {
-    Object.assign(this, values);
+    Object.assign(this, reduceObject(values));
   }
 }

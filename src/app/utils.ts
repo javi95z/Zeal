@@ -62,3 +62,15 @@ export const pluckFields = (array: any[], label?: string) => {
     }
   });
 };
+
+/**
+ * Reduce an object and remove its
+ * null and undefined attributes
+ * @param obj Object to reduce
+ */
+export const reduceObject = (obj: Object) => {
+  return  Object.entries(obj).reduce(
+    (a, [k, v]) => (v == null ? a : { ...a, [k]: v }),
+    {}
+  );
+}

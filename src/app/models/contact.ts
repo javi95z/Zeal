@@ -1,3 +1,5 @@
+import { reduceObject } from "@zeal/utils";
+
 export class Contact {
   id: number;
   //   account?: Account;
@@ -16,6 +18,6 @@ export class Contact {
   created_at?: string | Date;
 
   constructor(values: Contact) {
-    Object.assign(this, values);
+    Object.assign(this, reduceObject(values));
   }
 }

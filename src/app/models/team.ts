@@ -1,3 +1,5 @@
+import { reduceObject } from "@zeal/utils";
+
 export class Team {
   id: number;
   background_img: string;
@@ -9,6 +11,6 @@ export class Team {
   deleted_at?: string | Date;
 
   constructor(values: Team) {
-    Object.assign(this, values);
+    Object.assign(this, reduceObject(values));
   }
 }
