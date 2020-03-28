@@ -76,21 +76,14 @@ Project:	Philbert
 /****************************/
 /** Imports **/
 /****************************/
-@import url('https://fonts.googleapis.com/css?family=Poppins:400|500|600|700');
 @import url('bootstrap.min.css');
 @import url('font-awesome.min.css');
 @import url('themify-icons.css');
 @import url('animate.css');
 @import url('simple-line-icons.css');
 @import url('linea-icon.css');
-@import url('pe-icon-7-stroke.css');
-@import url('pe-icon-7-styles.css');
 @import url('material-design-iconic-font.min.css');
 @import url('filter.css');
-/* @import url('../../vendors/bower_components/switchery/dist/switchery.min.css'); */
-/* @import url('../../vendors/bower_components/owl.carousel/dist/assets/owl.carousel.min.css'); */
-/* @import url('../../vendors/bower_components/owl.carousel/dist/assets/owl.theme.default.min.css'); */
-/* @import url('lightgallery.css'); */
 @import url('awesome-bootstrap-checkbox.css');
 /****************************/
 /** Reset **/

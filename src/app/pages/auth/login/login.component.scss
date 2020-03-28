@@ -6,7 +6,7 @@
 :host {
   @include full-height();
   .auth-page {
-    background-image: url('https://images.unsplash.com/photo-1552573822-af07a7cf1e70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1997&q=80');
+    background-image: url('../../../../assets/img/bg-auth.webp');
     background-repeat: no-repeat;
     background-size: cover;
     @include full-height();
