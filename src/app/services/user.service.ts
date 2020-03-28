@@ -41,6 +41,28 @@ export class UserService {
   }
 
   /**
+   * Create one user
+   * @param u User
+   */
+  createUser(u: User): Promise<ApiResource<User>> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .post<ApiResource<User>>(this.urlApi, parseRelationships(u))
+        .toPromise()
+        .then(res => {
+          const user = new User(res.data);
+          this.toast.setMessage(`User ${user.fullName} created successfully`);
+          resolve(res);
+        })
+        .catch(rej => {
+          console.error(rej);
+          this.toast.setError(rej);
+          reject(rej);
+        });
+    });
+  }
+
+  /**
    * Update one user
    * @param u User
    */
@@ -51,14 +73,11 @@ export class UserService {
         .toPromise()
         .then(res => {
           const user = new User(res.data);
-          this.toast.setMessage(`User ${user.fullName} updated successfully.`);
+          this.toast.setMessage(`User ${user.fullName} updated successfully`);
           resolve(res);
         })
         .catch(rej => {
-          this.toast.setMessage(
-            `Failed to update user ${u.fullName}.`,
-            "error"
-          );
+          this.toast.setMessage(`Failed to update user ${u.fullName}`, "error");
           reject(rej);
         });
     });

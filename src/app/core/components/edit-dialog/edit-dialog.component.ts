@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Field } from "@models";
 import { populateFormFields, formatDate } from "@zeal/utils";
+import { VALIDATION_ERRORS } from "@zeal/dict";
 
 @Component({
   selector: "z-edit-dialog",
@@ -11,6 +12,7 @@ import { populateFormFields, formatDate } from "@zeal/utils";
 })
 export class EditDialogComponent<T> implements OnInit {
   form: FormGroup;
+  errorMessages = VALIDATION_ERRORS;
 
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent<T>>,
@@ -39,9 +41,17 @@ export class EditDialogComponent<T> implements OnInit {
     this.dialogRef.close(result);
   }
 
+  showErrors() {
+    console.log(this.form);
+  }
+
   private buildAndPopulateForm(fields: Field[]): FormGroup {
     const group: any = {};
-    fields.forEach(f => (group[f.key] = new FormControl()));
+    fields.forEach(f => {
+      group[f.key] = new FormControl();
+      group[f.key].setValidators(f.validators);
+      group[f.key].updateValueAndValidity();
+    });
     const fg = new FormGroup(group);
     if (this.data.object) {
       return populateFormFields(this.data.object, fg);

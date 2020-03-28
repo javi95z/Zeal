@@ -29,11 +29,15 @@ export class ToastService {
     return msg;
   }
 
+  setError(exception: Object): Message {
+    return this.setMessage(exception["error"]["message"], "error");
+  }
+
   removeToast(toast: Message) {
     toast.dismissed = true;
   }
 
-  setCountdown() {
+  private setCountdown() {
     this.getMessages().then((res: Message[]) => {
       res.forEach(item =>
         setTimeout(() => this.removeToast(item), this.timeDismissal)

@@ -1,3 +1,5 @@
+import { Validators } from "@angular/forms";
+
 export interface Field {
   key: string;
   label: string;
@@ -10,6 +12,6 @@ export interface Field {
     | "boolean"
     | "toggle"
     | "date";
-  required?: boolean;
   options?: any[];
+  validators?: Validators[];
 }

@@ -42,6 +42,15 @@ export class AdminListPageClass<T> {
   }
 
   /**
+   * Add new information to the table
+   * @param data New data
+   */
+  public addData(data: T) {
+    this.dataSource.data.push(data);
+    this.dataSource._updateChangeSubscription();
+  }
+
+  /**
    * Send API request to update information
    * and change it on the table too
    * @param request API request to update data

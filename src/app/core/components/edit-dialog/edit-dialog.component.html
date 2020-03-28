@@ -1,29 +1,25 @@
 <form novalidate [formGroup]="form">
-  <!-- <z-form-errors [form]="form"></z-form-errors> -->
-
   <div *ngFor="let field of data.fields">
     <div [ngSwitch]="field.type">
       <!-- Text fields -->
       <mat-form-field *ngSwitchCase="'text'">
-        <input matInput type="text" [formControlName]="field.key" [placeholder]="field.label" [required]="field.required">
+        <input matInput type="text" [formControlName]="field.key" [placeholder]="field.label">
       </mat-form-field>
 
       <!-- Email fields -->
       <mat-form-field *ngSwitchCase="'email'">
-        <input matInput type="email" [formControlName]="field.key" [placeholder]="field.label"
-          [required]="field.required">
+        <input matInput type="email" [formControlName]="field.key" [placeholder]="field.label">
       </mat-form-field>
 
       <!-- Textarea fields -->
       <mat-form-field *ngSwitchCase="'textarea'">
-        <textarea matInput type="text" [formControlName]="field.key" [placeholder]="field.label"
-          [required]="field.required"></textarea>
+        <textarea matInput type="text" [formControlName]="field.key" [placeholder]="field.label"></textarea>
       </mat-form-field>
 
       <!-- Select fields -->
       <mat-form-field *ngSwitchCase="'select'">
         <mat-label>{{ field.label }}</mat-label>
-        <mat-select [formControlName]="field.key" [required]="field.required">
+        <mat-select [formControlName]="field.key">
           <mat-option *ngFor="let item of field.options" [value]="item.key || item">
             {{ item.label || item }}</mat-option>
         </mat-select>
@@ -32,7 +28,7 @@
       <!-- Multiple fields -->
       <mat-form-field *ngSwitchCase="'multiple'">
         <mat-label>{{ field.label }}</mat-label>
-        <mat-select [formControlName]="field.key" [required]="field.required" multiple>
+        <mat-select [formControlName]="field.key" multiple>
           <mat-option *ngFor="let item of field.options" [value]="item.key || item">
             {{ item.label || item }}</mat-option>
         </mat-select>
@@ -40,21 +36,28 @@
 
       <!-- Date fields -->
       <mat-form-field *ngSwitchCase="'date'">
-        <input matInput [matDatepicker]="endDatePicker" [placeholder]="field.label" [formControlName]="field.key"
-          [required]="field.required">
+        <input matInput [matDatepicker]="endDatePicker" [placeholder]="field.label" [formControlName]="field.key">
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatePicker></mat-datepicker>
       </mat-form-field>
 
       <!-- Toggle fields -->
       <section *ngSwitchCase="'toggle'" class="mb-20">
-        <mat-slide-toggle [formControlName]="field.key" [required]="field.required">{{ field.label }}</mat-slide-toggle>
+        <mat-slide-toggle [formControlName]="field.key">{{ field.label }}</mat-slide-toggle>
       </section>
 
       <!-- Boolean fields -->
       <section *ngSwitchCase="'boolean'" class="mb-20">
-        <mat-checkbox [formControlName]="field.key" [required]="field.required">{{ field.label }}</mat-checkbox>
+        <mat-checkbox [formControlName]="field.key">{{ field.label }}</mat-checkbox>
       </section>
+    </div>
+
+    <div id="error-messages"
+      *ngIf="form.controls[field.key].invalid && (form.controls[field.key].dirty || form.controls[field.key].touched)">
+      <mat-error *ngIf="form.controls[field.key].hasError('required')">{{ errorMessages.required }}</mat-error>
+      <mat-error *ngIf="form.controls[field.key].hasError('email')">{{ errorMessages.email }}</mat-error>
+      <mat-error *ngIf="form.controls[field.key].hasError('minlength')">{{ errorMessages.minlength }}</mat-error>
+      <mat-error *ngIf="form.controls[field.key].hasError('maxlength')">{{ errorMessages.maxlength }}</mat-error>
     </div>
 
   </div>

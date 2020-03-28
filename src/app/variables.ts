@@ -1,4 +1,5 @@
 import { Field, PanelAction } from "@models";
+import { Validators } from "@angular/forms";
 
 export const PROJECT_PRIORITY = ["low", "medium", "high"];
 export const PROJECT_STATUS = ["open", "completed", "canceled"];
@@ -75,24 +76,26 @@ export const USER_FIELDS: Field[] = [
   {
     key: "suffix",
     label: "Suffix",
-    type: "text"
+    type: "text",
+    validators: [Validators.maxLength(10)]
   },
   {
     key: "first_name",
     label: "First Name",
-    type: "text"
+    type: "text",
+    validators: [Validators.maxLength(50)]
   },
   {
     key: "last_name",
     label: "Last Name",
     type: "text",
-    required: true
+    validators: [Validators.required, Validators.maxLength(50)]
   },
   {
     key: "email",
     label: "Email",
     type: "email",
-    required: true
+    validators: [Validators.required, Validators.email]
   },
   {
     key: "gender",
@@ -108,7 +111,8 @@ export const USER_FIELDS: Field[] = [
   {
     key: "active",
     label: "Active",
-    type: "toggle"
+    type: "toggle",
+    validators: [Validators.required]
   }
 ];
 export const PANEL_ACTIONS: PanelAction[] = [

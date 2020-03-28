@@ -9,7 +9,8 @@ import { USER_FIELDS } from "@zeal/variables";
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"]
 })
-export class UsersAdminComponent extends AdminListPageClass<User> implements OnInit {
+export class UsersAdminComponent extends AdminListPageClass<User>
+  implements OnInit {
   displayedColumns: string[] = [
     "select",
     "name",
@@ -38,6 +39,17 @@ export class UsersAdminComponent extends AdminListPageClass<User> implements OnI
     }
   }
 
+  createUser() {
+    this.dialog
+      .editDialog<User>({
+        object: null,
+        fields: USER_FIELDS
+      })
+      .subscribe((o: User) =>
+        this.service.createUser(o).then(res => super.addData(res.data))
+      );
+  }
+
   /**
    * Show dialog and return updated user
    * Send API request for modification
@@ -45,14 +57,15 @@ export class UsersAdminComponent extends AdminListPageClass<User> implements OnI
    * @param i Table index
    */
   private editUser(user: User, i: number) {
-    this.dialog
-      .editDialog<User>({
-        object: user,
-        fields: USER_FIELDS
-      })
-      .subscribe(result =>
-        super.updateData(this.service.updateUser(new User(result)), i)
-      );
+    this.dialog.editDialog<User>({
+      object: user,
+      fields: USER_FIELDS
+    })
+    .subscribe(result => {
+      if (result) {
+        super.updateData(this.service.updateUser(new User(result)), i);
+      }
+    });
   }
 
   /**

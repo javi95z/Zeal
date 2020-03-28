@@ -17,6 +17,9 @@ aside {
   margin-bottom: 20px;
   padding: 5px 15px;
   width: 300px;
+  p > button {
+    margin-left: 8px;
+  }
   .error & {
     background-color: $danger;
   }
