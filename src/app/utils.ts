@@ -69,8 +69,8 @@ export const pluckFields = (array: any[], label?: string) => {
  * @param obj Object to reduce
  */
 export const reduceObject = (obj: Object) => {
-  return  Object.entries(obj).reduce(
+  return Object.entries(obj).reduce(
     (a, [k, v]) => (v == null ? a : { ...a, [k]: v }),
     {}
   );
-}
+};
