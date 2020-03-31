@@ -33,12 +33,18 @@ export class RequestInterceptor implements HttpInterceptor {
     return handler.pipe(
       catchError((error: HttpErrorResponse, retryRequest) => {
         if (error.status === 401) {
+          // Not refresh token on invalid login
+          const url = error.url.split("/");
+          if (url[url.length - 1] === "login") {
+            this.toast.setMessage("Unauthorized", "error");
+            return throwError("login failed");
+          }
           // Refresh token on Unauthorized 401 response
           return from(
             this.auth.refreshToken().pipe(
               tap(res => (this.auth.token = res.access_token)),
               catchError(() => {
-                this.toast.setMessage("Unauthorized", "error");
+                this.toast.setMessage("Session expired. Logging back in...");
                 this.auth.doLogout();
                 return throwError("refresh_token failed");
               }),
@@ -46,7 +52,6 @@ export class RequestInterceptor implements HttpInterceptor {
             )
           );
         } else if (error.status === 400) {
-          this.toast.setMessage("Bad request error", "error");
           return throwError(error);
         } else if (error.status === 500) {
           this.toast.setMessage("Internal server error", "error");

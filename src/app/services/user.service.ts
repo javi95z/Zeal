@@ -55,8 +55,7 @@ export class UserService {
           resolve(res);
         })
         .catch(rej => {
-          console.error(rej);
-          this.toast.setError(rej);
+          this.toast.setMessage("Failed to create user", "error");
           reject(rej);
         });
     });
@@ -77,7 +76,7 @@ export class UserService {
           resolve(res);
         })
         .catch(rej => {
-          this.toast.setMessage(`Failed to update user ${u.fullName}`, "error");
+          this.toast.setMessage("Failed to update user", "error");
           reject(rej);
         });
     });
@@ -98,10 +97,7 @@ export class UserService {
           resolve(res as boolean);
         })
         .catch(rej => {
-          this.toast.setMessage(
-            `Failed to delete user ${u.fullName}.`,
-            "error"
-          );
+          this.toast.setMessage("Failed to delete user", "error");
           reject(rej);
         });
     });

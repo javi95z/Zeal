@@ -45,9 +45,9 @@ export class UsersAdminComponent extends AdminListPageClass<User>
         object: null,
         fields: USER_FIELDS
       })
-      .subscribe((o: User) =>
-        this.service.createUser(o).then(res => super.addData(res.data))
-      );
+      .subscribe((o: User) => {
+        if (o) this.service.createUser(o).then(res => super.addData(res.data));
+      });
   }
 
   /**
@@ -57,15 +57,16 @@ export class UsersAdminComponent extends AdminListPageClass<User>
    * @param i Table index
    */
   private editUser(user: User, i: number) {
-    this.dialog.editDialog<User>({
-      object: user,
-      fields: USER_FIELDS
-    })
-    .subscribe(result => {
-      if (result) {
-        super.updateData(this.service.updateUser(new User(result)), i);
-      }
-    });
+    this.dialog
+      .editDialog<User>({
+        object: user,
+        fields: USER_FIELDS
+      })
+      .subscribe(result => {
+        if (result) {
+          super.updateData(this.service.updateUser(new User(result)), i);
+        }
+      });
   }
 
   /**

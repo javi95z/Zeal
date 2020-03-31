@@ -29,10 +29,6 @@ export class ToastService {
     return msg;
   }
 
-  setError(exception: Object): Message {
-    return this.setMessage(exception["error"]["message"], "error");
-  }
-
   removeToast(toast: Message) {
     toast.dismissed = true;
   }
