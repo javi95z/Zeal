@@ -194,4 +194,17 @@ export class UserProfileAdminComponent implements OnInit {
         }
       });
   }
+
+  /**
+   * Activate a disabled user
+   * or deactivate an enabled user
+   */
+  toggleActive() {
+    this.isLoading = true;
+    this.user.active = !this.user.active;
+    this.service
+      .updateUser(this.user)
+      .then(o => (this.user = o.data))
+      .finally(() => (this.isLoading = false));
+  }
 }

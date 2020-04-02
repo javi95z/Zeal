@@ -49,6 +49,11 @@
                         <td>
                           <span *ngIf="user.active">Yes</span>
                           <span *ngIf="!user.active">No</span>
+                          <a class="table-button" (click)="toggleActive()">
+                            <i class="zmdi zmdi-edit"></i>
+                            <span *ngIf="user.active">Deactivate</span>
+                            <span *ngIf="!user.active">Activate</span>
+                          </a>
                         </td>
                       </tr>
                       <tr *ngIf="user.created_at">

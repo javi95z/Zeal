@@ -107,12 +107,6 @@ export const USER_FIELDS: Field[] = [
     key: "locale",
     label: "Locale",
     type: "text"
-  },
-  {
-    key: "active",
-    label: "Active",
-    type: "toggle",
-    validators: [Validators.required]
   }
 ];
 export const PANEL_ACTIONS: PanelAction[] = [
