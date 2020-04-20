@@ -14,7 +14,7 @@
             <div class="panel-body row">
               <div class="table-wrap">
                 <div class="table-responsive">
-                  <table class="table display pb-30">
+                  <table class="table display pb-30" id="details">
                     <tbody>
                       <tr *ngIf="project.name">
                         <td>Name</td>
@@ -65,7 +65,7 @@
             </div>
           </mat-tab>
           <!-- Members tab -->
-          <mat-tab label="Members ({{project.users.length}})">
+          <mat-tab label="Members ({{project.users?.length}})">
             <button mat-button (click)="addMember()" zPanelButton>Add member</button>
             <div *ngFor="let item of project.users" class="col-sm-4 col-xs-12">
               <div class="panel panel-default card-view">
@@ -84,6 +84,11 @@
                 </div>
               </div>
             </div>
+          </mat-tab>
+          <!-- Tasks tab -->
+          <mat-tab label="Tasks ({{project.tasks?.length}})">
+            <button mat-button zPanelButton>New task</button>
+            <z-admin-tasks [values]="project.tasks"></z-admin-tasks>
           </mat-tab>
         </mat-tab-group>
       </div>

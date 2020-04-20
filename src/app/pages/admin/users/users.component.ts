@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService, DialogService } from "@services";
-import { AdminListPageClass } from "@core/classes/adminlistpage";
+import { AdminListClass } from "@core/classes/adminlist";
 import { User } from "@models";
 import { USER_FIELDS } from "@zeal/variables";
 
@@ -9,7 +9,7 @@ import { USER_FIELDS } from "@zeal/variables";
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"]
 })
-export class UsersAdminComponent extends AdminListPageClass<User>
+export class UsersAdminComponent extends AdminListClass<User>
   implements OnInit {
   displayedColumns: string[] = [
     "select",

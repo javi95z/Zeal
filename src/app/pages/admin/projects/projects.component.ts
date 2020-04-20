@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ProjectService, DialogService } from "@services";
-import { AdminListPageClass } from "@core/classes/adminlistpage";
+import { AdminListClass } from "@core/classes/adminlist";
 import { Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
 
@@ -9,7 +9,7 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   templateUrl: "./projects.component.html",
   styleUrls: ["./projects.component.scss"]
 })
-export class ProjectsAdminComponent extends AdminListPageClass<Project>
+export class ProjectsAdminComponent extends AdminListClass<Project>
   implements OnInit {
   displayedColumns: string[] = [
     "select",

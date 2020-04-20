@@ -4,7 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 
-export class AdminListPageClass<T> {
+export class AdminListClass<T> {
   selection: SelectionModel<T>;
   dataSource = new MatTableDataSource<T>();
   isLoading = true;
@@ -21,24 +21,32 @@ export class AdminListPageClass<T> {
   public masterToggle(): void {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.dataSource.data.forEach(row => this.selection.select(row));
+      : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
 
   /**
-   * Initialize the material datasource
-   * and its components with the data
-   * retrieved from the API
+   * Retrieve data from the API
+   * and render it
    * @param request API request to load data
    */
   public initData(request: Promise<any>): void {
     this.selection = new SelectionModel<T>(true, []);
     request
-      .then(res => {
-        this.dataSource = new MatTableDataSource(res.data);
-        this.dataSource.sort = this.sort;
-        setTimeout(() => (this.dataSource.paginator = this.paginator));
-      })
+      .then((res) => this.renderView(res.data))
       .finally(() => (this.isLoading = false));
+  }
+
+  /**
+   * Initialize the material datasource
+   * and its components with data
+   * @param data Data retrieved from APi
+   */
+  public renderView(data: T[]) {
+    this.selection = new SelectionModel<T>(true, []);
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.sort = this.sort;
+    setTimeout(() => (this.dataSource.paginator = this.paginator));
+    this.isLoading = false;
   }
 
   /**
@@ -57,7 +65,7 @@ export class AdminListPageClass<T> {
    * @param index Index of the table row
    */
   public updateData(request: Promise<any>, index: number) {
-    request.then(res => {
+    request.then((res) => {
       this.dataSource.data[index] = res.data;
       this.dataSource._updateChangeSubscription();
     });
@@ -75,6 +83,6 @@ export class AdminListPageClass<T> {
         this.dataSource.data.splice(index, 1);
         this.dataSource._updateChangeSubscription();
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
   }
 }
