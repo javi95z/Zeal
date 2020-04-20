@@ -61,7 +61,7 @@ export class ProjectsAdminComponent extends AdminListClass<Project>
   /**
    * Confirmation dialog
    * to remove project
-   * @param p User
+   * @param p Project
    * @param i Index
    */
   private deleteProject(p: Project, i: number) {

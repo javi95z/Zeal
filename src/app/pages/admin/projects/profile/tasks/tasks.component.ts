@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { AdminListClass } from "@core/classes/adminlist";
 import { Task } from "@models";
+import { DialogService, TaskService } from "@services";
 
 @Component({
   selector: "z-admin-tasks",
   templateUrl: "./tasks.component.html",
-  styleUrls: ["./tasks.component.css"],
 })
 export class TasksComponent extends AdminListClass<Task> implements OnInit {
   @Input() values: Task[];
@@ -19,7 +19,7 @@ export class TasksComponent extends AdminListClass<Task> implements OnInit {
     "actions",
   ];
 
-  constructor() {
+  constructor(private service: TaskService, private dialog: DialogService) {
     super();
   }
 
@@ -27,5 +27,26 @@ export class TasksComponent extends AdminListClass<Task> implements OnInit {
     this.renderView(this.values);
   }
 
-  onAction(): void {}
+  onAction(action: string, task: Task, index: number): void {
+    switch (action) {
+      case "DELETE":
+        this.deleteTask(task, index);
+        break;
+    }
+  }
+
+  /**
+   * Confirmation dialog
+   * to remove task
+   * @param p Task
+   * @param i Index
+   */
+  private deleteTask(p: Task, i: number) {
+    const task = new Task(p);
+    this.dialog.deleteDialog(task.name).subscribe((res) => {
+      if (res) {
+        this.deleteData(this.service.deleteTask(task), i);
+      }
+    });
+  }
 }

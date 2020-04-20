@@ -3,10 +3,10 @@
 .dropdown {
   overflow: visible;
   width: 35px;
-  z-index: 99;
   ul {
     left: auto;
     right: 0;
+    z-index: 99;
     .divider + li {
       background-color: $danger;
       a {
