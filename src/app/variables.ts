@@ -8,121 +8,156 @@ export const STANDARD_MENU = [
   {
     name: "Dashboard",
     link: "dashboard",
-    icon: "view-dashboard"
-  }
+    icon: "view-dashboard",
+  },
 ];
 export const ADMIN_MENU = [
   {
     name: "Users",
     link: "users",
-    icon: "accounts-alt"
+    icon: "accounts-alt",
   },
   {
     name: "Projects",
     link: "projects",
-    icon: "case"
+    icon: "case",
   },
   {
     name: "Teams",
     link: "teams",
-    icon: "group-work"
+    icon: "group-work",
   },
   {
     name: "Other",
     link: "other",
-    icon: "more"
-  }
+    icon: "more",
+  },
 ];
 export const PROJECT_FIELDS: Field[] = [
   {
     key: "code",
     label: "Code",
-    type: "text"
+    type: "text",
   },
   {
     key: "name",
     label: "Name",
-    type: "text"
+    type: "text",
   },
   {
     key: "description",
     label: "Description",
-    type: "textarea"
+    type: "textarea",
   },
   {
     key: "priority",
     label: "Priority",
     type: "select",
-    options: PROJECT_PRIORITY
+    options: PROJECT_PRIORITY,
   },
   {
     key: "status",
     label: "Status",
     type: "select",
-    options: PROJECT_STATUS
+    options: PROJECT_STATUS,
   },
   {
     key: "start_date",
     label: "Start date",
-    type: "date"
+    type: "date",
   },
   {
     key: "end_date",
     label: "End date",
-    type: "date"
-  }
+    type: "date",
+  },
 ];
 export const USER_FIELDS: Field[] = [
   {
     key: "suffix",
     label: "Suffix",
     type: "text",
-    validators: [Validators.maxLength(10)]
+    validators: [Validators.maxLength(10)],
   },
   {
     key: "first_name",
     label: "First Name",
     type: "text",
-    validators: [Validators.maxLength(50)]
+    validators: [Validators.maxLength(50)],
   },
   {
     key: "last_name",
     label: "Last Name",
     type: "text",
-    validators: [Validators.required, Validators.maxLength(50)]
+    validators: [Validators.required, Validators.maxLength(50)],
   },
   {
     key: "email",
     label: "Email",
     type: "email",
-    validators: [Validators.required, Validators.email]
+    validators: [Validators.required, Validators.email],
   },
   {
     key: "gender",
     label: "Gender",
     type: "select",
-    options: GENDER
+    options: GENDER,
   },
   {
     key: "locale",
     label: "Locale",
-    type: "text"
-  }
+    type: "text",
+  },
+];
+export const TASK_FIELDS: Field[] = [
+  {
+    key: "name",
+    label: "Name",
+    type: "text",
+    validators: [Validators.required]
+  },
+  {
+    key: "description",
+    label: "Description",
+    type: "textarea",
+  },
+  {
+    key: "priority",
+    label: "Priority",
+    type: "select",
+    options: PROJECT_PRIORITY,
+  },
+  {
+    key: "status",
+    label: "Status",
+    type: "select",
+    options: PROJECT_STATUS,
+  },
+  {
+    key: "start_date",
+    label: "Start date",
+    type: "date",
+  },
+  {
+    key: "end_date",
+    label: "End date",
+    type: "date",
+  },
 ];
 export const PANEL_ACTIONS: PanelAction[] = [
   {
     name: "Edit",
     icon: "edit",
-    action: "EDIT"
+    action: "EDIT",
   },
   {
     name: "Go to list",
     icon: "view-list-alt",
-    action: "LIST"
+    action: "LIST",
   },
   {
     name: "Delete",
     icon: "delete",
-    action: "DELETE"
-  }
+    action: "DELETE",
+  },
 ];

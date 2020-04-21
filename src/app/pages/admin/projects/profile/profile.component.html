@@ -87,8 +87,7 @@
           </mat-tab>
           <!-- Tasks tab -->
           <mat-tab label="Tasks ({{project.tasks?.length}})">
-            <button mat-button zPanelButton>New task</button>
-            <z-admin-tasks [values]="project.tasks"></z-admin-tasks>
+            <z-admin-tasks [values]="project.tasks" [project_id]="project.id"></z-admin-tasks>
           </mat-tab>
         </mat-tab-group>
       </div>

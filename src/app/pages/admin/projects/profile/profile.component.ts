@@ -8,7 +8,7 @@ import { pluckFields } from "@zeal/utils";
 
 @Component({
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"]
+  styleUrls: ["./profile.component.scss"],
 })
 export class ProjectProfileAdminComponent implements OnInit {
   private _project: Project;
@@ -35,11 +35,11 @@ export class ProjectProfileAdminComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(data => {
+    this.route.params.subscribe((data) => {
       if (data.id) {
         this.service
           .getProject(data.id)
-          .then(res => (this.project = res.data))
+          .then((res) => (this.project = res.data))
           .catch(() => (this.error = true))
           .finally(() => {
             this.isLoading = false;
@@ -51,7 +51,7 @@ export class ProjectProfileAdminComponent implements OnInit {
 
   buildMenu(): PanelAction[] {
     const actions = ["EDIT", "LIST", "DELETE"];
-    return PANEL_ACTIONS.filter(o => actions.includes(o.action));
+    return PANEL_ACTIONS.filter((o) => actions.includes(o.action));
   }
 
   /**
@@ -80,14 +80,14 @@ export class ProjectProfileAdminComponent implements OnInit {
     this.dialog
       .editDialog<Project>({
         object: this.project,
-        fields: PROJECT_FIELDS
+        fields: PROJECT_FIELDS,
       })
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           this.isLoading = true;
           this.service
             .updateProject(result)
-            .then(res => (this.project = res.data))
+            .then((res) => (this.project = res.data))
             .finally(() => (this.isLoading = false));
         }
       });
@@ -99,7 +99,7 @@ export class ProjectProfileAdminComponent implements OnInit {
    * @param p Project
    */
   deleteProject() {
-    this.dialog.deleteDialog(this.project.name).subscribe(res => {
+    this.dialog.deleteDialog(this.project.name).subscribe((res) => {
       if (res) {
         this.service
           .deleteProject(this.project)
@@ -115,12 +115,12 @@ export class ProjectProfileAdminComponent implements OnInit {
   removeMember(users: User[]) {
     const names = users.length > 1 ? "selected users" : users[0].fullName;
     const text = `Are you sure you want to remove ${names} from the project ${this.project.name}`;
-    this.dialog.deleteDialog(null, text).subscribe(res => {
+    this.dialog.deleteDialog(null, text).subscribe((res) => {
       if (res) {
         this.isLoading = true;
         this.service
           .removeMember(this.project.id, pluckFields(users))
-          .then(o => (this.project = o.data))
+          .then((o) => (this.project = o.data))
           .finally(() => (this.isLoading = false));
       }
     });
@@ -134,26 +134,28 @@ export class ProjectProfileAdminComponent implements OnInit {
     this.availableUsers = [];
     await this.user
       .getUsers()
-      .then(o => o.data.filter(u => this.availableUsers.push(new User(u))));
+      .then((o) => o.data.filter((u) => this.availableUsers.push(new User(u))));
 
     // Filter out current members
     const members = pluckFields(this.project.users);
-    const usersList = this.availableUsers.filter(o => !members.includes(o.id));
+    const usersList = this.availableUsers.filter(
+      (o) => !members.includes(o.id)
+    );
 
     const membersField: Field = {
       key: "users",
       label: "Members",
       type: "multiple",
-      options: pluckFields(usersList, "fullName")
+      options: pluckFields(usersList, "fullName"),
     };
     this.dialog
       .editDialog<any>({ fields: [membersField] })
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           this.isLoading = true;
           this.service
             .addMember(this.project.id, result.users)
-            .then(o => (this.project = o.data))
+            .then((o) => (this.project = o.data))
             .finally(() => (this.isLoading = false));
         }
       });

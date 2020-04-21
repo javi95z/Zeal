@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { AdminListClass } from "@core/classes/adminlist";
 import { Task } from "@models";
-import { DialogService, TaskService } from "@services";
+import { DialogService, TaskService, ProjectService } from "@services";
+import { TASK_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-admin-tasks",
@@ -9,6 +10,7 @@ import { DialogService, TaskService } from "@services";
 })
 export class TasksComponent extends AdminListClass<Task> implements OnInit {
   @Input() values: Task[];
+  @Input() project_id?: number;
   displayedColumns: string[] = [
     "select",
     "name",
@@ -19,7 +21,11 @@ export class TasksComponent extends AdminListClass<Task> implements OnInit {
     "actions",
   ];
 
-  constructor(private service: TaskService, private dialog: DialogService) {
+  constructor(
+    private service: TaskService,
+    private project: ProjectService,
+    private dialog: DialogService
+  ) {
     super();
   }
 
@@ -35,6 +41,19 @@ export class TasksComponent extends AdminListClass<Task> implements OnInit {
     }
   }
 
+  addTask() {
+    this.dialog
+      .editDialog<Task>({
+        object: null,
+        fields: TASK_FIELDS,
+      })
+      .subscribe((o: Task) => {
+        if (o) {
+          this.project.addTask(this.project_id, o).then(() => super.addData(o));
+        }
+      });
+  }
+
   /**
    * Confirmation dialog
    * to remove task
@@ -42,6 +61,7 @@ export class TasksComponent extends AdminListClass<Task> implements OnInit {
    * @param i Index
    */
   private deleteTask(p: Task, i: number) {
+    // TODO: Move to Project service
     const task = new Task(p);
     this.dialog.deleteDialog(task.name).subscribe((res) => {
       if (res) {

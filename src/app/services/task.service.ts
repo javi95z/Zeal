@@ -8,7 +8,7 @@ import { environment as env } from "@env/environment";
   providedIn: "root",
 })
 export class TaskService {
-  private urlApi = `${env.urlApi}/projects`;
+  private urlApi = `${env.urlApi}/tasks`;
 
   constructor(private http: HttpClient, private toast: ToastService) {}
 
