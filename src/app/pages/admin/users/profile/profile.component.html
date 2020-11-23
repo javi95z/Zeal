@@ -31,10 +31,11 @@
                         <td>Gender</td>
                         <td zGender [value]="user.gender"></td>
                       </tr>
-                      <tr *ngIf="user.role">
+                      <tr>
                         <td>Role</td>
                         <td>
-                          {{ user.role.name }}
+                          <span *ngIf="user.role">{{ user.role.name }}</span>
+                          <span *ngIf="!user.role">-</span>
                           <a class="table-button" (click)="editRole()">
                             <i class="zmdi zmdi-edit"></i>Change
                           </a>

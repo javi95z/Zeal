@@ -5,7 +5,7 @@ import {
   UserService,
   DialogService,
   TeamService,
-  RoleService
+  RoleService,
 } from "@services";
 import { User, Team, PanelAction, Field, Tabs, Role } from "@models";
 import { USER_FIELDS, PANEL_ACTIONS } from "@zeal/variables";
@@ -13,7 +13,7 @@ import { pluckFields } from "@zeal/utils";
 
 @Component({
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"]
+  styleUrls: ["./profile.component.scss"],
 })
 export class UserProfileAdminComponent implements OnInit {
   private _user: User;
@@ -21,7 +21,6 @@ export class UserProfileAdminComponent implements OnInit {
   error: boolean;
   menu: PanelAction[];
   availableTeams: Team[];
-  availableRoles: Role[];
   tabs = new Tabs();
 
   get user(): User {
@@ -42,11 +41,11 @@ export class UserProfileAdminComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(data => {
+    this.route.params.subscribe((data) => {
       if (data.id) {
         this.service
           .getUser(data.id)
-          .then(res => (this.user = res.data))
+          .then((res) => (this.user = res.data))
           .catch(() => (this.error = true))
           .finally(() => {
             this.isLoading = false;
@@ -58,7 +57,7 @@ export class UserProfileAdminComponent implements OnInit {
 
   buildMenu(): PanelAction[] {
     const actions = ["EDIT", "LIST", "DELETE"];
-    return PANEL_ACTIONS.filter(o => actions.includes(o.action));
+    return PANEL_ACTIONS.filter((o) => actions.includes(o.action));
   }
 
   /**
@@ -87,14 +86,14 @@ export class UserProfileAdminComponent implements OnInit {
     this.dialog
       .editDialog<User>({
         object: this.user,
-        fields: USER_FIELDS
+        fields: USER_FIELDS,
       })
-      .subscribe(user => {
+      .subscribe((user) => {
         if (user) {
           this.isLoading = true;
           this.service
             .updateUser(user)
-            .then(res => (this.user = res.data))
+            .then((res) => (this.user = res.data))
             .finally(() => (this.isLoading = false));
         }
       });
@@ -106,7 +105,7 @@ export class UserProfileAdminComponent implements OnInit {
    * @param u User
    */
   deleteUser() {
-    this.dialog.deleteDialog(this.user.fullName).subscribe(res => {
+    this.dialog.deleteDialog(this.user.fullName).subscribe((res) => {
       if (res) {
         this.service.deleteUser(this.user).then(() => this.location.back());
       }
@@ -121,26 +120,28 @@ export class UserProfileAdminComponent implements OnInit {
     this.availableTeams = [];
     await this.teams
       .getTeams()
-      .then(o => o.data.filter(t => this.availableTeams.push(new Team(t))));
+      .then((o) => o.data.filter((t) => this.availableTeams.push(new Team(t))));
 
     // Filter out current teams
     const members = pluckFields(this.user.teams);
-    const teamsList = this.availableTeams.filter(o => !members.includes(o.id));
+    const teamsList = this.availableTeams.filter(
+      (o) => !members.includes(o.id)
+    );
 
     const teamsField: Field = {
       key: "teams",
       label: "Teams",
       type: "multiple",
-      options: pluckFields(teamsList, "name")
+      options: pluckFields(teamsList, "name"),
     };
     this.dialog
       .editDialog<any>({ fields: [teamsField] })
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           this.isLoading = true;
           this.service
             .addTeam(this.user.id, result.teams)
-            .then(o => (this.user = o.data))
+            .then((o) => (this.user = o.data))
             .finally(() => (this.isLoading = false));
         }
       });
@@ -153,12 +154,12 @@ export class UserProfileAdminComponent implements OnInit {
   removeTeam(teams: Team[]) {
     const names = teams.length > 1 ? "selected teams" : teams[0].name;
     const text = `Are you sure you want to remove the user ${this.user.fullName} from ${names}`;
-    this.dialog.deleteDialog(null, text).subscribe(res => {
+    this.dialog.deleteDialog(null, text).subscribe((res) => {
       if (res) {
         this.isLoading = true;
         this.service
           .removeTeam(this.user.id, pluckFields(teams))
-          .then(o => (this.user = o.data))
+          .then((o) => (this.user = o.data))
           .finally(() => (this.isLoading = false));
       }
     });
@@ -166,30 +167,31 @@ export class UserProfileAdminComponent implements OnInit {
 
   async editRole() {
     // Fetch roles
-    this.availableRoles = [];
+    let roleList: Role[] = [];
+
     await this.roles
       .getRoles()
-      .then(o => o.data.filter(r => this.availableRoles.push(new Role(r))));
+      .then((o) => o.data.filter((r) => roleList.push(new Role(r))));
 
     // Filter out current role
-    const roleList = this.availableRoles.filter(
-      o => this.user.role.id !== o.id
-    );
+    if (this.user.role) {
+      roleList = roleList.filter((o) => this.user.role.id !== o.id);
+    }
 
     const roleField: Field = {
       key: "role",
       label: "Role",
       type: "select",
-      options: pluckFields(roleList, "name")
+      options: pluckFields(roleList, "name"),
     };
     this.dialog
       .editDialog<any>({ fields: [roleField] })
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           this.isLoading = true;
           this.service
             .editRole(this.user.id, result.role)
-            .then(o => (this.user = o.data))
+            .then((o) => (this.user = o.data))
             .finally(() => (this.isLoading = false));
         }
       });
@@ -204,7 +206,7 @@ export class UserProfileAdminComponent implements OnInit {
     this.user.active = !this.user.active;
     this.service
       .updateUser(this.user)
-      .then(o => (this.user = o.data))
+      .then((o) => (this.user = o.data))
       .finally(() => (this.isLoading = false));
   }
 }
