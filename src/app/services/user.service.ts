@@ -65,10 +65,10 @@ export class UserService {
    * Update one user
    * @param u User
    */
-  updateUser(u: User): Promise<ApiResource<User>> {
+  updateUser(u: Object, id: number): Promise<ApiResource<User>> {
     return new Promise((resolve, reject) => {
       this.http
-        .put<ApiResource<User>>(`${this.urlApi}/${u.id}`, parseRelationships(u))
+        .put<ApiResource<User>>(`${this.urlApi}/${id}`, u)
         .toPromise()
         .then(res => {
           const user = new User(res.data);
@@ -104,29 +104,6 @@ export class UserService {
   }
 
   /**
-   * Add user to teams
-   * @param id Project id
-   * @param teams Teams ids
-   */
-  addTeam(id: number, teams: number[]): Promise<ApiResource<User>> {
-    return new Promise((resolve, reject) => {
-      this.http
-        .put<ApiResource<User>>(`${this.urlApi}/${id}/addteam`, { teams })
-        .toPromise()
-        .then(res => {
-          this.toast.setMessage(
-            `User added to the ${teams.length > 1 ? "teams" : "team"}.`
-          );
-          resolve(res);
-        })
-        .catch(rej => {
-          this.toast.setMessage(rej.error.error, "error");
-          reject(rej);
-        });
-    });
-  }
-
-  /**
    * Remove teams from user
    * @param id User id
    * @param teams Teams ids
@@ -149,19 +126,4 @@ export class UserService {
     });
   }
 
-  editRole(id: number, role: number): Promise<ApiResource<User>> {
-    return new Promise((resolve, reject) => {
-      this.http
-        .put<ApiResource<User>>(`${this.urlApi}/${id}/changerole`, { role })
-        .toPromise()
-        .then(res => {
-          this.toast.setMessage(`User role changed updated successfully`);
-          resolve(res);
-        })
-        .catch(rej => {
-          this.toast.setMessage(rej.error.error, "error");
-          reject(rej);
-        });
-    });
-  }
 }

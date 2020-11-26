@@ -35,7 +35,6 @@
                         <td>Role</td>
                         <td>
                           <span *ngIf="user.role">{{ user.role.name }}</span>
-                          <span *ngIf="!user.role">-</span>
                           <a class="table-button" (click)="editRole()">
                             <i class="zmdi zmdi-edit"></i>Change
                           </a>

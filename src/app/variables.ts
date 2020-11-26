@@ -114,7 +114,7 @@ export const TASK_FIELDS: Field[] = [
     key: "name",
     label: "Name",
     type: "text",
-    validators: [Validators.required]
+    validators: [Validators.required],
   },
   {
     key: "description",

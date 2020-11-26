@@ -65,10 +65,12 @@ export class AdminListClass<T> {
    * @param index Index of the table row
    */
   public updateData(request: Promise<any>, index: number) {
-    request.then((res) => {
-      this.dataSource.data[index] = res.data;
-      this.dataSource._updateChangeSubscription();
-    });
+    request
+      .then((res) => {
+        this.dataSource.data[index] = res.data;
+        this.dataSource._updateChangeSubscription();
+      })
+      .catch((err) => console.error(err));
   }
 
   /**

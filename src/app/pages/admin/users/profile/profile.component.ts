@@ -88,11 +88,11 @@ export class UserProfileAdminComponent implements OnInit {
         object: this.user,
         fields: USER_FIELDS,
       })
-      .subscribe((user) => {
-        if (user) {
+      .subscribe((result) => {
+        if (result) {
           this.isLoading = true;
           this.service
-            .updateUser(user)
+            .updateUser(result, this.user.id)
             .then((res) => (this.user = res.data))
             .finally(() => (this.isLoading = false));
         }
@@ -140,7 +140,7 @@ export class UserProfileAdminComponent implements OnInit {
         if (result) {
           this.isLoading = true;
           this.service
-            .addTeam(this.user.id, result.teams)
+            .updateUser(result, this.user.id)
             .then((o) => (this.user = o.data))
             .finally(() => (this.isLoading = false));
         }
@@ -190,7 +190,7 @@ export class UserProfileAdminComponent implements OnInit {
         if (result) {
           this.isLoading = true;
           this.service
-            .editRole(this.user.id, result.role)
+            .updateUser(result, this.user.id)
             .then((o) => (this.user = o.data))
             .finally(() => (this.isLoading = false));
         }
@@ -202,10 +202,10 @@ export class UserProfileAdminComponent implements OnInit {
    * or deactivate an enabled user
    */
   toggleActive() {
+    const obj = { active: !this.user.active };
     this.isLoading = true;
-    this.user.active = !this.user.active;
     this.service
-      .updateUser(this.user)
+      .updateUser(obj, this.user.id)
       .then((o) => (this.user = o.data))
       .finally(() => (this.isLoading = false));
   }

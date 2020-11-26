@@ -8,7 +8,7 @@ import { VALIDATION_ERRORS } from "@zeal/dict";
 @Component({
   selector: "z-edit-dialog",
   templateUrl: "./edit-dialog.component.html",
-  styleUrls: ["./edit-dialog.component.scss"]
+  styleUrls: ["./edit-dialog.component.scss"],
 })
 export class EditDialogComponent<T> implements OnInit {
   form: FormGroup;
@@ -29,12 +29,10 @@ export class EditDialogComponent<T> implements OnInit {
   }
 
   onSubmit(): void {
-    const updated = this.data.object
-      ? Object.assign(this.data.object, this.form.value)
-      : this.form.value;
+    const updated = this.getChangedProperties();
 
     // Transform dates to be sent to API
-    this.data.fields.forEach(e =>
+    this.data.fields.forEach((e) =>
       e.type === "date" ? (updated[e.key] = formatDate(updated[e.key])) : null
     );
     const result = updated as T;
@@ -47,7 +45,7 @@ export class EditDialogComponent<T> implements OnInit {
 
   private buildAndPopulateForm(fields: Field[]): FormGroup {
     const group: any = {};
-    fields.forEach(f => {
+    fields.forEach((f) => {
       group[f.key] = new FormControl();
       group[f.key].setValidators(f.validators);
       group[f.key].updateValueAndValidity();
@@ -57,5 +55,19 @@ export class EditDialogComponent<T> implements OnInit {
       return populateFormFields(this.data.object, fg);
     }
     return fg;
+  }
+
+  /**
+   * Get the values of the fields that were updated
+   */
+  private getChangedProperties(): Object {
+    const changedProps = {};
+    Object.keys(this.form.controls).forEach((name) => {
+      const current = this.form.controls[name];
+      if (!current.pristine) {
+        changedProps[name] = current.value;
+      }
+    });
+    return changedProps;
   }
 }
