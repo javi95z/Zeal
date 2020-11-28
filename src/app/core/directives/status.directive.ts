@@ -9,8 +9,10 @@ export class StatusDirective implements OnInit {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    const element = this.createLabel();
-    this.renderer.appendChild(this.el.nativeElement, element);
+    if (this.value) {
+      const element = this.createLabel();
+      this.renderer.appendChild(this.el.nativeElement, element);
+    }
   }
 
   private createLabel(): HTMLElement {

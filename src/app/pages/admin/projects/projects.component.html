@@ -35,7 +35,7 @@
                 <ng-container matColumnDef="contact">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
                   <td *matCellDef="let element">
-                    <a [routerLink]="['/contacts/profile', element.id]">{{ element?.contact.name }}</a>
+                    <a *ngIf="element?.contact" [routerLink]="['/contacts/profile', element.id]">{{ element?.contact.name }}</a>
                   </td>
                 </ng-container>
 

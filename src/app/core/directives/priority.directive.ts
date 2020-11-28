@@ -16,8 +16,10 @@ export class PriorityDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const element = this.createIcon();
-    this.renderer.appendChild(this.el.nativeElement, element);
+    if (this.value) {
+      const element = this.createIcon();
+      this.renderer.appendChild(this.el.nativeElement, element);
+    }
   }
 
   private createIcon(): HTMLElement {

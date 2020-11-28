@@ -64,7 +64,7 @@ export class UsersAdminComponent extends AdminListClass<User>
       })
       .subscribe(result => {
         if (result) {
-          super.updateData(this.service.updateUser(new User(result)), i);
+          super.updateData(this.service.updateUser(result, user.id), i);
         }
       });
   }
