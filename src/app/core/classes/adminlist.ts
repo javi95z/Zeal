@@ -70,7 +70,7 @@ export class AdminListClass<T> {
         this.dataSource.data[index] = res.data;
         this.dataSource._updateChangeSubscription();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err.error));
   }
 
   /**

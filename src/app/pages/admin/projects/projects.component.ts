@@ -7,9 +7,10 @@ import { PROJECT_FIELDS } from "@zeal/variables";
 @Component({
   selector: "app-projects",
   templateUrl: "./projects.component.html",
-  styleUrls: ["./projects.component.scss"]
+  styleUrls: ["./projects.component.scss"],
 })
-export class ProjectsAdminComponent extends AdminListClass<Project>
+export class ProjectsAdminComponent
+  extends AdminListClass<Project>
   implements OnInit {
   displayedColumns: string[] = [
     "select",
@@ -19,7 +20,7 @@ export class ProjectsAdminComponent extends AdminListClass<Project>
     "status",
     "start_date",
     "end_date",
-    "actions"
+    "actions",
   ];
 
   constructor(private service: ProjectService, private dialog: DialogService) {
@@ -51,11 +52,13 @@ export class ProjectsAdminComponent extends AdminListClass<Project>
     this.dialog
       .editDialog<Project>({
         object: project,
-        fields: PROJECT_FIELDS
+        fields: PROJECT_FIELDS,
       })
-      .subscribe(result =>
-        this.updateData(this.service.updateProject(new Project(result)), i)
-      );
+      .subscribe((result) => {
+        if (result) {
+          this.updateData(this.service.updateProject(result, project.id), i);
+        }
+      });
   }
 
   /**
@@ -66,7 +69,7 @@ export class ProjectsAdminComponent extends AdminListClass<Project>
    */
   private deleteProject(p: Project, i: number) {
     const project = new Project(p);
-    this.dialog.deleteDialog(project.name).subscribe(res => {
+    this.dialog.deleteDialog(project.name).subscribe((res) => {
       if (res) {
         this.deleteData(this.service.deleteProject(project), i);
       }

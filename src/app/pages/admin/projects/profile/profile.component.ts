@@ -86,7 +86,7 @@ export class ProjectProfileAdminComponent implements OnInit {
         if (result) {
           this.isLoading = true;
           this.service
-            .updateProject(result)
+            .updateProject(result, this.project.id)
             .then((res) => (this.project = res.data))
             .finally(() => (this.isLoading = false));
         }
