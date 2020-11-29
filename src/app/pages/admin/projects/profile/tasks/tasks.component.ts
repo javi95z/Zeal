@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { AdminListClass } from "@core/classes/adminlist";
 import { Task } from "@models";
-import { DialogService, TaskService, ProjectService } from "@services";
+import { ApiService, DialogService } from "@services";
 import { TASK_FIELDS } from "@zeal/variables";
 
 @Component({
@@ -21,11 +21,7 @@ export class TasksComponent extends AdminListClass<Task> implements OnInit {
     "actions",
   ];
 
-  constructor(
-    private service: TaskService,
-    private project: ProjectService,
-    private dialog: DialogService
-  ) {
+  constructor(private api: ApiService<any>, private dialog: DialogService) {
     super();
   }
 
@@ -49,7 +45,8 @@ export class TasksComponent extends AdminListClass<Task> implements OnInit {
       })
       .subscribe((o: Task) => {
         if (o) {
-          this.project.addTask(this.project_id, o).then(() => super.addData(o));
+          // ! Review
+          // this.api.createOne("tasks", o).then(() => super.addData(o));
         }
       });
   }
@@ -61,11 +58,10 @@ export class TasksComponent extends AdminListClass<Task> implements OnInit {
    * @param i Index
    */
   private deleteTask(p: Task, i: number) {
-    // TODO: Move to Project service
     const task = new Task(p);
     this.dialog.deleteDialog(task.name).subscribe((res) => {
       if (res) {
-        this.deleteData(this.service.deleteTask(task), i);
+        this.deleteData(this.api.deleteOne("tasks", task.id), i);
       }
     });
   }

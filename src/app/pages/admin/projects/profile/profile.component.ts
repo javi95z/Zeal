@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
-import { ProjectService, DialogService, UserService } from "@services";
+import { ApiService, DialogService } from "@services";
 import { Project, User, PanelAction, Field, Tabs } from "@models";
 import { PROJECT_FIELDS, PANEL_ACTIONS } from "@zeal/variables";
 import { pluckFields } from "@zeal/utils";
@@ -26,9 +26,8 @@ export class ProjectProfileAdminComponent implements OnInit {
   }
 
   constructor(
+    private api: ApiService<any>,
     private route: ActivatedRoute,
-    private service: ProjectService,
-    private user: UserService,
     private dialog: DialogService,
     private location: Location,
     private router: Router
@@ -37,8 +36,8 @@ export class ProjectProfileAdminComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((data) => {
       if (data.id) {
-        this.service
-          .getProject(data.id)
+        this.api
+          .getOne("projects", data.id)
           .then((res) => (this.project = res.data))
           .catch(() => (this.error = true))
           .finally(() => {
@@ -85,8 +84,8 @@ export class ProjectProfileAdminComponent implements OnInit {
       .subscribe((result) => {
         if (result) {
           this.isLoading = true;
-          this.service
-            .updateProject(result, this.project.id)
+          this.api
+            .updateOne("projects", result, this.project.id)
             .then((res) => (this.project = res.data))
             .finally(() => (this.isLoading = false));
         }
@@ -101,8 +100,8 @@ export class ProjectProfileAdminComponent implements OnInit {
   deleteProject() {
     this.dialog.deleteDialog(this.project.name).subscribe((res) => {
       if (res) {
-        this.service
-          .deleteProject(this.project)
+        this.api
+          .deleteOne("projects", this.project.id)
           .then(() => this.location.back());
       }
     });
@@ -112,19 +111,20 @@ export class ProjectProfileAdminComponent implements OnInit {
    * Remove members from project
    * @param ids User ids
    */
-  removeMember(users: User[]) {
-    const names = users.length > 1 ? "selected users" : users[0].fullName;
-    const text = `Are you sure you want to remove ${names} from the project ${this.project.name}`;
-    this.dialog.deleteDialog(null, text).subscribe((res) => {
-      if (res) {
-        this.isLoading = true;
-        this.service
-          .removeMember(this.project.id, pluckFields(users))
-          .then((o) => (this.project = o.data))
-          .finally(() => (this.isLoading = false));
-      }
-    });
-  }
+  // ! TOREFACTOR
+  // removeMember(users: User[]) {
+  //   const names = users.length > 1 ? "selected users" : users[0].fullName;
+  //   const text = `Are you sure you want to remove ${names} from the project ${this.project.name}`;
+  //   this.dialog.deleteDialog(null, text).subscribe((res) => {
+  //     if (res) {
+  //       this.isLoading = true;
+  //       this.service
+  //         .removeMember(this.project.id, pluckFields(users))
+  //         .then((o) => (this.project = o.data))
+  //         .finally(() => (this.isLoading = false));
+  //     }
+  //   });
+  // }
 
   /**
    * Add members to project
@@ -132,8 +132,8 @@ export class ProjectProfileAdminComponent implements OnInit {
   async addMember() {
     // Fetch users
     this.availableUsers = [];
-    await this.user
-      .getUsers()
+    await this.api
+      .getAll("users")
       .then((o) => o.data.filter((u) => this.availableUsers.push(new User(u))));
 
     // Filter out current members
@@ -148,13 +148,14 @@ export class ProjectProfileAdminComponent implements OnInit {
       type: "multiple",
       options: pluckFields(usersList, "fullName"),
     };
+    // ! Also send current members for sync
     this.dialog
       .editDialog<any>({ fields: [membersField] })
       .subscribe((result) => {
         if (result) {
           this.isLoading = true;
-          this.service
-            .addMember(this.project.id, result.users)
+          this.api
+            .updateOne("projects", result, this.project.id)
             .then((o) => (this.project = o.data))
             .finally(() => (this.isLoading = false));
         }

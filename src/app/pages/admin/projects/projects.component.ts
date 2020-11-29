@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ProjectService, DialogService } from "@services";
+import { ApiService, DialogService } from "@services";
 import { AdminListClass } from "@core/classes/adminlist";
 import { Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
@@ -23,12 +23,12 @@ export class ProjectsAdminComponent
     "actions",
   ];
 
-  constructor(private service: ProjectService, private dialog: DialogService) {
+  constructor(private api: ApiService<Project>, private dialog: DialogService) {
     super();
   }
 
   ngOnInit() {
-    this.initData(this.service.getProjects());
+    this.initData(this.api.getAll("projects"));
   }
 
   onAction(action: string, project: Project, index: number) {
@@ -56,7 +56,7 @@ export class ProjectsAdminComponent
       })
       .subscribe((result) => {
         if (result) {
-          this.updateData(this.service.updateProject(result, project.id), i);
+          this.updateData(this.api.updateOne("projects", result, project.id), i);
         }
       });
   }
@@ -71,7 +71,7 @@ export class ProjectsAdminComponent
     const project = new Project(p);
     this.dialog.deleteDialog(project.name).subscribe((res) => {
       if (res) {
-        this.deleteData(this.service.deleteProject(project), i);
+        this.deleteData(this.api.deleteOne("projects", project.id), i);
       }
     });
   }

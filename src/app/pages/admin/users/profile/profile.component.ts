@@ -1,12 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
-import {
-  UserService,
-  DialogService,
-  TeamService,
-  RoleService,
-} from "@services";
+import { ApiService, DialogService } from "@services";
 import { User, Team, PanelAction, Field, Tabs, Role } from "@models";
 import { USER_FIELDS, PANEL_ACTIONS } from "@zeal/variables";
 import { pluckFields } from "@zeal/utils";
@@ -31,10 +26,8 @@ export class UserProfileAdminComponent implements OnInit {
   }
 
   constructor(
+    private api: ApiService<any>,
     private route: ActivatedRoute,
-    private service: UserService,
-    private teams: TeamService,
-    private roles: RoleService,
     private dialog: DialogService,
     private location: Location,
     private router: Router
@@ -43,8 +36,8 @@ export class UserProfileAdminComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((data) => {
       if (data.id) {
-        this.service
-          .getUser(data.id)
+        this.api
+          .getOne("users", data.id)
           .then((res) => (this.user = res.data))
           .catch(() => (this.error = true))
           .finally(() => {
@@ -91,8 +84,8 @@ export class UserProfileAdminComponent implements OnInit {
       .subscribe((result) => {
         if (result) {
           this.isLoading = true;
-          this.service
-            .updateUser(result, this.user.id)
+          this.api
+            .updateOne("users", result, this.user.id)
             .then((res) => (this.user = res.data))
             .finally(() => (this.isLoading = false));
         }
@@ -107,7 +100,9 @@ export class UserProfileAdminComponent implements OnInit {
   deleteUser() {
     this.dialog.deleteDialog(this.user.fullName).subscribe((res) => {
       if (res) {
-        this.service.deleteUser(this.user).then(() => this.location.back());
+        this.api
+          .deleteOne("users", this.user.id)
+          .then(() => this.location.back());
       }
     });
   }
@@ -118,8 +113,8 @@ export class UserProfileAdminComponent implements OnInit {
   async addTeam() {
     // Fetch teams
     this.availableTeams = [];
-    await this.teams
-      .getTeams()
+    await this.api
+      .getAll("teams")
       .then((o) => o.data.filter((t) => this.availableTeams.push(new Team(t))));
 
     // Filter out current teams
@@ -134,13 +129,14 @@ export class UserProfileAdminComponent implements OnInit {
       type: "multiple",
       options: pluckFields(teamsList, "name"),
     };
+    // ! Also send current teams for sync
     this.dialog
       .editDialog<any>({ fields: [teamsField] })
       .subscribe((result) => {
         if (result) {
           this.isLoading = true;
-          this.service
-            .updateUser(result, this.user.id)
+          this.api
+            .updateOne("users", result, this.user.id)
             .then((o) => (this.user = o.data))
             .finally(() => (this.isLoading = false));
         }
@@ -151,16 +147,17 @@ export class UserProfileAdminComponent implements OnInit {
    * Remove user from teams
    * @param ids User ids
    */
+  // ! Refactor
   removeTeam(teams: Team[]) {
     const names = teams.length > 1 ? "selected teams" : teams[0].name;
     const text = `Are you sure you want to remove the user ${this.user.fullName} from ${names}`;
     this.dialog.deleteDialog(null, text).subscribe((res) => {
       if (res) {
-        this.isLoading = true;
-        this.service
-          .removeTeam(this.user.id, pluckFields(teams))
-          .then((o) => (this.user = o.data))
-          .finally(() => (this.isLoading = false));
+        // this.isLoading = true;
+        // this.api
+        //   .removeTeam("users", this.user.id, pluckFields(teams))
+        //   .then((o) => (this.user = o.data))
+        //   .finally(() => (this.isLoading = false));
       }
     });
   }
@@ -169,8 +166,8 @@ export class UserProfileAdminComponent implements OnInit {
     // Fetch roles
     let roleList: Role[] = [];
 
-    await this.roles
-      .getRoles()
+    await this.api
+      .getAll("roles")
       .then((o) => o.data.filter((r) => roleList.push(new Role(r))));
 
     // Filter out current role
@@ -189,8 +186,8 @@ export class UserProfileAdminComponent implements OnInit {
       .subscribe((result) => {
         if (result) {
           this.isLoading = true;
-          this.service
-            .updateUser(result, this.user.id)
+          this.api
+            .updateOne("users", result, this.user.id)
             .then((o) => (this.user = o.data))
             .finally(() => (this.isLoading = false));
         }
@@ -204,8 +201,8 @@ export class UserProfileAdminComponent implements OnInit {
   toggleActive() {
     const obj = { active: !this.user.active };
     this.isLoading = true;
-    this.service
-      .updateUser(obj, this.user.id)
+    this.api
+      .updateOne("users", obj, this.user.id)
       .then((o) => (this.user = o.data))
       .finally(() => (this.isLoading = false));
   }

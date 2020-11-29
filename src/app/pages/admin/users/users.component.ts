@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService, DialogService } from "@services";
+import { ApiService, DialogService } from "@services";
 import { AdminListClass } from "@core/classes/adminlist";
 import { User } from "@models";
 import { USER_FIELDS } from "@zeal/variables";
@@ -7,9 +7,10 @@ import { USER_FIELDS } from "@zeal/variables";
 @Component({
   selector: "z-admin-users",
   templateUrl: "./users.component.html",
-  styleUrls: ["./users.component.scss"]
+  styleUrls: ["./users.component.scss"],
 })
-export class UsersAdminComponent extends AdminListClass<User>
+export class UsersAdminComponent
+  extends AdminListClass<User>
   implements OnInit {
   displayedColumns: string[] = [
     "select",
@@ -17,15 +18,15 @@ export class UsersAdminComponent extends AdminListClass<User>
     "email",
     "role",
     "gender",
-    "actions"
+    "actions",
   ];
 
-  constructor(private service: UserService, private dialog: DialogService) {
+  constructor(private api: ApiService<User>, private dialog: DialogService) {
     super();
   }
 
   ngOnInit() {
-    this.initData(this.service.getUsers());
+    this.initData(this.api.getAll("users"));
   }
 
   onAction(action: string, user: User, index: number) {
@@ -43,10 +44,11 @@ export class UsersAdminComponent extends AdminListClass<User>
     this.dialog
       .editDialog<User>({
         object: null,
-        fields: USER_FIELDS
+        fields: USER_FIELDS,
       })
       .subscribe((o: User) => {
-        if (o) this.service.createUser(o).then(res => super.addData(res.data));
+        if (o)
+          this.api.createOne("users", o).then((res) => super.addData(res.data));
       });
   }
 
@@ -60,11 +62,11 @@ export class UsersAdminComponent extends AdminListClass<User>
     this.dialog
       .editDialog<User>({
         object: user,
-        fields: USER_FIELDS
+        fields: USER_FIELDS,
       })
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
-          super.updateData(this.service.updateUser(result, user.id), i);
+          super.updateData(this.api.updateOne("users", result, user.id), i);
         }
       });
   }
@@ -77,9 +79,9 @@ export class UsersAdminComponent extends AdminListClass<User>
    */
   private deleteUser(u: User, i: number) {
     const user = new User(u);
-    this.dialog.deleteDialog(user.fullName).subscribe(res => {
+    this.dialog.deleteDialog(user.fullName).subscribe((res) => {
       if (res) {
-        super.deleteData(this.service.deleteUser(user), i);
+        super.deleteData(this.api.deleteOne("users", user.id), i);
       }
     });
   }
