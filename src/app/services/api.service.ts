@@ -99,7 +99,7 @@ export class ApiService<T> {
           resolve(res as boolean);
         })
         .catch((rej) => {
-          this.toast.setMessage("Failed to delete", "error");
+          this.toast.setMessage(rej.error.error as string || "Failed to delete", "error");
           reject(rej);
         });
     });
