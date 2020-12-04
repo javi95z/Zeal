@@ -2,7 +2,11 @@ import { Routes } from "@angular/router";
 import { AdminGuard, AuthGuard } from "@guards";
 import { AdminComponent } from "./admin.component";
 import { UserProfileAdminComponent, UsersAdminComponent } from "./users";
-import { ProjectProfileAdminComponent, ProjectsAdminComponent } from "./projects";
+import {
+  ProjectProfileAdminComponent,
+  ProjectsAdminComponent,
+} from "./projects";
+import { TasksAdminComponent } from "./tasks";
 
 export const routes: Routes = [
   {
@@ -14,7 +18,8 @@ export const routes: Routes = [
       { path: "users/profile/:id", component: UserProfileAdminComponent },
       { path: "projects", component: ProjectsAdminComponent },
       { path: "projects/profile/:id", component: ProjectProfileAdminComponent },
-      { path: "**", redirectTo: "/admin/users" }
-    ]
-  }
+      { path: "tasks", component: TasksAdminComponent },
+      { path: "**", redirectTo: "/admin/users" },
+    ],
+  },
 ];

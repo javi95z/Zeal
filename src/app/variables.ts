@@ -23,6 +23,11 @@ export const ADMIN_MENU = [
     icon: "case",
   },
   {
+    name: "Tasks",
+    link: "tasks",
+    icon: "arrow-merge",
+  },
+  {
     name: "Teams",
     link: "teams",
     icon: "group-work",

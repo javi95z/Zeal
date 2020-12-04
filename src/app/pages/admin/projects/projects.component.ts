@@ -5,7 +5,7 @@ import { Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
 
 @Component({
-  selector: "app-projects",
+  selector: "z-admin-projects",
   templateUrl: "./projects.component.html",
   styleUrls: ["./projects.component.scss"],
 })

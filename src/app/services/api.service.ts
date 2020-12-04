@@ -15,10 +15,10 @@ export class ApiService<T> {
    * Get all resources
    * @param uri URI Resource name
    */
-  getAll(uri: string): Promise<ApiCollection<any>> {
+  getAll(uri: string, obj?: Object): Promise<ApiCollection<any>> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<ApiCollection<any>>(`${env.urlApi}/${uri}/index`, null)
+        .post<ApiCollection<any>>(`${env.urlApi}/${uri}/index`, obj)
         .toPromise()
         .then((res) => resolve(res))
         .catch((rej) => reject(rej));
@@ -48,8 +48,7 @@ export class ApiService<T> {
   createOne(uri: string, obj: Object): Promise<ApiResource<any>> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<ApiResource<any>>(`${env.urlApi}/${uri}`, parseRelationships(obj))
-        // .post<ApiResource<T>>(`${env.urlApi}/${uri}`, parseRelationships(u))
+        .post<ApiResource<any>>(`${env.urlApi}/${uri}`, obj)
         .toPromise()
         .then((res) => {
           this.toast.setMessage("Created successfully");
