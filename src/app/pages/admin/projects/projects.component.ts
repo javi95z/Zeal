@@ -9,9 +9,7 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   templateUrl: "./projects.component.html",
   styleUrls: ["./projects.component.scss"],
 })
-export class ProjectsAdminComponent
-  extends AdminListClass<Project>
-  implements OnInit {
+export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
   displayedColumns: string[] = [
     "select",
     "name",
@@ -56,7 +54,10 @@ export class ProjectsAdminComponent
       })
       .subscribe((result) => {
         if (result) {
-          this.updateData(this.api.updateOne("projects", result, project.id), i);
+          this.updateData(
+            this.api.updateOne("projects", result, project.id),
+            i
+          );
         }
       });
   }

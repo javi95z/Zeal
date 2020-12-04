@@ -9,9 +9,7 @@ import { TASK_FIELDS } from "@zeal/variables";
   templateUrl: "./tasks.component.html",
   styleUrls: ["./tasks.component.scss"],
 })
-export class TasksAdminComponent
-  extends AdminListClass<Task>
-  implements OnInit {
+export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   @Input() project_id?: number;
   tasks: Task[];
   displayedColumns: string[] = [

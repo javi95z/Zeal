@@ -7,7 +7,7 @@ import { User } from "@models";
   templateUrl: "./navbar.component.html",
   styleUrls: ["./navbar.component.scss"]
 })
-export class NavbarComponent {
+export class NavbarAdmin {
   currentUser: User;
   sidebarCollapsed: boolean;
   mobileNavCollapsed: boolean;

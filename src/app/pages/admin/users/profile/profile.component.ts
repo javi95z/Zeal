@@ -10,7 +10,7 @@ import { pluckFields } from "@zeal/utils";
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
 })
-export class UserProfileAdminComponent implements OnInit {
+export class UserProfileAdmin implements OnInit {
   private _user: User;
   isLoading = true;
   error: boolean;

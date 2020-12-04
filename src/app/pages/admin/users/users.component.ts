@@ -9,7 +9,7 @@ import { USER_FIELDS } from "@zeal/variables";
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"],
 })
-export class UsersAdminComponent
+export class UsersAdmin
   extends AdminListClass<User>
   implements OnInit {
   displayedColumns: string[] = [

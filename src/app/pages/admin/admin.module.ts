@@ -2,13 +2,13 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { routes } from "./admin-routing";
 import {
-  SidebarComponent,
-  NavbarComponent,
-  ProjectsAdminComponent,
-  ProjectProfileAdminComponent,
-  UsersAdminComponent,
-  UserProfileAdminComponent,
-  TasksAdminComponent,
+  SidebarAdmin,
+  NavbarAdmin,
+  ProjectsAdmin,
+  ProjectProfileAdmin,
+  UsersAdmin,
+  UserProfileAdmin,
+  TasksAdmin,
 } from "./";
 import { AdminComponent } from "./admin.component";
 import { CoreModule } from "@core/core.module";
@@ -17,13 +17,13 @@ import { LayoutModule } from "@pages/layout/layout.module";
 @NgModule({
   declarations: [
     AdminComponent,
-    SidebarComponent,
-    NavbarComponent,
-    ProjectsAdminComponent,
-    ProjectProfileAdminComponent,
-    UsersAdminComponent,
-    UserProfileAdminComponent,
-    TasksAdminComponent,
+    SidebarAdmin,
+    NavbarAdmin,
+    ProjectsAdmin,
+    ProjectProfileAdmin,
+    UsersAdmin,
+    UserProfileAdmin,
+    TasksAdmin,
   ],
   imports: [LayoutModule, CoreModule, RouterModule.forChild(routes)],
 })
