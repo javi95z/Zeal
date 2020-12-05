@@ -9,7 +9,7 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   templateUrl: "./projects.component.html",
 })
 export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
-  displayedColumns: string[] = [
+  columns: string[] = [
     "select",
     "name",
     "contact",

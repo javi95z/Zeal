@@ -10,7 +10,7 @@ import { TASK_FIELDS } from "@zeal/variables";
 })
 export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   @Input() project_id?: number;
-  displayedColumns: string[] = [
+  columns: string[] = [
     "select",
     "name",
     "project",
@@ -25,6 +25,8 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.hideCols)
+      this.columns = this.columns.filter((o) => !this.hideCols.includes(o));
     const body = this.project_id ? { project: this.project_id } : null;
     this.initData(this.api.getAll("tasks", body));
   }

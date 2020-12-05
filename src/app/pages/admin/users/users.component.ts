@@ -9,7 +9,7 @@ import { USER_FIELDS } from "@zeal/variables";
   templateUrl: "./users.component.html",
 })
 export class UsersAdmin extends AdminListClass<User> implements OnInit {
-  displayedColumns: string[] = [
+  columns: string[] = [
     "select",
     "name",
     "email",

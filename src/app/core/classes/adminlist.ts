@@ -1,10 +1,11 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { ViewChild } from "@angular/core";
+import { ViewChild, Input } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 
 export class AdminListClass<T> {
+  @Input() hideCols?: string[];
   selection: SelectionModel<T>;
   dataSource = new MatTableDataSource<T>();
   isLoading = true;

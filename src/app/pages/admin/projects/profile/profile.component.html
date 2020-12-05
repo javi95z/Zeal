@@ -84,7 +84,7 @@
         </mat-tab>
         <!-- Tasks tab -->
         <mat-tab label="Tasks ({{project.tasks?.length}})">
-          <z-admin-tasks [project_id]="project.id"></z-admin-tasks>
+          <z-admin-tasks [project_id]="project.id" [hideCols]="['project']"></z-admin-tasks>
         </mat-tab>
       </mat-tab-group>
     </div>
