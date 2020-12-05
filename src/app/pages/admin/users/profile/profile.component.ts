@@ -127,7 +127,7 @@ export class UserProfileAdmin implements OnInit {
       key: "teams",
       label: "Teams",
       type: "multiple",
-      options: pluckFields(teamsList, "name"),
+      options: pluckFields(teamsList, ["name"]),
     };
     // ! Also send current teams for sync
     this.dialog
@@ -162,13 +162,13 @@ export class UserProfileAdmin implements OnInit {
     });
   }
 
+  /**
+   * Edit role of the user
+   */
   async editRole() {
     // Fetch roles
     let roleList: Role[] = [];
-
-    await this.api
-      .getAll("roles")
-      .then((o) => o.data.filter((r) => roleList.push(new Role(r))));
+    await this.api.getAll("roles").then((o) => (roleList = o.data));
 
     // Filter out current role
     if (this.user.role) {
@@ -179,7 +179,7 @@ export class UserProfileAdmin implements OnInit {
       key: "role",
       label: "Role",
       type: "select",
-      options: pluckFields(roleList, "name"),
+      options: pluckFields(roleList, ["name"]),
     };
     this.dialog
       .editDialog<any>({ fields: [roleField] })

@@ -6,9 +6,9 @@ import { FormGroup } from "@angular/forms";
  * @param form FormGroup to populate
  */
 export const populateFormFields = (model: any, form: FormGroup): FormGroup => {
-  Object.keys(form.controls).map(i => {
+  Object.keys(form.controls).map((i) => {
     if (model[i] instanceof Array) {
-      form.controls[i].setValue(model[i].map(e => e.id));
+      form.controls[i].setValue(model[i].map((e) => e.id));
     } else if (model[i] instanceof Object) {
       form.controls[i].setValue(model[i].id);
     } else {
@@ -19,9 +19,9 @@ export const populateFormFields = (model: any, form: FormGroup): FormGroup => {
 };
 
 export const parseRelationships = (model: any) => {
-  Object.keys(model).map(i => {
+  Object.keys(model).map((i) => {
     if (model[i] instanceof Array) {
-      model[i] = model[i].map(e => e.id);
+      model[i] = model[i].map((e) => e.id);
     } else if (model[i] instanceof Object) {
       model[i] = model[i]["id"];
     }
@@ -39,7 +39,7 @@ export const formatDate = (raw): string => {
       .toLocaleDateString("ja-JP", {
         year: "numeric",
         month: "2-digit",
-        day: "2-digit"
+        day: "2-digit",
       })
       .replace(/\//gi, "-");
     return result;
@@ -53,10 +53,11 @@ export const formatDate = (raw): string => {
  * @param array Whole array of objects
  * @param label Name of the label field
  */
-export const pluckFields = (array: any[], label?: string) => {
-  return array.map(item => {
+export const pluckFields = (array: any[], label?: string[]) => {
+  return array.map((item) => {
     if (label) {
-      return { key: item["id"], label: item[label] };
+      const text = label.map((e) => item[e]).toString();
+      return { key: item["id"], label: text.replace(",", " ") };
     } else {
       return item.id;
     }

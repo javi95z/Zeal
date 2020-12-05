@@ -146,7 +146,7 @@ export class ProjectProfileAdmin implements OnInit {
       key: "users",
       label: "Members",
       type: "multiple",
-      options: pluckFields(usersList, "fullName"),
+      options: pluckFields(usersList, ["first_name", "last_name"]),
     };
     // ! Also send current members for sync
     this.dialog

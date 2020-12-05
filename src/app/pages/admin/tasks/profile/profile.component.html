@@ -23,6 +23,17 @@
                         <a [routerLink]="['/admin/projects/profile', task.project.id]">{{ task.project.name }}</a>
                       </td>
                     </tr>
+                    <tr>
+                      <td>Owner</td>
+                      <td>
+                        <a *ngIf="task.user" [routerLink]="['/admin/users/profile', task.user.id]">
+                          {{ task.user.first_name || "" }} {{ task.user.last_name || "" }}
+                        </a>
+                        <a class="table-button" (click)="editOwner()">
+                          <i class="zmdi zmdi-edit"></i>Change
+                        </a>
+                      </td>
+                    </tr>
                     <tr *ngIf="task.description">
                       <td>Description</td>
                       <td class="ws-normal">{{ task.description }}</td>

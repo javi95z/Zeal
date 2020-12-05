@@ -30,4 +30,41 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
     const body = this.project_id ? { project: this.project_id } : null;
     this.initData(this.api.getAll("tasks", body));
   }
+
+  onAction(action: string, task: Task, index: number) {
+    switch (action) {
+      case "EDIT":
+        // this.editTask(user, index);
+        break;
+      case "DELETE":
+        this.deleteTask(task, index);
+        break;
+    }
+  }
+
+  createTask() {
+    this.dialog
+      .editDialog<Task>({
+        object: null,
+        fields: TASK_FIELDS,
+      })
+      .subscribe((o: Task) => {
+        if (o)
+          this.api.createOne("tasks", o).then((res) => super.addData(res.data));
+      });
+  }
+
+  /**
+   * Confirmation dialog
+   * to remove task
+   * @param t Task
+   * @param i Index
+   */
+  private deleteTask(t: Task, i: number) {
+    this.dialog.deleteDialog(t.name).subscribe((res) => {
+      if (res) {
+        super.deleteData(this.api.deleteOne("tasks", t.id), i);
+      }
+    });
+  }
 }

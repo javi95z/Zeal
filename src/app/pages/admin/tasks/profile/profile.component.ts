@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { ApiService, DialogService } from "@services";
-import { Task, PanelAction, Tabs } from "@models";
+import { Task, PanelAction, Tabs, User, Field } from "@models";
 import { TASK_FIELDS, PANEL_ACTIONS } from "@zeal/variables";
+import { pluckFields } from "@zeal/utils";
 
 @Component({
   templateUrl: "./profile.component.html",
@@ -82,5 +83,38 @@ export class TaskProfileAdmin implements OnInit {
           .then(() => this.location.back());
       }
     });
+  }
+
+  /**
+   * Edit owner of the task
+   */
+  async editOwner() {
+    // Fetch users
+    let userList: User[] = [];
+    await this.api.getAll("users").then((o) => (userList = o.data));
+
+    // Filter out current role
+    if (this.task.user)
+      userList = userList.filter((o) => this.task.user.id !== o.id);
+
+    const userField: Field = {
+      key: "user",
+      label: "User",
+      type: "select",
+      options: pluckFields(userList, ["first_name", "last_name"]),
+    };
+    console.log(userField);
+
+    this.dialog
+      .editDialog<any>({ fields: [userField] })
+      .subscribe((result) => {
+        if (result) {
+          this.isLoading = true;
+          this.api
+            .updateOne("tasks", result, this.task.id)
+            .then((o) => (this.task = o.data))
+            .finally(() => (this.isLoading = false));
+        }
+      });
   }
 }
