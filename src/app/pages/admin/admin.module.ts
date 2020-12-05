@@ -9,6 +9,7 @@ import {
   UsersAdmin,
   UserProfileAdmin,
   TasksAdmin,
+  TaskProfileAdmin,
 } from "./";
 import { AdminComponent } from "./admin.component";
 import { CoreModule } from "@core/core.module";
@@ -24,6 +25,7 @@ import { LayoutModule } from "@pages/layout/layout.module";
     UsersAdmin,
     UserProfileAdmin,
     TasksAdmin,
+    TaskProfileAdmin,
   ],
   imports: [LayoutModule, CoreModule, RouterModule.forChild(routes)],
 })

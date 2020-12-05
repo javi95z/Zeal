@@ -21,7 +21,9 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-        <td *matCellDef="let element">{{ element?.name }}</td>
+        <td *matCellDef="let element">
+          <a [routerLink]="['/admin/tasks/profile', element.id]">{{ element?.name }}</a>
+        </td>
       </ng-container>
 
       <!-- Project Column -->

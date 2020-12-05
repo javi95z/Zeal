@@ -11,8 +11,10 @@ export class Task {
   end_date?: string | Date;
   name: string;
   priority: Priority;
+  project?: any;
   start_date?: string | Date;
   status: Status;
+  user?: any;
   updated_at?: string | Date;
   created_at?: string | Date;
 
