@@ -7,22 +7,20 @@ import { TASK_FIELDS } from "@zeal/variables";
 @Component({
   selector: "z-admin-tasks",
   templateUrl: "./tasks.component.html",
-  styleUrls: ["./tasks.component.scss"],
 })
 export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   @Input() project_id?: number;
-  tasks: Task[];
   displayedColumns: string[] = [
     "select",
     "name",
-    "priority",
+    "project",
     "status",
     "start_date",
     "end_date",
     "actions",
   ];
 
-  constructor(private api: ApiService<Task>) {
+  constructor(private api: ApiService<Task>, private dialog: DialogService) {
     super();
   }
 

@@ -12,15 +12,16 @@ import {
   LoadingComponent,
   NoResultsComponent,
   PanelHeaderComponent,
-  ToastMessageComponent
+  ToastMessageComponent,
 } from "./components";
 import {
   AvatarDirective,
   GenderDirective,
   HeaderButtonDirective,
+  OverflowDirective,
   PanelButtonDirective,
   PriorityDirective,
-  StatusDirective
+  StatusDirective,
 } from "./directives";
 import { CapitalizePipe } from "./pipes";
 import { MaterialModule } from "@zeal/material.module";
@@ -34,15 +35,16 @@ const components = [
   EditDialogComponent,
   ErrorMessageComponent,
   GenderDirective,
+  HeaderButtonDirective,
   HeaderComponent,
   LoadingComponent,
   NoResultsComponent,
+  OverflowDirective,
   PanelButtonDirective,
-  HeaderButtonDirective,
   PanelHeaderComponent,
   PriorityDirective,
   StatusDirective,
-  ToastMessageComponent
+  ToastMessageComponent,
 ];
 
 const modules = [
@@ -50,13 +52,13 @@ const modules = [
   FormsModule,
   MaterialModule,
   ReactiveFormsModule,
-  RouterModule
+  RouterModule,
 ];
 
 @NgModule({
   declarations: components,
   imports: modules,
   exports: [modules, components],
-  entryComponents: [ConfirmationDialogComponent, EditDialogComponent]
+  entryComponents: [ConfirmationDialogComponent, EditDialogComponent],
 })
 export class CoreModule {}

@@ -1,6 +1,7 @@
-<button mat-button (click)="addTask()" zPanelButton>New task</button>
-<div class="table-wrap" *ngIf="dataSource && !isLoading">
-  <div class="table-responsive">
+<z-loading *ngIf="isLoading"></z-loading>
+<div class="table-wrap" *ngIf="!isLoading">
+  <div class="table-responsive" *ngIf="dataSource.data.length">
+    <button mat-button (click)="createTask()" zPanelButton>Create task</button>
     <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
@@ -23,11 +24,12 @@
         <td *matCellDef="let element">{{ element?.name }}</td>
       </ng-container>
 
-      <!-- Priority Column -->
-      <ng-container matColumnDef="priority">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
-        <td *matCellDef="let element" class="text-center">
-          <div zPriority [value]="element.priority"></div>
+      <!-- Project Column -->
+      <ng-container matColumnDef="project">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Project </th>
+        <td *matCellDef="let element" zOverflow [width]="200">
+          <a *ngIf="element?.project"
+            [routerLink]="['/admin/projects/profile', element.project.id]">{{ element?.project.name }}</a>
         </td>
       </ng-container>
 
@@ -69,5 +71,5 @@
       showFirstLastButtons>
     </mat-paginator>
   </div>
-  <z-no-results *ngIf="!dataSource"></z-no-results>
+  <z-no-results *ngIf="!dataSource.data.length"></z-no-results>
 </div>
