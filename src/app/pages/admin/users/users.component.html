@@ -1,76 +1,65 @@
-<z-header title="Users page" current="Users"></z-header>
-<div class="row">
-  <div class="col-sm-12">
-    <div class="panel panel-default card-view">
-      <div class="panel-wrapper collapse in">
-        <div class="panel-body row pa-0">
-          <z-loading *ngIf="isLoading"></z-loading>
-          <div class="table-wrap" *ngIf="dataSource && !isLoading">
-            <div class="table-responsive">
-              <div zHeaderButton value="create" (click)="createUser()"></div>
-              <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>
-                <!-- Checkbox Column -->
-                <ng-container matColumnDef="select">
-                  <th mat-header-cell *matHeaderCellDef>
-                    <mat-checkbox (change)="$event ? masterToggle() : null"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()"
-                      [checked]="selection.hasValue() && isAllSelected()">
-                    </mat-checkbox>
-                  </th>
-                  <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                      [checked]="selection.isSelected(row)">
-                    </mat-checkbox>
-                  </td>
-                </ng-container>
+<z-loading *ngIf="isLoading"></z-loading>
+<div class="table-wrap" *ngIf="!isLoading">
+  <div class="table-responsive" *ngIf="dataSource.data.length">
+  <button mat-button (click)="createUser()" zPanelButton>Create user</button>
+    <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [checked]="selection.hasValue() && isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
 
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                  <td *matCellDef="let element">
-                    <a [routerLink]="['profile', element.id]">{{ element?.first_name }} {{ element?.last_name }}</a>
-                  </td>
-                </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td *matCellDef="let element">
+          <a [routerLink]="['profile', element.id]">{{ element?.first_name }} {{ element?.last_name }}</a>
+        </td>
+      </ng-container>
 
-                <!-- Email Column -->
-                <ng-container matColumnDef="email">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                  <td *matCellDef="let element"> {{ element?.email }} </td>
-                </ng-container>
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td *matCellDef="let element"> {{ element?.email }} </td>
+      </ng-container>
 
-                <!-- Role Column -->
-                <ng-container matColumnDef="role">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
-                  <td *matCellDef="let element"> {{ element.role?.name }} </td>
-                </ng-container>
+      <!-- Role Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+        <td *matCellDef="let element"> {{ element.role?.name }} </td>
+      </ng-container>
 
-                <!-- Gender Column -->
-                <ng-container matColumnDef="gender">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-                  <td *matCellDef="let element" zGender [value]="element?.gender" hideLabel="true">
-                  </td>
-                </ng-container>
+      <!-- Gender Column -->
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+        <td *matCellDef="let element" zGender [value]="element?.gender" hideLabel="true">
+        </td>
+      </ng-container>
 
-                <!-- Actions Column -->
-                <ng-container matColumnDef="actions">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                  <td *matCellDef="let element; let i = index" class="action-buttons">
-                    <z-actions-menu [details]="['profile', element.id]" (event)="onAction($event, element, i)">
-                    </z-actions-menu>
-                  </td>
-                </ng-container>
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td *matCellDef="let element; let i = index" class="action-buttons">
+          <z-actions-menu [details]="['profile', element.id]" (event)="onAction($event, element, i)">
+          </z-actions-menu>
+        </td>
+      </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-              <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
-                showFirstLastButtons>
-              </mat-paginator>
-            </div>
-            <z-no-results *ngIf="!dataSource"></z-no-results>
-          </div>
-        </div>
-      </div>
-    </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
+      showFirstLastButtons>
+    </mat-paginator>
   </div>
+  <z-no-results *ngIf="!dataSource.data.length"></z-no-results>
 </div>

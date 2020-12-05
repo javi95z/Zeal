@@ -7,7 +7,6 @@ import { PROJECT_FIELDS } from "@zeal/variables";
 @Component({
   selector: "z-admin-projects",
   templateUrl: "./projects.component.html",
-  styleUrls: ["./projects.component.scss"],
 })
 export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
   displayedColumns: string[] = [

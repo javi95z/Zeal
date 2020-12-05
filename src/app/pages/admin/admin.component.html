@@ -5,7 +5,17 @@
   <div class="page-wrapper">
     <div class="container-fluid pt-10">
       <z-notifications></z-notifications>
-      <router-outlet></router-outlet>
+      <div class="row mt-20">
+        <div class="col-sm-12">
+          <div class="panel panel-default card-view">
+            <div class="panel-wrapper collapse in">
+              <div class="panel-body">
+                <router-outlet></router-outlet>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <z-footer></z-footer>
     </div>
   </div>

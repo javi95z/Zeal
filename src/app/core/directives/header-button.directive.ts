@@ -5,15 +5,16 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
 })
 export class HeaderButtonDirective implements OnInit {
   @Input() value: string;
-  padding = 20;
+  paddingRight = 25;
+  paddingTop = 15;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     const button = this.createButton();
     this.el.nativeElement.style.position = "absolute";
-    this.el.nativeElement.style.right = `${this.padding}px`;
-    this.el.nativeElement.style.top = `-${this.padding}px`;
+    this.el.nativeElement.style.right = `${this.paddingRight}px`;
+    this.el.nativeElement.style.top = `-${this.paddingTop}px`;
     this.renderer.appendChild(this.el.nativeElement, button);
   }
 
@@ -23,6 +24,7 @@ export class HeaderButtonDirective implements OnInit {
     button.classList.add("btn");
     button.classList.add("btn-zeal");
     button.classList.add("btn-circle");
+    button.classList.add("btn-lg");
     button.classList.add("mat-elevation-z5");
     button.appendChild(this.createIcon());
     return button;

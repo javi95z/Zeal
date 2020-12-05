@@ -7,11 +7,8 @@ import { USER_FIELDS } from "@zeal/variables";
 @Component({
   selector: "z-admin-users",
   templateUrl: "./users.component.html",
-  styleUrls: ["./users.component.scss"],
 })
-export class UsersAdmin
-  extends AdminListClass<User>
-  implements OnInit {
+export class UsersAdmin extends AdminListClass<User> implements OnInit {
   displayedColumns: string[] = [
     "select",
     "name",

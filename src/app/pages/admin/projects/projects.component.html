@@ -1,94 +1,83 @@
-<z-header title="Projects page" current="Projects"></z-header>
-<div class="row">
-  <div class="col-sm-12">
-    <div class="panel panel-default card-view">
-      <div class="panel-wrapper collapse in">
-        <div class="panel-body row pa-0">
-          <z-loading *ngIf="isLoading"></z-loading>
-          <div class="table-wrap" *ngIf="dataSource && !isLoading">
-            <div class="table-responsive">
-              <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>
-                <!-- Checkbox Column -->
-                <ng-container matColumnDef="select">
-                  <th mat-header-cell *matHeaderCellDef>
-                    <mat-checkbox (change)="$event ? masterToggle() : null"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()"
-                      [checked]="selection.hasValue() && isAllSelected()">
-                    </mat-checkbox>
-                  </th>
-                  <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                      [checked]="selection.isSelected(row)">
-                    </mat-checkbox>
-                  </td>
-                </ng-container>
+<z-loading *ngIf="isLoading"></z-loading>
+<div class="table-wrap" *ngIf="!isLoading">
+  <div class="table-responsive" *ngIf="dataSource.data.length">
+    <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [checked]="selection.hasValue() && isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
 
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                  <td *matCellDef="let element">
-                    <a [routerLink]="['profile', element.id]">{{ element?.name }}</a>
-                  </td>
-                </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td *matCellDef="let element">
+          <a [routerLink]="['profile', element.id]">{{ element?.name }}</a>
+        </td>
+      </ng-container>
 
-                <!-- Contact Column -->
-                <ng-container matColumnDef="contact">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
-                  <td *matCellDef="let element">
-                    <a *ngIf="element?.contact" [routerLink]="['/contacts/profile', element.id]">{{ element?.contact.name }}</a>
-                  </td>
-                </ng-container>
+      <!-- Contact Column -->
+      <ng-container matColumnDef="contact">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
+        <td *matCellDef="let element">
+          <a *ngIf="element?.contact" [routerLink]="['/contacts/profile', element.id]">{{ element?.contact.name }}</a>
+        </td>
+      </ng-container>
 
-                <!-- Priority Column -->
-                <ng-container matColumnDef="priority">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
-                  <td *matCellDef="let element" class="text-center">
-                    <div zPriority [value]="element.priority"></div>
-                  </td>
-                </ng-container>
+      <!-- Priority Column -->
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
+        <td *matCellDef="let element" class="text-center">
+          <div zPriority [value]="element.priority"></div>
+        </td>
+      </ng-container>
 
-                <!-- Status Column -->
-                <ng-container matColumnDef="status">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                  <td *matCellDef="let element" zStatus [value]="element.status"></td>
-                </ng-container>
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td *matCellDef="let element" zStatus [value]="element.status"></td>
+      </ng-container>
 
-                <!-- Start date Column -->
-                <ng-container matColumnDef="start_date">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Start date </th>
-                  <td *matCellDef="let element">
-                    <span>{{ element?.start_date | date: "shortDate" }}</span>
-                  </td>
-                </ng-container>
+      <!-- Start date Column -->
+      <ng-container matColumnDef="start_date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Start date </th>
+        <td *matCellDef="let element">
+          <span>{{ element?.start_date | date: "shortDate" }}</span>
+        </td>
+      </ng-container>
 
-                <!-- End date Column -->
-                <ng-container matColumnDef="end_date">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> End date </th>
-                  <td *matCellDef="let element">
-                    <span>{{ element?.end_date | date: "shortDate" }}</span>
-                  </td>
-                </ng-container>
+      <!-- End date Column -->
+      <ng-container matColumnDef="end_date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> End date </th>
+        <td *matCellDef="let element">
+          <span>{{ element?.end_date | date: "shortDate" }}</span>
+        </td>
+      </ng-container>
 
-                <!-- Actions Column -->
-                <ng-container matColumnDef="actions">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                  <td *matCellDef="let element; let i = index" class="action-buttons">
-                    <z-actions-menu [details]="['profile', element.id]" (event)="onAction($event, element, i)">
-                    </z-actions-menu>
-                  </td>
-                </ng-container>
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td *matCellDef="let element; let i = index" class="action-buttons">
+          <z-actions-menu [details]="['profile', element.id]" (event)="onAction($event, element, i)">
+          </z-actions-menu>
+        </td>
+      </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-              <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
-                showFirstLastButtons>
-              </mat-paginator>
-            </div>
-            <z-no-results *ngIf="!dataSource"></z-no-results>
-          </div>
-        </div>
-      </div>
-    </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
+      showFirstLastButtons>
+    </mat-paginator>
   </div>
+  <z-no-results *ngIf="!dataSource.data.length"></z-no-results>
 </div>
