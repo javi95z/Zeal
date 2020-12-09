@@ -144,20 +144,20 @@ export class UserProfileAdmin implements OnInit {
   }
 
   /**
-   * Remove user from teams
-   * @param ids User ids
+   * Remove user from a team
+   * @param id Team id
    */
-  // ! Refactor
-  removeTeam(teams: Team[]) {
-    const names = teams.length > 1 ? "selected teams" : teams[0].name;
-    const text = `Are you sure you want to remove the user ${this.user.fullName} from ${names}`;
+  removeTeam(team: Team) {
+    const text = `Are you sure you want to remove the user ${this.user.fullName} from ${team.name}`;
+    const newTeams = pluckFields(this.user.teams).filter((o) => o !== team.id);
+
     this.dialog.deleteDialog(null, text).subscribe((res) => {
       if (res) {
-        // this.isLoading = true;
-        // this.api
-        //   .removeTeam("users", this.user.id, pluckFields(teams))
-        //   .then((o) => (this.user = o.data))
-        //   .finally(() => (this.isLoading = false));
+        this.isLoading = true;
+        this.api
+          .updateOne("users", { teams: newTeams }, this.user.id)
+          .then((o) => (this.user = o.data))
+          .finally(() => (this.isLoading = false));
       }
     });
   }
