@@ -15,7 +15,6 @@ export class UserProfileAdmin implements OnInit {
   isLoading = true;
   error: boolean;
   menu: PanelAction[];
-  availableTeams: Team[];
   tabs = new Tabs();
 
   get user(): User {
@@ -112,16 +111,12 @@ export class UserProfileAdmin implements OnInit {
    */
   async addTeam() {
     // Fetch teams
-    this.availableTeams = [];
-    await this.api
-      .getAll("teams")
-      .then((o) => o.data.filter((t) => this.availableTeams.push(new Team(t))));
+    let availableTeams: Team[];
+    await this.api.getAll("teams").then((o) => (availableTeams = o.data));
 
     // Filter out current teams
-    const members = pluckFields(this.user.teams);
-    const teamsList = this.availableTeams.filter(
-      (o) => !members.includes(o.id)
-    );
+    const teams = pluckFields(this.user.teams);
+    const teamsList = availableTeams.filter((o) => !teams.includes(o.id));
 
     const teamsField: Field = {
       key: "teams",
@@ -129,14 +124,14 @@ export class UserProfileAdmin implements OnInit {
       type: "multiple",
       options: pluckFields(teamsList, ["name"]),
     };
-    // ! Also send current teams for sync
     this.dialog
       .editDialog<any>({ fields: [teamsField] })
       .subscribe((result) => {
         if (result) {
+          teams.push(...result.teams);
           this.isLoading = true;
           this.api
-            .updateOne("users", result, this.user.id)
+            .updateOne("users", { teams }, this.user.id)
             .then((o) => (this.user = o.data))
             .finally(() => (this.isLoading = false));
         }
@@ -149,13 +144,13 @@ export class UserProfileAdmin implements OnInit {
    */
   removeTeam(team: Team) {
     const text = `Are you sure you want to remove the user ${this.user.fullName} from ${team.name}`;
-    const newTeams = pluckFields(this.user.teams).filter((o) => o !== team.id);
+    const teams = pluckFields(this.user.teams).filter((o) => o !== team.id);
 
     this.dialog.deleteDialog(null, text).subscribe((res) => {
       if (res) {
         this.isLoading = true;
         this.api
-          .updateOne("users", { teams: newTeams }, this.user.id)
+          .updateOne("users", { teams }, this.user.id)
           .then((o) => (this.user = o.data))
           .finally(() => (this.isLoading = false));
       }
