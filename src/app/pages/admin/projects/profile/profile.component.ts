@@ -15,7 +15,6 @@ export class ProjectProfileAdmin implements OnInit {
   isLoading = true;
   error: boolean;
   menu: PanelAction[];
-  availableUsers: User[];
   tabs = new Tabs();
 
   get project(): Project {
@@ -108,39 +107,35 @@ export class ProjectProfileAdmin implements OnInit {
   }
 
   /**
-   * Remove members from project
-   * @param ids User ids
+   * Remove member from a project
+   * @param user User to remove
    */
-  // ! TOREFACTOR
-  // removeMember(users: User[]) {
-  //   const names = users.length > 1 ? "selected users" : users[0].fullName;
-  //   const text = `Are you sure you want to remove ${names} from the project ${this.project.name}`;
-  //   this.dialog.deleteDialog(null, text).subscribe((res) => {
-  //     if (res) {
-  //       this.isLoading = true;
-  //       this.service
-  //         .removeMember(this.project.id, pluckFields(users))
-  //         .then((o) => (this.project = o.data))
-  //         .finally(() => (this.isLoading = false));
-  //     }
-  //   });
-  // }
+  removeMember(user: User) {
+    const text = `Are you sure you want to remove ${user.fullName} from the project ${this.project.name}`;
+    const users = pluckFields(this.project.users).filter((o) => o !== user.id);
+
+    this.dialog.deleteDialog(null, text).subscribe((res) => {
+      if (res) {
+        this.isLoading = true;
+        this.api
+          .updateOne("projects", { users }, this.project.id)
+          .then((o) => (this.project = o.data))
+          .finally(() => (this.isLoading = false));
+      }
+    });
+  }
 
   /**
    * Add members to project
    */
   async addMember() {
     // Fetch users
-    this.availableUsers = [];
-    await this.api
-      .getAll("users")
-      .then((o) => o.data.filter((u) => this.availableUsers.push(new User(u))));
+    let availableUsers: User[];
+    await this.api.getAll("users").then((o) => (availableUsers = o.data));
 
     // Filter out current members
-    const members = pluckFields(this.project.users);
-    const usersList = this.availableUsers.filter(
-      (o) => !members.includes(o.id)
-    );
+    const users = pluckFields(this.project.users);
+    const usersList = availableUsers.filter((o) => !users.includes(o.id));
 
     const membersField: Field = {
       key: "users",
@@ -148,14 +143,14 @@ export class ProjectProfileAdmin implements OnInit {
       type: "multiple",
       options: pluckFields(usersList, ["first_name", "last_name"]),
     };
-    // ! Also send current members for sync
     this.dialog
       .editDialog<any>({ fields: [membersField] })
       .subscribe((result) => {
         if (result) {
+          users.push(...result.users);
           this.isLoading = true;
           this.api
-            .updateOne("projects", result, this.project.id)
+            .updateOne("projects", { users }, this.project.id)
             .then((o) => (this.project = o.data))
             .finally(() => (this.isLoading = false));
         }

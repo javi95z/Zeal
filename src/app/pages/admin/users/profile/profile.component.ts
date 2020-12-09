@@ -140,7 +140,7 @@ export class UserProfileAdmin implements OnInit {
 
   /**
    * Remove user from a team
-   * @param id Team id
+   * @param team Team to remove
    */
   removeTeam(team: Team) {
     const text = `Are you sure you want to remove the user ${this.user.fullName} from ${team.name}`;
