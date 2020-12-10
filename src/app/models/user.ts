@@ -1,5 +1,3 @@
-import { Role } from "./role";
-import { Team } from "./team";
 import { reduceObject } from "@zeal/utils";
 
 export class User {
@@ -13,9 +11,10 @@ export class User {
   is_admin: boolean;
   last_name: string;
   profile_img: string;
-  role?: Role;
+  role?: any;
   suffix: string;
-  teams?: Team[];
+  teams?: any[];
+  projects?: any[];
   locale: string;
   updated_at?: string | Date;
   created_at?: string | Date;

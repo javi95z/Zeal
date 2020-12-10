@@ -8,21 +8,16 @@ import { USER_FIELDS } from "@zeal/variables";
   templateUrl: "./users.component.html",
 })
 export class UsersAdmin extends AdminListClass<User> implements OnInit {
-  columns: string[] = [
-    "select",
-    "name",
-    "email",
-    "role",
-    "gender",
-    "actions",
-  ];
+  @Input() project_id?: number;
+  columns: string[] = ["select", "name", "email", "role", "gender", "actions"];
 
   constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit() {
-    this.initData(this.api.getAll("users"));
+    const body = this.project_id ? { project: this.project_id } : null;
+    this.initData(this.api.getAll("users", body));
   }
 
   onAction(action: string, user: User, index: number) {
@@ -43,8 +38,10 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
         fields: USER_FIELDS,
       })
       .subscribe((o: User) => {
-        if (o)
+        if (o) {
+          if (this.project_id) o.projects = [this.project_id];
           this.api.createOne("users", o).then((res) => super.addData(res.data));
+        }
       });
   }
 
