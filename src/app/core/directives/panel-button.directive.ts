@@ -11,7 +11,6 @@ export class PanelButtonDirective implements OnInit {
 
   ngOnInit(): void {
     const container = this.el.nativeElement as HTMLElement;
-    container.classList.add("block");
     container.classList.add("bg-zeal");
     container.classList.add("ma-10");
   }
