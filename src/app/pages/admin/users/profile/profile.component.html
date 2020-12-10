@@ -2,7 +2,7 @@
 <z-error-message *ngIf="error"></z-error-message>
 <div class="row" *ngIf="!isLoading">
   <div class="col-sm-12" *ngIf="!error">
-    <z-panel-header [title]="user.fullName" [menu]="menu" (action)="onAction($event)"></z-panel-header>
+    <z-panel-header [title]="resource.fullName" [menu]="menu" (action)="onAction($event)"></z-panel-header>
     <div class="panel-wrapper collapse in">
       <mat-tab-group animationDuration="0ms" [selectedIndex]="tabs.selectedTab"
         (selectedIndexChange)="tabs.tabChanged($event)">
@@ -13,54 +13,54 @@
               <div class="table-responsive">
                 <table class="table display pb-30">
                   <tbody>
-                    <tr *ngIf="user.suffix">
+                    <tr *ngIf="resource.suffix">
                       <td>Suffix</td>
-                      <td>{{ user.suffix }}</td>
+                      <td>{{ resource.suffix }}</td>
                     </tr>
-                    <tr *ngIf="user.fullName">
+                    <tr *ngIf="resource.fullName">
                       <td>Fullname</td>
-                      <td>{{ user.fullName }}</td>
+                      <td>{{ resource.fullName }}</td>
                     </tr>
-                    <tr *ngIf="user.email">
+                    <tr *ngIf="resource.email">
                       <td>Email</td>
-                      <td>{{ user.email }}</td>
+                      <td>{{ resource.email }}</td>
                     </tr>
-                    <tr *ngIf="user.gender">
+                    <tr *ngIf="resource.gender">
                       <td>Gender</td>
-                      <td zGender [value]="user.gender"></td>
+                      <td zGender [value]="resource.gender"></td>
                     </tr>
                     <tr>
                       <td>Role</td>
                       <td>
-                        <span *ngIf="user.role">{{ user.role.name }}</span>
+                        <span *ngIf="resource.role">{{ resource.role.name }}</span>
                         <a class="table-button" (click)="editRole()">
                           <i class="zmdi zmdi-edit"></i>Change
                         </a>
                       </td>
                     </tr>
-                    <tr *ngIf="user.locale">
+                    <tr *ngIf="resource.locale">
                       <td>Locale</td>
-                      <td>{{ user.locale }}</td>
+                      <td>{{ resource.locale }}</td>
                     </tr>
                     <tr>
                       <td>Active</td>
                       <td>
-                        <span *ngIf="user.active">Yes</span>
-                        <span *ngIf="!user.active">No</span>
+                        <span *ngIf="resource.active">Yes</span>
+                        <span *ngIf="!resource.active">No</span>
                         <a class="table-button" (click)="toggleActive()">
                           <i class="zmdi zmdi-edit"></i>
-                          <span *ngIf="user.active">Deactivate</span>
-                          <span *ngIf="!user.active">Activate</span>
+                          <span *ngIf="resource.active">Deactivate</span>
+                          <span *ngIf="!resource.active">Activate</span>
                         </a>
                       </td>
                     </tr>
-                    <tr *ngIf="user.created_at">
+                    <tr *ngIf="resource.created_at">
                       <td>Created at</td>
-                      <td>{{ user.created_at | date: "long" }}</td>
+                      <td>{{ resource.created_at | date: "long" }}</td>
                     </tr>
-                    <tr *ngIf="user.updated_at">
+                    <tr *ngIf="resource.updated_at">
                       <td>Updated at</td>
-                      <td>{{ user.updated_at | date: "long" }}</td>
+                      <td>{{ resource.updated_at | date: "long" }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -69,9 +69,9 @@
           </div>
         </mat-tab>
         <!-- Teams tab -->
-        <mat-tab label="Teams ({{user.teams.length}})">
+        <mat-tab label="Teams ({{resource.teams.length}})">
           <button mat-button (click)="addTeam()" zPanelButton>Add team</button>
-          <div *ngFor="let item of user.teams" class="col-sm-4 col-xs-12">
+          <div *ngFor="let item of resource.teams" class="col-sm-4 col-xs-12">
             <div class="panel panel-default card-view">
               <z-panel-header [title]="item.name" [titleLink]="['/admin', 'teams', 'profile', item.id]">
               </z-panel-header>

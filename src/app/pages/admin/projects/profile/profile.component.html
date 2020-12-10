@@ -2,7 +2,7 @@
 <z-error-message *ngIf="error"></z-error-message>
 <div class="row" *ngIf="!isLoading">
   <div class="col-sm-12" *ngIf="!error">
-    <z-panel-header [title]="project?.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
+    <z-panel-header [title]="resource?.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
     <div class="panel-wrapper collapse in">
       <mat-tab-group animationDuration="0ms" [selectedIndex]="tabs.selectedTab"
         (selectedIndexChange)="tabs.tabChanged($event)">
@@ -13,47 +13,47 @@
               <div class="table-responsive">
                 <table class="table display pb-30" id="details">
                   <tbody>
-                    <tr *ngIf="project.name">
+                    <tr *ngIf="resource.name">
                       <td>Name</td>
-                      <td>{{ project.name }}</td>
+                      <td>{{ resource.name }}</td>
                     </tr>
-                    <tr *ngIf="project.code">
+                    <tr *ngIf="resource.code">
                       <td>Code</td>
-                      <td>{{ project.code }}</td>
+                      <td>{{ resource.code }}</td>
                     </tr>
-                    <tr *ngIf="project.contact">
+                    <tr *ngIf="resource.contact">
                       <td>Contact</td>
                       <td>
-                        <a [routerLink]="">{{ project.contact.name }}</a>
+                        <a [routerLink]="">{{ resource.contact.name }}</a>
                       </td>
                     </tr>
-                    <tr *ngIf="project.description">
+                    <tr *ngIf="resource.description">
                       <td>Description</td>
-                      <td class="ws-normal">{{ project.description }}</td>
+                      <td class="ws-normal">{{ resource.description }}</td>
                     </tr>
-                    <tr *ngIf="project.priority">
+                    <tr *ngIf="resource.priority">
                       <td>Priority</td>
-                      <td zPriority [value]="project.priority"></td>
+                      <td zPriority [value]="resource.priority"></td>
                     </tr>
-                    <tr *ngIf="project.status">
+                    <tr *ngIf="resource.status">
                       <td>Status</td>
-                      <td zStatus [value]="project.status"></td>
+                      <td zStatus [value]="resource.status"></td>
                     </tr>
-                    <tr *ngIf="project.start_date">
+                    <tr *ngIf="resource.start_date">
                       <td>Start Date</td>
-                      <td>{{ project.start_date | date }}</td>
+                      <td>{{ resource.start_date | date }}</td>
                     </tr>
-                    <tr *ngIf="project.end_date">
+                    <tr *ngIf="resource.end_date">
                       <td>End Date</td>
-                      <td>{{ project.end_date | date }}</td>
+                      <td>{{ resource.end_date | date }}</td>
                     </tr>
-                    <tr *ngIf="project.created_at">
+                    <tr *ngIf="resource.created_at">
                       <td>Created at</td>
-                      <td>{{ project.created_at | date: "long" }}</td>
+                      <td>{{ resource.created_at | date: "long" }}</td>
                     </tr>
-                    <tr *ngIf="project.updated_at">
+                    <tr *ngIf="resource.updated_at">
                       <td>Updated at</td>
-                      <td>{{ project.updated_at | date: "long" }}</td>
+                      <td>{{ resource.updated_at | date: "long" }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -62,9 +62,9 @@
           </div>
         </mat-tab>
         <!-- Members tab -->
-        <mat-tab label="Members ({{project.users?.length}})">
+        <mat-tab label="Members ({{resource.users?.length}})">
           <button mat-button (click)="addMember()" zPanelButton>Add member</button>
-          <div *ngFor="let item of project.users" class="col-sm-4 col-xs-12">
+          <div *ngFor="let item of resource.users" class="col-sm-4 col-xs-12">
             <div class="panel panel-default card-view">
               <z-panel-header [title]="item.fullName" [titleLink]="['/admin', 'users', 'profile', item.id]">
               </z-panel-header>
@@ -83,8 +83,8 @@
           </div>
         </mat-tab>
         <!-- Tasks tab -->
-        <mat-tab label="Tasks ({{project.tasks?.length}})">
-          <z-admin-tasks [project_id]="project.id" [hideCols]="['project']"></z-admin-tasks>
+        <mat-tab label="Tasks ({{resource.tasks?.length}})">
+          <z-admin-tasks [project_id]="resource.id" [hideCols]="['project']"></z-admin-tasks>
         </mat-tab>
       </mat-tab-group>
     </div>

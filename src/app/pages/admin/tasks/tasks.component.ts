@@ -49,8 +49,10 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
         fields: TASK_FIELDS,
       })
       .subscribe((o: Task) => {
-        if (o)
+        if (o) {
+          if (this.project_id) o.project = this.project_id;
           this.api.createOne("tasks", o).then((res) => super.addData(res.data));
+        }
       });
   }
 

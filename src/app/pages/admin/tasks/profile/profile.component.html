@@ -2,7 +2,7 @@
 <z-error-message *ngIf="error"></z-error-message>
 <div class="row" *ngIf="!isLoading">
   <div class="col-sm-12" *ngIf="!error">
-    <z-panel-header [title]="task?.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
+    <z-panel-header [title]="resource?.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
     <div class="panel-wrapper collapse in">
       <mat-tab-group animationDuration="0ms" [selectedIndex]="tabs.selectedTab"
         (selectedIndexChange)="tabs.tabChanged($event)">
@@ -13,54 +13,59 @@
               <div class="table-responsive">
                 <table class="table display pb-30" id="details">
                   <tbody>
-                    <tr *ngIf="task.name">
+                    <tr *ngIf="resource.name">
                       <td>Name</td>
-                      <td>{{ task.name }}</td>
+                      <td>{{ resource.name }}</td>
                     </tr>
-                    <tr *ngIf="task.project">
+                    <tr>
                       <td>Project</td>
                       <td>
-                        <a [routerLink]="['/admin/projects/profile', task.project.id]">{{ task.project.name }}</a>
+                        <a *ngIf="resource.project" [routerLink]="['/admin/projects/profile', resource.project.id]">
+                          {{ resource.project.name }}
+                        </a>
+                        <a class="table-button" (click)="editProject()">
+                          <i class="zmdi zmdi-edit"></i>Assign project
+                        </a>
                       </td>
                     </tr>
                     <tr>
                       <td>Owner</td>
                       <td>
-                        <a *ngIf="task.user" [routerLink]="['/admin/users/profile', task.user.id]">
-                          {{ task.user.first_name || "" }} {{ task.user.last_name || "" }}
+                        <a *ngIf="resource.user" [routerLink]="['/admin/users/profile', resource.user.id]">
+                          {{ resource.user.first_name || "" }} {{ resource.user.last_name || "" }}
                         </a>
                         <a class="table-button" (click)="editOwner()">
                           <i class="zmdi zmdi-edit"></i>Change
                         </a>
                       </td>
                     </tr>
-                    <tr *ngIf="task.description">
+                    <tr *ngIf="resource.description">
                       <td>Description</td>
-                      <td class="ws-normal">{{ task.description }}</td>
+                      <td class="ws-normal">{{ resource.description }}</td>
                     </tr>
-                    <tr *ngIf="task.priority">
+                    <tr *ngIf="resource.priority">
                       <td>Priority</td>
-                      <td zPriority [value]="task.priority"></td>
+                      <td zPriority [value]="resource.priority"></td>
                     </tr>
-                    <tr *ngIf="task.status">
+                    <tr *ngIf="resource.status">
                       <td>Status</td>
-                      <td zStatus [value]="task.status"></td>
+                      <td zStatus [value]="resource.status"></td>
                     </tr>
-                    <tr *ngIf="task.start_date">
+                    <tr *ngIf="resource.start_date">
                       <td>Start Date</td>
-                      <td>{{ task.start_date | date }}</td>
+                      <td>{{ resource.start_date | date }}</td>
                     </tr>
-                    <tr *ngIf="task.end_date">
+                    <tr *ngIf="resource.end_date">
                       <td>End Date</td>
-                      <td>{{ task.end_date | date }}</td>
+                      <td>{{ resource.end_date | date }}</td>
                     </tr>
-                    <tr *ngIf="task.created_at">
+                    <tr *ngIf="resource.created_at">
                       <td>Created at</td>
-                      <td>{{ task.created_at | date: "long" }}</td>
+                      <td>{{ resource.created_at | date: "long" }}</td>
                     </tr>
-                    <tr *ngIf="task.updated_at">
+                    <tr *ngIf="resource.updated_at">
                       <td>Updated at</td>
-                      <td>{{ task.updated_at | date: "long" }}</td>
+                      <td>{{ resource.updated_at | date: "long" }}</td>
                     </tr>
                   </tbody>
                 </table>
