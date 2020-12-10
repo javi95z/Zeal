@@ -10,6 +10,8 @@ import { PROJECT_FIELDS } from "@zeal/variables";
 export class ProjectProfileAdmin
   extends AdminSingleClass<Project>
   implements OnInit {
+  membersCount = 0;
+  tasksCount = 0;
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "projects";
@@ -19,6 +21,9 @@ export class ProjectProfileAdmin
     this.getResource();
     this.buildMenu(["EDIT", "LIST", "DELETE"]);
   }
+
+  countMembers = (n: number) => (this.membersCount = n);
+  countTasks = (n: number) => (this.tasksCount = n);
 
   /**
    * Execute action depending on element clicked
@@ -50,6 +55,8 @@ export class ProjectProfileAdmin
    * Add members to project
    */
   addMember() {
+    console.log(this.resource?.users);
+
     this.editManyToMany<User>("users", this.resource?.users, [
       "first_name",
       "last_name",

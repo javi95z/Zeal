@@ -3,6 +3,7 @@ import {
   ViewChild,
   Input,
   Output,
+  EventEmitter,
   Injector,
 } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
@@ -12,6 +13,7 @@ import { ApiService, DialogService } from "@services";
 
 export class AdminListClass<T> {
   @Input() hideCols?: string[];
+  @Output() countValues = new  EventEmitter<number>();
   api: ApiService<T>;
   dialog: DialogService;
   selection: SelectionModel<T>;
@@ -57,6 +59,7 @@ export class AdminListClass<T> {
    */
   public renderView(data: T[]) {
     this.selection = new SelectionModel<T>(true, []);
+    this.countValues.emit(data.length);
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.sort = this.sort;
     setTimeout(() => (this.dataSource.paginator = this.paginator));

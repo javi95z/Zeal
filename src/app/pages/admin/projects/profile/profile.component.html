@@ -62,29 +62,14 @@
           </div>
         </mat-tab>
         <!-- Members tab -->
-        <mat-tab label="Members ({{resource.users?.length}})">
+        <mat-tab label="Members ({{membersCount}})">
           <button mat-button (click)="addMember()" zPanelButton>Add member</button>
-          <div *ngFor="let item of resource.users" class="col-sm-4 col-xs-12">
-            <div class="panel panel-default card-view">
-              <z-panel-header [title]="item.fullName" [titleLink]="['/admin', 'users', 'profile', item.id]">
-              </z-panel-header>
-              <div class="panel-wrapper collapse in">
-                <div class="panel-body text-center">
-                  <div [zAvatar]="item.imagePath" circled="80"></div>
-                  <p class="mt-10">{{ item.email }}</p>
-                </div>
-                <div class="panel-footer">
-                  <a [routerLink]="" (click)="removeMember(item)">
-                    <i class="zmdi zmdi-delete"></i> Remove
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <z-admin-users [project_id]="resource.id" (countValues)="countMembers($event)"></z-admin-users>
         </mat-tab>
         <!-- Tasks tab -->
-        <mat-tab label="Tasks ({{resource.tasks?.length}})">
-          <z-admin-tasks [project_id]="resource.id" [hideCols]="['project']"></z-admin-tasks>
+        <mat-tab label="Tasks ({{tasksCount}})">
+          <z-admin-tasks [project_id]="resource.id" [hideCols]="['project']" (countValues)="countTasks($event)">
+          </z-admin-tasks>
         </mat-tab>
       </mat-tab-group>
     </div>
