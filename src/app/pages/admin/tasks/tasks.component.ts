@@ -21,13 +21,14 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
 
   constructor(injector: Injector) {
     super(injector);
+    this.resourceName = "tasks";
   }
 
   ngOnInit(): void {
     if (this.hideCols)
       this.columns = this.columns.filter((o) => !this.hideCols.includes(o));
     const body = this.project_id ? { project: this.project_id } : null;
-    this.initData(this.api.getAll("tasks", body));
+    this.initData(body);
   }
 
   onAction(action: string, task: Task, index: number) {
@@ -50,7 +51,7 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
       .subscribe((o: Task) => {
         if (o) {
           if (this.project_id) o.project = this.project_id;
-          this.api.createOne("tasks", o).then((res) => super.addData(res.data));
+          super.createData(o);
         }
       });
   }
@@ -63,9 +64,7 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
    */
   private deleteTask(t: Task, i: number) {
     this.dialog.deleteDialog(t.name).subscribe((res) => {
-      if (res) {
-        super.deleteData(this.api.deleteOne("tasks", t.id), i);
-      }
+      if (res) super.deleteData(t.id, i);
     });
   }
 }

@@ -14,8 +14,9 @@ export class ApiService<T> {
   /**
    * Get all resources
    * @param uri URI Resource name
+   * @param obj Optional body for the request
    */
-  getAll(uri: string, obj?: Object): Promise<ApiCollection<any>> {
+  getAll(uri: string, obj?: object): Promise<ApiCollection<any>> {
     return new Promise((resolve, reject) => {
       this.http
         .post<ApiCollection<any>>(`${env.urlApi}/${uri}/index`, obj)

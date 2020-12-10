@@ -13,11 +13,12 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
 
   constructor(injector: Injector) {
     super(injector);
+    this.resourceName = "users";
   }
 
   ngOnInit() {
     const body = this.project_id ? { project: this.project_id } : null;
-    this.initData(this.api.getAll("users", body));
+    this.initData(body);
   }
 
   onAction(action: string, user: User, index: number) {
@@ -40,7 +41,7 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
       .subscribe((o: User) => {
         if (o) {
           if (this.project_id) o.projects = [this.project_id];
-          this.api.createOne("users", o).then((res) => super.addData(res.data));
+          super.createData(o);
         }
       });
   }
@@ -58,9 +59,7 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
         fields: USER_FIELDS,
       })
       .subscribe((result) => {
-        if (result) {
-          super.updateData(this.api.updateOne("users", result, user.id), i);
-        }
+        if (result) super.updateData(result, user.id, i);
       });
   }
 
@@ -73,9 +72,7 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
   private deleteUser(u: User, i: number) {
     const user = new User(u);
     this.dialog.deleteDialog(user.fullName).subscribe((res) => {
-      if (res) {
-        super.deleteData(this.api.deleteOne("users", user.id), i);
-      }
+      if (res) super.deleteData(user.id, i);
     });
   }
 }

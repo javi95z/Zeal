@@ -13,7 +13,8 @@ import { ApiService, DialogService } from "@services";
 
 export class AdminListClass<T> {
   @Input() hideCols?: string[];
-  @Output() countValues = new  EventEmitter<number>();
+  @Output() countValues = new EventEmitter<number>();
+  public resourceName: string;
   api: ApiService<T>;
   dialog: DialogService;
   selection: SelectionModel<T>;
@@ -43,13 +44,15 @@ export class AdminListClass<T> {
   /**
    * Retrieve data from the API
    * and render it
-   * @param request API request to load data
+   * @param obj Optional body for the request
    */
-  public initData(request: Promise<any>): void {
+  public async initData(body?: object): Promise<boolean> {
     this.selection = new SelectionModel<T>(true, []);
-    request
+    await this.api
+      .getAll(this.resourceName, body || null)
       .then((res) => this.renderView(res.data))
       .finally(() => (this.isLoading = false));
+    return true;
   }
 
   /**
@@ -67,22 +70,26 @@ export class AdminListClass<T> {
   }
 
   /**
-   * Add new information to the table
-   * @param data New data
+   * Send API request to create information
+   * and add it to the table too
+   * @param resource New resource data to create
    */
-  public addData(data: T) {
-    this.dataSource.data.push(data);
-    this.dataSource._updateChangeSubscription();
+  public createData(resource: T) {
+    this.api
+      .createOne(this.resourceName, resource)
+      .then((res) => this.addDataTable(res.data));
   }
 
   /**
    * Send API request to update information
    * and change it on the table too
-   * @param request API request to update data
+   * @param resource New resource data to update
+   * @param id Id of resource to update
    * @param index Index of the table row
    */
-  public updateData(request: Promise<any>, index: number) {
-    request
+  public updateData(resource: T, id: number, index: number) {
+    this.api
+      .updateOne(this.resourceName, resource, id)
       .then((res) => {
         this.dataSource.data[index] = res.data;
         this.dataSource._updateChangeSubscription();
@@ -93,15 +100,25 @@ export class AdminListClass<T> {
   /**
    * Send API request to delete information
    * and remove it from the table too
-   * @param request API request to remove data
+   * @param id Id of resource to delete
    * @param index Index of the table row
    */
-  public deleteData(request: Promise<any>, index: number) {
-    request
+  public deleteData(id: number, index: number) {
+    this.api
+      .deleteOne(this.resourceName, id)
       .then(() => {
         this.dataSource.data.splice(index, 1);
         this.dataSource._updateChangeSubscription();
       })
       .catch((err) => console.error(err));
+  }
+
+  /**
+   * Add new information to the table
+   * @param data New data
+   */
+  private addDataTable(data: T) {
+    this.dataSource.data.push(data);
+    this.dataSource._updateChangeSubscription();
   }
 }

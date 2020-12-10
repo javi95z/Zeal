@@ -21,10 +21,11 @@ export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
 
   constructor(injector: Injector) {
     super(injector);
+    this.resourceName = "projects";
   }
 
   ngOnInit() {
-    this.initData(this.api.getAll("projects"));
+    this.initData();
   }
 
   onAction(action: string, project: Project, index: number) {
@@ -51,12 +52,7 @@ export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
         fields: PROJECT_FIELDS,
       })
       .subscribe((result) => {
-        if (result) {
-          this.updateData(
-            this.api.updateOne("projects", result, project.id),
-            i
-          );
-        }
+        if (result) super.updateData(result, project.id, i);
       });
   }
 
@@ -67,11 +63,8 @@ export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
    * @param i Index
    */
   private deleteProject(p: Project, i: number) {
-    const project = new Project(p);
-    this.dialog.deleteDialog(project.name).subscribe((res) => {
-      if (res) {
-        this.deleteData(this.api.deleteOne("projects", project.id), i);
-      }
+    this.dialog.deleteDialog(p.name).subscribe((res) => {
+      if (res) this.deleteData(p.id, i);
     });
   }
 }
