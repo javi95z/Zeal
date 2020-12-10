@@ -1,17 +1,30 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { ViewChild, Input } from "@angular/core";
+import {
+  ViewChild,
+  Input,
+  Output,
+  Injector,
+} from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
+import { ApiService, DialogService } from "@services";
 
 export class AdminListClass<T> {
   @Input() hideCols?: string[];
+  api: ApiService<T>;
+  dialog: DialogService;
   selection: SelectionModel<T>;
   dataSource = new MatTableDataSource<T>();
   isLoading = true;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
+
+  constructor(private injectorObj: Injector) {
+    this.api = this.injectorObj.get(ApiService);
+    this.dialog = this.injectorObj.get(DialogService);
+  }
 
   public isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;

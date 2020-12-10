@@ -1,5 +1,4 @@
-import { Component, OnInit } from "@angular/core";
-import { ApiService, DialogService } from "@services";
+import { Component, OnInit, Injector } from "@angular/core";
 import { AdminListClass } from "@core/classes/adminlist";
 import { Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
@@ -20,8 +19,8 @@ export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
     "actions",
   ];
 
-  constructor(private api: ApiService<Project>, private dialog: DialogService) {
-    super();
+  constructor(injector: Injector) {
+    super(injector);
   }
 
   ngOnInit() {

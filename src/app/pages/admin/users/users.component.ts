@@ -1,5 +1,4 @@
-import { Component, OnInit } from "@angular/core";
-import { ApiService, DialogService } from "@services";
+import { Component, OnInit, Input, Injector } from "@angular/core";
 import { AdminListClass } from "@core/classes/adminlist";
 import { User } from "@models";
 import { USER_FIELDS } from "@zeal/variables";
@@ -18,8 +17,8 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
     "actions",
   ];
 
-  constructor(private api: ApiService<User>, private dialog: DialogService) {
-    super();
+  constructor(injector: Injector) {
+    super(injector);
   }
 
   ngOnInit() {

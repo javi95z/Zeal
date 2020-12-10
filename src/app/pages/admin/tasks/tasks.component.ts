@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Injector } from "@angular/core";
 import { AdminListClass } from "@zeal/core/classes/adminlist";
 import { Task } from "@models";
-import { ApiService, DialogService } from "@services";
 import { TASK_FIELDS } from "@zeal/variables";
 
 @Component({
@@ -20,8 +19,8 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
     "actions",
   ];
 
-  constructor(private api: ApiService<Task>, private dialog: DialogService) {
-    super();
+  constructor(injector: Injector) {
+    super(injector);
   }
 
   ngOnInit(): void {
