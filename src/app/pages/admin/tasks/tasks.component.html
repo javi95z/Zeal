@@ -34,6 +34,14 @@
             [routerLink]="['/admin/projects/profile', element.project.id]">{{ element?.project.name }}</a>
         </td>
       </ng-container>
+      
+      <!-- Priority Column -->
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
+        <td *matCellDef="let element" class="text-center">
+          <div zPriority [value]="element.priority"></div>
+        </td>
+      </ng-container>
 
       <!-- Status Column -->
       <ng-container matColumnDef="status">

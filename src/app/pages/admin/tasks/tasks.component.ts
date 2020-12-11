@@ -13,6 +13,7 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
     "select",
     "name",
     "project",
+    "priority",
     "status",
     "start_date",
     "end_date",
@@ -22,6 +23,7 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "tasks";
+    this.fields = TASK_FIELDS;
   }
 
   ngOnInit(): void {
@@ -34,10 +36,10 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   onAction(action: string, task: Task, index: number) {
     switch (action) {
       case "EDIT":
-        // this.editTask(user, index);
+        super.editDialog(task, task.id, index);
         break;
       case "DELETE":
-        this.deleteTask(task, index);
+        super.deleteDialog(task.id, index, task.name);
         break;
     }
   }
@@ -54,17 +56,5 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
           super.createData(o);
         }
       });
-  }
-
-  /**
-   * Confirmation dialog
-   * to remove task
-   * @param t Task
-   * @param i Index
-   */
-  private deleteTask(t: Task, i: number) {
-    this.dialog.deleteDialog(t.name).subscribe((res) => {
-      if (res) super.deleteData(t.id, i);
-    });
   }
 }

@@ -22,6 +22,7 @@ export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "projects";
+    this.fields = PROJECT_FIELDS;
   }
 
   ngOnInit() {
@@ -31,40 +32,11 @@ export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
   onAction(action: string, project: Project, index: number) {
     switch (action) {
       case "EDIT":
-        this.editProject(project, index);
+        super.editDialog(project, project.id, index);
         break;
       case "DELETE":
-        this.deleteProject(project, index);
+        super.deleteDialog(project.id, index, project.name);
         break;
     }
-  }
-
-  /**
-   * Show dialog and return updated project
-   * Send API request for modification
-   * @param project Project
-   * @param i Index
-   */
-  private editProject(project: Project, i: number) {
-    this.dialog
-      .editDialog<Project>({
-        object: project,
-        fields: PROJECT_FIELDS,
-      })
-      .subscribe((result) => {
-        if (result) super.updateData(result, project.id, i);
-      });
-  }
-
-  /**
-   * Confirmation dialog
-   * to remove project
-   * @param p Project
-   * @param i Index
-   */
-  private deleteProject(p: Project, i: number) {
-    this.dialog.deleteDialog(p.name).subscribe((res) => {
-      if (res) this.deleteData(p.id, i);
-    });
   }
 }

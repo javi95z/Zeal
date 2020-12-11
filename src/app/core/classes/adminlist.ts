@@ -1,4 +1,3 @@
-import { SelectionModel } from "@angular/cdk/collections";
 import {
   ViewChild,
   Input,
@@ -6,15 +5,18 @@ import {
   EventEmitter,
   Injector,
 } from "@angular/core";
+import { SelectionModel } from "@angular/cdk/collections";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
+import { Field } from "@models";
 import { ApiService, DialogService } from "@services";
 
 export class AdminListClass<T> {
   @Input() hideCols?: string[];
   @Output() countValues = new EventEmitter<number>();
   public resourceName: string;
+  public fields: Field[];
   api: ApiService<T>;
   dialog: DialogService;
   selection: SelectionModel<T>;
@@ -81,13 +83,31 @@ export class AdminListClass<T> {
   }
 
   /**
+   * Show dialog and return updated resource
+   * Send API request for modification
+   * @param resource New resource data to update
+   * @param id Id of resource to update
+   * @param index Index of the table row
+   */
+  public editDialog(resource: T, id: number, index: number) {
+    this.dialog
+      .editDialog<T>({
+        object: resource,
+        fields: this.fields,
+      })
+      .subscribe((result) => {
+        if (result) this.updateData(result, id, index);
+      });
+  }
+
+  /**
    * Send API request to update information
    * and change it on the table too
    * @param resource New resource data to update
    * @param id Id of resource to update
    * @param index Index of the table row
    */
-  public updateData(resource: T, id: number, index: number) {
+  private updateData(resource: T, id: number, index: number) {
     this.api
       .updateOne(this.resourceName, resource, id)
       .then((res) => {
@@ -98,12 +118,24 @@ export class AdminListClass<T> {
   }
 
   /**
+   * Confirmation dialog
+   * to remove user
+   * @param id Id of resource to delete
+   * @param index Index of the table row
+   */
+  public deleteDialog(id: number, index: number, label?: string) {
+    this.dialog.deleteDialog(label).subscribe((res) => {
+      if (res) this.deleteData(id, index);
+    });
+  }
+
+  /**
    * Send API request to delete information
    * and remove it from the table too
    * @param id Id of resource to delete
    * @param index Index of the table row
    */
-  public deleteData(id: number, index: number) {
+  private deleteData(id: number, index: number) {
     this.api
       .deleteOne(this.resourceName, id)
       .then(() => {

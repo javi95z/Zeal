@@ -14,6 +14,7 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "users";
+    this.fields = USER_FIELDS;
   }
 
   ngOnInit() {
@@ -24,10 +25,10 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
   onAction(action: string, user: User, index: number) {
     switch (action) {
       case "EDIT":
-        this.editUser(user, index);
+        super.editDialog(user, user.id, index);
         break;
       case "DELETE":
-        this.deleteUser(user, index);
+        super.deleteDialog(user.id, index, user.name);
         break;
     }
   }
@@ -44,35 +45,5 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
           super.createData(o);
         }
       });
-  }
-
-  /**
-   * Show dialog and return updated user
-   * Send API request for modification
-   * @param user User
-   * @param i Table index
-   */
-  private editUser(user: User, i: number) {
-    this.dialog
-      .editDialog<User>({
-        object: user,
-        fields: USER_FIELDS,
-      })
-      .subscribe((result) => {
-        if (result) super.updateData(result, user.id, i);
-      });
-  }
-
-  /**
-   * Confirmation dialog
-   * to remove user
-   * @param u User
-   * @param i Index
-   */
-  private deleteUser(u: User, i: number) {
-    const user = new User(u);
-    this.dialog.deleteDialog(user.name).subscribe((res) => {
-      if (res) super.deleteData(user.id, i);
-    });
   }
 }

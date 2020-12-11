@@ -1,6 +1,7 @@
 import { Component, OnInit, Injector } from "@angular/core";
 import { AdminListClass } from "@core/classes/adminlist";
 import { Team } from "@models";
+import { TEAM_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-admin-teams",
@@ -12,6 +13,7 @@ export class TeamsAdmin extends AdminListClass<Team> implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "teams";
+    this.fields = TEAM_FIELDS;
   }
 
   ngOnInit() {
@@ -21,23 +23,11 @@ export class TeamsAdmin extends AdminListClass<Team> implements OnInit {
   onAction(action: string, team: Team, index: number) {
     switch (action) {
       case "EDIT":
-        // this.editTeam(team, index);
+        super.editDialog(team, team.id, index);
         break;
       case "DELETE":
-        this.deleteTeam(team, index);
+        super.deleteDialog(team.id, index, team.name);
         break;
     }
-  }
-
-  /**
-   * Confirmation dialog
-   * to remove team
-   * @param t Team
-   * @param i Index
-   */
-  private deleteTeam(t: Team, i: number) {
-    this.dialog.deleteDialog(t.name).subscribe((res) => {
-      if (res) super.deleteData(t.id, i);
-    });
   }
 }
