@@ -1,0 +1,7 @@
+<div *ngIf="listValues">
+  <div class="user-icon" *ngFor="let item of listValues">
+    <a [routerLink]="[path + '/' + item.id]" [matTooltip]="item.name">
+      <div [zAvatar]="item.profile_img" circled="30"></div>
+    </a>
+  </div>
+</div>

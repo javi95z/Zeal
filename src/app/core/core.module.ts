@@ -13,6 +13,7 @@ import {
   NoResultsComponent,
   PanelHeaderComponent,
   ToastMessageComponent,
+  UserIconsComponent
 } from "./components";
 import {
   AvatarDirective,
@@ -45,6 +46,7 @@ const components = [
   PriorityDirective,
   StatusDirective,
   ToastMessageComponent,
+  UserIconsComponent
 ];
 
 const modules = [

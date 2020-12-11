@@ -8,3 +8,4 @@ export * from "./panel-header/panel-header.component";
 export * from "./tables/actions-menu/actions-menu.component";
 export * from "./tables/no-results/no-results.component";
 export * from "./toast-message/toast-message.component";
+export * from "./user-icons/user-icons.component";
