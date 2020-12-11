@@ -22,6 +22,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
         <td *matCellDef="let element">
           <a [routerLink]="['/admin/projects/profile', element.id]">{{ element?.name }}</a>
+          <p class="fs-sm" zOverflow width="600">{{ element?.description }}</p>
         </td>
       </ng-container>
 
