@@ -2,7 +2,7 @@
 <z-error-message *ngIf="error"></z-error-message>
 <div class="row" *ngIf="!isLoading">
   <div class="col-sm-12" *ngIf="!error">
-    <z-panel-header [title]="resource.fullName" [menu]="menu" (action)="onAction($event)"></z-panel-header>
+    <z-panel-header [title]="resource.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
     <div class="panel-wrapper collapse in">
       <mat-tab-group animationDuration="0ms" [selectedIndex]="tabs.selectedTab"
         (selectedIndexChange)="tabs.tabChanged($event)">
@@ -17,9 +17,9 @@
                       <td>Suffix</td>
                       <td>{{ resource.suffix }}</td>
                     </tr>
-                    <tr *ngIf="resource.fullName">
+                    <tr *ngIf="resource.name">
                       <td>Fullname</td>
-                      <td>{{ resource.fullName }}</td>
+                      <td>{{ resource.name }}</td>
                     </tr>
                     <tr *ngIf="resource.email">
                       <td>Email</td>

@@ -85,16 +85,10 @@ export const USER_FIELDS: Field[] = [
     validators: [Validators.maxLength(10)],
   },
   {
-    key: "first_name",
-    label: "First Name",
+    key: "name",
+    label: "Full name",
     type: "text",
-    validators: [Validators.maxLength(50)],
-  },
-  {
-    key: "last_name",
-    label: "Last Name",
-    type: "text",
-    validators: [Validators.required, Validators.maxLength(50)],
+    validators: [Validators.required],
   },
   {
     key: "email",

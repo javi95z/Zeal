@@ -6,10 +6,9 @@ export class User {
   api_token: string;
   background_img: string;
   email: string;
-  first_name: string;
   gender: "female" | "male";
   is_admin: boolean;
-  last_name: string;
+  name: string;
   profile_img: string;
   role?: any;
   suffix: string;
@@ -21,10 +20,6 @@ export class User {
 
   constructor(values: User) {
     Object.assign(this, reduceObject(values));
-  }
-
-  get fullName(): string {
-    return `${this.first_name || ""} ${this.last_name || ""}`;
   }
 
   get imagePath(): string {

@@ -71,7 +71,7 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
    */
   private deleteUser(u: User, i: number) {
     const user = new User(u);
-    this.dialog.deleteDialog(user.fullName).subscribe((res) => {
+    this.dialog.deleteDialog(user.name).subscribe((res) => {
       if (res) super.deleteData(user.id, i);
     });
   }

@@ -52,7 +52,7 @@ export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
       "teams",
       this.resource.teams,
       team.id,
-      this.resource.fullName
+      this.resource.name
     );
   }
 
