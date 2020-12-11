@@ -11,6 +11,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { Field } from "@models";
 import { ApiService, DialogService } from "@services";
+import { reduceObject } from "@zeal/utils";
 
 export class AdminListClass<T> {
   @Input() hideCols?: string[];
@@ -72,11 +73,29 @@ export class AdminListClass<T> {
   }
 
   /**
+   * Show dialog and return new resource
+   * Add aditional data if existent
+   * Send API request for modification
+   * @param extraData Aditional data
+   */
+  public createDialog(extraData?: object) {
+    this.dialog
+      .editDialog<T>({
+        object: null,
+        fields: this.fields,
+      })
+      .subscribe((o: T) => {
+        if (extraData) Object.assign(o, reduceObject(extraData));
+        this.createData(o);
+      });
+  }
+
+  /**
    * Send API request to create information
    * and add it to the table too
    * @param resource New resource data to create
    */
-  public createData(resource: T) {
+  private createData(resource: T) {
     this.api
       .createOne(this.resourceName, resource)
       .then((res) => this.addDataTable(res.data));
@@ -95,8 +114,8 @@ export class AdminListClass<T> {
         object: resource,
         fields: this.fields,
       })
-      .subscribe((result) => {
-        if (result) this.updateData(result, id, index);
+      .subscribe((o: T) => {
+        if (o) this.editData(o, id, index);
       });
   }
 
@@ -107,7 +126,7 @@ export class AdminListClass<T> {
    * @param id Id of resource to update
    * @param index Index of the table row
    */
-  private updateData(resource: T, id: number, index: number) {
+  private editData(resource: T, id: number, index: number) {
     this.api
       .updateOne(this.resourceName, resource, id)
       .then((res) => {

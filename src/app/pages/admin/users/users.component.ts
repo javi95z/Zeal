@@ -34,16 +34,8 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
   }
 
   createUser() {
-    this.dialog
-      .editDialog<User>({
-        object: null,
-        fields: USER_FIELDS,
-      })
-      .subscribe((o: User) => {
-        if (o) {
-          if (this.project_id) o.projects = [this.project_id];
-          super.createData(o);
-        }
-      });
+    const data = {};
+    if (this.project_id) data["projects"] = [this.project_id];
+    this.createDialog(data);
   }
 }

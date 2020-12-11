@@ -1,5 +1,5 @@
 <z-loading *ngIf="isLoading"></z-loading>
-<button mat-button (click)="createUser()" *ngIf="dataSource.data.length" zPanelButton>Create user</button>
+<button mat-button (click)="createUser()" *ngIf="!isLoading" zPanelButton>Create user</button>
 <div class="table-wrap" *ngIf="!isLoading">
   <div class="table-responsive" *ngIf="dataSource.data.length">
     <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>

@@ -45,16 +45,8 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   }
 
   createTask() {
-    this.dialog
-      .editDialog<Task>({
-        object: null,
-        fields: TASK_FIELDS,
-      })
-      .subscribe((o: Task) => {
-        if (o) {
-          if (this.project_id) o.project = this.project_id;
-          super.createData(o);
-        }
-      });
+    const data = {};
+    if (this.project_id) data["project"] = this.project_id;
+    this.createDialog(data);
   }
 }

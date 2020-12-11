@@ -1,7 +1,7 @@
 <z-loading *ngIf="isLoading"></z-loading>
+<button mat-button (click)="createTask()" *ngIf="!isLoading" zPanelButton>Create task</button>
 <div class="table-wrap" *ngIf="!isLoading">
   <div class="table-responsive" *ngIf="dataSource.data.length">
-    <button mat-button (click)="createTask()" zPanelButton>Create task</button>
     <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
