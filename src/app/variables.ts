@@ -143,6 +143,19 @@ export const TASK_FIELDS: Field[] = [
     type: "date",
   },
 ];
+export const TEAM_FIELDS: Field[] = [
+  {
+    key: "name",
+    label: "Name",
+    type: "text",
+    validators: [Validators.required],
+  },
+  {
+    key: "description",
+    label: "Description",
+    type: "textarea",
+  },
+];
 export const PANEL_ACTIONS: PanelAction[] = [
   {
     name: "Edit",
