@@ -9,28 +9,29 @@ import { TASK_FIELDS } from "@zeal/variables";
 })
 export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   @Input() project?: number;
-  columns: string[] = [
-    "select",
-    "name",
-    "project",
-    "priority",
-    "owner",
-    "status",
-    "start_date",
-    "end_date",
-    "actions",
-  ];
+  @Input() user?: number;
 
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "tasks";
     this.fields = TASK_FIELDS;
+    this.columns = [
+      "select",
+      "name",
+      "project",
+      "priority",
+      "owner",
+      "status",
+      "start_date",
+      "end_date",
+      "actions",
+    ];
   }
 
   ngOnInit(): void {
-    if (this.hideCols)
-      this.columns = this.columns.filter((o) => !this.hideCols.includes(o));
-    const body = this.project ? { project: this.project } : null;
+    const body = {};
+    if (this.project) body["project"] = this.project;
+    if (this.user) body["user"] = this.user;
     this.initData(body);
   }
 
@@ -48,6 +49,7 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   createTask() {
     const data = {};
     if (this.project) data["project"] = this.project;
+    if (this.user) data["user"] = this.user;
     this.createDialog(data);
   }
 }

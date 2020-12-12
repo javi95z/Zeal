@@ -8,21 +8,20 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   templateUrl: "./projects.component.html",
 })
 export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
-  columns: string[] = [
-    "select",
-    "name",
-    "contact",
-    "priority",
-    "status",
-    "start_date",
-    "end_date",
-    "actions",
-  ];
-
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "projects";
     this.fields = PROJECT_FIELDS;
+    this.columns = [
+      "select",
+      "name",
+      "contact",
+      "priority",
+      "status",
+      "start_date",
+      "end_date",
+      "actions",
+    ];
   }
 
   ngOnInit() {

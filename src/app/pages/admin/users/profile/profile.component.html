@@ -69,24 +69,13 @@
           </div>
         </mat-tab>
         <!-- Teams tab -->
-        <mat-tab label="Teams ({{resource.teams.length}})">
+        <mat-tab label="Teams ({{teamsCount}})">
           <button mat-button (click)="addTeam()" zPanelButton>Add team</button>
-          <div *ngFor="let item of resource.teams" class="col-sm-4 col-xs-12">
-            <div class="panel panel-default card-view">
-              <z-panel-header [title]="item.name" [titleLink]="['/admin', 'teams', 'profile', item.id]">
-              </z-panel-header>
-              <div class="panel-wrapper collapse in">
-                <div class="panel-body text-center">
-                  <p class="mt-10">{{ item.description }}</p>
-                </div>
-                <div class="panel-footer">
-                  <a [routerLink]="" (click)="removeTeam(item)">
-                    <i class="zmdi zmdi-delete"></i> Remove
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <z-admin-teams [user]="resource.id" (countValues)="countTeams($event)"></z-admin-teams>
+        </mat-tab>
+        <!-- Tasks tab -->
+        <mat-tab label="Tasks ({{tasksCount}})">
+          <z-admin-tasks [user]="resource.id" [hideCols]="['owner']" (countValues)="countTasks($event)"></z-admin-tasks>
         </mat-tab>
       </mat-tab-group>
     </div>

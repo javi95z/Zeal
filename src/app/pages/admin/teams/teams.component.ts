@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from "@angular/core";
+import { Component, OnInit, Injector, Input } from "@angular/core";
 import { AdminListClass } from "@core/classes/adminlist";
 import { Team } from "@models";
 import { TEAM_FIELDS } from "@zeal/variables";
@@ -8,16 +8,19 @@ import { TEAM_FIELDS } from "@zeal/variables";
   templateUrl: "./teams.component.html",
 })
 export class TeamsAdmin extends AdminListClass<Team> implements OnInit {
-  columns: string[] = ["select", "name", "members", "actions"];
+  @Input() user?: number;
 
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "teams";
     this.fields = TEAM_FIELDS;
+    this.columns = ["select", "name", "members", "actions"];
   }
 
   ngOnInit() {
-    this.initData();
+    const body = {};
+    if (this.user) body["user"] = this.user;
+    this.initData(body);
   }
 
   onAction(action: string, team: Team, index: number) {

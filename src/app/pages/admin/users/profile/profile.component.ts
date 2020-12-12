@@ -8,6 +8,8 @@ import { USER_FIELDS } from "@zeal/variables";
   styleUrls: ["./profile.component.scss"],
 })
 export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
+  tasksCount = 0;
+  teamsCount = 0;
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "users";
@@ -17,6 +19,9 @@ export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
     this.getResource();
     this.buildMenu(["EDIT", "LIST", "DELETE"]);
   }
+
+  countTasks = (n: number) => (this.tasksCount = n);
+  countTeams = (n: number) => (this.teamsCount = n);
 
   /**
    * Execute action depending on element clicked

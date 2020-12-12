@@ -10,12 +10,12 @@ import { USER_FIELDS } from "@zeal/variables";
 export class UsersAdmin extends AdminListClass<User> implements OnInit {
   @Input() project?: number;
   @Input() team?: number;
-  columns: string[] = ["select", "name", "email", "role", "gender", "actions"];
 
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "users";
     this.fields = USER_FIELDS;
+    this.columns = ["select", "name", "email", "role", "gender", "actions"];
   }
 
   ngOnInit() {

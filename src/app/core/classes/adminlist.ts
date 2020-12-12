@@ -18,6 +18,7 @@ export class AdminListClass<T> {
   @Output() countValues = new EventEmitter<number>();
   public resourceName: string;
   public fields: Field[];
+  public columns: string[];
   api: ApiService<T>;
   dialog: DialogService;
   selection: SelectionModel<T>;
@@ -50,6 +51,8 @@ export class AdminListClass<T> {
    * @param obj Optional body for the request
    */
   public async initData(body?: object): Promise<boolean> {
+    if (this.hideCols)
+      this.columns = this.columns.filter((o) => !this.hideCols.includes(o));
     this.selection = new SelectionModel<T>(true, []);
     await this.api
       .getAll(this.resourceName, body || null)
