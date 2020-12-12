@@ -31,9 +31,9 @@
                     <tr>
                       <td>Owner</td>
                       <td>
-                        <a *ngIf="resource.user" [routerLink]="['/admin/users/profile', resource.user.id]">
-                          {{ resource.user.name }}
-                        </a>
+                        <z-user-icons *ngIf="resource.user" [listValues]="[resource.user]" path="/admin/users/profile"
+                          size="25">
+                        </z-user-icons>
                         <a class="table-button" (click)="editOwner()">
                           <i class="zmdi zmdi-edit"></i>Change
                         </a>
