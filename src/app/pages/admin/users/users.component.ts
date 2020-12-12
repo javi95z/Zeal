@@ -8,7 +8,8 @@ import { USER_FIELDS } from "@zeal/variables";
   templateUrl: "./users.component.html",
 })
 export class UsersAdmin extends AdminListClass<User> implements OnInit {
-  @Input() project_id?: number;
+  @Input() project?: number;
+  @Input() team?: number;
   columns: string[] = ["select", "name", "email", "role", "gender", "actions"];
 
   constructor(injector: Injector) {
@@ -18,7 +19,9 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
   }
 
   ngOnInit() {
-    const body = this.project_id ? { project: this.project_id } : null;
+    const body = {};
+    if (this.project) body["project"] = this.project;
+    if (this.team) body["team"] = this.team;
     this.initData(body);
   }
 
@@ -35,7 +38,8 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
 
   createUser() {
     const data = {};
-    if (this.project_id) data["projects"] = [this.project_id];
+    if (this.project) data["projects"] = [this.project];
+    if (this.team) data["teams"] = [this.team];
     this.createDialog(data);
   }
 }

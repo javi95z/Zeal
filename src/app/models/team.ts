@@ -6,6 +6,7 @@ export class Team {
   description?: string;
   name: string;
   profile_img: string;
+  users?: any;
   updated_at?: string | Date;
   created_at?: string | Date;
   deleted_at?: string | Date;

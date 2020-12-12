@@ -9,6 +9,7 @@ import {
   TasksAdmin,
   TaskProfileAdmin,
   TeamsAdmin,
+  TeamProfileAdmin
 } from "./";
 
 export const routes: Routes = [
@@ -24,7 +25,7 @@ export const routes: Routes = [
       { path: "tasks", component: TasksAdmin },
       { path: "tasks/profile/:id", component: TaskProfileAdmin },
       { path: "teams", component: TeamsAdmin },
-      // { path: "teams/profile/:id", component: TaskProfileAdmin },
+      { path: "teams/profile/:id", component: TeamProfileAdmin },
       { path: "**", redirectTo: "/admin/users" },
     ],
   },

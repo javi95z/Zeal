@@ -8,7 +8,7 @@ import { TASK_FIELDS } from "@zeal/variables";
   templateUrl: "./tasks.component.html",
 })
 export class TasksAdmin extends AdminListClass<Task> implements OnInit {
-  @Input() project_id?: number;
+  @Input() project?: number;
   columns: string[] = [
     "select",
     "name",
@@ -29,7 +29,7 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   ngOnInit(): void {
     if (this.hideCols)
       this.columns = this.columns.filter((o) => !this.hideCols.includes(o));
-    const body = this.project_id ? { project: this.project_id } : null;
+    const body = this.project ? { project: this.project } : null;
     this.initData(body);
   }
 
@@ -46,7 +46,7 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
 
   createTask() {
     const data = {};
-    if (this.project_id) data["project"] = this.project_id;
+    if (this.project) data["project"] = this.project;
     this.createDialog(data);
   }
 }
