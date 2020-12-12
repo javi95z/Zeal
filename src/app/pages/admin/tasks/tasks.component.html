@@ -29,17 +29,26 @@
       <!-- Project Column -->
       <ng-container matColumnDef="project">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Project </th>
-        <td *matCellDef="let element" zOverflow [width]="200">
+        <td *matCellDef="let element" zOverflow width="200">
           <a *ngIf="element?.project"
             [routerLink]="['/admin/projects/profile', element.project.id]">{{ element?.project.name }}</a>
         </td>
       </ng-container>
-      
+
       <!-- Priority Column -->
       <ng-container matColumnDef="priority">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
         <td *matCellDef="let element" class="text-center">
           <div zPriority [value]="element.priority"></div>
+        </td>
+      </ng-container>
+
+      <!-- Owner Column -->
+      <ng-container matColumnDef="owner">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Owner </th>
+        <td *matCellDef="let element" zOverflow width="200">
+          <a *ngIf="element?.user"
+            [routerLink]="['/admin/users/profile', element.user.id]">{{ element?.user.name }}</a>
         </td>
       </ng-container>
 

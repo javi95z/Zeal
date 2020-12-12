@@ -38,17 +38,11 @@ export class TaskProfileAdmin extends AdminSingleClass<Task> implements OnInit {
   /**
    * Edit owner of the task
    */
-  editOwner() {
-    this.editOneToMany<User>("user", this.resource?.user, [
-      "first_name",
-      "last_name",
-    ]);
-  }
+  editOwner = () => this.editOneToMany<User>("user", this.resource?.user);
 
   /**
    * Edit project of the task
    */
-  editProject() {
+  editProject = () =>
     this.editOneToMany<Project>("project", this.resource?.project);
-  }
 }

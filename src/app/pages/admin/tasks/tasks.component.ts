@@ -14,6 +14,7 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
     "name",
     "project",
     "priority",
+    "owner",
     "status",
     "start_date",
     "end_date",

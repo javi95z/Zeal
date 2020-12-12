@@ -32,7 +32,7 @@
                       <td>Owner</td>
                       <td>
                         <a *ngIf="resource.user" [routerLink]="['/admin/users/profile', resource.user.id]">
-                          {{ resource.user.first_name || "" }} {{ resource.user.last_name || "" }}
+                          {{ resource.user.name }}
                         </a>
                         <a class="table-button" (click)="editOwner()">
                           <i class="zmdi zmdi-edit"></i>Change
