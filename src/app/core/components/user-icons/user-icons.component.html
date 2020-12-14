@@ -1,5 +1,5 @@
 <div *ngIf="listValues">
-  <div class="user-icon" *ngFor="let item of listValues">
+  <div class="user-icon" *ngFor="let item of listValues" [class.overlap]="overlap">
     <a [routerLink]="[path + '/' + item.id]" [matTooltip]="item.name">
       <span class="user-avatar" [zAvatar]="item.profile_img" [circled]="size"></span>
       <span class="user-name" *ngIf="listValues.length === 1">{{ item.name }}</span>

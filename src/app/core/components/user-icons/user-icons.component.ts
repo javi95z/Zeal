@@ -9,6 +9,7 @@ export class UserIconsComponent {
   @Input() listValues: { id: number; name: string; profile_img: string }[];
   @Input() path: string;
   @Input() size = 30;
+  @Input() overlap = false;
 
   constructor() {}
 }
