@@ -1,0 +1,83 @@
+<div class="widget panel panel-default card-view panel-refresh">
+  <div class="panel-loading" *ngIf="refresh">
+    <z-loading></z-loading>
+  </div>
+  <div class="panel-heading">
+    <div class="pull-left">
+      <h6 class="panel-title txt-dark">
+        <i class="zmdi zmdi-case"></i>Projects
+        <span *ngIf="data" class="label bg-zeal">
+          {{ masterData?.length }}
+        </span>
+      </h6>
+    </div>
+    <div class="right-menu">
+      <!-- Collapse widget -->
+      <a
+        class="menu-option"
+        data-toggle="collapse"
+        href="#projectsWidget"
+        aria-expanded="true"
+      >
+        <i class="zmdi zmdi-chevron-down"></i>
+        <i class="zmdi zmdi-chevron-up"></i>
+      </a>
+      <!-- Refresh widget -->
+      <a class="menu-option" (click)="loadData()" routerLink="">
+        <i class="zmdi zmdi-replay"></i>
+      </a>
+      <!-- Options -->
+      <div class="menu-option dropdown">
+        <a
+          class="dropdown-toggle"
+          data-toggle="dropdown"
+          routerLink=""
+          aria-expanded="false"
+          role="button"
+        >
+          <i class="zmdi zmdi-more-vert"></i>
+        </a>
+        <ul class="dropdown-menu bullet dropdown-menu-right" role="menu">
+          <li role="presentation" [class.active]="filters.includes('open')">
+            <a routerLink="" (click)="filterProjects('open')" role="menuitem">
+              <span>Open</span>
+            </a>
+          </li>
+          <li role="presentation" [class.active]="filters.includes('canceled')">
+            <a routerLink="" (click)="filterProjects('canceled')" role="menuitem">
+              Canceled
+            </a>
+          </li>
+          <li role="presentation" [class.active]="filters.includes('completed')">
+            <a routerLink="" (click)="filterProjects('completed')" role="menuitem">
+              Completed
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-wrapper collapse in" id="projectsWidget">
+    <div class="panel-body pa-0">
+      <div class="row">
+        <div class="data-table table-responsive">
+          <table *ngIf="data" class="table">
+            <tbody>
+              <tr *ngFor="let item of data" class="data-table__row">
+                <td>
+                  <a [routerLink]="['/projects/profile', item.id]">
+                    {{ item.name }}
+                  </a>
+                </td>
+                <td>
+                  <div [zStatus]="item.status"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

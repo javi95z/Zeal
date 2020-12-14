@@ -1,0 +1,54 @@
+<div class="widget panel panel-default card-view panel-refresh">
+  <div class="panel-loading" *ngIf="refresh">
+    <z-loading></z-loading>
+  </div>
+  <div class="panel-heading">
+    <div class="pull-left">
+      <h6 class="panel-title txt-dark">
+        <i class="zmdi zmdi-group-work"></i>Teams
+        <span *ngIf="data" class="label bg-zeal">
+          {{ data?.length }}
+        </span>
+      </h6>
+    </div>
+    <div class="right-menu">
+      <!-- Collapse widget -->
+      <a class="menu-option" data-toggle="collapse" href="#teamsWidget" aria-expanded="true">
+        <i class="zmdi zmdi-chevron-down"></i>
+        <i class="zmdi zmdi-chevron-up"></i>
+      </a>
+      <!-- Refresh widget -->
+      <a class="menu-option" (click)="loadData()" routerLink="">
+        <i class="zmdi zmdi-replay"></i>
+      </a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-wrapper collapse in" id="teamsWidget">
+    <div class="panel-body pa-0">
+      <div class="row">
+        <div class="data-table table-responsive">
+          <table *ngIf="data" class="table">
+            <tbody>
+              <tr *ngFor="let item of data" class="data-table__row">
+                <td>
+                  <a [routerLink]="['/teams/profile', item.id]">
+                    {{ item.name }}
+                  </a>
+                </td>
+                <td class="text-right">
+                  <z-user-icons
+                    [listValues]="item.users"
+                    path="/users/profile"
+                    size="25"
+                    overlap="true"
+                  ></z-user-icons>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
