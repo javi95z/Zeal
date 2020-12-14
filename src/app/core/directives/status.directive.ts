@@ -4,7 +4,7 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
   selector: "[zStatus]"
 })
 export class StatusDirective implements OnInit {
-  @Input() value: string;
+  @Input("zStatus") value: string;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 

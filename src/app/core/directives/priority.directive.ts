@@ -6,7 +6,7 @@ import { CapitalizePipe } from "@core/pipes";
   providers: [CapitalizePipe]
 })
 export class PriorityDirective implements OnInit {
-  @Input() value: string;
+  @Input("zPriority") value: string;
   @Input() hideLabel: boolean;
 
   constructor(
@@ -24,7 +24,7 @@ export class PriorityDirective implements OnInit {
 
   private createIcon(): HTMLElement {
     let container: HTMLElement;
-    container = this.renderer.createElement("div");
+    container = this.renderer.createElement("span");
     let icon: HTMLElement;
     icon = this.renderer.createElement("i");
     icon.classList.value = this.iconAttributes();

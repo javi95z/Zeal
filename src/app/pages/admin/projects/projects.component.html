@@ -40,14 +40,16 @@
       <ng-container matColumnDef="priority">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
         <td *matCellDef="let element" class="text-center">
-          <div zPriority [value]="element.priority"></div>
+          <div [zPriority]="element.priority"></div>
         </td>
       </ng-container>
 
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-        <td *matCellDef="let element" zStatus [value]="element.status"></td>
+        <td *matCellDef="let element">
+          <div [zStatus]="element.status"></div>
+        </td>
       </ng-container>
 
       <!-- Start date Column -->
