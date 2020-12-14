@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from "@angular/core";
-import { User, Team, Role } from "@models";
+import { User, Team, Role, Project } from "@models";
 import { AdminSingleClass } from "@core/classes/adminsingle";
 import { USER_FIELDS } from "@zeal/variables";
 
@@ -8,8 +8,9 @@ import { USER_FIELDS } from "@zeal/variables";
   styleUrls: ["./profile.component.scss"],
 })
 export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
-  tasksCount = 0;
+  projectsCount = 0;
   teamsCount = 0;
+  tasksCount = 0;
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "users";
@@ -20,8 +21,9 @@ export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
     this.buildMenu(["EDIT", "LIST", "DELETE"]);
   }
 
-  countTasks = (n: number) => (this.tasksCount = n);
+  countProjects = (n: number) => (this.projectsCount = n);
   countTeams = (n: number) => (this.teamsCount = n);
+  countTasks = (n: number) => (this.tasksCount = n);
 
   /**
    * Execute action depending on element clicked
@@ -46,6 +48,13 @@ export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
    */
   addTeam() {
     this.editManyToMany<Team>("teams", this.resource?.teams);
+  }
+
+  /**
+   * Add teams to user
+   */
+  addProject() {
+    this.editManyToMany<Project>("projects", this.resource?.projects);
   }
 
   /**

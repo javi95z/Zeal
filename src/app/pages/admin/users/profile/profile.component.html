@@ -77,6 +77,11 @@
         <mat-tab label="Tasks ({{tasksCount}})">
           <z-admin-tasks [user]="resource.id" [hideCols]="['owner']" (countValues)="countTasks($event)"></z-admin-tasks>
         </mat-tab>
+        <!-- Projects tab -->
+        <mat-tab label="Projects ({{projectsCount}})">
+          <button mat-button (click)="addProject()" zPanelButton>Add project</button>
+          <z-admin-projects [user]="resource.id" (countValues)="countProjects($event)"></z-admin-projects>
+        </mat-tab>
       </mat-tab-group>
     </div>
   </div>

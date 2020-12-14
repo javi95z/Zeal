@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from "@angular/core";
+import { Component, OnInit, Injector, Input } from "@angular/core";
 import { AdminListClass } from "@core/classes/adminlist";
 import { Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
@@ -8,6 +8,8 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   templateUrl: "./projects.component.html",
 })
 export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
+  @Input() user?: number;
+
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "projects";
@@ -25,7 +27,9 @@ export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
   }
 
   ngOnInit() {
-    this.initData();
+    const body = {};
+    if (this.user) body["user"] = this.user;
+    this.initData(body);
   }
 
   onAction(action: string, project: Project, index: number) {

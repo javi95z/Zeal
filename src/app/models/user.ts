@@ -14,6 +14,7 @@ export class User {
   suffix: string;
   teams?: any[];
   projects?: any[];
+  tasks?: any[];
   locale: string;
   updated_at?: string | Date;
   created_at?: string | Date;
