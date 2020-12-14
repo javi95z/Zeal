@@ -153,7 +153,7 @@ h6 {
 .panel {
   @include mat-elevation(2);
   .panel-heading .panel-button {
-    color: #878787;
+    color: $gray;
     cursor: pointer;
     display: inline-block;
     font-size: 14px;
@@ -235,6 +235,16 @@ mat-tab-group {
 mat-calendar .mat-calendar-body-selected {
   background-color: $zeal !important;
   color: set-text-color($zeal) !important;
+}
+
+// Dropdowns
+.dropdown-menu > .active > a {
+  background: $zeal;
+  &:hover,
+  &:active {
+    color: #212121;
+    background: rgba(33, 33, 33, 0.05);
+  }
 }
 
 // Scrollbar

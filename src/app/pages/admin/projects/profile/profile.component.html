@@ -33,11 +33,11 @@
                     </tr>
                     <tr *ngIf="resource.priority">
                       <td>Priority</td>
-                      <td zPriority [value]="resource.priority"></td>
+                      <td [zPriority]="resource.priority"></td>
                     </tr>
                     <tr *ngIf="resource.status">
                       <td>Status</td>
-                      <td zStatus [value]="resource.status"></td>
+                      <td [zStatus]="resource.status"></td>
                     </tr>
                     <tr *ngIf="resource.start_date">
                       <td>Start Date</td>

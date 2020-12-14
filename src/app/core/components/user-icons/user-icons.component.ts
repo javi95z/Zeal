@@ -10,6 +10,7 @@ export class UserIconsComponent {
   @Input() path: string;
   @Input() size = 30;
   @Input() overlap = false;
+  @Input() singleValue = false;
 
   constructor() {}
 }
