@@ -33,6 +33,11 @@ export const ADMIN_MENU = [
     icon: "group-work",
   },
   {
+    name: "Roles",
+    link: "roles",
+    icon: "badge-check",
+  },
+  {
     name: "Other",
     link: "other",
     icon: "more",
@@ -149,6 +154,25 @@ export const TEAM_FIELDS: Field[] = [
     label: "Name",
     type: "text",
     validators: [Validators.required],
+  },
+  {
+    key: "description",
+    label: "Description",
+    type: "textarea",
+  },
+];
+export const ROLE_FIELDS: Field[] = [
+  {
+    key: "name",
+    label: "Name",
+    type: "text",
+    validators: [Validators.required],
+  },
+  {
+    key: "color",
+    label: "Color",
+    type: "text",
+    validators: [Validators.maxLength(7)],
   },
   {
     key: "description",

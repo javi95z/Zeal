@@ -12,6 +12,7 @@ import {
   TaskProfileAdmin,
   TeamsAdmin,
   TeamProfileAdmin,
+  RolesAdmin,
 } from "./";
 import { AdminComponent } from "./admin.component";
 import { CoreModule } from "@core/core.module";
@@ -30,6 +31,7 @@ import { LayoutModule } from "@pages/layout/layout.module";
     TaskProfileAdmin,
     TeamsAdmin,
     TeamProfileAdmin,
+    RolesAdmin,
   ],
   imports: [LayoutModule, CoreModule, RouterModule.forChild(routes)],
 })
