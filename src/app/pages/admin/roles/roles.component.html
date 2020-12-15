@@ -31,7 +31,7 @@
       <ng-container matColumnDef="color">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
         <td *matCellDef="let element">
-            {{ element?.color }}
+          <z-color [value]="element?.color"></z-color>
         </td>
       </ng-container>
 

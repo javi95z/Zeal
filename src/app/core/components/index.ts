@@ -1,5 +1,6 @@
 export * from "./back-button/back-button.component";
 export * from "./confirmation-dialog/confirmation-dialog.component";
+export * from "./color/color.component";
 export * from "./edit-dialog/edit-dialog.component";
 export * from "./error-message/error-message.component";
 export * from "./header/header.component";

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   ActionsMenuComponent,
   BackButtonComponent,
+  ColorComponent,
   ConfirmationDialogComponent,
   EditDialogComponent,
   ErrorMessageComponent,
@@ -33,6 +34,7 @@ const components = [
   AvatarDirective,
   BackButtonComponent,
   CapitalizePipe,
+  ColorComponent,
   ConfirmationDialogComponent,
   EditDialogComponent,
   ErrorMessageComponent,
@@ -59,7 +61,7 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [components, widgets],
+  declarations: [components, widgets, ColorComponent],
   imports: modules,
   exports: [modules, components, widgets],
   entryComponents: [ConfirmationDialogComponent, EditDialogComponent],
