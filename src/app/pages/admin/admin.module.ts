@@ -13,6 +13,7 @@ import {
   TeamsAdmin,
   TeamProfileAdmin,
   RolesAdmin,
+  RoleProfileAdmin,
 } from "./";
 import { AdminComponent } from "./admin.component";
 import { CoreModule } from "@core/core.module";
@@ -32,6 +33,7 @@ import { LayoutModule } from "@pages/layout/layout.module";
     TeamsAdmin,
     TeamProfileAdmin,
     RolesAdmin,
+    RoleProfileAdmin,
   ],
   imports: [LayoutModule, CoreModule, RouterModule.forChild(routes)],
 })

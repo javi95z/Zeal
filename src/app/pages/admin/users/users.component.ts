@@ -10,6 +10,7 @@ import { USER_FIELDS } from "@zeal/variables";
 export class UsersAdmin extends AdminListClass<User> implements OnInit {
   @Input() project?: number;
   @Input() team?: number;
+  @Input() role?: number;
 
   constructor(injector: Injector) {
     super(injector);
@@ -22,6 +23,7 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
     const body = {};
     if (this.project) body["project"] = this.project;
     if (this.team) body["team"] = this.team;
+    if (this.role) body["role"] = this.role;
     this.initData(body);
   }
 
@@ -40,6 +42,7 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
     const data = {};
     if (this.project) data["projects"] = [this.project];
     if (this.team) data["teams"] = [this.team];
+    if (this.role) data["role"] = this.role;
     this.createDialog(data);
   }
 }

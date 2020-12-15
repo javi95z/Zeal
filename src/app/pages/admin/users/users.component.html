@@ -35,7 +35,9 @@
       <!-- Role Column -->
       <ng-container matColumnDef="role">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
-        <td *matCellDef="let element"> {{ element.role?.name }} </td>
+        <td *matCellDef="let element">
+          <a *ngIf="element.role" [routerLink]="['/admin/roles/profile', element.role.id]">{{ element?.role.name }}</a>
+        </td>
       </ng-container>
 
       <!-- Gender Column -->

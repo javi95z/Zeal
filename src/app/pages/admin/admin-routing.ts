@@ -11,6 +11,7 @@ import {
   TeamsAdmin,
   TeamProfileAdmin,
   RolesAdmin,
+  RoleProfileAdmin,
 } from "./";
 
 export const routes: Routes = [
@@ -28,7 +29,7 @@ export const routes: Routes = [
       { path: "teams", component: TeamsAdmin },
       { path: "teams/profile/:id", component: TeamProfileAdmin },
       { path: "roles", component: RolesAdmin },
-      // { path: "roles/profile/:id", component: RoleProfileAdmin },
+      { path: "roles/profile/:id", component: RoleProfileAdmin },
       { path: "**", redirectTo: "/admin/users" },
     ],
   },
