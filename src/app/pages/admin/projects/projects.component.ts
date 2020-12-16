@@ -35,10 +35,10 @@ export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
   onAction(action: string, project: Project, index: number) {
     switch (action) {
       case "EDIT":
-        super.editDialog(project, project.id, index);
+        this.editData(project, project.id, index);
         break;
       case "DELETE":
-        super.deleteDialog(project.id, index, project.name);
+        this.deleteData(project.id, index, project.name);
         break;
     }
   }

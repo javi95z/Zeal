@@ -14,6 +14,7 @@ export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "users";
+    this.fields = USER_FIELDS;
   }
 
   ngOnInit() {
@@ -35,7 +36,7 @@ export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
         this.router.navigate(["/admin", "users"]);
         break;
       case "EDIT":
-        this.editResource(USER_FIELDS);
+        this.editResource();
         break;
       case "DELETE":
         this.deleteResource();

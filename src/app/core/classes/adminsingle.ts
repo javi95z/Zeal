@@ -1,17 +1,14 @@
 import { Injector } from "@angular/core";
 import { Location } from "@angular/common";
 import { Router, ActivatedRoute } from "@angular/router";
-import { ApiService, DialogService } from "@services";
+import { MasterClass } from "./master";
 import { Tabs, Field, PanelAction } from "@models";
 import { PANEL_ACTIONS } from "@zeal/variables";
 import { pluckFields } from "@zeal/utils";
 
-export class AdminSingleClass<T> {
-  public resourceName: string;
+export class AdminSingleClass<T> extends MasterClass<T> {
   private _resource: T;
-  api: ApiService<T>;
   route: ActivatedRoute;
-  dialog: DialogService;
   location: Location;
   router: Router;
   isLoading = true;
@@ -26,12 +23,11 @@ export class AdminSingleClass<T> {
     this._resource = value as T;
   }
 
-  constructor(private injectorObj: Injector) {
-    this.api = this.injectorObj.get(ApiService);
-    this.route = this.injectorObj.get(ActivatedRoute);
-    this.router = this.injectorObj.get(Router);
-    this.dialog = this.injectorObj.get(DialogService);
-    this.location = this.injectorObj.get(Location);
+  constructor(injector: Injector) {
+    super(injector);
+    this.route = injector.get(ActivatedRoute);
+    this.router = injector.get(Router);
+    this.location = injector.get(Location);
   }
 
   // Get one resource from route parameters
@@ -57,11 +53,11 @@ export class AdminSingleClass<T> {
    * Show editing dialog
    * @param fields List of fields in variables
    */
-  public editResource(fields: Field[]) {
+  public editResource() {
     this.dialog
       .editDialog<T>({
         object: this.resource,
-        fields: fields,
+        fields: this.fields,
       })
       .subscribe((result) => {
         if (result) this.performUpdateRequest(result);
@@ -73,13 +69,10 @@ export class AdminSingleClass<T> {
    * Show confirmation dialog
    */
   public deleteResource() {
-    this.dialog.deleteDialog().subscribe((res) => {
-      if (res) {
-        this.api
-          .deleteOne(this.resourceName, this.resource["id"])
-          .then(() => this.location.back());
-      }
-    });
+    this.deleteDialog(
+      this.resource["id"],
+      this.resource["name"] || null
+    ).then(() => this.location.back());
   }
 
   /**

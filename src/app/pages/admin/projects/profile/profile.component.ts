@@ -15,6 +15,7 @@ export class ProjectProfileAdmin
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "projects";
+    this.fields = PROJECT_FIELDS;
   }
 
   ngOnInit() {
@@ -35,7 +36,7 @@ export class ProjectProfileAdmin
         this.router.navigate(["/admin", "projects"]);
         break;
       case "EDIT":
-        this.editResource(PROJECT_FIELDS);
+        this.editResource();
         break;
       case "DELETE":
         this.deleteResource();

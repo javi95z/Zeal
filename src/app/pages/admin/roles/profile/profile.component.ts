@@ -12,6 +12,7 @@ export class RoleProfileAdmin extends AdminSingleClass<Role> implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "roles";
+    this.fields = ROLE_FIELDS;
   }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class RoleProfileAdmin extends AdminSingleClass<Role> implements OnInit {
         this.router.navigate(["/admin", "roles"]);
         break;
       case "EDIT":
-        this.editResource(ROLE_FIELDS);
+        this.editResource();
         break;
       case "DELETE":
         this.deleteResource();

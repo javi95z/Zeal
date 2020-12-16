@@ -12,6 +12,7 @@ export class TeamProfileAdmin extends AdminSingleClass<Team> implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "teams";
+    this.fields = TASK_FIELDS;
   }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class TeamProfileAdmin extends AdminSingleClass<Team> implements OnInit {
         this.router.navigate(["/admin", "users"]);
         break;
       case "EDIT":
-        this.editResource(TASK_FIELDS);
+        this.editResource();
         break;
       case "DELETE":
         this.deleteResource();

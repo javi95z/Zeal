@@ -30,10 +30,10 @@ export class UsersAdmin extends AdminListClass<User> implements OnInit {
   onAction(action: string, user: User, index: number) {
     switch (action) {
       case "EDIT":
-        super.editDialog(user, user.id, index);
+        this.editData(user, user.id, index);
         break;
       case "DELETE":
-        super.deleteDialog(user.id, index, user.name);
+        this.deleteData(user.id, index, user.name);
         break;
     }
   }

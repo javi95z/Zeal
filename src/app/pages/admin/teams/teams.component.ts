@@ -26,10 +26,10 @@ export class TeamsAdmin extends AdminListClass<Team> implements OnInit {
   onAction(action: string, team: Team, index: number) {
     switch (action) {
       case "EDIT":
-        super.editDialog(team, team.id, index);
+        this.editData(team, team.id, index);
         break;
       case "DELETE":
-        super.deleteDialog(team.id, index, team.name);
+        this.deleteData(team.id, index, team.name);
         break;
     }
   }

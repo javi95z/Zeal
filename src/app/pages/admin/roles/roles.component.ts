@@ -22,15 +22,15 @@ export class RolesAdmin extends AdminListClass<Role> implements OnInit {
   onAction(action: string, role: Role, index: number) {
     switch (action) {
       case "EDIT":
-        super.editDialog(role, role.id, index);
+        this.editData(role, role.id, index);
         break;
       case "DELETE":
-        super.deleteDialog(role.id, index, role.name);
+        this.deleteData(role.id, index, role.name);
         break;
     }
   }
 
   createRole() {
-    this.createDialog();
+    this.createData();
   }
 }

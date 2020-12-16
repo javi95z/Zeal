@@ -3,9 +3,7 @@ import { ApiService, AuthService } from "@services";
 import { User } from "@models";
 
 @Component({
-  selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit {
   user: User;

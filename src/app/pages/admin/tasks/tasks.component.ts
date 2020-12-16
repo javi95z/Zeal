@@ -38,10 +38,10 @@ export class TasksAdmin extends AdminListClass<Task> implements OnInit {
   onAction(action: string, task: Task, index: number) {
     switch (action) {
       case "EDIT":
-        super.editDialog(task, task.id, index);
+        this.editData(task, task.id, index);
         break;
       case "DELETE":
-        super.deleteDialog(task.id, index, task.name);
+        this.deleteData(task.id, index, task.name);
         break;
     }
   }

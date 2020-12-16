@@ -20,7 +20,7 @@ export class MasterClass<T> {
    * Send API request for creation
    * @param params Aditional data
    */
-  public async createDialog(params?: object) {
+  public async createDialog(params?: object): Promise<ApiResource<T>> {
     // Open dialog and save result
     let response: T;
     await this.openDialog()
@@ -41,12 +41,61 @@ export class MasterClass<T> {
   }
 
   /**
+   * Show dialog and return updated resource
+   * Send API request for modification
+   * @param resource New resource data to update
+   * @param id Id of resource to update
+   */
+  public async editDialog(resource: T, id: number): Promise<ApiResource<T>> {
+    // Open dialog and save result
+    let response: T;
+    await this.openDialog(resource)
+      .toPromise<T>()
+      .then((o) => {
+        if (!o) return;
+        // if (params) Object.assign(o, reduceObject(params));
+        response = o;
+      });
+    if (!response) return;
+    // Call API and return result
+    let result: ApiResource<T>;
+    await this.api
+      .updateOne(this.resourceName, response, id)
+      .then((o) => (result = o))
+      .catch((err) => (result = err));
+    return result;
+  }
+
+  /**
+   * Confirmation dialog
+   * to remove user
+   * @param id Id of resource to delete
+   * @param label Label to show on delete dialog
+   */
+  public async deleteDialog(id: number, label?: string) {
+    // Open dialog and save result
+    let response: boolean;
+    await this.dialog
+      .deleteDialog(label)
+      .toPromise<boolean>()
+      .then((o) => (response = o));
+    if (!response) return;
+    // Call API and return result
+    let result: boolean;
+    await this.api
+      .deleteOne(this.resourceName, id)
+      .then((o) => (result = o))
+      .catch((err) => (result = err));
+    return result;
+  }
+
+  /**
    * Open edit dialog for a resource
    * Populating the fields if needed
    */
-  private openDialog() {
+  private openDialog(resource?: T) {
     return this.dialog.editDialog<T>({
-      object: null, // !
+      object: resource || null,
       fields: this.fields,
     });
   }
