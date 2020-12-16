@@ -36,9 +36,9 @@
 
       <!-- Date fields -->
       <mat-form-field *ngSwitchCase="'date'">
-        <input matInput [matDatepicker]="endDatePicker" [placeholder]="field.label" [formControlName]="field.key">
-        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #endDatePicker></mat-datepicker>
+        <input matInput [matDatepicker]="datePickerField" [placeholder]="field.label" [formControlName]="field.key">
+        <mat-datepicker-toggle matSuffix [for]="datePickerField"></mat-datepicker-toggle>
+        <mat-datepicker #datePickerField></mat-datepicker>
       </mat-form-field>
 
       <!-- Toggle fields -->

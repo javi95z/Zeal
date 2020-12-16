@@ -19,8 +19,8 @@ import { MAT_DATE_LOCALE } from "@angular/material/core";
   providers: [
     {
       provide: MAT_DATE_LOCALE,
-      useValue: localStorage.getItem("locale") || "en"
-    }
+      useValue: "en-US",
+    },
   ],
   exports: [
     MatButtonModule,
@@ -36,7 +36,7 @@ import { MAT_DATE_LOCALE } from "@angular/material/core";
     MatSortModule,
     MatTableModule,
     MatTabsModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+  ],
 })
 export class MaterialModule {}
