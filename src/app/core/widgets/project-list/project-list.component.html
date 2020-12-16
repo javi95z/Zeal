@@ -12,30 +12,23 @@
       </h6>
     </div>
     <div class="right-menu">
+      <!-- Create new -->
+      <a *ngIf="canCreate" class="menu-option" (click)="createNew()" routerLink="">
+        <i class="zmdi zmdi-plus"></i>
+      </a>
       <!-- Collapse widget -->
-      <a
-        class="menu-option"
-        data-toggle="collapse"
-        href="#projectsWidget"
-        aria-expanded="true"
-      >
+      <a class="menu-option" data-toggle="collapse" href="#projectsWidget" aria-expanded="true">
         <i class="zmdi zmdi-chevron-down"></i>
         <i class="zmdi zmdi-chevron-up"></i>
       </a>
       <!-- Refresh widget -->
-      <a class="menu-option" (click)="loadData()" routerLink="">
+      <a class="menu-option" (click)="refreshData()" routerLink="">
         <i class="zmdi zmdi-replay"></i>
       </a>
       <!-- Options -->
-      <div class="menu-option dropdown">
-        <a
-          class="dropdown-toggle"
-          data-toggle="dropdown"
-          routerLink=""
-          aria-expanded="false"
-          role="button"
-        >
-          <i class="zmdi zmdi-more-vert"></i>
+      <div *ngIf="canFilter" class="menu-option dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" routerLink="" aria-expanded="false" role="button">
+          <i class="zmdi zmdi-filter-list"></i>
         </a>
         <ul class="dropdown-menu bullet dropdown-menu-right" role="menu">
           <li role="presentation" [class.active]="filters.includes('open')">

@@ -53,6 +53,7 @@ export const PROJECT_FIELDS: Field[] = [
     key: "name",
     label: "Name",
     type: "text",
+    validators: [Validators.required]
   },
   {
     key: "description",

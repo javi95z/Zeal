@@ -1,28 +1,34 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Injector } from "@angular/core";
 import { Team } from "@models";
-import { ApiService } from "@services";
+import { DataWidgetClass } from "@core/classes/datawidget";
+import { TEAM_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-team-list",
   templateUrl: "./team-list.component.html",
   styleUrls: ["../widgets.scss"],
 })
-export class TeamListWidget implements OnInit {
+export class TeamListWidget extends DataWidgetClass<Team> implements OnInit {
   @Input() user?: number;
-  refresh = false;
-  data: Team[];
 
-  constructor(private api: ApiService<Team>) {}
-
-  ngOnInit(): void {
-    this.loadData();
+  constructor(injector: Injector) {
+    super(injector);
+    this.resourceName = "teams";
+    this.fields = TEAM_FIELDS;
   }
 
-  public loadData() {
+  ngOnInit(): void {
+    this.params = { user: this.user };
+    this.refreshData();
+  }
+
+  refreshData() {
     this.refresh = true;
-    this.api
-      .getAll("teams", { user: this.user })
-      .then((o) => (this.data = o.data))
-      .finally(() => (this.refresh = false));
+    this.loadData().then((o) => (this.data = o));
+  }
+
+  createNew() {
+    const body = { users: [this.user] };
+    super.createNew(body);
   }
 }

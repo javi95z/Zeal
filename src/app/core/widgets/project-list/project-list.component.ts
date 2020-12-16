@@ -1,37 +1,44 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Injector } from "@angular/core";
 import { Project } from "@models";
-import { ApiService } from "@services";
+import { DataWidgetClass } from "@core/classes/datawidget";
+import { PROJECT_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-project-list",
   templateUrl: "./project-list.component.html",
   styleUrls: ["../widgets.scss"],
 })
-export class ProjectListWidget implements OnInit {
+export class ProjectListWidget
+  extends DataWidgetClass<Project>
+  implements OnInit {
   @Input() user?: number;
-  refresh = false;
-  masterData: Project[];
   data: Project[];
   filters: string[] = ["open"];
 
-  constructor(private api: ApiService<Project>) {}
+  constructor(injector: Injector) {
+    super(injector);
+    this.resourceName = "projects";
+    this.fields = PROJECT_FIELDS;
+  }
 
   ngOnInit(): void {
-    this.loadData();
+    this.params = { user: this.user };
+    this.refreshData();
   }
 
-  public loadData() {
+  public refreshData() {
     this.refresh = true;
-    this.api
-      .getAll("projects", { user: this.user })
-      .then((o) => (this.masterData = o.data))
-      .finally(() => {
-        this.filterProjects();
-        this.refresh = false;
-      });
+    this.loadData()
+      .then((o) => (this.data = o))
+      .finally(() => this.filterProjects());
   }
 
-  public filterProjects(status?: string) {
+  createNew() {
+    const body = { users: [this.user] };
+    super.createNew(body);
+  }
+
+  filterProjects(status?: string) {
     if (status) {
       var index = this.filters.indexOf(status);
       index === -1 ? this.filters.push(status) : this.filters.splice(index, 1);

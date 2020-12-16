@@ -1,28 +1,29 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Injector } from "@angular/core";
 import { Task } from "@models";
-import { ApiService } from "@services";
+import { DataWidgetClass } from "@core/classes/datawidget";
+import { TASK_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-task-list",
   templateUrl: "./task-list.component.html",
   styleUrls: ["../widgets.scss"],
 })
-export class TaskListWidget implements OnInit {
-  @Input() user?: number;
-  refresh = false;
-  data: Task[];
+export class TaskListWidget extends DataWidgetClass<Task> implements OnInit {
+  @Input() user: number;
 
-  constructor(private api: ApiService<Task>) {}
-
-  ngOnInit(): void {
-    this.loadData();
+  constructor(injector: Injector) {
+    super(injector);
+    this.resourceName = "tasks";
+    this.fields = TASK_FIELDS;
   }
 
-  public loadData() {
+  ngOnInit(): void {
+    this.params = { user: this.user };
+    this.refreshData();
+  }
+
+  refreshData() {
     this.refresh = true;
-    this.api
-      .getAll("tasks", { user: this.user })
-      .then((o) => (this.data = o.data))
-      .finally(() => (this.refresh = false));
+    this.loadData().then((o) => (this.data = o));
   }
 }

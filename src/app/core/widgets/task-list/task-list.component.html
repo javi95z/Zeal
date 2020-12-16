@@ -12,13 +12,17 @@
       </h6>
     </div>
     <div class="right-menu">
+      <!-- Create new -->
+      <a *ngIf="canCreate" class="menu-option" (click)="createNew()" routerLink="">
+        <i class="zmdi zmdi-plus"></i>
+      </a>
       <!-- Collapse widget -->
       <a class="menu-option" data-toggle="collapse" href="#tasksWidget" aria-expanded="true">
         <i class="zmdi zmdi-chevron-down"></i>
         <i class="zmdi zmdi-chevron-up"></i>
       </a>
       <!-- Refresh widget -->
-      <a class="menu-option" (click)="loadData()" routerLink="">
+      <a class="menu-option" (click)="refreshData()" routerLink="">
         <i class="zmdi zmdi-replay"></i>
       </a>
     </div>
