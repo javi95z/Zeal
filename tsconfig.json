@@ -14,19 +14,19 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@zeal/*": ["app/*"],
-      "@core": ["app/core/"],
+      "@core": ["app/core"],
       "@core/*": ["app/core/*"],
-      "@env": ["environments/"],
+      "@env": ["environments"],
       "@env/*": ["environments/*"],
-      "@guards": ["app/guards/"],
+      "@guards": ["app/guards"],
       "@guards/*": ["app/guards/*"],
-      "@models": ["app/models/"],
+      "@models": ["app/models"],
       "@models/*": ["app/models/*"],
-      "@pages": ["app/pages/"],
+      "@pages": ["app/pages"],
       "@pages/*": ["app/pages/*"],
-      "@services": ["app/services/"],
-      "@services/*": ["app/services/*"]
+      "@services": ["app/services"],
+      "@services/*": ["app/services/*"],
+      "@zeal/*": ["app/*"]
     }
   }
 }

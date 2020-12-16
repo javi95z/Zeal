@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { ApiCollection, ApiResource } from "@models";
 import { ToastService } from "./toast.service";
 import { environment as env } from "@env/environment";
-import { parseRelationships } from "@zeal/utils";
 
 @Injectable({
   providedIn: "root",
@@ -99,7 +98,10 @@ export class ApiService<T> {
           resolve(res as boolean);
         })
         .catch((rej) => {
-          this.toast.setMessage(rej.error.error as string || "Failed to delete", "error");
+          this.toast.setMessage(
+            (rej.error.error as string) || "Failed to delete",
+            "error"
+          );
           reject(rej);
         });
     });
