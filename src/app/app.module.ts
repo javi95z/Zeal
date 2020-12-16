@@ -8,7 +8,6 @@ import { AppRoutingModule } from "./app-routing.module";
 
 // Components
 import { AppComponent } from "./app.component";
-import { DashboardComponent } from "@pages/dashboard/dashboard.component";
 
 // Services
 import { ToastService } from "@services";
@@ -18,6 +17,7 @@ import { CoreModule } from "@core/core.module";
 import { LayoutModule } from "@pages/layout/layout.module";
 import { AdminModule } from "@pages/admin/admin.module";
 import { LoginModule } from "@pages/auth/login.module";
+import { ContentModule } from "@pages/content/content.module";
 
 // Locales
 import localeEs from "@angular/common/locales/es";
@@ -28,11 +28,11 @@ registerLocaleData(localeFr, "fr");
 const httpProvider = {
   provide: HTTP_INTERCEPTORS,
   useClass: RequestInterceptor,
-  multi: true
+  multi: true,
 };
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -41,9 +41,10 @@ const httpProvider = {
     CoreModule,
     AppRoutingModule,
     AdminModule,
-    LoginModule
+    ContentModule,
+    LoginModule,
   ],
   providers: [httpProvider, ToastService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
