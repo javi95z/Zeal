@@ -1,3 +1,4 @@
+<h1 mat-dialog-title>{{ titleForm }}</h1>
 <form novalidate [formGroup]="form">
   <div *ngFor="let field of data.fields">
     <div [ngSwitch]="field.type">

@@ -1,15 +1,19 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "z-loading",
   templateUrl: "./loading.component.html",
-  styleUrls: ["./loading.component.scss"]
+  styles: [
+    `
+      .loading-shade {
+        margin: 30px 0;
+        mat-spinner {
+          margin: auto;
+        }
+      }
+    `,
+  ],
 })
-export class LoadingComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class LoadingComponent {
+  constructor() {}
 }

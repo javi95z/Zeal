@@ -85,6 +85,7 @@ export class AdminListClass<T> extends MasterClass<T> {
    */
   protected editData(resource: T, id: number, index: number) {
     this.editDialog(resource, id).then((res) => {
+      if (!res) return;
       this.dataSource.data[index] = res.data;
       this.dataSource._updateChangeSubscription();
     });

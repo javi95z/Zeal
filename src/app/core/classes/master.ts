@@ -51,11 +51,7 @@ export class MasterClass<T> {
     let response: T;
     await this.openDialog(resource)
       .toPromise<T>()
-      .then((o) => {
-        if (!o) return;
-        // if (params) Object.assign(o, reduceObject(params));
-        response = o;
-      });
+      .then((o) => (response = o));
     if (!response) return;
     // Call API and return result
     let result: ApiResource<T>;
@@ -97,6 +93,7 @@ export class MasterClass<T> {
     return this.dialog.editDialog<T>({
       object: resource || null,
       fields: this.fields,
+      nameResource: this.resourceName,
     });
   }
 }

@@ -13,14 +13,17 @@ import { VALIDATION_ERRORS } from "@zeal/dict";
 export class EditDialogComponent<T> implements OnInit {
   form: FormGroup;
   errorMessages = VALIDATION_ERRORS;
+  titleForm: string;
 
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent<T>>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { object: T; fields: Field[]; relationships: string[] }
+    public data: { fields: Field[]; object?: T; nameResource: string }
   ) {}
 
   ngOnInit(): void {
+    this.titleForm = this.data.object ? "Edit" : "Create";
+    this.titleForm += " " + this.data.nameResource.slice(0, -1);
     this.form = this.buildAndPopulateForm(this.data.fields);
   }
 
@@ -37,10 +40,6 @@ export class EditDialogComponent<T> implements OnInit {
     );
     const result = updated as T;
     this.dialogRef.close(result);
-  }
-
-  showErrors() {
-    console.log(this.form);
   }
 
   private buildAndPopulateForm(fields: Field[]): FormGroup {

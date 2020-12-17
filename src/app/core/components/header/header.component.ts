@@ -4,7 +4,16 @@ import { Router } from "@angular/router";
 @Component({
   selector: "z-header",
   templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"],
+  styles: [
+    `
+      .breadcrumb span {
+        color: #777777;
+        &.active {
+          color: #222222;
+        }
+      }
+    `,
+  ],
 })
 export class HeaderComponent {
   @Input() title: string;
