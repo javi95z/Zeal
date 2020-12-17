@@ -6,9 +6,7 @@
     <div class="pull-left">
       <h6 class="panel-title txt-dark">
         <i class="zmdi zmdi-group-work"></i>Teams
-        <span *ngIf="data" class="label bg-zeal">
-          {{ data?.length }}
-        </span>
+        <z-label [value]="data?.length" *ngIf="data"></z-label>
       </h6>
     </div>
     <div class="right-menu">

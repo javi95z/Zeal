@@ -10,6 +10,7 @@ import {
   EditDialogComponent,
   ErrorMessageComponent,
   HeaderComponent,
+  LabelComponent,
   LoadingComponent,
   NoResultsComponent,
   PanelHeaderComponent,
@@ -41,6 +42,7 @@ const components = [
   GenderDirective,
   HeaderButtonDirective,
   HeaderComponent,
+  LabelComponent,
   LoadingComponent,
   NoResultsComponent,
   OverflowDirective,
@@ -61,9 +63,9 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [components, widgets, ColorComponent],
+  declarations: [components, widgets, ColorComponent, LabelComponent],
   imports: modules,
-  exports: [modules, components, widgets],
+  exports: [modules, components, widgets, LabelComponent],
   entryComponents: [ConfirmationDialogComponent, EditDialogComponent],
 })
 export class CoreModule {}

@@ -4,6 +4,7 @@ export * from "./color/color.component";
 export * from "./edit-dialog/edit-dialog.component";
 export * from "./error-message/error-message.component";
 export * from "./header/header.component";
+export * from "./label/label.component";
 export * from "./loading/loading.component";
 export * from "./panel-header/panel-header.component";
 export * from "./tables/actions-menu/actions-menu.component";
