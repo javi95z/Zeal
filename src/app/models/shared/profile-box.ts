@@ -5,4 +5,5 @@ export interface ProfileBox {
   profileImage?: string;
   backgroundImage?: string;
   icon?: string;
+  stats?: { number: number; label: string }[];
 }

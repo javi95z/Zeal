@@ -24,4 +24,23 @@
       }
     }
   }
+  .profile-stats {
+    border-top: 1px solid rgba(33, 33, 33, 0.05);
+    padding: 30px 15px;
+    color: #212121;
+    .row {
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: space-around;
+    }
+    &__number {
+      display: block;
+      font-size: 22px;
+    }
+    &__label {
+      display: block;
+      font-size: small;
+      text-transform: uppercase;
+    }
+  }
 }

@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input,
 } from "@angular/core";
+import { ProfileBox } from "@models";
 
 @Component({
   selector: "z-profile-box",

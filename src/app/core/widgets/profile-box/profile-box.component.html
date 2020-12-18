@@ -27,21 +27,16 @@
           <h5 *ngIf="data.title" class="profile-info__title text-zeal">{{ data?.title }}</h5>
           <h6 *ngIf="data.subtitle" class="profile-info__subtitle block pb-20">{{ data?.subtitle }}</h6>
         </div>
-        <div class="social-info">
+        <!-- Statistics -->
+        <div class="profile-stats" *ngIf="data.stats">
           <div class="row">
-            <div class="col-xs-4 text-center">
-              <span class="counts block head-font"><span class="counter-anim">345</span></span>
-              <span class="counts-text block">post</span>
-            </div>
-            <div class="col-xs-4 text-center">
-              <span class="counts block head-font"><span class="counter-anim">246</span></span>
-              <span class="counts-text block">followers</span>
-            </div>
-            <div class="col-xs-4 text-center">
-              <span class="counts block head-font"><span class="counter-anim">898</span></span>
-              <span class="counts-text block">tweets</span>
+            <div class="col text-center" *ngFor="let item of data.stats">
+              <span class="profile-stats__number">{{ item.number }}</span>
+              <span class="profile-stats__label">{{ item.label }}</span>
             </div>
           </div>
+        </div>
+        <div>
           <button class="btn btn-default btn-block btn-outline btn-anim mt-30" data-toggle="modal"
             data-target="#myModal">
             <i class="fa fa-pencil"></i>
