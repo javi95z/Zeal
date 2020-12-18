@@ -1,6 +1,6 @@
 import { Injector } from "@angular/core";
 import { ApiService, DialogService } from "@services";
-import { Field } from "@models";
+import { ApiResource, Field } from "@models";
 import { reduceObject } from "@zeal/utils";
 
 export class MasterClass<T> {
@@ -58,7 +58,7 @@ export class MasterClass<T> {
     await this.api
       .updateOne(this.resourceName, response, id)
       .then((o) => (result = o))
-      .catch((err) => (result = err));
+      .catch((err) => console.error(err.error));
     return result;
   }
 

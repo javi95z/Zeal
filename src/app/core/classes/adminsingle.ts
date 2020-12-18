@@ -31,16 +31,15 @@ export class AdminSingleClass<T> extends MasterClass<T> {
   }
 
   // Get one resource from route parameters
-  public getResource() {
-    this.route.params.subscribe((data) => {
-      if (data.id) {
-        this.api
-          .getOne(this.resourceName, data.id)
-          .then((res) => (this.resource = res.data as T))
-          .catch(() => (this.error = true))
-          .finally(() => (this.isLoading = false));
-      }
-    });
+  public async getResource(): Promise<T> {
+    const id = this.route.snapshot.params.id;
+    if (!id) return;
+    await this.api
+      .getOne(this.resourceName, id)
+      .then((res) => (this.resource = res.data as T))
+      .catch(() => (this.error = true))
+      .finally(() => (this.isLoading = false));
+    return this.resource;
   }
 
   // Build options menu in the panel

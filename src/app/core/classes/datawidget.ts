@@ -1,4 +1,5 @@
 import { Injector, Input } from "@angular/core";
+import { ApiCollection } from "@models";
 import { MasterClass } from "./master";
 
 export class DataWidgetClass<T> extends MasterClass<T> {

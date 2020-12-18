@@ -1,4 +1,4 @@
-interface ProfileBox {
+export interface ProfileBox {
   title: string;
   resourceName: string;
   subtitle?: string;

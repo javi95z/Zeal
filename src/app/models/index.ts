@@ -4,7 +4,4 @@ export * from "./role";
 export * from "./task";
 export * from "./team";
 export * from "./user";
-export * from "./shared/field";
-export * from "./shared/menu-item";
-export * from "./shared/panel-action";
-export * from "./shared/tabs";
+export * from "./shared";

@@ -1,9 +1,9 @@
-interface ApiResource<T> {
+export interface ApiResource<T> {
   data: T;
   meta?: any;
 }
 
-interface ApiCollection<T> {
+export interface ApiCollection<T> {
   data: T[];
   meta?: any;
 }
