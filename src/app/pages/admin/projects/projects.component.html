@@ -2,7 +2,8 @@
 <button mat-button (click)="createDialog()" *ngIf="!isLoading" zPanelButton>Create project</button>
 <div class="table-wrap" *ngIf="!isLoading">
   <div class="table-responsive" *ngIf="dataSource.data.length">
-    <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>
+    <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
+      (matSortChange)="sortData($event)">
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
@@ -31,8 +32,9 @@
       <ng-container matColumnDef="contact">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
         <td *matCellDef="let element">
-          <a *ngIf="element?.contact"
-            [routerLink]="['/admin/contacts/profile', element.id]">{{ element?.contact.name }}</a>
+          <a *ngIf="element?.contact" [routerLink]="['/admin/contacts/profile', element.id]">
+            {{ element?.contact.name }}
+          </a>
         </td>
       </ng-container>
 

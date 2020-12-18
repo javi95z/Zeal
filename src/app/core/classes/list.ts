@@ -8,7 +8,7 @@ import {
 import { SelectionModel } from "@angular/cdk/collections";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
+import { MatSort, Sort } from "@angular/material/sort";
 import { MasterClass } from "./master";
 
 export class ListClass<T> extends MasterClass<T> {
@@ -36,6 +36,15 @@ export class ListClass<T> extends MasterClass<T> {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.data.forEach((row) => this.selection.select(row));
+  }
+
+  public sortData(sort: Sort) {
+    const data = this.dataSource.data.slice();
+    if (!sort.active || sort.direction === "") return;
+    this.dataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === "asc";
+      return this.compare(a[sort.active], b[sort.active], isAsc);
+    });
   }
 
   /**
@@ -115,4 +124,7 @@ export class ListClass<T> extends MasterClass<T> {
     this.dataSource.data.push(data);
     this.dataSource._updateChangeSubscription();
   }
+
+  private compare = (a: number | string, b: number | string, isAsc: boolean) =>
+    (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

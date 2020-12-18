@@ -4,7 +4,8 @@
 </button>
 <div class="table-wrap" *ngIf="!isLoading">
   <div class="table-responsive" *ngIf="dataSource.data.length">
-    <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>
+    <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
+      (matSortChange)="sortData($event)">
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
