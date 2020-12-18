@@ -4,28 +4,18 @@
 </button>
 <div class="table-wrap" *ngIf="!isLoading">
   <div class="table-responsive" *ngIf="dataSource.data.length">
-    <table
-      class="table table-hover display pb-30"
-      mat-table
-      [dataSource]="dataSource"
-      matSort
-    >
+    <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort>
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox
-            (change)="$event ? masterToggle() : null"
+          <mat-checkbox (change)="$event ? masterToggle() : null"
             [indeterminate]="selection.hasValue() && !isAllSelected()"
-            [checked]="selection.hasValue() && isAllSelected()"
-          >
+            [checked]="selection.hasValue() && isAllSelected()">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row">
-          <mat-checkbox
-            (click)="$event.stopPropagation()"
-            (change)="$event ? selection.toggle(row) : null"
-            [checked]="selection.isSelected(row)"
-          >
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)">
           </mat-checkbox>
         </td>
       </ng-container>
@@ -36,7 +26,7 @@
         <td *matCellDef="let element">
           <a [routerLink]="['/admin/tasks/profile', element.id]">{{
             element?.name
-          }}</a>
+            }}</a>
         </td>
       </ng-container>
 
@@ -44,11 +34,8 @@
       <ng-container matColumnDef="project">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Project</th>
         <td *matCellDef="let element" zOverflow width="200">
-          <a
-            *ngIf="element?.project"
-            [routerLink]="['/admin/projects/profile', element.project.id]"
-            >{{ element?.project.name }}</a
-          >
+          <a *ngIf="element?.project" [routerLink]="['/admin/projects/profile', element.project.id]">{{
+            element?.project.name }}</a>
         </td>
       </ng-container>
 
@@ -64,11 +51,7 @@
       <ng-container matColumnDef="owner">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner</th>
         <td *matCellDef="let element" zOverflow width="200">
-          <a
-            *ngIf="element?.user"
-            [routerLink]="['/admin/users/profile', element.user.id]"
-            >{{ element?.user.name }}</a
-          >
+          <a *ngIf="element?.user" [routerLink]="['/admin/users/profile', element.user.id]">{{ element?.user.name }}</a>
         </td>
       </ng-container>
 
@@ -100,21 +83,15 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
         <td *matCellDef="let element; let i = index" class="action-buttons">
-          <z-actions-menu
-            (event)="onAction($event, element, i)"
-          ></z-actions-menu>
+          <z-actions-menu (event)="onAction($event, element, i)"></z-actions-menu>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
       <tr mat-row *matRowDef="let row; columns: columns"></tr>
     </table>
-    <mat-paginator
-      [length]="dataSource.data.length"
-      [pageSize]="8"
-      [pageSizeOptions]="[8, 20, 50, 100]"
-      showFirstLastButtons
-    >
+    <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
+      showFirstLastButtons>
     </mat-paginator>
   </div>
   <z-no-results *ngIf="!dataSource.data.length"></z-no-results>

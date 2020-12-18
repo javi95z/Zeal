@@ -26,7 +26,12 @@ import {
   PriorityDirective,
   StatusDirective,
 } from "./directives";
-import { ProjectListWidget, TaskListWidget, TeamListWidget } from "./widgets";
+import {
+  ProfileBoxComponent,
+  ProjectListWidget,
+  TaskListWidget,
+  TeamListWidget,
+} from "./widgets";
 import { CapitalizePipe } from "./pipes";
 import { MaterialModule } from "@zeal/material.module";
 
@@ -53,7 +58,12 @@ const components = [
   ToastMessageComponent,
   UserIconsComponent,
 ];
-const widgets = [ProjectListWidget, TaskListWidget, TeamListWidget];
+const widgets = [
+  ProfileBoxComponent,
+  ProjectListWidget,
+  TaskListWidget,
+  TeamListWidget,
+];
 const modules = [
   CommonModule,
   FormsModule,
@@ -63,9 +73,15 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [components, widgets, ColorComponent, LabelComponent],
+  declarations: [
+    components,
+    widgets,
+    ColorComponent,
+    LabelComponent,
+    ProfileBoxComponent,
+  ],
   imports: modules,
-  exports: [modules, components, widgets, LabelComponent],
+  exports: [modules, components, widgets, LabelComponent, ProfileBoxComponent],
   entryComponents: [ConfirmationDialogComponent, EditDialogComponent],
 })
 export class CoreModule {}

@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from "@angular/core";
-import { AdminListClass } from "@zeal/core/classes/adminlist";
+import { ListClass } from "@zeal/core/classes";
 import { Role } from "@models";
 import { ROLE_FIELDS } from "@zeal/variables";
 
@@ -7,7 +7,7 @@ import { ROLE_FIELDS } from "@zeal/variables";
   selector: "z-admin-roles",
   templateUrl: "./roles.component.html",
 })
-export class RolesAdmin extends AdminListClass<Role> implements OnInit {
+export class RolesAdmin extends ListClass<Role> implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "roles";

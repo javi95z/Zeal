@@ -1,6 +1,6 @@
 import { Injector } from "@angular/core";
 import { ApiService, DialogService } from "@services";
-import { Field, ApiResource } from "@models";
+import { Field } from "@models";
 import { reduceObject } from "@zeal/utils";
 
 export class MasterClass<T> {

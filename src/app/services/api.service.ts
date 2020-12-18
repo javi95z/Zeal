@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ApiCollection, ApiResource } from "@models";
 import { ToastService } from "./toast.service";
 import { environment as env } from "@env/environment";
 

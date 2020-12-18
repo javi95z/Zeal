@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Injector } from "@angular/core";
-import { AdminListClass } from "@core/classes/adminlist";
+import { ListClass } from "@core/classes";
 import { User } from "@models";
 import { USER_FIELDS } from "@zeal/variables";
 
@@ -7,7 +7,7 @@ import { USER_FIELDS } from "@zeal/variables";
   selector: "z-admin-users",
   templateUrl: "./users.component.html",
 })
-export class UsersAdmin extends AdminListClass<User> implements OnInit {
+export class UsersAdmin extends ListClass<User> implements OnInit {
   @Input() project?: number;
   @Input() team?: number;
   @Input() role?: number;

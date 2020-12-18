@@ -7,9 +7,9 @@ import { Component } from "@angular/core";
     `
       .loading-shade {
         margin: 30px 0;
-        mat-spinner {
-          margin: auto;
-        }
+      }
+      mat-spinner {
+        margin: auto;
       }
     `,
   ],

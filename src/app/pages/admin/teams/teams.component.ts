@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector, Input } from "@angular/core";
-import { AdminListClass } from "@core/classes/adminlist";
+import { ListClass } from "@core/classes";
 import { Team } from "@models";
 import { TEAM_FIELDS } from "@zeal/variables";
 
@@ -7,7 +7,7 @@ import { TEAM_FIELDS } from "@zeal/variables";
   selector: "z-admin-teams",
   templateUrl: "./teams.component.html",
 })
-export class TeamsAdmin extends AdminListClass<Team> implements OnInit {
+export class TeamsAdmin extends ListClass<Team> implements OnInit {
   @Input() user?: number;
 
   constructor(injector: Injector) {

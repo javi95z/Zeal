@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Injector } from "@angular/core";
-import { AdminListClass } from "@zeal/core/classes/adminlist";
+import { ListClass } from "@zeal/core/classes/list";
 import { Task } from "@models";
 import { TASK_FIELDS } from "@zeal/variables";
 
@@ -7,7 +7,7 @@ import { TASK_FIELDS } from "@zeal/variables";
   selector: "z-admin-tasks",
   templateUrl: "./tasks.component.html",
 })
-export class TasksAdmin extends AdminListClass<Task> implements OnInit {
+export class TasksAdmin extends ListClass<Task> implements OnInit {
   @Input() project?: number;
   @Input() user?: number;
 

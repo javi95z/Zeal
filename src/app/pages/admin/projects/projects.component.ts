@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector, Input } from "@angular/core";
-import { AdminListClass } from "@core/classes/adminlist";
+import { ListClass } from "@core/classes";
 import { Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
 
@@ -7,7 +7,7 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   selector: "z-admin-projects",
   templateUrl: "./projects.component.html",
 })
-export class ProjectsAdmin extends AdminListClass<Project> implements OnInit {
+export class ProjectsAdmin extends ListClass<Project> implements OnInit {
   @Input() user?: number;
 
   constructor(injector: Injector) {

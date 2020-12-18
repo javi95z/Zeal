@@ -11,7 +11,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MasterClass } from "./master";
 
-export class AdminListClass<T> extends MasterClass<T> {
+export class ListClass<T> extends MasterClass<T> {
   @Input() hideCols?: string[];
   @Output() countValues = new EventEmitter<number>();
   public columns: string[];
@@ -73,7 +73,10 @@ export class AdminListClass<T> extends MasterClass<T> {
    * and add it to the table too
    */
   protected createData() {
-    this.createDialog().then((res) => this.addDataTable(res.data));
+    this.createDialog().then((res) => {
+      if (!res) return;
+      this.addDataTable(res.data);
+    });
   }
 
   /**

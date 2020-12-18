@@ -8,9 +8,9 @@ import { Router } from "@angular/router";
     `
       .breadcrumb span {
         color: #777777;
-        &.active {
-          color: #222222;
-        }
+      }
+      span.active {
+        color: #222222;
       }
     `,
   ],
