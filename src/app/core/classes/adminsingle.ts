@@ -39,7 +39,7 @@ export class AdminSingleClass<T> extends MasterClass<T> {
       .then((res) => (this.resource = res.data as T))
       .catch(() => (this.error = true))
       .finally(() => (this.isLoading = false));
-    return this.resource;
+    return this.resource || null;
   }
 
   // Build options menu in the panel

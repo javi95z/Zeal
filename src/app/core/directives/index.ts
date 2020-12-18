@@ -1,4 +1,5 @@
 export * from "./avatar.directive";
+export * from "./expired-date.directive";
 export * from "./gender.directive";
 export * from "./header-button.directive";
 export * from "./overflow.directive";

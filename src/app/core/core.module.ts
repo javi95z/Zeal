@@ -19,6 +19,7 @@ import {
 } from "./components";
 import {
   AvatarDirective,
+  ExpiredDateDirective,
   GenderDirective,
   HeaderButtonDirective,
   OverflowDirective,
@@ -44,6 +45,7 @@ const components = [
   ConfirmationDialogComponent,
   EditDialogComponent,
   ErrorMessageComponent,
+  ExpiredDateDirective,
   GenderDirective,
   HeaderButtonDirective,
   HeaderComponent,
