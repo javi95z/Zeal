@@ -81,8 +81,8 @@ export class ListClass<T> extends MasterClass<T> {
    * Send API request to create information
    * and add it to the table too
    */
-  protected createData() {
-    this.createDialog().then((res) => {
+  protected createData(params?: object) {
+    this.createDialog(params).then((res) => {
       if (!res) return;
       this.addDataTable(res.data);
     });
@@ -121,6 +121,7 @@ export class ListClass<T> extends MasterClass<T> {
    * @param data New data
    */
   private addDataTable(data: T) {
+    if (!data) return;
     this.dataSource.data.push(data);
     this.dataSource._updateChangeSubscription();
   }

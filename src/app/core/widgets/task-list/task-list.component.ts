@@ -9,7 +9,8 @@ import { TASK_FIELDS } from "@zeal/variables";
   styleUrls: ["../widgets.scss"],
 })
 export class TaskListWidget extends DataWidgetClass<Task> implements OnInit {
-  @Input() user: number;
+  @Input() user?: number;
+  @Input() project?: number;
 
   constructor(injector: Injector) {
     super(injector);
@@ -18,7 +19,8 @@ export class TaskListWidget extends DataWidgetClass<Task> implements OnInit {
   }
 
   ngOnInit(): void {
-    this.params = { user: this.user };
+    if (this.user) this.params = { user: this.user };
+    if (this.project) this.params = { project: this.project };
     this.refreshData();
   }
 
