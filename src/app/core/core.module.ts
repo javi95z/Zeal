@@ -32,6 +32,7 @@ import {
   ProjectListWidget,
   TaskListWidget,
   TeamListWidget,
+  UserListWidget,
 } from "./widgets";
 import { CapitalizePipe } from "./pipes";
 import { MaterialModule } from "@zeal/material.module";
@@ -65,6 +66,7 @@ const widgets = [
   ProjectListWidget,
   TaskListWidget,
   TeamListWidget,
+  UserListWidget,
 ];
 const modules = [
   CommonModule,

@@ -1,0 +1,48 @@
+<div class="widget panel panel-default card-view panel-refresh">
+  <div class="panel-loading" *ngIf="refresh">
+    <z-loading></z-loading>
+  </div>
+  <div class="panel-heading">
+    <div class="pull-left">
+      <h6 class="panel-title txt-dark">
+        <i class="zmdi zmdi-group-work"></i>{{ altTitle || 'Users' }}
+        <z-label [value]="data?.length" *ngIf="data"></z-label>
+      </h6>
+    </div>
+    <div class="right-menu">
+      <!-- Create new -->
+      <a *ngIf="canCreate" class="menu-option" (click)="createNew()" routerLink="">
+        <i class="zmdi zmdi-plus"></i>
+      </a>
+      <!-- Collapse widget -->
+      <a *ngIf="canCollapse" class="menu-option" data-toggle="collapse" href="#usersWidget" aria-expanded="true">
+        <i class="zmdi zmdi-chevron-down"></i>
+        <i class="zmdi zmdi-chevron-up"></i>
+      </a>
+      <!-- Refresh widget -->
+      <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()" routerLink="">
+        <i class="zmdi zmdi-replay"></i>
+      </a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-wrapper collapse in" id="usersWidget">
+    <div class="panel-body pa-0">
+      <div class="row">
+        <div class="data-table table-responsive">
+          <table *ngIf="data" class="table">
+            <tbody>
+              <tr *ngFor="let item of data" class="data-table__row">
+                <td>
+                  <a [routerLink]="['/users/profile', item.id]">
+                    {{ item.name }}
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import { TASK_FIELDS } from "@zeal/variables";
 export class TasksComponent extends ListClass<Task> implements OnInit {
   @Input() project: number;
   @Input() canCreate: boolean;
+  @Input() canRefresh: boolean;
 
   constructor(injector: Injector) {
     super(injector);
