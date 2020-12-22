@@ -36,11 +36,11 @@
             </div>
           </div>
         </div>
-        <div>
-          <button class="btn btn-default btn-block btn-outline btn-anim mt-30" data-toggle="modal"
-            data-target="#myModal">
+        <!-- Action button -->
+        <div class="profile-actions" *ngIf="canEdit">
+          <button class="btn btn-default btn-block btn-outline btn-anim" (click)="emitAction()">
             <i class="fa fa-pencil"></i>
-            <span class="btn-text">edit profile</span>
+            <span class="btn-text">Edit</span>
           </button>
         </div>
       </div>
