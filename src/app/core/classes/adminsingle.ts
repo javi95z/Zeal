@@ -116,17 +116,16 @@ export class AdminSingleClass<T> extends MasterClass<T> {
    * Show dialog with select input
    * Send update request to API
    * @param name Name of resource relationship
-   * @param current Current values of resource
-   * @param nameLabel Label for select list values
+   * @param params Params for fetching current values
    */
-  public async editManyToMany<T2>(
-    name: string,
-    current?: T2[],
-    nameLabel?: string[]
-  ): Promise<T2> {
+  public async editManyToMany<T2>(name: string, params: object): Promise<T2> {
     // Fetch all resources
     let list: T2[];
     await this.api.getAll(name).then((o) => (list = o.data));
+
+    // Fetch current values
+    let current: T2[];
+    await this.api.getAll(name, params).then((o) => (current = o.data));
 
     // Filter out current values of resource
     const values = pluckFields(current);
@@ -136,7 +135,7 @@ export class AdminSingleClass<T> extends MasterClass<T> {
       key: name,
       label: name,
       type: "multiple",
-      options: pluckFields(list, nameLabel || ["name"]),
+      options: pluckFields(list, ["name"]),
     };
     return this.dialog
       .editDialog<any>({ fields: [field] })

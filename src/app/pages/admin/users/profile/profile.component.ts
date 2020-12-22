@@ -48,14 +48,16 @@ export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
    * Add teams to user
    */
   addTeam() {
-    this.editManyToMany<Team>("teams", this.resource?.teams);
+    const params = { user: this.resource.id };
+    this.editManyToMany<Team>("teams", params);
   }
 
   /**
-   * Add teams to user
+   * Add projects to user
    */
   addProject() {
-    this.editManyToMany<Project>("projects", this.resource?.projects);
+    const params = { user: this.resource.id };
+    this.editManyToMany<Project>("projects", params);
   }
 
   /**

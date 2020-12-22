@@ -56,6 +56,7 @@ export class ProjectProfileAdmin
    * Add members to project
    */
   addMember() {
-    this.editManyToMany<User>("users", this.resource?.users);
+    const params = { project: this.resource.id };
+    this.editManyToMany<User>("users", params);
   }
 }

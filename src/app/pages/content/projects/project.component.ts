@@ -47,7 +47,8 @@ export class ProjectComponent
    * Add members to project
    */
   protected addMembers() {
-    this.editManyToMany<User>("users", this.resource?.users).then((a) => {
+    const params = { project: this.resource.id };
+    this.editManyToMany<User>("users", params).then((a) => {
       if (!a) return;
       this.members.refreshData();
     });

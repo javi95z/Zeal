@@ -44,6 +44,7 @@ export class TeamProfileAdmin extends AdminSingleClass<Team> implements OnInit {
    * Add members to team
    */
   addMember() {
-    this.editManyToMany<User>("users", this.resource?.users);
+    const params = { team: this.resource.id };
+    this.editManyToMany<User>("users", params);
   }
 }
