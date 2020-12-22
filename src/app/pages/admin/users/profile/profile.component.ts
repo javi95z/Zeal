@@ -1,13 +1,13 @@
 import { Component, OnInit, Injector } from "@angular/core";
 import { User, Team, Role, Project } from "@models";
-import { AdminSingleClass } from "@core/classes/adminsingle";
+import { DetailClass } from "@core/classes";
 import { USER_FIELDS } from "@zeal/variables";
 
 @Component({
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
 })
-export class UserProfileAdmin extends AdminSingleClass<User> implements OnInit {
+export class UserProfileAdmin extends DetailClass<User> implements OnInit {
   projectsCount = 0;
   teamsCount = 0;
   tasksCount = 0;

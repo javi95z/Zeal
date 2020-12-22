@@ -1,13 +1,13 @@
 import { Component, OnInit, Injector } from "@angular/core";
 import { Role } from "@models";
-import { AdminSingleClass } from "@core/classes/adminsingle";
+import { DetailClass } from "@core/classes";
 import { ROLE_FIELDS } from "@zeal/variables";
 
 @Component({
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
 })
-export class RoleProfileAdmin extends AdminSingleClass<Role> implements OnInit {
+export class RoleProfileAdmin extends DetailClass<Role> implements OnInit {
   usersCount = 0;
   constructor(injector: Injector) {
     super(injector);

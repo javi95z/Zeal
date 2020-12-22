@@ -1,4 +1,4 @@
-import { Injector } from "@angular/core";
+import { Injector, Input } from "@angular/core";
 import { Location } from "@angular/common";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MasterClass } from "./master";
@@ -6,7 +6,7 @@ import { Tabs, Field, PanelAction } from "@models";
 import { PANEL_ACTIONS } from "@zeal/variables";
 import { pluckFields } from "@zeal/utils";
 
-export class AdminSingleClass<T> extends MasterClass<T> {
+export class DetailClass<T> extends MasterClass<T> {
   private _resource: T;
   route: ActivatedRoute;
   location: Location;

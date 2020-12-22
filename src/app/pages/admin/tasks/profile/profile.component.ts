@@ -1,12 +1,12 @@
 import { Component, OnInit, Injector } from "@angular/core";
 import { Task, User, Project } from "@models";
-import { AdminSingleClass } from "@core/classes/adminsingle";
+import { DetailClass } from "@core/classes";
 
 @Component({
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
 })
-export class TaskProfileAdmin extends AdminSingleClass<Task> implements OnInit {
+export class TaskProfileAdmin extends DetailClass<Task> implements OnInit {
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "tasks";

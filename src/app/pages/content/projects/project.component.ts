@@ -1,16 +1,15 @@
 import { Component, OnInit, Injector, ViewChild } from "@angular/core";
 import { Project, ProfileBox, User } from "@models";
-import { AdminSingleClass } from "@core/classes";
+import { DetailClass } from "@core/classes";
 import { UserListWidget } from "@core/widgets";
+import { PROJECT_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-project",
   templateUrl: "./project.component.html",
   styleUrls: ["./project.component.scss"],
 })
-export class ProjectComponent
-  extends AdminSingleClass<Project>
-  implements OnInit {
+export class ProjectComponent extends DetailClass<Project> implements OnInit {
   tasksCount: number;
   membersCount: number;
   @ViewChild("members") members: UserListWidget;
@@ -18,6 +17,7 @@ export class ProjectComponent
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "projects";
+    this.fields = PROJECT_FIELDS;
   }
 
   ngOnInit() {
