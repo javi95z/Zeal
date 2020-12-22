@@ -1,22 +1,24 @@
-import { Component, OnInit, Input, Injector } from "@angular/core";
-import { ListClass } from "@zeal/core/classes/list";
+import { Component, OnInit, Input, Injector, Output } from "@angular/core";
+import { ListClass } from "@core/classes";
 import { Task } from "@models";
 import { TASK_FIELDS } from "@zeal/variables";
+import { Observable } from "rxjs";
 
 @Component({
-  selector: "z-admin-tasks",
+  selector: "z-tasks",
   templateUrl: "./tasks.component.html",
+  styleUrls: ["./tasks.component.scss"],
 })
-export class TasksAdmin extends ListClass<Task> implements OnInit {
-  @Input() project?: number;
-  @Input() user?: number;
+export class TasksComponent extends ListClass<Task> implements OnInit {
+  @Input() project: number;
+  @Input() canCreate: boolean;
+  @Output() count = new Observable<number>();
 
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "tasks";
     this.fields = TASK_FIELDS;
     this.columns = [
-      "select",
       "name",
       "project",
       "priority",
@@ -29,9 +31,19 @@ export class TasksAdmin extends ListClass<Task> implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  protected create() {
+    const data = {};
+    if (this.project) data["project"] = this.project;
+    super.createData(data);
+  }
+
+  protected loadData() {
+    this.isLoading = true;
     const body = {};
     if (this.project) body["project"] = this.project;
-    if (this.user) body["user"] = this.user;
     this.initData(body);
   }
 
@@ -44,12 +56,5 @@ export class TasksAdmin extends ListClass<Task> implements OnInit {
         this.deleteData(task.id, index, task.name);
         break;
     }
-  }
-
-  protected createTask() {
-    const data = {};
-    if (this.project) data["project"] = this.project;
-    if (this.user) data["user"] = this.user;
-    this.createDialog(data);
   }
 }

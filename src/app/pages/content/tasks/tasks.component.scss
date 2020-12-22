@@ -1,0 +1,19 @@
+.panel-heading {
+  padding: 20px 30px !important;
+  .panel-title {
+    .zmdi {
+      margin-right: 15px;
+    }
+  }
+  .right-menu {
+    float: right;
+    .menu-option {
+      float: left;
+      margin-left: 20px;
+      .zmdi {
+        color: #878787;
+        font-size: 22px;
+      }
+    }
+  }
+}

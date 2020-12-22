@@ -9,30 +9,32 @@ import { Project, ProfileBox } from "@models";
 export class ProjectComponent
   extends AdminSingleClass<Project>
   implements OnInit {
-  profileBox: ProfileBox;
+  tasksCount: number;
+  membersCount: number;
 
   constructor(injector: Injector) {
     super(injector);
     this.resourceName = "projects";
   }
 
-  ngOnInit(): void {
-    this.getResource().then((o) => {
-      this.profileBox = this.buildProfileBox(o);
-    });
+  ngOnInit() {
+    this.getResource();
   }
 
-  private buildProfileBox(item: Project): ProfileBox {
-    console.log(item, "item");
-    return {
-      title: item.name,
+  protected countTasks = (n: number) => (this.tasksCount = n);
+  // protected countMembers = (n: number) => (this.membersCount = n);
+
+  protected buildProfileBox(): ProfileBox {
+    if (!this.resource) return;
+    const pb = {
+      title: this.resource.name,
       resourceName: this.resourceName.slice(0, -1),
-      subtitle: item.code,
+      subtitle: this.resource.code,
       icon: "case",
-      stats: [
-        { label: "tasks", number: item.tasks.length },
-        { label: "members", number: item.users.length },
-      ]
+      stats: [{ label: "members", number: this.resource.users.length }],
     };
+    if (this.tasksCount)
+      pb.stats.push({ label: "tasks", number: this.tasksCount });
+    return pb;
   }
 }

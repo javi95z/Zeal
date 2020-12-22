@@ -1,5 +1,9 @@
 <div class="row" *ngIf="resource">
   <div class="col-lg-3 col-xs-12">
-    <z-profile-box [data]="profileBox" hasIcon="true"></z-profile-box>
+    <z-profile-box [data]="buildProfileBox()" hasIcon="true"></z-profile-box>
+  </div>
+  <div class="col-lg-9 col-xs-12">
+    <z-tasks [project]="resource.id" [hideCols]="['project']" canCreate="true" (countValues)="countTasks($event)">
+    </z-tasks>
   </div>
 </div>
