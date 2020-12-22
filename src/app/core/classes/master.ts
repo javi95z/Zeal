@@ -1,5 +1,5 @@
 import { Injector } from "@angular/core";
-import { ApiService, DialogService } from "@services";
+import { ApiService, DialogService, ToastService } from "@services";
 import { ApiResource, Field } from "@models";
 import { reduceObject } from "@zeal/utils";
 
@@ -8,10 +8,12 @@ export class MasterClass<T> {
   resourceName: string;
   protected api: ApiService<T>;
   protected dialog: DialogService;
+  protected toast: ToastService;
 
   constructor(private injectorObj: Injector) {
     this.api = this.injectorObj.get(ApiService);
     this.dialog = this.injectorObj.get(DialogService);
+    this.toast = this.injectorObj.get(ToastService);
   }
 
   /**
@@ -36,7 +38,7 @@ export class MasterClass<T> {
     await this.api
       .createOne(this.resourceName, response)
       .then((o) => (result = o))
-      .catch((err) => (result = err));
+      .catch((err) => this.notifyErrors(err.error));
     return result;
   }
 
@@ -95,5 +97,15 @@ export class MasterClass<T> {
       fields: this.fields,
       nameResource: this.resourceName,
     });
+  }
+
+  /**
+   * Notify each form error with a toast message
+   * @param errorBag Object of form errors
+   */
+  private notifyErrors(errorBag: {}) {
+    for (const [k, v] of Object.entries(errorBag)) {
+      this.toast.setMessage(v[0], "error");
+    }
   }
 }
