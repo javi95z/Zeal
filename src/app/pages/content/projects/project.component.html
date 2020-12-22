@@ -1,11 +1,17 @@
 <div class="row" *ngIf="resource">
   <div class="col-lg-3 col-xs-12">
     <z-profile-box [data]="buildProfileBox()" hasIcon="true"></z-profile-box>
-    <z-user-list [project]="resource.id" altTitle="Members" canRefresh="true" (countValues)="countMembers($event)">
+    <z-user-list #members [project]="resource.id" altTitle="Members" canRefresh="true" (countValues)="countMembers($event)">
+      <div class="extra-options" extra-options>
+        <a (click)="addMembers()">
+          <i class="zmdi zmdi-plus"></i>
+        </a>
+      </div>
     </z-user-list>
   </div>
   <div class="col-lg-9 col-xs-12">
-    <z-tasks [project]="resource.id" [hideCols]="['project']" canCreate="true" canRefresh="true" (countValues)="countTasks($event)">
+    <z-tasks [project]="resource.id" [hideCols]="['project']" canCreate="true" canRefresh="true"
+      (countValues)="countTasks($event)">
     </z-tasks>
   </div>
 </div>

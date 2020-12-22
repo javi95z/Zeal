@@ -11,7 +11,7 @@
     </div>
     <div class="right-menu">
       <!-- Create new -->
-      <a *ngIf="canCreate" class="menu-option" (click)="createNew()" routerLink="">
+      <a *ngIf="canCreate" class="menu-option" (click)="createNew()">
         <i class="zmdi zmdi-plus"></i>
       </a>
       <!-- Collapse widget -->
@@ -20,9 +20,10 @@
         <i class="zmdi zmdi-chevron-up"></i>
       </a>
       <!-- Refresh widget -->
-      <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()" routerLink="">
+      <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()">
         <i class="zmdi zmdi-replay"></i>
       </a>
+      <ng-content select="[extra-options]"></ng-content>
     </div>
     <div class="clearfix"></div>
   </div>

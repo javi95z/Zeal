@@ -123,7 +123,7 @@ export class AdminSingleClass<T> extends MasterClass<T> {
     name: string,
     current?: T2[],
     nameLabel?: string[]
-  ) {
+  ): Promise<T2> {
     // Fetch all resources
     let list: T2[];
     await this.api.getAll(name).then((o) => (list = o.data));
@@ -138,16 +138,17 @@ export class AdminSingleClass<T> extends MasterClass<T> {
       type: "multiple",
       options: pluckFields(list, nameLabel || ["name"]),
     };
-    this.dialog
+    return this.dialog
       .editDialog<any>({ fields: [field] })
-      .subscribe((result) => {
-        if (result) {
-          // Push new values to previous list
-          const obj = {};
-          values.push(...result[name]);
-          obj[name] = values;
-          this.performUpdateRequest(obj);
-        }
+      .toPromise()
+      .then((result) => {
+        if (!result) return;
+        // Push new values to previous list
+        const obj = {};
+        values.push(...result[name]);
+        obj[name] = values;
+        const res = this.performUpdateRequest<T2>(obj);
+        return res;
       });
   }
 
@@ -182,11 +183,13 @@ export class AdminSingleClass<T> extends MasterClass<T> {
   }
 
   // Perform update request in API with given values
-  private performUpdateRequest(values: {}) {
+  private async performUpdateRequest<T>(values: {}): Promise<T> {
     this.isLoading = true;
-    this.api
+    let response: T;
+    await this.api
       .updateOne(this.resourceName, values, this.resource["id"])
-      .then((o) => (this.resource = o.data))
+      .then((o) => (this.resource = response = o.data))
       .finally(() => (this.isLoading = false));
+    return response;
   }
 }

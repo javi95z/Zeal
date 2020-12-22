@@ -1,16 +1,19 @@
-import { Component, OnInit, Injector } from "@angular/core";
+import { Component, OnInit, Injector, ViewChild } from "@angular/core";
+import { Project, ProfileBox, User } from "@models";
 import { AdminSingleClass } from "@core/classes";
-import { Project, ProfileBox } from "@models";
+import { UserListWidget } from "@core/widgets";
 
 @Component({
   selector: "z-project",
   templateUrl: "./project.component.html",
+  styleUrls: ["./project.component.scss"],
 })
 export class ProjectComponent
   extends AdminSingleClass<Project>
   implements OnInit {
   tasksCount: number;
   membersCount: number;
+  @ViewChild("members") members: UserListWidget;
 
   constructor(injector: Injector) {
     super(injector);
@@ -38,5 +41,15 @@ export class ProjectComponent
     if (this.membersCount)
       pb.stats.push({ label: "members", number: this.membersCount });
     return pb;
+  }
+
+  /**
+   * Add members to project
+   */
+  protected addMembers() {
+    this.editManyToMany<User>("users", this.resource?.users).then((a) => {
+      if (!a) return;
+      this.members.refreshData();
+    });
   }
 }
