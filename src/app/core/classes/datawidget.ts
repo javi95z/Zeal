@@ -1,10 +1,13 @@
-import { Injector, Input } from "@angular/core";
+import { Injector, Input, Output, EventEmitter } from "@angular/core";
 import { ApiCollection } from "@models";
 import { MasterClass } from "./master";
 
 export class DataWidgetClass<T> extends MasterClass<T> {
+  @Output() countValues = new EventEmitter<number>();
   @Input() canCreate?: boolean;
+  @Input() canCollapse?: boolean;
   @Input() canFilter?: boolean;
+  @Input() canRefresh?: boolean;
   public refresh = false;
   protected masterData: T[];
   public data: T[];
@@ -17,7 +20,10 @@ export class DataWidgetClass<T> extends MasterClass<T> {
   protected async loadData(): Promise<T[]> {
     await this.api
       .getAll(this.resourceName, this.params)
-      .then((o: ApiCollection<T>) => (this.masterData = o.data))
+      .then((o: ApiCollection<T>) => {
+        this.masterData = o.data;
+        this.countValues.emit(o.data.length)
+      })
       .finally(() => (this.refresh = false));
     return this.masterData;
   }

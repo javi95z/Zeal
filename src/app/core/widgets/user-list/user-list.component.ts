@@ -25,9 +25,6 @@ export class UserListWidget extends DataWidgetClass<User> implements OnInit {
 
   refreshData() {
     this.refresh = true;
-    this.loadData().then((o) => {
-      this.countValues.emit(o.length);
-      this.data = o;
-    });
+    this.loadData().then((o) => (this.data = o));
   }
 }

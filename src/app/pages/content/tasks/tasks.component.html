@@ -11,7 +11,7 @@
         <i class="zmdi zmdi-plus"></i>
       </a>
       <!-- Refresh widget -->
-      <a class="menu-option" (click)="loadData()" [routerLink]="">
+      <a *ngIf="canRefresh" class="menu-option" (click)="loadData()" [routerLink]="">
         <i class="zmdi zmdi-replay"></i>
       </a>
     </div>

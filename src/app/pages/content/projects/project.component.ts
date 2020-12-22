@@ -22,7 +22,7 @@ export class ProjectComponent
   }
 
   protected countTasks = (n: number) => (this.tasksCount = n);
-  // protected countMembers = (n: number) => (this.membersCount = n);
+  protected countMembers = (n: number) => (this.membersCount = n);
 
   protected buildProfileBox(): ProfileBox {
     if (!this.resource) return;
@@ -31,10 +31,12 @@ export class ProjectComponent
       resourceName: this.resourceName.slice(0, -1),
       subtitle: this.resource.code,
       icon: "case",
-      stats: [{ label: "members", number: this.resource.users.length }],
+      stats: [],
     };
     if (this.tasksCount)
       pb.stats.push({ label: "tasks", number: this.tasksCount });
+    if (this.membersCount)
+      pb.stats.push({ label: "members", number: this.membersCount });
     return pb;
   }
 }
