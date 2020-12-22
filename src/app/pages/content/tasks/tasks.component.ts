@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Injector, Output } from "@angular/core";
+import { Component, OnInit, Input, Injector } from "@angular/core";
 import { ListClass } from "@core/classes";
 import { Task } from "@models";
 import { TASK_FIELDS } from "@zeal/variables";
-import { Observable } from "rxjs";
 
 @Component({
   selector: "z-tasks",
@@ -12,7 +11,6 @@ import { Observable } from "rxjs";
 export class TasksComponent extends ListClass<Task> implements OnInit {
   @Input() project: number;
   @Input() canCreate: boolean;
-  @Output() count = new Observable<number>();
 
   constructor(injector: Injector) {
     super(injector);

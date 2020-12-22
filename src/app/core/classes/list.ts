@@ -71,7 +71,7 @@ export class ListClass<T> extends MasterClass<T> {
   public renderView(data: T[]) {
     this.selection = new SelectionModel<T>(true, []);
     this.countValues.emit(data.length);
-    this.dataSource = new MatTableDataSource(data);
+    this.dataSource = new MatTableDataSource(data.slice());
     this.dataSource.sort = this.sort;
     setTimeout(() => (this.dataSource.paginator = this.paginator));
     this.isLoading = false;
@@ -110,9 +110,12 @@ export class ListClass<T> extends MasterClass<T> {
    * @param index Index of the table row
    */
   protected deleteData(id: number, index: number, label?: string) {
-    this.deleteDialog(id, label).then(() => {
-      this.dataSource.data.splice(index, 1);
-      this.dataSource._updateChangeSubscription();
+    this.deleteDialog(id, label).then((a) => {
+      if (!a) return;
+      const pg = this.paginator;
+      const data = this.dataSource.data;
+      data.splice(pg.pageIndex * pg.pageSize + index, 1);
+      this.renderView(data);
     });
   }
 
@@ -120,10 +123,11 @@ export class ListClass<T> extends MasterClass<T> {
    * Add new information to the table
    * @param data New data
    */
-  private addDataTable(data: T) {
-    if (!data) return;
-    this.dataSource.data.push(data);
-    this.dataSource._updateChangeSubscription();
+  private addDataTable(element: T) {
+    if (!element) return;
+    const data = this.dataSource.data;
+    data.push(element);
+    this.renderView(data);
   }
 
   private compare = (a: number | string, b: number | string, isAsc: boolean) =>
