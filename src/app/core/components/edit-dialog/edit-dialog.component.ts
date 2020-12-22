@@ -22,8 +22,7 @@ export class EditDialogComponent<T> implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.titleForm = this.data.object ? "Edit" : "Create";
-    this.titleForm += " " + this.data.nameResource.slice(0, -1);
+    this.titleForm = this.buildFormName();
     this.form = this.buildAndPopulateForm(this.data.fields);
   }
 
@@ -54,6 +53,16 @@ export class EditDialogComponent<T> implements OnInit {
       return populateFormFields(this.data.object, fg);
     }
     return fg;
+  }
+
+  /**
+   * Build form title depending on
+   * resource name and existing data
+   */
+  private buildFormName(): string {
+    if (!this.data.nameResource) return;
+    let name = this.data.object ? "Edit " : "Create ";
+    name += this.data.nameResource.slice(0, -1) || "item";
   }
 
   /**

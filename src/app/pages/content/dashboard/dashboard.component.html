@@ -1,15 +1,15 @@
 <div class="row" *ngIf="user">
   <!-- Projects widget -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-project-list [user]="user.id" canCreate="true" canFilter="true"></z-project-list>
+    <z-project-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"></z-project-list>
   </div>
   <!-- Teams widget -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-team-list [user]="user.id" canCreate="true"></z-team-list>
+    <z-team-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true"></z-team-list>
   </div>
   <!-- Tasks widget -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-task-list [user]="user.id" canCreate="true" canFilter="true"></z-task-list>
+    <z-task-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"></z-task-list>
   </div>
   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
     <div class="panel panel-default card-view pa-0">
