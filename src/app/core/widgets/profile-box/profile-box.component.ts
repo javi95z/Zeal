@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { ProfileBox } from "@models";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "z-profile-box",
@@ -13,11 +12,20 @@ export class ProfileBoxComponent {
   @Input() canEdit: boolean;
   @Input() data: ProfileBox;
   @Output() editAction = new EventEmitter();
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor() {}
 
   protected emitAction() {
     this.editAction.emit(true);
   }
+}
+
+interface ProfileBox {
+  title: string;
+  resourceName: string;
+  subtitle?: string;
+  profileImage?: string;
+  backgroundImage?: string;
+  icon?: string;
+  stats?: { number: number; label: string }[];
 }

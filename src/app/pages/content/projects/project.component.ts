@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector, ViewChild } from "@angular/core";
-import { Project, ProfileBox, User } from "@models";
+import { Project, User } from "@models";
 import { DetailClass } from "@core/classes";
 import { UserListWidget } from "@core/widgets";
 import { PROJECT_FIELDS } from "@zeal/variables";
@@ -27,7 +27,7 @@ export class ProjectComponent extends DetailClass<Project> implements OnInit {
   protected countTasks = (n: number) => (this.tasksCount = n);
   protected countMembers = (n: number) => (this.membersCount = n);
 
-  protected buildProfileBox(): ProfileBox {
+  protected buildProfileBox(): object {
     if (!this.resource) return;
     const pb = {
       title: this.resource.name,

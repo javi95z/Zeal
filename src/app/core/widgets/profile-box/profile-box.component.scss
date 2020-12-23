@@ -1,10 +1,11 @@
 .profile-box {
   .profile-info {
     &__resource {
+      color: #212121;
       font-size: 14px;
       font-weight: 500;
-      letter-spacing: 2px;
       margin-top: 15px;
+      text-align: center;
       text-transform: uppercase;
     }
     &__title {

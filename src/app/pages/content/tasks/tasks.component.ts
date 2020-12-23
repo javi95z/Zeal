@@ -29,6 +29,7 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     ];
   }
 
+  // Load data if not provided
   ngOnInit(): void {
     this.loadData();
   }
