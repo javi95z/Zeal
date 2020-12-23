@@ -3,6 +3,7 @@ import { ApiCollection } from "@models";
 import { MasterClass } from "./master";
 
 export class DataWidgetClass<T> extends MasterClass<T> {
+  @Input() title?: string;
   @Output() countValues = new EventEmitter<number>();
   @Input() canCreate?: boolean;
   @Input() canCollapse?: boolean;
