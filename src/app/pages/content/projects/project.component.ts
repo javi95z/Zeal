@@ -10,6 +10,7 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   styleUrls: ["./project.component.scss"],
 })
 export class ProjectComponent extends DetailClass<Project> implements OnInit {
+  progressData: object;
   tasksCount: number;
   membersCount: number;
   @ViewChild("members") members: UserListWidget;
@@ -20,8 +21,9 @@ export class ProjectComponent extends DetailClass<Project> implements OnInit {
     this.fields = PROJECT_FIELDS;
   }
 
-  ngOnInit() {
-    this.getResource();
+  async ngOnInit() {
+    await this.getResource();
+    this.buildProgressTrack();
   }
 
   protected countTasks = (n: number) => (this.tasksCount = n);
@@ -41,6 +43,25 @@ export class ProjectComponent extends DetailClass<Project> implements OnInit {
     if (this.membersCount)
       pb.stats.push({ label: "members", number: this.membersCount });
     return pb;
+  }
+
+  protected async buildProgressTrack() {
+    let response: object;
+    await this.api
+      .getCustom(this.resourceName, this.resource.id, "progress")
+      .then((o) => (response = o));
+    this.progressData = {
+      status: response["status"],
+      percent: response["percent"],
+      data1: {
+        label: "Still open",
+        value: response["open"],
+      },
+      data2: {
+        label: "Status",
+        value: response["status"],
+      },
+    };
   }
 
   /**

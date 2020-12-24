@@ -1,7 +1,17 @@
 <div class="row" *ngIf="resource">
   <div class="col-lg-3 col-xs-12">
+    <!-- Profile box -->
     <z-profile-box [data]="buildProfileBox()" hasIcon="true" canEdit="true" (editAction)="editResource()">
     </z-profile-box>
+    <!-- Progress tracking -->
+    <z-progress-track *ngIf="progressData" [data]="progressData"></z-progress-track>
+  </div>
+  <div class="col-lg-9 col-xs-12">
+    <!-- Project tasks -->
+    <z-tasks [project]="resource.id" [hideCols]="['project']" canCreate="true" canRefresh="true"
+      (countValues)="countTasks($event)">
+    </z-tasks>
+    <!-- Project members -->
     <z-user-list #members [project]="resource.id" altTitle="Members" canRefresh="true"
       (countValues)="countMembers($event)">
       <div class="extra-options" extra-options>
@@ -10,10 +20,5 @@
         </a>
       </div>
     </z-user-list>
-  </div>
-  <div class="col-lg-9 col-xs-12">
-    <z-tasks [project]="resource.id" [hideCols]="['project']" canCreate="true" canRefresh="true"
-      (countValues)="countTasks($event)">
-    </z-tasks>
   </div>
 </div>

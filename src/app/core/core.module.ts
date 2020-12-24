@@ -29,6 +29,7 @@ import {
 } from "./directives";
 import {
   ProfileBoxComponent,
+  ProgressTrackComponent,
   ProjectListWidget,
   TaskListWidget,
   TeamListWidget,
@@ -62,6 +63,7 @@ const components = [
   UserIconsComponent,
 ];
 const widgets = [
+  ProgressTrackComponent,
   ProfileBoxComponent,
   ProjectListWidget,
   TaskListWidget,

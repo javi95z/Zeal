@@ -15,7 +15,7 @@ export class ApiService<T> {
    * @param uri URI Resource name
    * @param obj Optional body for the request
    */
-  getAll(uri: string, obj?: object): Promise<ApiCollection<any>> {
+  public getAll(uri: string, obj?: object): Promise<ApiCollection<any>> {
     return new Promise((resolve, reject) => {
       this.http
         .post<ApiCollection<any>>(`${env.urlApi}/${uri}/index`, obj)
@@ -30,10 +30,26 @@ export class ApiService<T> {
    * @param uri URI Resource name
    * @param id Resource identifier
    */
-  getOne(uri: string, id: number): Promise<ApiResource<any>> {
+  public getOne(uri: string, id: number): Promise<ApiResource<any>> {
     return new Promise((resolve, reject) => {
       this.http
         .post<ApiResource<any>>(`${env.urlApi}/${uri}/${id}`, null)
+        .toPromise()
+        .then((res) => resolve(res))
+        .catch((rej) => reject(rej));
+    });
+  }
+
+  /**
+   * Get custom resource
+   * @param uri URI Resource name
+   * @param id Resource identifier
+   * @param endpoint Extra slug for the reequest
+   */
+  public getCustom(uri: string, id: number, endpoint: string): Promise<object> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .post<object>(`${env.urlApi}/${uri}/${id}/${endpoint}`, null)
         .toPromise()
         .then((res) => resolve(res))
         .catch((rej) => reject(rej));
@@ -45,7 +61,7 @@ export class ApiService<T> {
    * @param uri URI Resource name
    * @param obj Resource object
    */
-  createOne(uri: string, obj: Object): Promise<ApiResource<any>> {
+  public createOne(uri: string, obj: Object): Promise<ApiResource<any>> {
     return new Promise((resolve, reject) => {
       this.http
         .post<ApiResource<any>>(`${env.urlApi}/${uri}`, obj)
@@ -67,7 +83,11 @@ export class ApiService<T> {
    * @param obj Resource object
    * @param id Resource identifier
    */
-  updateOne(uri: string, obj: Object, id: number): Promise<ApiResource<any>> {
+  public updateOne(
+    uri: string,
+    obj: Object,
+    id: number
+  ): Promise<ApiResource<any>> {
     return new Promise((resolve, reject) => {
       this.http
         .put<ApiResource<any>>(`${env.urlApi}/${uri}/${id}`, obj)
@@ -88,7 +108,7 @@ export class ApiService<T> {
    * @param uri URI Resource name
    * @param id Resource identifier
    */
-  deleteOne(uri: string, id: number): Promise<boolean> {
+  public deleteOne(uri: string, id: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.http
         .delete(`${env.urlApi}/${uri}/${id}`)

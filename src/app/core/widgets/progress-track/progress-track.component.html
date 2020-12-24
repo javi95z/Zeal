@@ -1,0 +1,27 @@
+<div class="progress-tracking panel panel-default card-view" *ngIf="data">
+  <div class="panel-wrapper collapse in">
+    <div class="panel-body sm-data-box-1">
+      <span class="progress-tracking__title">{{ data.title || 'Progress tracking' }}</span>
+      <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
+        <span class="text-zeal">{{ data.percent }}%</span>
+      </div>
+      <div class="progress-tracking__bar">
+        <mat-progress-bar mode="determinate" [value]="data.percent"></mat-progress-bar>
+      </div>
+      <ul class="progress-tracking__stats">
+        <li *ngIf="data.data1">
+          <span class="progress-tracking__stats-label">{{ data.data1.label }}</span>
+          <span class="progress-tracking__stats-value">{{ data.data1.value }}</span>
+        </li>
+        <li *ngIf="data.data2">
+          <span class="progress-tracking__stats-label">{{ data.data2.label }}</span>
+          <span class="progress-tracking__stats-value">{{ data.data2.value }}</span>
+        </li>
+        <li *ngIf="data.data3">
+          <span class="progress-tracking__stats-label">{{ data.data3.label }}</span>
+          <span class="progress-tracking__stats-value">{{ data.data3.value }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
