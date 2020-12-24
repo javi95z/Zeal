@@ -58,7 +58,11 @@ export class ProjectComponent extends DetailClass<Project> implements OnInit {
         value: response["open"],
       },
       data2: {
-        label: "Status",
+        label: "Overdue",
+        value: response["overdue"],
+      },
+      data3: {
+        label: "Project Status",
         value: response["status"],
       },
     };
