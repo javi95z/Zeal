@@ -6,7 +6,7 @@ import { AuthService } from "@services";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -29,11 +29,11 @@ export class LoginComponent implements OnInit {
    * Log into the application
    */
   logIn() {
-    this.auth.doLogin(this.loginForm.value).then(res => {
+    this.auth.doLogin(this.loginForm.value).then((res) => {
       this.auth.token = res.access_token;
       // Get user data and enter the app
-      this.auth.getUser().then(user => {
-        this.auth.userData = user;
+      this.auth.getUser().then((user) => {
+        this.auth.setCurrentUser(user);
         // Set user locale
         this.auth.locale = user.locale;
         this.router.navigate(["/content"]);
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   private createForm() {
     this.loginForm = new FormGroup({
       email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", Validators.required)
+      password: new FormControl("", Validators.required),
     });
   }
 }

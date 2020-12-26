@@ -1,48 +1,58 @@
-<div class="panel panel-default card-view pa-0">
+<div class="profile-box panel panel-default card-view pa-0">
   <div class="panel-wrapper collapse in">
+    <!-- Panel header -->
+    <div class="profile-header">
+      <div class="profile-header__menu"></div>
+      <h2 class="profile-header__resource">{{ data.resourceName }}</h2>
+      <div class="profile-header__menu">
+        <a *ngIf="!isFavorite" [routerLink]="" (click)="star()" matTooltip="Mark as favorite">
+          <i class="zmdi zmdi-star-outline"></i>
+        </a>
+        <a *ngIf="isFavorite" [routerLink]="" (click)="unstar()" matTooltip="Remove favorite">
+          <i class="zmdi zmdi-star" style="color: #f3ed3d"></i>
+        </a>
+      </div>
+    </div>
     <div class="panel-body pa-0">
-      <div class="profile-box">
-        <!-- Background image -->
-        <div *ngIf="hasBackground" class="profile-cover-pic">
+      <!-- Background image -->
+      <div *ngIf="hasBackground" class="profile-cover-pic">
+        <div class="fileupload btn btn-default">
+          <span class="btn-text">edit</span>
+          <input class="upload" type="file">
+        </div>
+        <div class="profile-image-overlay"></div>
+      </div>
+      <div class="profile-info text-center">
+        <!-- Profile image -->
+        <div *ngIf="hasImage" class="profile-img-wrap">
+          <img class="inline-block mb-10" [src]="data?.profileImage" alt="user">
           <div class="fileupload btn btn-default">
             <span class="btn-text">edit</span>
             <input class="upload" type="file">
           </div>
-          <div class="profile-image-overlay"></div>
         </div>
-        <div class="profile-info text-center">
-          <div class="profile-info__resource">{{ data?.resourceName }}</div>
-          <!-- Profile image -->
-          <div *ngIf="hasImage" class="profile-img-wrap">
-            <img class="inline-block mb-10" [src]="data?.profileImage" alt="user">
-            <div class="fileupload btn btn-default">
-              <span class="btn-text">edit</span>
-              <input class="upload" type="file">
-            </div>
-          </div>
-          <!-- Profile icon -->
-          <div *ngIf="hasIcon" class="profile-info__icon">
-            <i class="zmdi zmdi-{{data.icon}}"></i>
-          </div>
-          <h5 *ngIf="data.title" class="profile-info__title text-zeal">{{ data?.title }}</h5>
-          <h6 *ngIf="data.subtitle" class="profile-info__subtitle block pb-20">{{ data?.subtitle }}</h6>
+        <!-- Profile icon -->
+        <div *ngIf="hasIcon" class="profile-info__icon">
+          <i class="zmdi zmdi-{{data.icon}}"></i>
         </div>
-        <!-- Statistics -->
-        <div class="profile-stats" *ngIf="data.stats">
-          <div class="row">
-            <div class="col text-center" *ngFor="let item of data.stats">
-              <span class="profile-stats__number">{{ item.number }}</span>
-              <span class="profile-stats__label">{{ item.label }}</span>
-            </div>
+        <h5 *ngIf="data.title" class="profile-info__title text-zeal">{{ data?.title }}</h5>
+        <h6 *ngIf="data.subtitle" class="profile-info__subtitle block pb-20">{{ data?.subtitle }}</h6>
+      </div>
+      <!-- Statistics -->
+      <div class="profile-stats" *ngIf="data.stats">
+        <div class="row">
+          <div class="col text-center" *ngFor="let item of data.stats">
+            <span class="profile-stats__number">{{ item.number }}</span>
+            <span class="profile-stats__label">{{ item.label }}</span>
           </div>
         </div>
-        <!-- Action button -->
-        <div class="profile-actions" *ngIf="canEdit">
-          <button class="btn btn-default btn-block btn-outline btn-anim" (click)="emitAction()">
-            <i class="fa fa-pencil"></i>
-            <span class="btn-text">Edit</span>
-          </button>
-        </div>
+      </div>
+      <!-- Action button -->
+      <div class="profile-actions" *ngIf="canEdit">
+        <button class="btn btn-default btn-block btn-outline btn-anim" (click)="emitAction()">
+          <i class="fa fa-pencil"></i>
+          <span class="btn-text">Edit</span>
+        </button>
       </div>
     </div>
   </div>

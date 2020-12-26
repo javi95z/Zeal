@@ -200,15 +200,15 @@ export const PANEL_ACTIONS: PanelAction[] = [
 ];
 export const RESOURCE_ICONS: any[] = [
   {
-    key: "project",
+    key: "projects",
     icon: "case",
   },
   {
-    key: "team",
+    key: "teams",
     icon: "group-work",
   },
   {
-    key: "task",
+    key: "tasks",
     icon: "arrow-merge",
   },
 ];

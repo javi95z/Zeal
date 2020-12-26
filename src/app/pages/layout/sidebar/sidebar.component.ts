@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ApiService } from "@services";
+import { ApiService, AuthService } from "@services";
 import { MenuItem, User } from "@models";
 import { STANDARD_MENU, RESOURCE_ICONS } from "@zeal/variables";
 
@@ -12,12 +12,9 @@ export class SidebarComponent {
   protected menuItems: MenuItem[];
   favorites: FavoriteMenuItem[] = [];
 
-  constructor(private api: ApiService<User>) {
+  constructor(private auth: AuthService) {
     this.menuItems = STANDARD_MENU;
-    this.getFavorites();
-  }
-  private getFavorites() {
-    this.api.getAll("favorites").then((o) => this.buildMenu(o));
+    this.auth.favorites.then((res) => this.buildMenu(res));
   }
 
   private buildMenu(items: any) {
@@ -25,7 +22,7 @@ export class SidebarComponent {
       this.favorites.push({
         label: o.name,
         icon: this.getIcon(o.item_type),
-        link: ["/content", `${o.item_type}s`, "profile", o.item_id],
+        link: ["/content", o.item_type, "profile", o.item_id],
       });
     });
   }

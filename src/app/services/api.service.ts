@@ -61,17 +61,21 @@ export class ApiService<T> {
    * @param uri URI Resource name
    * @param obj Resource object
    */
-  public createOne(uri: string, obj: Object): Promise<ApiResource<any>> {
+  public createOne(
+    uri: string,
+    obj: Object,
+    dontNotify?: boolean
+  ): Promise<ApiResource<any>> {
     return new Promise((resolve, reject) => {
       this.http
         .post<ApiResource<any>>(`${env.urlApi}/${uri}`, obj)
         .toPromise()
         .then((res) => {
-          this.toast.setMessage("Created successfully");
+          if (!dontNotify) this.toast.setMessage("Created successfully");
           resolve(res);
         })
         .catch((rej) => {
-          this.toast.setMessage("Failed to create", "error");
+          if (!dontNotify) this.toast.setMessage("Failed to create", "error");
           reject(rej);
         });
     });

@@ -32,6 +32,7 @@ export class ProjectComponent extends DetailClass<Project> implements OnInit {
   protected buildProfileBox(): object {
     if (!this.resource) return;
     const pb = {
+      id: this.resource.id,
       title: this.resource.name,
       resourceName: this.resourceName.slice(0, -1),
       subtitle: this.resource.code,

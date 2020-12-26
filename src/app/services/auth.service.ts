@@ -4,13 +4,14 @@ import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { User } from "@models";
 import { environment as env } from "@env/environment";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class AuthService {
-  userData: User;
+  private _userData: User;
+  private _favoritesData: any;
 
   get token(): string {
     return sessionStorage.getItem("token") || "";
@@ -28,13 +29,32 @@ export class AuthService {
     return !!this.token;
   }
   get currentUser(): Promise<User> {
-    return new Promise(resolve => {
-      if (!this.userData) {
-        this.getUser().then(res => resolve((this.userData = res)));
+    return new Promise((resolve) => {
+      if (!this._userData) {
+        this.getUser()
+          .then((res) => this.setCurrentUser(res))
+          .finally(() => resolve(this._userData));
       } else {
-        resolve(this.userData);
+        resolve(this._userData);
       }
     });
+  }
+  setCurrentUser(data: User) {
+    this._userData = data;
+  }
+  get favorites(): Promise<any> {
+    return new Promise((resolve) => {
+      if (!this._favoritesData) {
+        this.getFavorites()
+          .then((res) => this.setFavoritesData(res))
+          .finally(() => resolve(this._favoritesData));
+      } else {
+        resolve(this._favoritesData);
+      }
+    });
+  }
+  setFavoritesData(data: any) {
+    this._favoritesData = data;
   }
 
   constructor(
@@ -53,8 +73,8 @@ export class AuthService {
         .post(env.urlApi + "/auth/login", loginData)
         .toPromise()
         .then(
-          res => resolve(res),
-          rej => reject(rej)
+          (res) => resolve(res),
+          (rej) => reject(rej)
         );
     });
   }
@@ -76,7 +96,19 @@ export class AuthService {
       this.http
         .post<User>(`${env.urlApi}/auth/me`, null)
         .toPromise()
-        .then(res => resolve(res));
+        .then((res) => resolve(res));
+    });
+  }
+
+  /**
+   * Get logged user data
+   */
+  getFavorites(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(`${env.urlApi}/favorites/index`, null)
+        .toPromise()
+        .then((res) => resolve(res));
     });
   }
 

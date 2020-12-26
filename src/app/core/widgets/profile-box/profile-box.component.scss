@@ -1,13 +1,24 @@
 .profile-box {
-  .profile-info {
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
     &__resource {
       color: #212121;
       font-size: 14px;
       font-weight: 500;
-      margin-top: 15px;
       text-align: center;
-      text-transform: uppercase;
+      text-transform: uppercase !important;
     }
+    &__menu {
+      padding: 10px 0;
+      width: 15px;
+      .zmdi {
+        font-size: 20px;
+      }
+    }
+  }
+  .profile-info {
     &__title {
       display: block;
       margin-top: 20px;
@@ -18,10 +29,9 @@
       display: block;
     }
     &__icon {
-      padding: 20px 20px;
+      padding: 10px 20px;
       .zmdi {
         font-size: 65px;
-        color: #d6d6d6;
       }
     }
   }
@@ -46,5 +56,8 @@
   }
   .profile-actions {
     padding: 10px 15px;
+  }
+  .zmdi {
+    color: #d6d6d6;
   }
 }
