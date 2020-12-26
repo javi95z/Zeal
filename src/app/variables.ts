@@ -53,7 +53,7 @@ export const PROJECT_FIELDS: Field[] = [
     key: "name",
     label: "Name",
     type: "text",
-    validators: [Validators.required]
+    validators: [Validators.required],
   },
   {
     key: "description",
@@ -196,5 +196,19 @@ export const PANEL_ACTIONS: PanelAction[] = [
     name: "Delete",
     icon: "delete",
     action: "DELETE",
+  },
+];
+export const RESOURCE_ICONS: any[] = [
+  {
+    key: "project",
+    icon: "case",
+  },
+  {
+    key: "team",
+    icon: "group-work",
+  },
+  {
+    key: "task",
+    icon: "arrow-merge",
   },
 ];

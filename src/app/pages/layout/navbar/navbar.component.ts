@@ -5,7 +5,7 @@ import { User } from "@models";
 @Component({
   selector: "z-navbar",
   templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.scss"]
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent {
   currentUser: User;
@@ -13,9 +13,9 @@ export class NavbarComponent {
   mobileNavCollapsed: boolean;
 
   constructor(public auth: AuthService, private ui: LayoutService) {
-    this.auth.currentUser.then(res => (this.currentUser = new User(res)));
-    this.ui.getSidebar().subscribe(res => (this.sidebarCollapsed = res));
-    this.ui.getMobileNav().subscribe(res => (this.mobileNavCollapsed = res));
+    this.auth.currentUser.then((res) => (this.currentUser = res));
+    this.ui.getSidebar().subscribe((res) => (this.sidebarCollapsed = res));
+    this.ui.getMobileNav().subscribe((res) => (this.mobileNavCollapsed = res));
   }
 
   // TODO: Make it into a route

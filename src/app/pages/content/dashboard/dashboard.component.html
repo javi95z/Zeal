@@ -1,15 +1,18 @@
 <div class="row" *ngIf="user">
   <!-- Projects widget -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-project-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"></z-project-list>
+    <z-project-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
+      title="My projects">
+    </z-project-list>
   </div>
   <!-- Teams widget -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-team-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true"></z-team-list>
+    <z-team-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" title="My teams"></z-team-list>
   </div>
   <!-- Tasks widget -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-task-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"></z-task-list>
+    <z-task-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
+      title="My tasks"></z-task-list>
   </div>
   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
     <div class="panel panel-default card-view pa-0">
@@ -25,15 +28,9 @@
             </div>
             <div class="profile-info text-center">
               <div class="profile-img-wrap">
-                <div
-                  class="inline-block mb-10"
-                  [zAvatar]="user?.profile_img"
-                  alt="user"
-                ></div>
+                <div class="inline-block mb-10" [zAvatar]="user?.profile_img" alt="user"></div>
               </div>
-              <h5
-                class="block mt-10 mb-5 weight-500 capitalize-font txt-danger"
-              >
+              <h5 class="block mt-10 mb-5 weight-500 capitalize-font txt-danger">
                 {{ user?.name }}
               </h5>
               <h6 class="block capitalize-font pb-20">{{ user?.role.name }}</h6>

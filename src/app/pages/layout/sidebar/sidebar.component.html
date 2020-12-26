@@ -1,10 +1,10 @@
 <div class="fixed-sidebar-left">
   <ul class="nav navbar-nav side-nav nicescroll-bar">
+    <!-- Main menu -->
     <li class="navigation-header">
       <span>Main</span>
       <i class="zmdi zmdi-more"></i>
     </li>
-    <!-- Menu items -->
     <li *ngFor="let item of menuItems">
       <a [routerLink]="[item.link]" routerLinkActive="active">
         <div class="pull-left">
@@ -14,6 +14,24 @@
         <div class="clearfix"></div>
       </a>
     </li>
-    <li><hr class="light-grey-hr mb-10"/></li>
+    <!-- Favorites menu -->
+    <ng-container *ngIf="favorites.length">
+      <li class="navigation-header">
+        <span>Favorites</span>
+        <i class="zmdi zmdi-star"></i>
+      </li>
+      <li *ngFor="let item of favorites">
+        <a [routerLink]="item.link" routerLinkActive="active">
+          <div class="pull-left" zOverflow="200">
+            <i class="zmdi zmdi-{{ item.icon }} mr-20"></i>
+            <span class="right-nav-text">{{ item.label }}</span>
+          </div>
+          <div class="clearfix"></div>
+        </a>
+      </li>
+    </ng-container>
+    <li>
+      <hr class="light-grey-hr mb-10" />
+    </li>
   </ul>
 </div>

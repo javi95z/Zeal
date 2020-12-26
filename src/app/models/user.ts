@@ -15,6 +15,7 @@ export class User {
   teams?: any[];
   projects?: any[];
   tasks?: any[];
+  favorites?: any[];
   locale: string;
   updated_at?: string | Date;
   created_at?: string | Date;
