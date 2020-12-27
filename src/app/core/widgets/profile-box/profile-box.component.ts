@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
-import { ApiService, AuthService } from "@services";
+import { FavoritesService } from "@services";
+import { Favorite } from "@models";
 
 @Component({
   selector: "z-profile-box",
@@ -7,8 +8,8 @@ import { ApiService, AuthService } from "@services";
   styleUrls: ["./profile-box.component.scss"],
 })
 export class ProfileBoxComponent implements OnInit {
-  isFavorite: boolean;
-  obj: any;
+  private favorites: Favorite[];
+  isFavorite: Favorite;
   @Input() data: ProfileBox;
   @Input() hasImage: boolean;
   @Input() hasIcon: boolean;
@@ -16,22 +17,13 @@ export class ProfileBoxComponent implements OnInit {
   @Input() canEdit: boolean;
   @Output() editAction = new EventEmitter();
 
-  constructor(private auth: AuthService) {}
+  constructor(private fav: FavoritesService) {}
 
-  ngOnInit(): void {
-    this.obj = {
+  ngOnInit() {
+    this.fav.favs$.subscribe((o) => (this.favorites = o));
+    this.checkFavorite({
       item_id: this.data.id,
       item_type: this.data.resourceName + "s",
-    };
-    this.checkFavorite(this.obj);
-  }
-
-  protected checkFavorite(object: { item_id: number; item_type: string }) {
-    this.auth.favorites.then((res: Array<any>) => {
-      const a = res.findIndex(
-        (o) => o.item_id == object.item_id && o.item_type == object.item_type
-      );
-      if (a !== -1) this.isFavorite = true;
     });
   }
 
@@ -40,17 +32,34 @@ export class ProfileBoxComponent implements OnInit {
   }
 
   /**
-   * Star or unstar a resource
+   * Star a resource
+   * Add to API
    */
   protected star() {
-    this.isFavorite = true;
-    // this.api.createOne("favorites", this.obj, true).then((o) => console.log(o));
-    // .finally(() => (this.isLoading = false));
+    const obj = {
+      item_id: this.data.id,
+      item_type: this.data.resourceName + "s",
+    };
+    this.fav.addFavorite(obj);
+    this.isFavorite = obj;
   }
 
+  /**
+   * Unstar a resource
+   * Delete from API
+   */
   protected unstar() {
-    this.isFavorite = false;
-    // this.
+    const id = this.checkFavorite(this.isFavorite).id;
+    this.fav.removeFavorite(id);
+    this.isFavorite = null;
+  }
+
+  private checkFavorite(object: { item_id: number; item_type: string }) {
+    const d = this.favorites.find(
+      (o) => o.item_id === object.item_id && o.item_type === object.item_type
+    );
+    if (d) this.isFavorite = d;
+    return d || null;
   }
 }
 

@@ -4,14 +4,13 @@ import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { User } from "@models";
 import { environment as env } from "@env/environment";
-import { Observable, BehaviorSubject } from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
   private _userData: User;
-  private _favoritesData: any;
 
   get token(): string {
     return sessionStorage.getItem("token") || "";
@@ -41,20 +40,6 @@ export class AuthService {
   }
   setCurrentUser(data: User) {
     this._userData = data;
-  }
-  get favorites(): Promise<any> {
-    return new Promise((resolve) => {
-      if (!this._favoritesData) {
-        this.getFavorites()
-          .then((res) => this.setFavoritesData(res))
-          .finally(() => resolve(this._favoritesData));
-      } else {
-        resolve(this._favoritesData);
-      }
-    });
-  }
-  setFavoritesData(data: any) {
-    this._favoritesData = data;
   }
 
   constructor(
@@ -95,18 +80,6 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.http
         .post<User>(`${env.urlApi}/auth/me`, null)
-        .toPromise()
-        .then((res) => resolve(res));
-    });
-  }
-
-  /**
-   * Get logged user data
-   */
-  getFavorites(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.http
-        .post(`${env.urlApi}/favorites/index`, null)
         .toPromise()
         .then((res) => resolve(res));
     });

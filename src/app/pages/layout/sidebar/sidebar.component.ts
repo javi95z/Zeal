@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
-import { ApiService, AuthService } from "@services";
-import { MenuItem, User } from "@models";
+import { Component, OnInit } from "@angular/core";
+import { FavoritesService } from "@services";
+import { MenuItem, Favorite } from "@models";
 import { STANDARD_MENU, RESOURCE_ICONS } from "@zeal/variables";
 
 @Component({
@@ -8,21 +8,26 @@ import { STANDARD_MENU, RESOURCE_ICONS } from "@zeal/variables";
   templateUrl: "./sidebar.component.html",
   styleUrls: ["./sidebar.component.scss"],
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   protected menuItems: MenuItem[];
-  favorites: FavoriteMenuItem[] = [];
+  favorites: FavoriteMenuItem[];
 
-  constructor(private auth: AuthService) {
+  constructor(private fav: FavoritesService) {
     this.menuItems = STANDARD_MENU;
-    this.auth.favorites.then((res) => this.buildMenu(res));
   }
 
-  private buildMenu(items: any) {
+  ngOnInit(): void {
+    this.fav.getFavorites();
+    this.fav.favs$.subscribe((o) => this.buildMenu(o));
+  }
+
+  private buildMenu(items: Favorite[]) {
+    this.favorites = [];
     items.map((o) => {
       this.favorites.push({
         label: o.name,
         icon: this.getIcon(o.item_type),
-        link: ["/content", o.item_type, "profile", o.item_id],
+        link: `/content/${o.item_type}/profile/${o.item_id}`,
       });
     });
   }
@@ -35,5 +40,5 @@ export class SidebarComponent {
 interface FavoriteMenuItem {
   label: string;
   icon: string;
-  link: string[];
+  link: string;
 }

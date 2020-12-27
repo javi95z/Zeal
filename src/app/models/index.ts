@@ -1,4 +1,5 @@
 export * from "./contact";
+export * from "./favorite";
 export * from "./project";
 export * from "./role";
 export * from "./task";
