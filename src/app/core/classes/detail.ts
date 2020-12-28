@@ -28,6 +28,7 @@ export class DetailClass<T> extends MasterClass<T> {
     this.route = injector.get(ActivatedRoute);
     this.router = injector.get(Router);
     this.location = injector.get(Location);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   // Get one resource from route parameters

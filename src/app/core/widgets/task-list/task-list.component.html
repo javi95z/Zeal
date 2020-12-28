@@ -5,8 +5,10 @@
   <div class="panel-heading">
     <div class="pull-left">
       <h6 class="panel-title txt-dark">
-        <i class="zmdi zmdi-arrow-merge"></i>{{ title || 'Tasks' }}
-        <z-label [value]="data?.length" *ngIf="data"></z-label>
+        <a [routerLink]="['/content/tasks']">
+          <i class="zmdi zmdi-arrow-merge"></i>{{ title || 'Tasks' }}
+          <z-label [value]="data?.length" *ngIf="data"></z-label>
+        </a>
       </h6>
     </div>
     <div class="right-menu">

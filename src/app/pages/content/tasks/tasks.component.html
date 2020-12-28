@@ -4,6 +4,7 @@
       <h6 class="panel-title txt-dark">
         <i class="zmdi zmdi-arrow-merge"></i>Tasks
       </h6>
+      <small class="panel-subtitle" *ngIf="project">From this project</small>
     </div>
     <div class="right-menu">
       <!-- Create new -->
@@ -28,7 +29,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
             <td *matCellDef="let element">
               <i class="zmdi zmdi-arrow-merge zmdi-hc-lg ml-10 mr-15"></i>
-              <a [routerLink]="['/admin/tasks/profile', element.id]">{{ element.name }}</a>
+              <a [routerLink]="['/content/tasks/profile', element.id]">{{ element.name }}</a>
             </td>
           </ng-container>
 

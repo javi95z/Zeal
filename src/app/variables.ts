@@ -10,6 +10,11 @@ export const STANDARD_MENU = [
     link: "dashboard",
     icon: "view-dashboard",
   },
+  {
+    name: "Tasks",
+    link: "tasks",
+    icon: "arrow-merge",
+  },
 ];
 export const ADMIN_MENU = [
   {

@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
       this.favorites.push({
         label: o.name,
         icon: this.getIcon(o.item_type),
-        link: `/content/${o.item_type}/profile/${o.item_id}`,
+        link: `${o.item_type}/profile/${o.item_id}`,
       });
     });
   }

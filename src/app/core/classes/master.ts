@@ -1,5 +1,10 @@
 import { Injector } from "@angular/core";
-import { ApiService, DialogService, ToastService } from "@services";
+import {
+  ApiService,
+  DialogService,
+  ToastService,
+  AuthService,
+} from "@services";
 import { ApiResource, Field } from "@models";
 import { reduceObject } from "@zeal/utils";
 
@@ -9,11 +14,13 @@ export class MasterClass<T> {
   protected api: ApiService<T>;
   protected dialog: DialogService;
   protected toast: ToastService;
+  protected auth: AuthService;
 
   constructor(private injectorObj: Injector) {
     this.api = this.injectorObj.get(ApiService);
     this.dialog = this.injectorObj.get(DialogService);
     this.toast = this.injectorObj.get(ToastService);
+    this.auth = this.injectorObj.get(AuthService);
   }
 
   /**

@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
 import { AuthGuard } from "@guards";
 import { ContentComponent } from "@pages/layout";
-import { DashboardComponent, ProjectComponent } from "./";
+import { DashboardComponent, ProjectComponent, TasksComponent } from "./";
 
 export const routes: Routes = [
   {
@@ -10,6 +10,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: "dashboard", component: DashboardComponent },
+      { path: "tasks", component: TasksComponent },
       { path: "projects/profile/:id", component: ProjectComponent },
       { path: "**", redirectTo: "/content/dashboard" },
     ],

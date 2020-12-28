@@ -4,9 +4,14 @@
   .panel-heading {
     padding: 20px 30px !important;
     .panel-title {
+      line-height: 14px;
       .zmdi {
         margin-right: 15px;
       }
+    }
+    .panel-subtitle {
+      padding-left: 25px;
+      font-size: 11px;
     }
     .right-menu {
       float: right;
