@@ -87,7 +87,7 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
             <td *matCellDef="let element; let i = index" class="action-buttons">
-              <z-actions-menu (event)="onAction($event, element, i)"></z-actions-menu>
+              <z-actions-menu [isFavorite]="checkFavorite(element.id)" (event)="onAction($event, element, i)"></z-actions-menu>
             </td>
           </ng-container>
 

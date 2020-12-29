@@ -4,6 +4,7 @@ import {
   DialogService,
   ToastService,
   AuthService,
+  FavoritesService,
 } from "@services";
 import { ApiResource, Field } from "@models";
 import { reduceObject } from "@zeal/utils";
@@ -15,12 +16,14 @@ export class MasterClass<T> {
   protected dialog: DialogService;
   protected toast: ToastService;
   protected auth: AuthService;
+  protected favs: FavoritesService;
 
   constructor(private injectorObj: Injector) {
     this.api = this.injectorObj.get(ApiService);
     this.dialog = this.injectorObj.get(DialogService);
     this.toast = this.injectorObj.get(ToastService);
     this.auth = this.injectorObj.get(AuthService);
+    this.favs = this.injectorObj.get(FavoritesService);
   }
 
   /**

@@ -9,12 +9,14 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort, Sort } from "@angular/material/sort";
+import { Favorite } from "@models";
 import { MasterClass } from "./master";
 
 export class ListClass<T> extends MasterClass<T> {
   @Input() hideCols?: string[];
   @Output() countValues = new EventEmitter<number>();
   public columns: string[];
+  private favorites: Favorite[];
   selection: SelectionModel<T>;
   dataSource = new MatTableDataSource<T>();
   isLoading = true;
@@ -24,6 +26,7 @@ export class ListClass<T> extends MasterClass<T> {
 
   constructor(injector: Injector) {
     super(injector);
+    this.favs.favs$.subscribe((o) => (this.favorites = o));
   }
 
   public isAllSelected(): boolean {
@@ -117,6 +120,25 @@ export class ListClass<T> extends MasterClass<T> {
       data.splice(pg.pageIndex * pg.pageSize + index, 1);
       this.renderView(data);
     });
+  }
+
+  // Star or unstar an element
+  protected toggleFavorite(id: number) {
+    const item = this.checkFavorite(id);
+    item
+      ? this.favs.removeFavorite(item.id)
+      : this.favs.addFavorite({
+          item_id: id,
+          item_type: this.resourceName,
+        });
+  }
+
+  // Check if element is already favorited
+  protected checkFavorite(id: number): Favorite {
+    const res = this.favorites.find(
+      (o) => o.item_id === id && o.item_type === this.resourceName
+    );
+    return res || null;
   }
 
   /**

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from "@angular/core";
+import { Component, Output, Input, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "z-actions-menu",
@@ -6,6 +6,7 @@ import { Component, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./actions-menu.component.scss"],
 })
 export class ActionsMenuComponent {
+  @Input() isFavorite = false;
   @Output() event = new EventEmitter<string>();
 
   constructor() {}
