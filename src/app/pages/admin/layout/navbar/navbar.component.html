@@ -3,7 +3,7 @@
     <div class="nav-header pull-left">
       <div class="logo-wrap">
         <a [routerLink]="['/admin']">
-          <img class="brand-img" src="assets/img/logo.png" alt="Zeal" />
+          <img class="brand-img" src="assets/img/logo.png" alt="Zeal" width="20px" height="19px" />
           <span class="brand-text">Zeal</span>
         </a>
       </div>
@@ -45,16 +45,6 @@
           <span class="user-online-status"></span>
         </a>
         <ul class="dropdown-menu user-auth-dropdown">
-          <!-- <li>
-            <a href="profile.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
-          </li>
-          <li>
-            <a href="inbox.html"><i class="zmdi zmdi-email"></i><span>Inbox</span></a>
-          </li>
-          <li>
-            <a href="#"><i class="zmdi zmdi-settings"></i><span>Settings</span></a>
-          </li>
-          <li class="divider"></li> -->
           <li>
             <a (click)="logOut()" [routerLink]="">
               <i class="zmdi zmdi-power"></i>
