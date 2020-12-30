@@ -31,4 +31,12 @@ export class DialogService {
     });
     return dialogRef.afterClosed();
   }
+
+  confirmDialog(text: string): Observable<boolean> {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "400px",
+      data: text,
+    });
+    return dialogRef.afterClosed();
+  }
 }

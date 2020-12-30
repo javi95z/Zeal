@@ -84,11 +84,14 @@ export class ListClass<T> extends MasterClass<T> {
    * Send API request to create information
    * and add it to the table too
    */
-  protected createData(params?: object) {
-    this.createDialog(params).then((res) => {
+  protected async createData(params?: object): Promise<T> {
+    let response: T;
+    await this.createDialog(params).then((res) => {
       if (!res) return;
+      response = res.data;
       this.addDataTable(res.data);
     });
+    return response;
   }
 
   /**

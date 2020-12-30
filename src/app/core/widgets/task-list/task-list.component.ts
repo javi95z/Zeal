@@ -19,8 +19,10 @@ export class TaskListWidget extends DataWidgetClass<Task> implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.user) this.params = { user: this.user };
-    if (this.project) this.params = { project: this.project };
+    this.params = {
+      user: this.user ? [this.user] : null,
+      project: this.project ? [this.project] : null,
+    };
     this.refreshData();
   }
 

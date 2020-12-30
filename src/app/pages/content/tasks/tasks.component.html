@@ -5,14 +5,15 @@
         <i class="zmdi zmdi-arrow-merge"></i>Tasks
       </h6>
       <small class="panel-subtitle" *ngIf="project">From this project</small>
+      <small class="panel-subtitle" *ngIf="currentUser && !project">From me or my projects</small>
     </div>
     <div class="right-menu">
-      <!-- Create new -->
-      <a *ngIf="canCreate" class="menu-option" (click)="create()" [routerLink]="">
+      <!-- Create new item -->
+      <a class="menu-option" (click)="create()" matTooltip="Create new" [routerLink]="">
         <i class="zmdi zmdi-plus"></i>
       </a>
-      <!-- Refresh widget -->
-      <a *ngIf="canRefresh" class="menu-option" (click)="loadData()" [routerLink]="">
+      <!-- Refresh content -->
+      <a *ngIf="canRefresh" class="menu-option" (click)="loadData()" matTooltip="Refresh data" [routerLink]="">
         <i class="zmdi zmdi-replay"></i>
       </a>
     </div>
@@ -87,7 +88,8 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
             <td *matCellDef="let element; let i = index" class="action-buttons">
-              <z-actions-menu [isFavorite]="checkFavorite(element.id)" (event)="onAction($event, element, i)"></z-actions-menu>
+              <z-actions-menu [isFavorite]="checkFavorite(element.id)" (event)="onAction($event, element, i)">
+              </z-actions-menu>
             </td>
           </ng-container>
 

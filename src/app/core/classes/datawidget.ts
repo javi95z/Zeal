@@ -12,7 +12,7 @@ export class DataWidgetClass<T> extends MasterClass<T> {
   public refresh = false;
   protected masterData: T[];
   public data: T[];
-  public params: object;
+  public params: object = {};
 
   constructor(injector: Injector) {
     super(injector);
