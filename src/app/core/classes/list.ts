@@ -67,6 +67,13 @@ export class ListClass<T> extends MasterClass<T> {
   }
 
   /**
+   * Filter data in datasource records
+   * @param query Text string from the input
+   */
+  public doFilter = (query: string) =>
+    (this.dataSource.filter = query.trim().toLocaleLowerCase());
+
+  /**
    * Initialize the material datasource
    * and its components with data
    * @param data Data retrieved from APi

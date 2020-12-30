@@ -23,6 +23,12 @@
           font-size: 22px;
         }
       }
+      mat-form-field {
+        float: left;
+        ::ng-deep .mat-form-field-infix {
+          border: 0;
+        }
+      }
     }
   }
 }
