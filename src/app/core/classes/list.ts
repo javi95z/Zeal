@@ -104,6 +104,8 @@ export class ListClass<T> extends MasterClass<T> {
   protected editData(resource: T, id: number, index: number) {
     this.editDialog(resource, id).then((res) => {
       if (!res) return;
+      const pg = this.paginator;
+      index = pg.pageIndex * pg.pageSize + index;
       this.dataSource.data[index] = res.data;
       this.dataSource._updateChangeSubscription();
     });
@@ -146,13 +148,14 @@ export class ListClass<T> extends MasterClass<T> {
 
   /**
    * Add new information to the table
-   * @param data New data
+   * @param element New data
    */
-  private addDataTable(element: T) {
+  private addDataTable(element: T): number {
     if (!element) return;
     const data = this.dataSource.data;
-    data.push(element);
+    const index = data.push(element);
     this.renderView(data);
+    return index;
   }
 
   private compare = (a: number | string, b: number | string, isAsc: boolean) =>
