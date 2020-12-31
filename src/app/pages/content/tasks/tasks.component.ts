@@ -38,21 +38,21 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     this.loadData();
   }
 
+  protected loadData() {
+    this.isLoading = true;
+    this.initData(this.buildParams());
+  }
+
   protected create() {
     const data = {
       project: this.project ? this.project : null,
     };
-    super.createData(data).then((task) => {
-      if (!task) return;
-      this.suggestToSelfAssignTask().then((res) => {
-        if (res) this.selfAssign(task.id);
+    super.createData(data).then((res) => {
+      if (!res) return;
+      this.suggestToSelfAssignTask().then((o) => {
+        if (o) this.selfAssign(res.data.id, res.index);
       });
     });
-  }
-
-  protected loadData() {
-    this.isLoading = true;
-    this.initData(this.buildParams());
   }
 
   protected onAction(action: string, task: Task, index: number) {
@@ -69,21 +69,20 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     }
   }
 
-  protected selfAssign(id: number) {
+  protected selfAssign(id: number, index: number) {
     const obj = {
       user: this.currentUser.id,
     };
     this.api.updateOne(this.resourceName, obj, id).then((res) => {
-      // ! Refresh to show Owner field correctly
-      // this.dataSource.data[index] = res.data;
-      // this.dataSource._updateChangeSubscription();
+      this.editDataTable(res.data, index);
     });
   }
 
+  // Build parameters to fetch data from API
   private buildParams(): object {
     const userProjects = pluckFields(this.currentUser.projects);
     return {
-      user: this.currentUser ? [this.currentUser.id] : null,
+      user: this.currentUser && !this.project ? [this.currentUser.id] : null,
       project: this.project ? [this.project] : userProjects,
     };
   }

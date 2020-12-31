@@ -91,14 +91,19 @@ export class ListClass<T> extends MasterClass<T> {
    * Send API request to create information
    * and add it to the table too
    */
-  protected async createData(params?: object): Promise<T> {
-    let response: T;
+  protected async createData(
+    params?: object
+  ): Promise<{ data: T; index: number }> {
+    let response = {
+      data: {} as T,
+      index: null,
+    };
     await this.createDialog(params).then((res) => {
       if (!res) return;
-      response = res.data;
-      this.addDataTable(res.data);
+      response.data = res.data;
+      response.index = this.addDataTable(res.data);
     });
-    return response;
+    return new Promise((resolve) => resolve(response));
   }
 
   /**
@@ -113,8 +118,7 @@ export class ListClass<T> extends MasterClass<T> {
       if (!res) return;
       const pg = this.paginator;
       index = pg.pageIndex * pg.pageSize + index;
-      this.dataSource.data[index] = res.data;
-      this.dataSource._updateChangeSubscription();
+      this.editDataTable(res.data, index);
     });
   }
 
@@ -160,9 +164,19 @@ export class ListClass<T> extends MasterClass<T> {
   private addDataTable(element: T): number {
     if (!element) return;
     const data = this.dataSource.data;
-    const index = data.push(element);
+    const index = data.push(element) - 1;
     this.renderView(data);
     return index;
+  }
+
+  /**
+   * Edit a row from the table
+   * @param element New data
+   * @param index Row index
+   */
+  protected editDataTable(element: T, index: number) {
+    this.dataSource.data[index] = element;
+    this.dataSource._updateChangeSubscription();
   }
 
   private compare = (a: number | string, b: number | string, isAsc: boolean) =>
