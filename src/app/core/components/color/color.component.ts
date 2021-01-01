@@ -19,4 +19,5 @@ import { Component, Input } from "@angular/core";
 })
 export class ColorComponent {
   @Input() value: string;
+  @Input() hideLabel: boolean;
 }

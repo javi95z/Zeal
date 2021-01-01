@@ -152,17 +152,36 @@ h6 {
 // Panels
 .panel {
   @include mat-elevation(2);
-  .panel-heading .panel-button {
-    color: $gray;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    &:not(:last-child) {
-      margin-right: 15px;
+  max-height: 700px;
+  overflow-y: auto;
+  .panel-heading {
+    padding: 20px 30px !important;
+    .panel-title {
+      line-height: 14px;
+      .zmdi {
+        margin-right: 15px;
+      }
     }
-    i {
-      font-size: 15px;
-      margin-right: 5px;
+    .panel-subtitle {
+      padding-left: 25px;
+      font-size: 11px;
+    }
+    .right-menu {
+      float: right;
+      .menu-option {
+        float: left;
+        margin-left: 20px;
+        .zmdi {
+          color: #878787;
+          font-size: 22px;
+        }
+      }
+      mat-form-field {
+        float: left;
+        ::ng-deep .mat-form-field-infix {
+          border: 0;
+        }
+      }
     }
   }
   .panel-footer {
