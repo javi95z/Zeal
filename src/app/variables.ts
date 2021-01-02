@@ -43,6 +43,11 @@ export const ADMIN_MENU = [
     icon: "badge-check",
   },
   {
+    name: "Contacts",
+    link: "contacts",
+    icon: "account-box-phone",
+  },
+  {
     name: "Other",
     link: "other",
     icon: "more",

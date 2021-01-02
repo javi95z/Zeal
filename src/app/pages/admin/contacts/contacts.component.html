@@ -1,0 +1,80 @@
+<z-loading *ngIf="isLoading"></z-loading>
+<!-- <button mat-button (click)="createDialog()" *ngIf="!isLoading" zPanelButton>Create contact</button> -->
+<div class="table-wrap" *ngIf="!isLoading">
+  <div class="table-responsive" *ngIf="dataSource.data.length">
+    <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
+      (matSortChange)="sortData($event)">
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [checked]="selection.hasValue() && isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td *matCellDef="let element">
+          <a [routerLink]="['/admin/contacts/profile', element.id]">{{ element?.name }}</a>
+          <p class="fs-sm" zOverflow="600">{{ element?.email }}</p>
+        </td>
+      </ng-container>
+
+      <!-- Type Column -->
+      <ng-container matColumnDef="business_type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Business Type </th>
+        <td *matCellDef="let element">{{ element?.business_type.name }}</td>
+      </ng-container>
+
+      <!-- Phone Number Column -->
+      <ng-container matColumnDef="phone_number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone number </th>
+        <td *matCellDef="let element">
+          {{ element?.phone_number }}
+        </td>
+      </ng-container>
+
+      <!-- Mobile Number Column -->
+      <ng-container matColumnDef="mobile_phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile phone </th>
+        <td *matCellDef="let element">
+          {{ element?.mobile_phone }}
+        </td>
+      </ng-container>
+
+      <!-- Website Column -->
+      <ng-container matColumnDef="website">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Website </th>
+        <td *matCellDef="let element">
+          <a [href]="element?.website" target="_blank">
+            <i class="zmdi zmdi-link"></i>
+            {{ element?.website }}
+          </a>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td *matCellDef="let element; let i = index" class="action-buttons">
+          <z-actions-menu (event)="onAction($event, element, i)"></z-actions-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
+      showFirstLastButtons>
+    </mat-paginator>
+  </div>
+  <z-no-results *ngIf="!dataSource.data.length"></z-no-results>
+</div>
