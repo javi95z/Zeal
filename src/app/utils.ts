@@ -1,4 +1,5 @@
 import { FormGroup } from "@angular/forms";
+import { COLORS } from './variables';
 
 /**
  * Populate the form values from a model
@@ -75,3 +76,7 @@ export const reduceObject = (obj: Object) => {
     {}
   );
 };
+
+export const getColor = (key: string) => {
+  return COLORS.find(o => o.key === key)?.value || null;
+}

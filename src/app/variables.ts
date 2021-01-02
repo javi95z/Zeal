@@ -217,3 +217,29 @@ export const RESOURCE_ICONS: any[] = [
     icon: "arrow-merge",
   },
 ];
+export const COLORS = [
+  {
+    key: "open",
+    value: "#0e3b84",
+  },
+  {
+    key: "completed",
+    value: "#2ecd99",
+  },
+  {
+    key: "canceled",
+    value: "#bf2424",
+  },
+  {
+    key: "low",
+    value: "#bf2424",
+  },
+  {
+    key: "medium",
+    value: "#878787",
+  },
+  {
+    key: "high",
+    value: "#2ecd99",
+  },
+];
