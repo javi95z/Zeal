@@ -3,6 +3,7 @@ import { Validators } from "@angular/forms";
 
 export const PROJECT_PRIORITY = ["low", "medium", "high"];
 export const PROJECT_STATUS = ["open", "completed", "canceled"];
+export const CONTACT_TYPES = ["customer", "supplier"];
 export const GENDER = ["female", "male"];
 export const STANDARD_MENU = [
   {
@@ -189,6 +190,69 @@ export const ROLE_FIELDS: Field[] = [
     key: "description",
     label: "Description",
     type: "textarea",
+  },
+];
+export const CONTACT_FIELDS: Field[] = [
+  {
+    key: "name",
+    label: "Name",
+    type: "text",
+    validators: [Validators.required],
+  },
+  {
+    key: "email",
+    label: "Email",
+    type: "email",
+    validators: [Validators.required, Validators.email],
+  },
+  {
+    key: "type",
+    label: "Type",
+    type: "select",
+    options: CONTACT_TYPES,
+  },
+  {
+    key: "bio",
+    label: "Bio",
+    type: "textarea",
+  },
+  {
+    key: "discount",
+    label: "Discount",
+    type: "text",
+  },
+  {
+    key: "phone_number",
+    label: "Phone number",
+    type: "text",
+  },
+  {
+    key: "phone_number",
+    label: "Phone number",
+    type: "text",
+    validators: [Validators.maxLength(25)],
+  },
+  {
+    key: "mobile_phone",
+    label: "Mobile phone",
+    type: "text",
+    validators: [Validators.maxLength(25)],
+  },
+  {
+    key: "skype",
+    label: "Skype",
+    type: "text",
+  },
+  {
+    key: "fax",
+    label: "Fax",
+    type: "text",
+  },
+  {
+    key: "website",
+    label: "Website",
+    type: "text",
+    validators: [Validators.maxLength(100)],
   },
 ];
 export const PANEL_ACTIONS: PanelAction[] = [

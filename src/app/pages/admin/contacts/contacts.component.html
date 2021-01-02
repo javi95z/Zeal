@@ -29,9 +29,11 @@
       </ng-container>
 
       <!-- Type Column -->
-      <ng-container matColumnDef="business_type">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Business Type </th>
-        <td *matCellDef="let element">{{ element?.business_type.name }}</td>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+        <td *matCellDef="let element">
+          <span class="capitalize-font">{{ element?.type }}</span>
+        </td>
       </ng-container>
 
       <!-- Phone Number Column -->
