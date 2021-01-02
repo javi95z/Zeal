@@ -28,6 +28,7 @@ import {
   StatusDirective,
 } from "./directives";
 import {
+  PieChartWidget,
   ProfileBoxComponent,
   ProgressTrackComponent,
   ProjectListWidget,
@@ -37,6 +38,7 @@ import {
 } from "./widgets";
 import { CapitalizePipe } from "./pipes";
 import { MaterialModule } from "@zeal/material.module";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 const components = [
   ActionsMenuComponent,
@@ -63,6 +65,7 @@ const components = [
   UserIconsComponent,
 ];
 const widgets = [
+  PieChartWidget,
   ProgressTrackComponent,
   ProfileBoxComponent,
   ProjectListWidget,
@@ -76,6 +79,7 @@ const modules = [
   MaterialModule,
   ReactiveFormsModule,
   RouterModule,
+  NgxChartsModule,
 ];
 
 @NgModule({

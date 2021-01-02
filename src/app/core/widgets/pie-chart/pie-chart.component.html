@@ -1,0 +1,33 @@
+<div class="pie-chart panel panel-default card-view">
+  <div class="panel-heading">
+    <div class="pull-left">
+      <h6 class="panel-title txt-dark">
+        <i class="zmdi zmdi-chart-donut"></i>{{ data.title }}
+      </h6>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-wrapper collapse in">
+    <div class="panel-body">
+      <!-- Graphic chart -->
+      <!-- <div class="block">
+        <ngx-charts-pie-chart [results]="results" [scheme]="colors" (select)="onSelect($event)">
+        </ngx-charts-pie-chart>
+      </div> -->
+      <!-- Chart labels -->
+      <ng-container *ngFor="let item of data.labels">
+        <hr class="light-grey-hr row mt-10 mb-15">
+        <div class="label-chatrs">
+          <div class="pie-chart-label">
+            <z-color [value]="item.color" hideLabel="true"></z-color>
+            <span class="pie-chart-label__container">
+              <span class="pie-chart-label__line1">{{ item.percent }} {{ item.name }}</span>
+              <span class="pie-chart-label__line2">{{ item.value }} {{ data.resource }}</span>
+            </span>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
