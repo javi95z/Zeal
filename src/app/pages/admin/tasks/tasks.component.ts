@@ -29,9 +29,10 @@ export class TasksAdmin extends ListClass<Task> implements OnInit {
   }
 
   ngOnInit(): void {
-    const body = {};
-    if (this.project) body["project"] = this.project;
-    if (this.user) body["user"] = this.user;
+    const body = {
+      project: this.project ? [this.project] : null,
+      user: this.user ? [this.user] : null,
+    };
     this.initData(body);
   }
 

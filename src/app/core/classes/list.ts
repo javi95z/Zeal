@@ -64,7 +64,7 @@ export class ListClass<T> extends MasterClass<T> {
       .getAll(this.resourceName, body || null)
       .then((res) => {
         this.renderView(res.data);
-        if (res.meta.stats) this.stats = res.meta.stats;
+        if (res.meta?.stats) this.stats = res.meta.stats;
       })
       .finally(() => (this.isLoading = false));
     return true;

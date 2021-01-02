@@ -152,7 +152,7 @@ h6 {
 // Panels
 .panel {
   @include mat-elevation(2);
-  max-height: 700px;
+  max-height: 85vh;
   overflow-y: auto;
   .panel-heading {
     padding: 20px 30px !important;
@@ -169,8 +169,15 @@ h6 {
     .right-menu {
       float: right;
       .menu-option {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
         float: left;
         margin-left: 20px;
+        span {
+          margin-left: 5px;
+          color: #878787;
+        }
         .zmdi {
           color: #878787;
           font-size: 22px;

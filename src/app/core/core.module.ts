@@ -4,7 +4,6 @@ import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   ActionsMenuComponent,
-  BackButtonComponent,
   ColorComponent,
   ConfirmationDialogComponent,
   EditDialogComponent,
@@ -43,7 +42,6 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 const components = [
   ActionsMenuComponent,
   AvatarDirective,
-  BackButtonComponent,
   CapitalizePipe,
   ColorComponent,
   ConfirmationDialogComponent,

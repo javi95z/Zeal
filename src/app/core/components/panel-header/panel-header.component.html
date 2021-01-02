@@ -5,13 +5,17 @@
       <ng-container *ngIf="!titleLink">{{ title }}</ng-container>
     </h6>
   </div>
-  <div class="pull-right" *ngIf="menu">
+  <div class="right-menu" *ngIf="menu">
+    <!-- Menu elements -->
     <ng-container *ngFor="let item of menu">
-      <a class="panel-button" (click)="emitAction(item.action)">
+      <a class="menu-option" (click)="emitAction(item.action)">
         <i class="zmdi zmdi-{{item.icon}}"></i><span>{{ item.name }}</span>
       </a>
     </ng-container>
-    <z-back-button [defClass]="'panel-button'" *ngIf="!hideBack"></z-back-button>
+    <!-- Back button -->
+    <a (click)="goBack()" class="menu-option">
+      <i class="zmdi zmdi-arrow-left"></i><span>Go back</span>
+    </a>
   </div>
   <div class="clearfix"></div>
 </div>
