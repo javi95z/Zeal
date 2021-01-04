@@ -15,6 +15,7 @@ import {
   RolesAdmin,
   RoleProfileAdmin,
   ContactsAdmin,
+  ContactProfileAdmin,
 } from "./";
 import { AdminComponent } from "./admin.component";
 import { CoreModule } from "@core/core.module";
@@ -36,6 +37,7 @@ import { LayoutModule } from "@pages/layout/layout.module";
     RolesAdmin,
     RoleProfileAdmin,
     ContactsAdmin,
+    ContactProfileAdmin,
   ],
   imports: [LayoutModule, CoreModule, RouterModule.forChild(routes)],
 })

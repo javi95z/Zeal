@@ -1,0 +1,79 @@
+<z-loading *ngIf="isLoading"></z-loading>
+<z-error-message *ngIf="error"></z-error-message>
+<div class="row" *ngIf="!isLoading">
+  <div class="col-sm-12" *ngIf="!error">
+    <z-panel-header [title]="resource?.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
+    <div class="panel-wrapper collapse in">
+      <mat-tab-group animationDuration="0ms" [selectedIndex]="tabs.selectedTab"
+        (selectedIndexChange)="tabs.tabChanged($event)">
+        <!-- Details tab -->
+        <mat-tab label="Details">
+          <div class="panel-body row">
+            <div class="table-wrap">
+              <div class="table-responsive">
+                <table class="table display pb-30" id="details">
+                  <tbody>
+                    <tr *ngIf="resource.name">
+                      <td>Name</td>
+                      <td>{{ resource.name }}</td>
+                    </tr>
+                    <tr *ngIf="resource.bio">
+                      <td>Bio</td>
+                      <td class="ws-normal">{{ resource.bio }}</td>
+                    </tr>
+                    <tr *ngIf="resource.email">
+                      <td>Email</td>
+                      <td>{{ resource.email }}</td>
+                    </tr>
+                    <tr *ngIf="resource.type">
+                      <td>Type</td>
+                      <td class="capitalize-font">{{ resource.type }}</td>
+                    </tr>
+                    <tr *ngIf="resource.discount">
+                      <td>Discount</td>
+                      <td>{{ resource.discount }}</td>
+                    </tr>
+                    <tr *ngIf="resource.phone_number">
+                      <td>Phone number</td>
+                      <td>{{ resource.phone_number }}</td>
+                    </tr>
+                    <tr *ngIf="resource.mobile_phone">
+                      <td>Mobile phone</td>
+                      <td>{{ resource.mobile_phone }}</td>
+                    </tr>
+                    <tr *ngIf="resource.skype">
+                      <td>Skype</td>
+                      <td>{{ resource.skype }}</td>
+                    </tr>
+                    <tr *ngIf="resource.fax">
+                      <td>Fax</td>
+                      <td>{{ resource.fax }}</td>
+                    </tr>
+                    <tr *ngIf="resource.website">
+                      <td>Website</td>
+                      <td>
+                        <a [href]="resource.website" target="_blank">{{ resource.website }}</a>
+                      </td>
+                    </tr>
+                    <tr *ngIf="resource.created_at">
+                      <td>Created at</td>
+                      <td>{{ resource.created_at | date: "long" }}</td>
+                    </tr>
+                    <tr *ngIf="resource.updated_at">
+                      <td>Updated at</td>
+                      <td>{{ resource.updated_at | date: "long" }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <!-- Projects tab -->
+        <mat-tab label="Projects ({{projectsCount}})">
+          <z-admin-projects [contact]="resource.id" (countValues)="countProjects($event)"></z-admin-projects>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

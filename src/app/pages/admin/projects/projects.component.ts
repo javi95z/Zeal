@@ -9,6 +9,7 @@ import { PROJECT_FIELDS } from "@zeal/variables";
 })
 export class ProjectsAdmin extends ListClass<Project> implements OnInit {
   @Input() user?: number;
+  @Input() contact?: number;
 
   constructor(injector: Injector) {
     super(injector);
@@ -29,7 +30,15 @@ export class ProjectsAdmin extends ListClass<Project> implements OnInit {
   async ngOnInit() {
     const body = {
       user: this.user ? [this.user] : null,
+      contact: this.contact ? this.contact : null,
     };
     this.initData(body);
+  }
+
+  createProject() {
+    const data = {
+      contact: this.contact || null,
+    };
+    this.createData(data);
   }
 }
