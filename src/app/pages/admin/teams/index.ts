@@ -1,2 +1,2 @@
 export * from "./teams.component";
-export * from "./profile/profile.component";
+export * from "./profile.component";
