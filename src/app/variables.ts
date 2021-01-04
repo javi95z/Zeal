@@ -274,6 +274,10 @@ export const PANEL_ACTIONS: PanelAction[] = [
 ];
 export const RESOURCE_ICONS: any[] = [
   {
+    key: "user",
+    icon: "accounts-alt"
+  },
+  {
     key: "projects",
     icon: "case",
   },
@@ -284,6 +288,14 @@ export const RESOURCE_ICONS: any[] = [
   {
     key: "tasks",
     icon: "arrow-merge",
+  },
+  {
+    key: "roles",
+    icon: "badge-check"
+  },
+  {
+    key: "contacts",
+    icon: "account-box-phone"
   },
 ];
 export const COLORS = [
