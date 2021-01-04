@@ -26,15 +26,4 @@ export class ContactsAdmin extends ListClass<Contact> implements OnInit {
   ngOnInit(): void {
     this.initData();
   }
-
-  protected onAction(action: string, contact: Contact, index: number) {
-    switch (action) {
-      case "EDIT":
-        this.editData(contact, contact.id, index);
-        break;
-      case "DELETE":
-        this.deleteData(contact.id, index, contact.name);
-        break;
-    }
-  }
 }

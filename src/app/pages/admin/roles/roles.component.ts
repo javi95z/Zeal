@@ -19,17 +19,6 @@ export class RolesAdmin extends ListClass<Role> implements OnInit {
     this.initData();
   }
 
-  onAction(action: string, role: Role, index: number) {
-    switch (action) {
-      case "EDIT":
-        this.editData(role, role.id, index);
-        break;
-      case "DELETE":
-        this.deleteData(role.id, index, role.name);
-        break;
-    }
-  }
-
   createRole() {
     this.createData();
   }

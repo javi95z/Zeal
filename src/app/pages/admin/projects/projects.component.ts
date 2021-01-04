@@ -26,20 +26,10 @@ export class ProjectsAdmin extends ListClass<Project> implements OnInit {
     ];
   }
 
-  ngOnInit() {
-    const body = {};
-    if (this.user) body["user"] = this.user;
+  async ngOnInit() {
+    const body = {
+      user: this.user ? [this.user] : null,
+    };
     this.initData(body);
-  }
-
-  onAction(action: string, project: Project, index: number) {
-    switch (action) {
-      case "EDIT":
-        this.editData(project, project.id, index);
-        break;
-      case "DELETE":
-        this.deleteData(project.id, index, project.name);
-        break;
-    }
   }
 }

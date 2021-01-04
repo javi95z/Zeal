@@ -27,17 +27,6 @@ export class UsersAdmin extends ListClass<User> implements OnInit {
     this.initData(body);
   }
 
-  onAction(action: string, user: User, index: number) {
-    switch (action) {
-      case "EDIT":
-        this.editData(user, user.id, index);
-        break;
-      case "DELETE":
-        this.deleteData(user.id, index, user.name);
-        break;
-    }
-  }
-
   createUser() {
     const data = {};
     if (this.project) data["projects"] = [this.project];

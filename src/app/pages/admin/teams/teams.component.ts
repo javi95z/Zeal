@@ -22,15 +22,4 @@ export class TeamsAdmin extends ListClass<Team> implements OnInit {
     if (this.user) body["user"] = this.user;
     this.initData(body);
   }
-
-  onAction(action: string, team: Team, index: number) {
-    switch (action) {
-      case "EDIT":
-        this.editData(team, team.id, index);
-        break;
-      case "DELETE":
-        this.deleteData(team.id, index, team.name);
-        break;
-    }
-  }
 }

@@ -6,12 +6,13 @@ import {
   AuthService,
   FavoritesService,
 } from "@services";
-import { ApiResource, Field } from "@models";
+import { ApiResource, Field, Favorite } from "@models";
 import { reduceObject } from "@zeal/utils";
 
 export class MasterClass<T> {
   fields: Field[];
   resourceName: string;
+  favorites: Favorite[];
   protected api: ApiService<T>;
   protected dialog: DialogService;
   protected toast: ToastService;
@@ -24,6 +25,12 @@ export class MasterClass<T> {
     this.toast = this.injectorObj.get(ToastService);
     this.auth = this.injectorObj.get(AuthService);
     this.favs = this.injectorObj.get(FavoritesService);
+    this.loadFavorites();
+  }
+
+  private loadFavorites() {
+    this.favs.getFavorites();
+    this.favs.favs$.subscribe((o) => (this.favorites = o));
   }
 
   /**
@@ -95,6 +102,26 @@ export class MasterClass<T> {
       .then((o) => (result = o))
       .catch((err) => (result = err));
     return result;
+  }
+
+  // Star or unstar an element
+  public toggleFavorite(id: number) {
+    const item = this.checkFavorite(id);
+    item
+      ? this.favs.removeFavorite(item.id)
+      : this.favs.addFavorite({
+          item_id: id,
+          item_type: this.resourceName,
+        });
+  }
+
+  // Check if element is already favorited
+  public checkFavorite(id: number): Favorite {
+    if (!this.favorites) this.loadFavorites();
+    const res = this.favorites.find(
+      (o) => o.item_id === id && o.item_type === this.resourceName
+    );
+    return res || null;
   }
 
   /**

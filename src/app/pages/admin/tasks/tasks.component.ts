@@ -36,17 +36,6 @@ export class TasksAdmin extends ListClass<Task> implements OnInit {
     this.initData(body);
   }
 
-  protected onAction(action: string, task: Task, index: number) {
-    switch (action) {
-      case "EDIT":
-        this.editData(task, task.id, index);
-        break;
-      case "DELETE":
-        this.deleteData(task.id, index, task.name);
-        break;
-    }
-  }
-
   protected createTask() {
     const data = {};
     if (this.project) data["project"] = this.project;

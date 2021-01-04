@@ -60,20 +60,6 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     });
   }
 
-  protected onAction(action: string, task: Task, index: number) {
-    switch (action) {
-      case "FAVORITE":
-        this.toggleFavorite(task.id);
-        break;
-      case "EDIT":
-        this.editData(task, task.id, index);
-        break;
-      case "DELETE":
-        this.deleteData(task.id, index, task.name);
-        break;
-    }
-  }
-
   protected selfAssign(id: number, index: number) {
     const obj = {
       user: this.currentUser.id,

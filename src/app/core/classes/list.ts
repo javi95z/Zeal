@@ -9,7 +9,6 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort, Sort } from "@angular/material/sort";
-import { Favorite } from "@models";
 import { MasterClass } from "./master";
 
 export class ListClass<T> extends MasterClass<T> {
@@ -17,7 +16,6 @@ export class ListClass<T> extends MasterClass<T> {
   @Output() countValues = new EventEmitter<number>();
   public columns: string[];
   public stats: [];
-  private favorites: Favorite[];
   selection: SelectionModel<T>;
   dataSource = new MatTableDataSource<T>();
   isLoading = true;
@@ -27,7 +25,6 @@ export class ListClass<T> extends MasterClass<T> {
 
   constructor(injector: Injector) {
     super(injector);
-    this.favs.favs$.subscribe((o) => (this.favorites = o));
   }
 
   public isAllSelected(): boolean {
@@ -42,6 +39,10 @@ export class ListClass<T> extends MasterClass<T> {
       : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
 
+  /**
+   * Sort data table by a given column
+   * @param sort Object with sorting column and direction
+   */
   public sortData(sort: Sort) {
     const data = this.dataSource.data.slice();
     if (!sort.active || sort.direction === "") return;
@@ -68,6 +69,26 @@ export class ListClass<T> extends MasterClass<T> {
       })
       .finally(() => (this.isLoading = false));
     return true;
+  }
+
+  /**
+   * Perform different actions on a table row resource
+   * @param action Name of action clicked
+   * @param resource Resource to perform action to
+   * @param index Table row index
+   */
+  public onAction(action: string, resource: T, index: number) {
+    switch (action) {
+      case "FAVORITE":
+        this.toggleFavorite(resource["id"]);
+        break;
+      case "EDIT":
+        this.editData(resource, resource["id"], index);
+        break;
+      case "DELETE":
+        this.deleteData(resource["id"], index, resource["name"]);
+        break;
+    }
   }
 
   /**
@@ -140,25 +161,6 @@ export class ListClass<T> extends MasterClass<T> {
       data.splice(pg.pageIndex * pg.pageSize + index, 1);
       this.renderView(data);
     });
-  }
-
-  // Star or unstar an element
-  protected toggleFavorite(id: number) {
-    const item = this.checkFavorite(id);
-    item
-      ? this.favs.removeFavorite(item.id)
-      : this.favs.addFavorite({
-          item_id: id,
-          item_type: this.resourceName,
-        });
-  }
-
-  // Check if element is already favorited
-  protected checkFavorite(id: number): Favorite {
-    const res = this.favorites.find(
-      (o) => o.item_id === id && o.item_type === this.resourceName
-    );
-    return res || null;
   }
 
   /**
