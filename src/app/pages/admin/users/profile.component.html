@@ -33,7 +33,7 @@
                       <td>Role</td>
                       <td>
                         <span *ngIf="resource.role">
-                          <a [routerLink]="['/admin/roles/profile', resource.role.id]">{{ resource?.role.name }}</a>
+                          <a [routerLink]="['/admin/roles/profile', resource.role.id]">{{ resource.role.name }}</a>
                         </span>
                         <a class="table-button" (click)="editRole()">
                           <i class="zmdi zmdi-edit"></i>Change

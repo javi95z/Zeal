@@ -75,9 +75,7 @@ export class UserProfileAdmin extends DetailClass<User> implements OnInit {
   /**
    * Edit role of the user
    */
-  editRole() {
-    this.editOneToMany<Role>("role", this.resource?.role);
-  }
+  editRole = () => this.editOneToMany<Role>("role", this.resource?.role);
 
   /**
    * Activate a disabled user

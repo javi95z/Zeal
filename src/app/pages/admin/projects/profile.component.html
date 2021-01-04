@@ -24,7 +24,12 @@
                     <tr *ngIf="resource.contact">
                       <td>Contact</td>
                       <td>
-                        <a [routerLink]="">{{ resource.contact.name }}</a>
+                        <span *ngIf="resource.contact">
+                          <a [routerLink]="['/admin/contacts/profile', resource.contact.id]">{{ resource.contact.name }}</a>
+                        </span>
+                        <a class="table-button" (click)="editContact()">
+                          <i class="zmdi zmdi-edit"></i>Change
+                        </a>
                       </td>
                     </tr>
                     <tr *ngIf="resource.description">

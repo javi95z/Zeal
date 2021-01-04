@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from "@angular/core";
-import { Project, User } from "@models";
+import { Project, User, Contact } from "@models";
 import { DetailClass } from "@core/classes";
 import { PROJECT_FIELDS } from "@zeal/variables";
 
@@ -58,4 +58,10 @@ export class ProjectProfileAdmin
     const params = { project: this.resource.id };
     this.editManyToMany<User>("users", params);
   }
+
+  /**
+   * Edit contact of the project
+   */
+  editContact = () =>
+    this.editOneToMany<Contact>("contact", this.resource?.contact);
 }
