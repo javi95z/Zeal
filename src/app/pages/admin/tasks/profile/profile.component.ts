@@ -4,7 +4,6 @@ import { DetailClass } from "@core/classes";
 
 @Component({
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"],
 })
 export class TaskProfileAdmin extends DetailClass<Task> implements OnInit {
   constructor(injector: Injector) {

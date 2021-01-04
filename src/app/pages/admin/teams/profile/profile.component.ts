@@ -5,7 +5,6 @@ import { TASK_FIELDS } from "@zeal/variables";
 
 @Component({
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"],
 })
 export class TeamProfileAdmin extends DetailClass<Team> implements OnInit {
   membersCount = 0;

@@ -225,11 +225,6 @@ export const CONTACT_FIELDS: Field[] = [
     key: "phone_number",
     label: "Phone number",
     type: "text",
-  },
-  {
-    key: "phone_number",
-    label: "Phone number",
-    type: "text",
     validators: [Validators.maxLength(25)],
   },
   {

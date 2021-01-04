@@ -5,7 +5,6 @@ import { USER_FIELDS } from "@zeal/variables";
 
 @Component({
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"],
 })
 export class UserProfileAdmin extends DetailClass<User> implements OnInit {
   projectsCount = 0;

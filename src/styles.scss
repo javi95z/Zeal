@@ -217,6 +217,18 @@ mat-tab-group {
 
 // Tables
 .table {
+  &#details {
+    tr {
+      td:nth-child(1) {
+        font-weight: 800;
+      }
+      td:nth-child(2) {
+        max-width: 80%;
+        width: 80%;
+      }
+    }
+  }
+
   .mat-row {
     td {
       padding: 10px;

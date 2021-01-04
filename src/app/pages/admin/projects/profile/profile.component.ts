@@ -5,7 +5,6 @@ import { PROJECT_FIELDS } from "@zeal/variables";
 
 @Component({
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"],
 })
 export class ProjectProfileAdmin
   extends DetailClass<Project>

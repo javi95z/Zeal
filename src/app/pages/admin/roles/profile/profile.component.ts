@@ -5,7 +5,6 @@ import { ROLE_FIELDS } from "@zeal/variables";
 
 @Component({
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"],
 })
 export class RoleProfileAdmin extends DetailClass<Role> implements OnInit {
   usersCount = 0;
