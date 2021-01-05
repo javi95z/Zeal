@@ -15,4 +15,15 @@ export class DashboardComponent implements OnInit {
       this.api.getOne("users", e.id).then((o) => (this.user = o.data));
     });
   }
+
+  protected buildProfileBox(): object {
+    if (!this.user) return;
+    const pb = {
+      id: this.user.id,
+      title: this.user.name,
+      subtitle: this.user.role?.name,
+      profileImage: this.user.profile_img
+    };
+    return pb;
+  }
 }

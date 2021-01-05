@@ -14,6 +14,7 @@ export class ProfileBoxComponent implements OnInit {
   @Input() hasImage: boolean;
   @Input() hasIcon: boolean;
   @Input() hasBackground: boolean;
+  @Input() canFavorite = true;
   @Input() canEdit: boolean;
   @Output() editAction = new EventEmitter();
 

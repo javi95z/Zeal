@@ -15,30 +15,7 @@
       title="My tasks"></z-task-list>
   </div>
   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <!-- ! Replace by ProfileBox -->
-    <div class="panel panel-default card-view pa-0">
-      <div class="panel-wrapper collapse in">
-        <div class="panel-body pa-0">
-          <div class="profile-box">
-            <div class="profile-cover-pic">
-              <div class="fileupload btn btn-default">
-                <span class="btn-text">edit</span>
-                <input class="upload" type="file" />
-              </div>
-              <div class="profile-image-overlay"></div>
-            </div>
-            <div class="profile-info text-center">
-              <div class="profile-img-wrap">
-                <div class="inline-block mb-10" [zAvatar]="user?.profile_img" alt="user"></div>
-              </div>
-              <h5 class="block mt-10 mb-5 weight-500 capitalize-font txt-danger">
-                {{ user?.name }}
-              </h5>
-              <h6 class="block capitalize-font pb-20">{{ user.role?.name }}</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <z-profile-box [data]="buildProfileBox()" hasImage="true" hasBackground="true" canEdit="true" [canFavorite]="false">
+    </z-profile-box>
   </div>
 </div>

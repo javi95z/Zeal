@@ -1,10 +1,10 @@
 <div class="profile-box panel panel-default card-view pa-0">
   <div class="panel-wrapper collapse in">
     <!-- Panel header -->
-    <div class="profile-header">
+    <div class="profile-header" *ngIf="data.resourceName || canFavorite">
       <div class="profile-header__menu"></div>
       <h2 class="profile-header__resource">{{ data.resourceName }}</h2>
-      <div class="profile-header__menu">
+      <div class="profile-header__menu" *ngIf="canFavorite">
         <a *ngIf="!isFavorite" [routerLink]="" (click)="star()" matTooltip="Mark as favorite">
           <i class="zmdi zmdi-star-outline"></i>
         </a>
@@ -25,7 +25,7 @@
       <div class="profile-info text-center">
         <!-- Profile image -->
         <div *ngIf="hasImage" class="profile-img-wrap">
-          <img class="inline-block mb-10" [src]="data?.profileImage" alt="user">
+          <div [zAvatar]="data?.profileImage" [extraClasses]="['inline-block', 'mb-10']"></div>
           <div class="fileupload btn btn-default">
             <span class="btn-text">edit</span>
             <input class="upload" type="file">
