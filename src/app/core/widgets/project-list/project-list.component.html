@@ -26,20 +26,20 @@
       <!-- Options -->
       <div *ngIf="canFilter" class="menu-option dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="button">
-          <i class="zmdi zmdi-filter-list"></i>
+          <i class="zmdi zmdi-filter-list" [class.active]="filters.length"></i>
         </a>
         <ul class="dropdown-menu bullet dropdown-menu-right" role="menu">
-          <li role="presentation" [class.active]="filters.includes('open')">
+          <li role="presentation" [class.active]="!filters.includes('open')">
             <a (click)="filterProjects('open')" role="menuitem">
-              <span>Open</span>
+              Open
             </a>
           </li>
-          <li role="presentation" [class.active]="filters.includes('canceled')">
+          <li role="presentation" [class.active]="!filters.includes('canceled')">
             <a (click)="filterProjects('canceled')" role="menuitem">
               Canceled
             </a>
           </li>
-          <li role="presentation" [class.active]="filters.includes('completed')">
+          <li role="presentation" [class.active]="!filters.includes('completed')">
             <a (click)="filterProjects('completed')" role="menuitem">
               Completed
             </a>

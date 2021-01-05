@@ -13,7 +13,7 @@ export class ProjectListWidget
   implements OnInit {
   @Input() user?: number;
   data: Project[];
-  filters: string[] = ["open"];
+  filters: string[] = [];
 
   constructor(injector: Injector) {
     super(injector);
@@ -38,11 +38,11 @@ export class ProjectListWidget
     super.createNew(body);
   }
 
-  filterProjects(status?: string) {
+  protected filterProjects(status?: string) {
     if (status) {
       var index = this.filters.indexOf(status);
       index === -1 ? this.filters.push(status) : this.filters.splice(index, 1);
     }
-    this.data = this.masterData.filter((o) => this.filters.includes(o.status));
+    this.data = this.masterData.filter((o) => !this.filters.includes(o.status));
   }
 }

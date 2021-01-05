@@ -1,3 +1,5 @@
+@import "~app/variables";
+
 .widget {
   .panel-loading {
     background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
@@ -23,8 +25,11 @@
         float: left;
         margin-left: 20px;
         .zmdi {
-          color: #878787;
+          color: $gray;
           font-size: 22px;
+          &.active {
+            color: $zeal;
+          }
         }
       }
     }
