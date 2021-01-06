@@ -25,11 +25,6 @@ export class MasterClass<T> {
     this.toast = this.injectorObj.get(ToastService);
     this.auth = this.injectorObj.get(AuthService);
     this.favs = this.injectorObj.get(FavoritesService);
-    this.loadFavorites();
-  }
-
-  private loadFavorites() {
-    this.favs.getFavorites();
     this.favs.favs$.subscribe((o) => (this.favorites = o));
   }
 
@@ -117,7 +112,7 @@ export class MasterClass<T> {
 
   // Check if element is already favorited
   public checkFavorite(id: number): Favorite {
-    if (!this.favorites) this.loadFavorites();
+    if (!this.favorites) return;
     const res = this.favorites.find(
       (o) => o.item_id === id && o.item_type === this.resourceName
     );

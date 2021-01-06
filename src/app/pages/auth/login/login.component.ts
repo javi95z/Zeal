@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthService } from "@services";
+import { AuthService, InitService } from "@services";
 
 @Component({
   selector: "app-login",
@@ -11,7 +11,11 @@ import { AuthService } from "@services";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private init: InitService
+  ) {}
 
   get email() {
     return this.loginForm.get("email");
@@ -32,11 +36,13 @@ export class LoginComponent implements OnInit {
     this.auth.doLogin(this.loginForm.value).then((res) => {
       this.auth.token = res.access_token;
       // Get user data and enter the app
-      this.auth.getUser().then((user) => {
-        this.auth.setCurrentUser(user);
+      this.init.initAppRequests();
+      this.auth.user$.subscribe((user) => {
         // Set user locale
-        this.auth.locale = user.locale;
-        this.router.navigate(["/content"]);
+        if (user) {
+          this.auth.locale = user.locale;
+          this.router.navigate(["/content"]);
+        }
       });
     });
   }

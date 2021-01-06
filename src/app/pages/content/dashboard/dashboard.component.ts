@@ -1,19 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { ApiService, AuthService } from "@services";
+import { Component, Injector } from "@angular/core";
 import { User } from "@models";
+import { MasterClass } from "@core/classes";
 
 @Component({
   templateUrl: "./dashboard.component.html",
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends MasterClass<User> {
   user: User;
 
-  constructor(private auth: AuthService, private api: ApiService<User>) {}
-
-  ngOnInit() {
-    this.auth.currentUser.then((e) => {
-      this.api.getOne("users", e.id).then((o) => (this.user = o.data));
-    });
+  constructor(injector: Injector) {
+    super(injector);
+    this.auth.user$.subscribe((o) => (this.user = o));
   }
 
   protected buildProfileBox(): object {
@@ -22,7 +19,7 @@ export class DashboardComponent implements OnInit {
       id: this.user.id,
       title: this.user.name,
       subtitle: this.user.role?.name,
-      profileImage: this.user.profile_img
+      profileImage: this.user.profile_img,
     };
     return pb;
   }

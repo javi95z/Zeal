@@ -13,7 +13,7 @@ export class NavbarComponent {
   mobileNavCollapsed: boolean;
 
   constructor(public auth: AuthService, private ui: LayoutService) {
-    this.auth.currentUser.then((res) => (this.currentUser = res));
+    this.auth.user$.subscribe((o) => (this.currentUser = o));
     this.ui.getSidebar().subscribe((res) => (this.sidebarCollapsed = res));
     this.ui.getMobileNav().subscribe((res) => (this.mobileNavCollapsed = res));
   }

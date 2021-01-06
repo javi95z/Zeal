@@ -34,9 +34,8 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     ];
   }
 
-  // Load data if not provided
-  async ngOnInit() {
-    await this.auth.currentUser.then((e) => (this.currentUser = e));
+  ngOnInit() {
+    this.auth.user$.subscribe((e) => (this.currentUser = e));
     this.loadData();
   }
 

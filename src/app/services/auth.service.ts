@@ -4,13 +4,14 @@ import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { User } from "@models";
 import { environment as env } from "@env/environment";
-import { Observable } from "rxjs";
+import { Observable, ReplaySubject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  private _userData: User;
+  private userSubject = new ReplaySubject<User>(1);
+  user$: Observable<User> = this.userSubject.asObservable();
 
   get token(): string {
     return sessionStorage.getItem("token") || "";
@@ -26,20 +27,6 @@ export class AuthService {
   }
   get isLoggedIn(): boolean {
     return !!this.token;
-  }
-  get currentUser(): Promise<User> {
-    return new Promise((resolve) => {
-      if (!this._userData) {
-        this.getUser()
-          .then((res) => this.setCurrentUser(res))
-          .finally(() => resolve(this._userData));
-      } else {
-        resolve(this._userData);
-      }
-    });
-  }
-  setCurrentUser(data: User) {
-    this._userData = data;
   }
 
   constructor(
@@ -76,13 +63,11 @@ export class AuthService {
   /**
    * Get logged user data
    */
-  getUser(): Promise<User> {
-    return new Promise((resolve, reject) => {
-      this.http
-        .post<User>(`${env.urlApi}/auth/me`, null)
-        .toPromise()
-        .then((res) => resolve(res));
-    });
+  getUser() {
+    this.http
+      .post<User>(`${env.urlApi}/auth/me`, null)
+      .toPromise()
+      .then((res) => this.userSubject.next(res));
   }
 
   /**
