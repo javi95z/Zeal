@@ -1,4 +1,4 @@
-<div class="profile-box panel panel-default card-view pa-0">
+<div class="profile-box panel panel-default card-view pa-0" *ngIf="data">
   <div class="panel-wrapper collapse in">
     <!-- Panel header -->
     <div class="profile-header" *ngIf="data.resourceName || canFavorite">
@@ -25,10 +25,10 @@
       <div class="profile-info text-center">
         <!-- Profile image -->
         <div *ngIf="hasImage" class="profile-img-wrap">
-          <div [zAvatar]="data?.profileImage" [extraClasses]="['inline-block', 'mb-10']"></div>
+          <div [zAvatar]="data.profileImage" [extraClasses]="['inline-block', 'mb-10']"></div>
           <div class="fileupload btn btn-default">
             <span class="btn-text">edit</span>
-            <input class="upload" type="file">
+            <input class="upload" type="file" (change)="onProfileImage($event)">
           </div>
         </div>
         <!-- Profile icon -->

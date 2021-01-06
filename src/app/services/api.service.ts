@@ -130,4 +130,20 @@ export class ApiService<T> {
         });
     });
   }
+
+  public uploadImage(file, uri: string) {
+    if (!file.type.match(/image.*/)) {
+      this.toast.setMessage("The file uploaded is not an image.", "error");
+      return;
+    }
+    const body = new FormData();
+    body.append("profile_image", file, file.name);
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(`${env.urlApi}/${uri}`, body)
+        .toPromise()
+        .then((res) => resolve(res))
+        .catch((rej) => reject(rej));
+    });
+  }
 }

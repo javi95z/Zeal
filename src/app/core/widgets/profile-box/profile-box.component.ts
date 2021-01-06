@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
-import { FavoritesService } from "@services";
+import { FavoritesService, ApiService } from "@services";
 import { Favorite } from "@models";
 
 @Component({
@@ -18,9 +18,10 @@ export class ProfileBoxComponent implements OnInit {
   @Input() canEdit: boolean;
   @Output() editAction = new EventEmitter();
 
-  constructor(private fav: FavoritesService) {}
+  constructor(private fav: FavoritesService, private api: ApiService<any>) {}
 
   ngOnInit() {
+    if (!this.canFavorite) return;
     this.fav.favs$.subscribe((o) => (this.favorites = o));
     this.checkFavorite({
       item_id: this.data.id,
@@ -30,6 +31,12 @@ export class ProfileBoxComponent implements OnInit {
 
   protected emitAction() {
     this.editAction.emit(true);
+  }
+
+  protected onProfileImage(event) {
+    this.api
+      .uploadImage(event.target.files[0], `users/${this.data.id}/profile-image`)
+      .then((o: any) => (this.data.profileImage = o.data.profile_img));
   }
 
   /**

@@ -17,7 +17,6 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fav.getFavorites();
     this.fav.favs$.subscribe((o) => this.buildMenu(o));
   }
 

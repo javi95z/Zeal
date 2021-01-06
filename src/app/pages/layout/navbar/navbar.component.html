@@ -30,7 +30,7 @@
       </div>
     </form>
   </div>
-  <div id="mobile_only_nav" class="mobile-only-nav pull-right">
+  <div id="mobile_only_nav" class="mobile-only-nav pull-right" *ngIf="currentUser">
     <ul class="nav navbar-right top-nav pull-right">
       <!-- Admin settings -->
       <li matTooltip="Administration" *ngIf="currentUser?.is_admin">
@@ -130,7 +130,7 @@
       <!-- User panel -->
       <li class="dropdown auth-drp">
         <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
-          <div [zAvatar]="currentUser?.imagePath" circled="40" [extraClasses]="['user-auth-img']"></div>
+          <div [zAvatar]="currentUser?.profile_img" circled="40" [extraClasses]="['user-auth-img']"></div>
           <span class="user-online-status"></span>
         </a>
         <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
