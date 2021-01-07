@@ -1,4 +1,4 @@
-import { Injector, Input } from "@angular/core";
+import { Injector } from "@angular/core";
 import { Location } from "@angular/common";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MasterClass } from "./master";

@@ -3,6 +3,7 @@ import { Project, User } from "@models";
 import { DetailClass } from "@core/classes";
 import { UserListWidget } from "@core/widgets";
 import { PROJECT_FIELDS } from "@zeal/variables";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "z-project",
@@ -10,6 +11,9 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   styleUrls: ["./profile.component.scss"],
 })
 export class ProjectProfile extends DetailClass<Project> implements OnInit {
+  hasPermissions: Observable<boolean>;
+  project: Project;
+  currentUser: User;
   progressData: object;
   tasksCount: number;
   membersCount: number;
@@ -19,31 +23,34 @@ export class ProjectProfile extends DetailClass<Project> implements OnInit {
     super(injector);
     this.resourceName = "projects";
     this.fields = PROJECT_FIELDS;
+    this.auth.user$.subscribe((e) => (this.currentUser = e));
   }
 
   async ngOnInit() {
     await this.getResource();
     this.buildProgressTrack();
+    this.hasPermissions = this.checkPermissions();
   }
 
   protected countTasks = (n: number) => (this.tasksCount = n);
   protected countMembers = (n: number) => (this.membersCount = n);
 
-  protected buildProfileBox(): object {
-    if (!this.resource) return;
-    const pb = {
-      id: this.resource.id,
-      title: this.resource.name,
-      resourceName: this.resourceName.slice(0, -1),
-      subtitle: this.resource.code,
-      icon: "case",
-      stats: [],
-    };
-    if (this.tasksCount)
-      pb.stats.push({ label: "tasks", number: this.tasksCount });
-    if (this.membersCount)
-      pb.stats.push({ label: "members", number: this.membersCount });
-    return pb;
+  protected buildProfileBox(): Observable<object> {
+    return new Observable((observer) => {
+      if (!this.resource) observer.next(null);
+      const pb = {
+        id: this.resource.id,
+        title: this.resource.name,
+        resourceName: this.resourceName.slice(0, -1),
+        subtitle: this.resource.code,
+        icon: "case",
+        stats: [
+          { label: "tasks", number: this.tasksCount | 0 },
+          { label: "members", number: this.membersCount | 0 },
+        ],
+      };
+      observer.next(pb);
+    });
   }
 
   protected async buildProgressTrack() {
@@ -77,6 +84,18 @@ export class ProjectProfile extends DetailClass<Project> implements OnInit {
     this.editManyToMany<User>("users", params).then((a) => {
       if (!a) return;
       this.members.refreshData();
+    });
+  }
+
+  /**
+   * Check if user has permissions on this resource
+   */
+  protected checkPermissions(): Observable<boolean> {
+    return new Observable((observer) => {
+      if (!this.resource && !this.currentUser) observer.next(false);
+      const isOwnProject = (id: number) =>
+        this.currentUser.projects.find((o) => o.id === id);
+      observer.next(!!isOwnProject(this.resource.id));
     });
   }
 }

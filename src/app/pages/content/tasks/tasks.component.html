@@ -19,7 +19,7 @@
         <i class="zmdi zmdi-search"></i>
       </a>
       <!-- Create new item -->
-      <a class="menu-option" (click)="create()" matTooltip="Create new" [routerLink]="">
+      <a *ngIf="canCreate" class="menu-option" (click)="create()" matTooltip="Create new" [routerLink]="">
         <i class="zmdi zmdi-plus"></i>
       </a>
       <!-- Refresh content -->

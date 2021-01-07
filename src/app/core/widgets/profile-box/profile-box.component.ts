@@ -63,6 +63,7 @@ export class ProfileBoxComponent implements OnInit {
   }
 
   private checkFavorite(object: { item_id: number; item_type: string }) {
+    if (!this.favorites) return;
     const d = this.favorites.find(
       (o) => o.item_id === object.item_id && o.item_type === object.item_type
     );
