@@ -1,3 +1,6 @@
+<div class="panel-progress-bar" *ngIf="isLoading">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
 <div class="panel panel-default card-view">
   <div class="panel-heading">
     <div class="pull-left">
@@ -27,8 +30,7 @@
     <div class="clearfix"></div>
   </div>
   <div class="panel-wrapper collapse in">
-    <z-loading *ngIf="isLoading"></z-loading>
-    <div class="table-wrap" *ngIf="!isLoading">
+    <div class="table-wrap">
       <div class="table-responsive" *ngIf="dataSource.data.length">
         <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
           (matSortChange)="sortData($event)">
@@ -45,8 +47,9 @@
           <ng-container matColumnDef="project">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Project</th>
             <td *matCellDef="let element" zOverflow="200">
-              <a *ngIf="element?.project" [routerLink]="['/admin/projects/profile', element.project.id]">{{
-                element?.project.name }}</a>
+              <a *ngIf="element?.project" [routerLink]="['/content/projects/profile', element.project.id]">
+                {{ element?.project.name }}
+              </a>
             </td>
           </ng-container>
 
