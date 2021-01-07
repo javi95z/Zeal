@@ -6,10 +6,10 @@ import { PROJECT_FIELDS } from "@zeal/variables";
 
 @Component({
   selector: "z-project",
-  templateUrl: "./project.component.html",
-  styleUrls: ["./project.component.scss"],
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"],
 })
-export class ProjectComponent extends DetailClass<Project> implements OnInit {
+export class ProjectProfile extends DetailClass<Project> implements OnInit {
   progressData: object;
   tasksCount: number;
   membersCount: number;

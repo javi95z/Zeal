@@ -12,6 +12,11 @@ export const STANDARD_MENU = [
     icon: "view-dashboard",
   },
   {
+    name: "Projects",
+    link: "projects",
+    icon: "case",
+  },
+  {
     name: "Tasks",
     link: "tasks",
     icon: "arrow-merge",

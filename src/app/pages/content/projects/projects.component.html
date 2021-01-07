@@ -1,0 +1,105 @@
+<div class="panel-progress-bar" *ngIf="isLoading">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="panel panel-default card-view">
+  <div class="panel-heading">
+    <div class="pull-left">
+      <h6 class="panel-title txt-dark">
+        <i class="zmdi zmdi-case"></i>Projects
+      </h6>
+    </div>
+    <div class="right-menu">
+      <!-- Filter in results -->
+      <mat-form-field class="search-input" *ngIf="searchOn">
+        <input matInput (keyup)="doFilter($event.target.value)">
+      </mat-form-field>
+      <a class="menu-option" (click)="searchOn = !searchOn" matTooltip="Filter data" [routerLink]="">
+        <i class="zmdi zmdi-search"></i>
+      </a>
+      <!-- Create new item -->
+      <a class="menu-option" (click)="createData()" matTooltip="Create new" [routerLink]="">
+        <i class="zmdi zmdi-plus"></i>
+      </a>
+      <!-- Refresh content -->
+      <a *ngIf="canRefresh" class="menu-option" (click)="loadData()" matTooltip="Refresh data" [routerLink]="">
+        <i class="zmdi zmdi-replay"></i>
+      </a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-wrapper collapse in">
+    <div class="table-wrap">
+      <div class="table-responsive" *ngIf="dataSource.data.length">
+        <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
+          (matSortChange)="sortData($event)">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td *matCellDef="let element">
+              <i class="zmdi zmdi-arrow-merge zmdi-hc-lg ml-10 mr-15"></i>
+              <a [routerLink]="['/content/projects/profile', element.id]">{{ element.name }}</a>
+            </td>
+          </ng-container>
+
+          <!-- Contact Column -->
+          <ng-container matColumnDef="contact">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
+            <td *matCellDef="let element">
+              <a *ngIf="element?.contact" [routerLink]="['/admin/contacts/profile', element.id]">
+                {{ element?.contact.name }}
+              </a>
+            </td>
+          </ng-container>
+
+          <!-- Priority Column -->
+          <ng-container matColumnDef="priority">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Priority</th>
+            <td *matCellDef="let element" class="text-center">
+              <div [zPriority]="element.priority"></div>
+            </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td *matCellDef="let element">
+              <div [zStatus]="element.status"></div>
+            </td>
+          </ng-container>
+
+          <!-- Start date Column -->
+          <ng-container matColumnDef="start_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Start date</th>
+            <td *matCellDef="let element">
+              <span>{{ element?.start_date | date: "shortDate" }}</span>
+            </td>
+          </ng-container>
+
+          <!-- End date Column -->
+          <ng-container matColumnDef="end_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>End date</th>
+            <td *matCellDef="let element">
+              <span [zExpiredDate]="element?.end_date">{{ element?.end_date | date: "shortDate" }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td *matCellDef="let element; let i = index" class="action-buttons">
+              <z-actions-menu [isFavorite]="checkFavorite(element.id)" (event)="onAction($event, element, i)">
+              </z-actions-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columns"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns"></tr>
+        </table>
+        <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
+          showFirstLastButtons>
+        </mat-paginator>
+      </div>
+      <z-no-results *ngIf="!dataSource.data.length"></z-no-results>
+    </div>
+  </div>
+</div>

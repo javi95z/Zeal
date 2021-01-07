@@ -8,7 +8,6 @@ import { pluckFields, getColor } from "@zeal/utils";
 @Component({
   selector: "z-tasks",
   templateUrl: "./tasks.component.html",
-  styleUrls: ["./tasks.component.scss"],
 })
 export class TasksComponent extends ListClass<Task> implements OnInit {
   @Input() project: number[];
@@ -35,8 +34,10 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.user$.subscribe((e) => (this.currentUser = e));
-    this.loadData();
+    this.auth.user$.subscribe((e) => {
+      this.currentUser = e;
+      this.loadData();
+    });
   }
 
   protected loadData() {

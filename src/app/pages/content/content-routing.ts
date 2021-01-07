@@ -1,7 +1,12 @@
 import { Routes } from "@angular/router";
 import { AuthGuard } from "@guards";
 import { ContentComponent } from "@pages/layout";
-import { DashboardComponent, ProjectComponent, TasksComponent } from "./";
+import {
+  DashboardComponent,
+  ProjectsComponent,
+  ProjectProfile,
+  TasksComponent,
+} from "./";
 
 export const routes: Routes = [
   {
@@ -11,7 +16,8 @@ export const routes: Routes = [
     children: [
       { path: "dashboard", component: DashboardComponent },
       { path: "tasks", component: TasksComponent },
-      { path: "projects/profile/:id", component: ProjectComponent },
+      { path: "projects", component: ProjectsComponent },
+      { path: "projects/profile/:id", component: ProjectProfile },
       { path: "**", redirectTo: "/content/dashboard" },
     ],
   },
