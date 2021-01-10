@@ -8,11 +8,11 @@ import {
   ConfirmationDialogComponent,
   EditDialogComponent,
   ErrorMessageComponent,
-  HeaderComponent,
   LabelComponent,
   LoadingComponent,
   NoResultsComponent,
   PanelHeaderComponent,
+  PanelSearchComponent,
   ToastMessageComponent,
   UserIconsComponent,
 } from "./components";
@@ -50,12 +50,12 @@ const components = [
   ExpiredDateDirective,
   GenderDirective,
   HeaderButtonDirective,
-  HeaderComponent,
   LabelComponent,
   LoadingComponent,
   NoResultsComponent,
   OverflowDirective,
   PanelButtonDirective,
+  PanelSearchComponent,
   PanelHeaderComponent,
   PriorityDirective,
   StatusDirective,
@@ -81,13 +81,7 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [
-    components,
-    widgets,
-    ColorComponent,
-    LabelComponent,
-    ProfileBoxComponent,
-  ],
+  declarations: [components, widgets],
   imports: modules,
   exports: [modules, components, widgets, LabelComponent, ProfileBoxComponent],
   entryComponents: [ConfirmationDialogComponent, EditDialogComponent],

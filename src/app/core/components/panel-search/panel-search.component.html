@@ -1,0 +1,7 @@
+<mat-form-field class="search-input" *ngIf="searchOn">
+  <mat-label>Type to filter...</mat-label>
+  <input matInput (keyup)="onSearch($event.target.value)">
+</mat-form-field>
+<a class="menu-option" (click)="toggleSearch()" matTooltip="Filter data">
+  <i class="zmdi zmdi-search"></i>
+</a>

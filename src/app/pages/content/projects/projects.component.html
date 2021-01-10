@@ -8,14 +8,9 @@
         <i class="zmdi zmdi-case"></i>Projects
       </h6>
     </div>
-    <div class="right-menu">
+    <div class="right-menu" *ngIf="!isLoading">
       <!-- Filter in results -->
-      <mat-form-field class="search-input" *ngIf="searchOn">
-        <input matInput (keyup)="doFilter($event.target.value)">
-      </mat-form-field>
-      <a class="menu-option" (click)="searchOn = !searchOn" matTooltip="Filter data" [routerLink]="">
-        <i class="zmdi zmdi-search"></i>
-      </a>
+      <z-panel-search (searchQuery)="doFilter($event)"></z-panel-search>
       <!-- Create new item -->
       <a class="menu-option" (click)="createData()" matTooltip="Create new" [routerLink]="">
         <i class="zmdi zmdi-plus"></i>
