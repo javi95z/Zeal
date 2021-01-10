@@ -10,3 +10,7 @@ export const TASKS_TEXTS = {
   newTaskWithoutOwner:
     "This task has no assigned owner. Do you want to assign it to yourself?",
 };
+export const AUTH_TEXTS = {
+  noAccount: "Don't have an account?",
+  signUp: "Sign up",
+};

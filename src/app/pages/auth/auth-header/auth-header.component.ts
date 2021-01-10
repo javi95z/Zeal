@@ -1,15 +1,16 @@
 import { Component, OnInit } from "@angular/core";
+import { AUTH_TEXTS } from "@zeal/dict";
 
 @Component({
   selector: "z-auth-header",
   templateUrl: "./auth-header.component.html",
-  styleUrls: ["./auth-header.component.scss"]
 })
 export class AuthHeaderComponent implements OnInit {
+  texts: object;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    this.texts = AUTH_TEXTS;
   }
 
+  ngOnInit() {}
 }
