@@ -39,10 +39,34 @@ export class AuthService {
    * Login with credentials
    * @param loginData Object { user, password }
    */
-  doLogin(loginData): Promise<any> {
+  doLogin(loginData: object): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.http
         .post(env.urlApi + "/auth/login", loginData)
+        .toPromise()
+        .then(
+          (res: any) => {
+            this.token = res.access_token;
+            this.user$.subscribe((user) => {
+              if (user) {
+                this.locale = user.locale;
+                this.router.navigate(["/content"]);
+              }
+            });
+            resolve(true);
+          },
+          (rej) => reject(rej)
+        );
+    });
+  }
+  /**
+   * Sign up new user
+   * @param loginData Object with sign up user
+   */
+  doSignUp(signupData: object): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(env.urlApi + "/users", signupData)
         .toPromise()
         .then(
           (res) => resolve(res),
@@ -57,7 +81,7 @@ export class AuthService {
   doLogout() {
     this.http.post(`${env.urlApi}/auth/logout`, null);
     this.dialog.closeAll();
-    this.router.navigate(["/login"]);
+    this.router.navigate(["/auth"]);
   }
 
   /**

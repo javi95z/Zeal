@@ -16,7 +16,7 @@ import { ToastService } from "@services";
 import { CoreModule } from "@core/core.module";
 import { LayoutModule } from "@pages/layout/layout.module";
 import { AdminModule } from "@pages/admin/admin.module";
-import { LoginModule } from "@pages/auth/login.module";
+import { AuthModule } from "@pages/auth/auth.module";
 import { ContentModule } from "@pages/content/content.module";
 
 // Locales
@@ -42,7 +42,7 @@ const httpProvider = {
     AppRoutingModule,
     AdminModule,
     ContentModule,
-    LoginModule,
+    AuthModule,
   ],
   providers: [httpProvider, ToastService],
   bootstrap: [AppComponent],

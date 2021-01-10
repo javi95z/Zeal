@@ -4,7 +4,6 @@ import { LayoutService } from "@services";
 @Component({
   selector: "z-admin",
   templateUrl: "./admin.component.html",
-  styles: []
 })
 export class AdminComponent implements OnInit {
   sidebarCollapsed: boolean;

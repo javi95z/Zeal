@@ -11,6 +11,10 @@ export const TASKS_TEXTS = {
     "This task has no assigned owner. Do you want to assign it to yourself?",
 };
 export const AUTH_TEXTS = {
-  noAccount: "Don't have an account?",
+  logIn: "Log in",
   signUp: "Sign up",
+  noAccount: "Don't have an account?",
+  alreadyAccount: "Already have an account?",
+  enterDetails: "Enter your details below",
+  keepLogin: "Keep me logged in"
 };

@@ -1,15 +1,17 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService, InitService } from "@services";
 import { AUTH_TEXTS } from "@zeal/dict";
+import { GENDER } from "@zeal/variables";
 
 @Component({
-  templateUrl: "./login.component.html",
+  templateUrl: "./signup.component.html",
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
   dict = AUTH_TEXTS;
-  loginForm: FormGroup;
+  genderOpts = GENDER;
+  signupForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -18,7 +20,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   get f() {
-    return this.loginForm.controls;
+    return this.signupForm.controls;
   }
 
   ngOnInit() {
@@ -26,22 +28,24 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Log into the application
+   * Sign up new user
    */
-  logIn() {
-    this.auth
-      .doLogin(this.loginForm.value)
-      .then((res) => {
+  signUp() {
+    this.auth.doSignUp(this.signupForm.value).then((o) => {
+      if (!o) return;
+      this.auth.doLogin(this.signupForm.value).then((res) => {
         if (!res) return;
         this.init.initAppRequests();
-      })
-      .catch(() => this.loginForm.reset());
+      });
+    });
   }
 
   private createForm() {
-    this.loginForm = new FormGroup({
+    this.signupForm = new FormGroup({
       email: new FormControl("", [Validators.required, Validators.email]),
+      name: new FormControl("", Validators.required),
       password: new FormControl("", Validators.required),
+      gender: new FormControl(""),
     });
   }
 }

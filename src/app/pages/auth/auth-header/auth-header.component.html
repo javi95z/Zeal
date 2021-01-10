@@ -1,4 +1,4 @@
-<header class="sp-header">
+<header class="auth-header">
   <div class="sp-logo-wrap pull-left">
     <a href="">
       <img class="brand-img mr-10" src="./assets/img/icon.png" alt="Zeal" />
@@ -6,10 +6,14 @@
     </a>
   </div>
   <div class="form-group mb-0 pull-right">
-    <span class="inline-block pr-10">{{ texts.noAccount }}</span>
-    <a class="inline-block btn btn-zeal btn-rounded btn-outline" href="signup.html">
-      {{ texts.signUp }}
-    </a>
+    <ng-container *ngIf="router.url == '/auth/login'">
+      <span class="inline-block pr-10">{{ dict.noAccount }}</span>
+      <a class="navbar-button btn" [routerLink]="['signup']">{{ dict.signUp }}</a>
+    </ng-container>
+    <ng-container *ngIf="router.url == '/auth/signup'">
+      <span class="inline-block pr-10">{{ dict.alreadyAccount }}</span>
+      <a class="navbar-button btn" [routerLink]="['login']">{{ dict.logIn }}</a>
+    </ng-container>
   </div>
   <div class="clearfix"></div>
 </header>

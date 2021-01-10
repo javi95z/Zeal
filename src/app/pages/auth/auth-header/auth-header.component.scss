@@ -1,0 +1,15 @@
+@import "~app/variables";
+
+.auth-header {
+  padding: 0 15px;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  .navbar-button {
+    background: transparent;
+    border: solid 1px $zeal;
+    border-radius: 50px;
+    color: $white;
+    display: inline-block;
+  }
+}

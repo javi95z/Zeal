@@ -1,16 +1,21 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { LoginComponent } from "@pages/auth/login/login.component";
+import { ContentModule } from "@pages/content/content.module";
+import { AdminModule } from "@pages/admin/admin.module";
+import { AuthModule } from "@pages/auth/auth.module";
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
+  {
+    path: "auth",
+    loadChildren: () => AuthModule,
+  },
   {
     path: "content",
-    loadChildren: "./pages/content/content.module#ContentModule",
+    loadChildren: () => ContentModule,
   },
   {
     path: "admin",
-    loadChildren: "./pages/admin/admin.module#AdminModule",
+    loadChildren: () => AdminModule,
   },
   { path: "", redirectTo: "content/dashboard", pathMatch: "full" },
   { path: "**", redirectTo: "content/dashboard", pathMatch: "full" },

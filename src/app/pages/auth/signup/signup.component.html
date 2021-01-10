@@ -1,0 +1,48 @@
+<div class="auth-form ml-auto mr-auto no-float">
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <div class="mb-30">
+        <h3 class="text-center txt-light mb-10">Sign up to <strong class="txt-zeal">Zeal</strong></h3>
+        <h6 class="text-center txt-grey">{{ dict.enterDetails }}</h6>
+      </div>
+      <div class="form-wrap">
+        <form [formGroup]="signupForm" (ngSubmit)="signUp()" autocomplete="off">
+          <!-- Name field -->
+          <div class="form-group" [class.has-error]="f.name.errors && f.name.dirty">
+            <label class="txt-light mb-10" for="inputName">Full name</label>
+            <input type="text" class="form-control" formControlName="name" name="name" id="inputName"
+              placeholder="Enter full name" autocomplete="off" />
+          </div>
+          <!-- Email field -->
+          <div class="form-group" [class.has-error]="f.email.errors && f.email.dirty">
+            <label class="txt-light mb-10" for="inputEmail">Email address</label>
+            <input type="email" class="form-control" formControlName="email" name="email" id="inputEmail"
+              placeholder="Enter email" autocomplete="off" />
+          </div>
+          <!-- Password field -->
+          <div class="form-group" [class.has-error]="f.email.errors && f.email.dirty">
+            <label class="txt-light mb-10" for="inputPassword">Password</label>
+            <input type="password" class="form-control" formControlName="password" name="password" required
+              id="inputPassword" placeholder="Enter password" autocomplete="off" />
+          </div>
+          <!-- Gender field -->
+          <div class="form-group" [class.has-error]="f.gender.errors && f.gender.dirty">
+            <label class="txt-light mb-10" for="inputGender">Gender</label>
+            <select class="form-control" formControlName="gender">
+              <option value="" disabled selected>Select one option</option>
+              <option *ngFor="let item of genderOpts" [value]="item">
+                {{ item | capitalize }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-zeal btn-rounded" [disabled]="!signupForm.valid">
+              {{ dict.signUp }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
