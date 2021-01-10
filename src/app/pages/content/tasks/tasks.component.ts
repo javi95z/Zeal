@@ -13,6 +13,7 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
   @Input() project: number[];
   @Input() canCreate = true;
   @Input() canRefresh = true;
+  @Input() canAssign = false;
   currentUser: User;
   statusWidget: any;
   priorityWidget: any;
@@ -75,14 +76,12 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     await this.api
       .getAll("users", { project: this.project })
       .then((o) => (list = o.data));
-    const currentOwner = this.dataSource.data.find((o) => o.id === id).user;
 
     const field: Field = {
       key: "user",
       label: "Task owner",
       type: "select",
       options: pluckFields(list, ["name"]),
-      default: currentOwner.id,
     };
 
     this.dialog

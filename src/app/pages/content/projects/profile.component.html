@@ -9,8 +9,8 @@
   </div>
   <div class="col-lg-9 col-xs-12">
     <!-- Project tasks -->
-    <z-tasks [project]="resource.id" [hideCols]="['project', 'start_date']" [canCreate]="hasPermissions | async" canRefresh="true"
-      (countValues)="countTasks($event)">
+    <z-tasks [project]="resource.id" [hideCols]="['project', 'start_date']" [canCreate]="hasPermissions | async"
+      canRefresh="true" [canAssign]="hasPermissions | async" (countValues)="countTasks($event)">
     </z-tasks>
     <!-- Project members -->
     <z-user-list #members [project]="resource.id" altTitle="Members" (countValues)="countMembers($event)">

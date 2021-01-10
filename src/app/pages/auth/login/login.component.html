@@ -16,7 +16,7 @@
           <!-- Password field -->
           <div class="form-group" [class.has-error]="f.password.errors && f.password.dirty">
             <div class="clearfix"></div>
-            <a class="txt-zeal block mb-10 pull-right font-12" href="#">Forgot password?</a>
+            <a class="txt-light block mb-10 pull-right font-12" [routerLink]="['']">Forgot password?</a>
             <label class="txt-light mb-10" for="inputPassword">Password</label>
             <input type="password" class="form-control" formControlName="password" name="password" required
               id="inputPassword" placeholder="Enter password">

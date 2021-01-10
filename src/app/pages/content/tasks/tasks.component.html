@@ -69,7 +69,7 @@
                 {{ element?.user.name }}
               </a>
               <!-- Change owner button -->
-              <a *ngIf="project" class="table-button pull-right" (click)="assignTask(element.id, i)">
+              <a *ngIf="canAssign" class="table-button pull-right" (click)="assignTask(element.id, i)">
                 <i class="zmdi zmdi-accounts"></i>Assign
               </a>
             </td>

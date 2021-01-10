@@ -80,6 +80,7 @@ export class AuthService {
    */
   doLogout() {
     this.http.post(`${env.urlApi}/auth/logout`, null);
+    sessionStorage.clear();
     this.dialog.closeAll();
     this.router.navigate(["/auth"]);
   }
