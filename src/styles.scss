@@ -147,7 +147,7 @@ h6 {
 // Panels
 .panel {
   @include mat-elevation(2);
-  max-height: 85vh;
+  height: 100%;
   overflow-y: auto;
   .panel-heading {
     padding: 20px 30px !important;
@@ -179,12 +179,6 @@ h6 {
           font-size: 22px;
         }
       }
-      mat-form-field {
-        float: left;
-        ::ng-deep .mat-form-field-infix {
-          border: 0;
-        }
-      }
     }
   }
   .panel-footer {
@@ -201,6 +195,7 @@ h6 {
   justify-content: center;
   margin: 0 -5px;
   margin-bottom: -4px;
+  z-index: 2;
   mat-progress-bar {
     border-radius: 2px 2px 0 0;
   }

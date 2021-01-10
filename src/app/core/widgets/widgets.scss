@@ -1,16 +1,17 @@
 @import "~app/variables";
 
 .widget {
-  .panel-loading {
+  .panel-progress-bar {
     background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
+    cursor: wait;
     height: 100%;
     left: 0;
+    margin: 0;
+    overflow: hidden;
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 5;
-    cursor: wait;
-    overflow: hidden;
+    z-index: 2;
   }
   .panel-heading {
     .panel-title {
