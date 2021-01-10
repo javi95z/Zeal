@@ -64,9 +64,14 @@
           <!-- Owner Column -->
           <ng-container matColumnDef="owner">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner</th>
-            <td *matCellDef="let element" zOverflow="200">
-              <a *ngIf="element?.user" [routerLink]="['/admin/users/profile', element.user.id]">{{ element?.user.name
-                }}</a>
+            <td *matCellDef="let element; let i = index" zOverflow="300">
+              <a *ngIf="element?.user" [routerLink]="['/admin/users/profile', element.user.id]">
+                {{ element?.user.name }}
+              </a>
+              <!-- Change owner button -->
+              <a *ngIf="project" class="table-button pull-right" (click)="assignTask(element.id, i)">
+                <i class="zmdi zmdi-accounts"></i>Assign
+              </a>
             </td>
           </ng-container>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Injector } from "@angular/core";
 import { ListClass } from "@core/classes";
-import { Task, User } from "@models";
+import { Task, User, Field } from "@models";
 import { TASK_FIELDS } from "@zeal/variables";
 import { TASKS_TEXTS } from "@zeal/dict";
 import { pluckFields, getColor } from "@zeal/utils";
@@ -11,7 +11,7 @@ import { pluckFields, getColor } from "@zeal/utils";
 })
 export class TasksComponent extends ListClass<Task> implements OnInit {
   @Input() project: number[];
-  @Input() canCreate: boolean;
+  @Input() canCreate = true;
   @Input() canRefresh = true;
   currentUser: User;
   statusWidget: any;
@@ -67,6 +67,35 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     this.api.updateOne(this.resourceName, obj, id).then((res) => {
       this.editDataTable(res.data, index);
     });
+  }
+
+  protected async assignTask(id: number, index: number) {
+    // Fetch all resources
+    let list: User[];
+    await this.api
+      .getAll("users", { project: this.project })
+      .then((o) => (list = o.data));
+    const currentOwner = this.dataSource.data.find((o) => o.id === id).user;
+
+    const field: Field = {
+      key: "user",
+      label: "Task owner",
+      type: "select",
+      options: pluckFields(list, ["name"]),
+      default: currentOwner.id,
+    };
+
+    this.dialog
+      .editDialog<any>({ fields: [field] })
+      .subscribe((result) => {
+        if (result) {
+          this.isLoading = true;
+          this.api
+            .updateOne(this.resourceName, result, id)
+            .then((o) => this.editDataTable(o.data, index))
+            .finally(() => (this.isLoading = false));
+        }
+      });
   }
 
   // Build parameters to fetch data from API

@@ -9,7 +9,7 @@
   </div>
   <div class="col-lg-9 col-xs-12">
     <!-- Project tasks -->
-    <z-tasks [project]="resource.id" [hideCols]="['project']" [canCreate]="hasPermissions | async" canRefresh="true"
+    <z-tasks [project]="resource.id" [hideCols]="['project', 'start_date']" [canCreate]="hasPermissions | async" canRefresh="true"
       (countValues)="countTasks($event)">
     </z-tasks>
     <!-- Project members -->

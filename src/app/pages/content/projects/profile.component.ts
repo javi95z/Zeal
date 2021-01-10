@@ -58,6 +58,7 @@ export class ProjectProfile extends DetailClass<Project> implements OnInit {
     await this.api
       .getCustom(this.resourceName, this.resource.id, "progress")
       .then((o) => (response = o));
+    if (!response) return;
     this.progressData = {
       status: response["status"],
       percent: response["percent"],
