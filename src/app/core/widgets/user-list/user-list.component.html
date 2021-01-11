@@ -1,7 +1,5 @@
 <div class="widget panel panel-default card-view panel-refresh">
-  <div class="panel-progress-bar" *ngIf="refresh">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  </div>
+  <z-loading *ngIf="refresh"></z-loading>
   <div class="panel-heading">
     <div class="pull-left">
       <h6 class="panel-title txt-dark">
@@ -14,11 +12,6 @@
       <a *ngIf="canCreate" class="menu-option" (click)="createNew()">
         <i class="zmdi zmdi-plus"></i>
       </a>
-      <!-- Collapse widget -->
-      <a *ngIf="canCollapse" class="menu-option" data-toggle="collapse" href="#usersWidget" aria-expanded="true">
-        <i class="zmdi zmdi-chevron-down"></i>
-        <i class="zmdi zmdi-chevron-up"></i>
-      </a>
       <!-- Refresh widget -->
       <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()">
         <i class="zmdi zmdi-replay"></i>
@@ -29,8 +22,8 @@
   </div>
   <div class="panel-wrapper collapse in" id="usersWidget">
     <div class="panel-body pa-0">
-      <div class="row">
-        <div class="data-table table-responsive">
+      <div class="row" *ngIf="data">
+        <div class="data-table table-responsive" *ngIf="data.length">
           <table *ngIf="data" class="table">
             <tbody>
               <tr *ngFor="let item of data" class="data-table__row">
@@ -41,6 +34,7 @@
             </tbody>
           </table>
         </div>
+        <z-no-results *ngIf="!data.length"></z-no-results>
       </div>
     </div>
   </div>

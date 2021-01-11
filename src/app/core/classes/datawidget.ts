@@ -6,7 +6,6 @@ export class DataWidgetClass<T> extends MasterClass<T> {
   @Input() title?: string;
   @Output() countValues = new EventEmitter<number>();
   @Input() canCreate?: boolean;
-  @Input() canCollapse?: boolean;
   @Input() canFilter?: boolean;
   @Input() canRefresh?: boolean;
   public refresh = false;

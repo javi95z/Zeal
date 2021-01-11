@@ -5,11 +5,16 @@ import { Component } from "@angular/core";
   templateUrl: "./loading.component.html",
   styles: [
     `
-      .loading-shade {
-        margin: 30px 0;
-      }
-      mat-spinner {
-        margin: auto;
+      .panel-progress-bar {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        margin: 0 -5px;
+        margin-bottom: -4px;
+        z-index: 2;
+        mat-progress-bar {
+          border-radius: 2px 2px 0 0;
+        }
       }
     `,
   ],

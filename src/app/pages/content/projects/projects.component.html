@@ -1,6 +1,4 @@
-<div class="panel-progress-bar" *ngIf="isLoading">
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
+<z-loading *ngIf="isLoading"></z-loading>
 <div class="panel panel-default card-view">
   <div class="panel-heading">
     <div class="pull-left">
@@ -94,7 +92,7 @@
           showFirstLastButtons>
         </mat-paginator>
       </div>
-      <z-no-results *ngIf="!dataSource.data.length"></z-no-results>
+      <z-no-results *ngIf="!isLoading && dataSource.data.length === 0"></z-no-results>
     </div>
   </div>
 </div>
