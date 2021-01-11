@@ -1,5 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="mobile-only-brand pull-left">
+    <!-- Brand logo -->
     <div class="nav-header pull-left">
       <div class="logo-wrap">
         <a [routerLink]="['/']">
@@ -33,6 +34,13 @@
   </div>
   <div id="mobile_only_nav" class="mobile-only-nav pull-right" *ngIf="currentUser">
     <ul class="nav navbar-right top-nav pull-right">
+      <!-- Fullscreen mode -->
+      <li matTooltip="Fullscreen mode">
+        <a (click)="toggleFullscreen()" [routerLink]="">
+          <i *ngIf="!isFullscreen" class="zmdi zmdi-fullscreen top-nav-icon"></i>
+          <i *ngIf="isFullscreen" class="zmdi zmdi-fullscreen-exit top-nav-icon"></i>
+        </a>
+      </li>
       <!-- Admin settings -->
       <li matTooltip="Administration" *ngIf="currentUser?.is_admin">
         <a [routerLink]="['/admin']">
