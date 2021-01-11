@@ -5,6 +5,7 @@ import { USER_FIELDS } from "@zeal/variables";
 
 @Component({
   templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent extends MasterClass<User> {
   user: User;

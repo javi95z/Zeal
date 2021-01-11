@@ -1,22 +1,26 @@
-<div class="row" *ngIf="user">
-  <!-- Projects widget -->
-  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-project-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
-      title="My projects">
-    </z-project-list>
-  </div>
-  <!-- Teams widget -->
-  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-team-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" title="My teams"></z-team-list>
-  </div>
-  <!-- Tasks widget -->
-  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-task-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
-      title="My tasks"></z-task-list>
-  </div>
-  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-    <z-profile-box [data]="buildProfileBox()" hasImage="true" hasBackground="true" canEdit="true" [canFavorite]="false"
-      (editAction)="editCurrentUser()">
-    </z-profile-box>
+<div class="dashboard">
+  <div class="dashboard-row" *ngIf="user">
+    <!-- Projects widget -->
+    <div class="dashboard-row__item">
+      <z-project-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
+        title="My projects">
+      </z-project-list>
+    </div>
+    <!-- Teams widget -->
+    <div class="dashboard-row__item">
+      <z-team-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" title="My teams">
+      </z-team-list>
+    </div>
+    <!-- Tasks widget -->
+    <div class="dashboard-row__item">
+      <z-task-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
+        title="My tasks"></z-task-list>
+    </div>
+    <!-- Profile box -->
+    <div class="dashboard-row__item">
+      <z-profile-box [data]="buildProfileBox()" hasImage="true" hasBackground="true" canEdit="true"
+        [canFavorite]="false" (editAction)="editCurrentUser()">
+      </z-profile-box>
+    </div>
   </div>
 </div>

@@ -9,17 +9,17 @@
     </div>
     <div class="right-menu">
       <!-- Create new -->
-      <a *ngIf="canCreate" class="menu-option" (click)="createNew()">
+      <a *ngIf="canCreate" class="menu-option" (click)="createNew()" matTooltip="Create new">
         <i class="zmdi zmdi-plus"></i>
       </a>
       <!-- Refresh widget -->
-      <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()">
+      <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()" matTooltip="Refresh data">
         <i class="zmdi zmdi-replay"></i>
       </a>
     </div>
     <div class="clearfix"></div>
   </div>
-  <div class="panel-wrapper collapse in" id="teamsWidget">
+  <div class="panel-wrapper collapse in">
     <div class="panel-body pa-0">
       <div class="row" *ngIf="data">
         <div class="data-table table-responsive" *ngIf="data.length">

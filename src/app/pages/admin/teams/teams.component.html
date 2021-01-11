@@ -1,7 +1,7 @@
 <z-loading *ngIf="isLoading"></z-loading>
 <button mat-button (click)="createDialog()" *ngIf="!isLoading" zPanelButton>Create team</button>
-<div class="table-wrap" *ngIf="!isLoading">
-  <div class="table-responsive" *ngIf="dataSource.data.length">
+<div class="table-wrap" *ngIf="!isLoading && dataSource.data.length">
+  <div class="table-responsive">
     <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
       (matSortChange)="sortData($event)">
       <!-- Checkbox Column -->
@@ -52,5 +52,5 @@
       showFirstLastButtons>
     </mat-paginator>
   </div>
-  <z-no-results *ngIf="!dataSource.data.length"></z-no-results>
 </div>
+<z-no-results *ngIf="!isLoading && !dataSource.data.length"></z-no-results>

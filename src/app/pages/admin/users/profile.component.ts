@@ -55,7 +55,7 @@ export class UserProfileAdmin extends DetailClass<User> implements OnInit {
    * Add projects to user
    */
   addProject() {
-    const params = { user: this.resource.id };
+    const params = { user: [this.resource.id] };
     this.editManyToMany<Project>("projects", params);
   }
 

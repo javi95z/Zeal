@@ -1,5 +1,5 @@
-<z-loading *ngIf="isLoading"></z-loading>
-<div class="panel panel-default card-view">
+<div class="panel panel-default card-view panel-refresh">
+  <z-loading *ngIf="isLoading"></z-loading>
   <div class="panel-heading">
     <div class="pull-left">
       <h6 class="panel-title txt-dark">
@@ -12,11 +12,11 @@
       <!-- Filter in results -->
       <z-panel-search (searchQuery)="doFilter($event)"></z-panel-search>
       <!-- Create new item -->
-      <a *ngIf="canCreate" class="menu-option" (click)="create()" matTooltip="Create new" [routerLink]="">
+      <a *ngIf="canCreate" class="menu-option" (click)="create()" matTooltip="Create new">
         <i class="zmdi zmdi-plus"></i>
       </a>
       <!-- Refresh content -->
-      <a *ngIf="canRefresh" class="menu-option" (click)="loadData()" matTooltip="Refresh data" [routerLink]="">
+      <a *ngIf="canRefresh" class="menu-option" (click)="loadData()" matTooltip="Refresh data">
         <i class="zmdi zmdi-replay"></i>
       </a>
     </div>

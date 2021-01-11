@@ -9,22 +9,22 @@
     </div>
     <div class="right-menu">
       <!-- Create new -->
-      <a *ngIf="canCreate" class="menu-option" (click)="createNew()">
+      <a *ngIf="canCreate" class="menu-option" (click)="createNew()" matTooltip="Create new">
         <i class="zmdi zmdi-plus"></i>
       </a>
       <!-- Refresh widget -->
-      <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()">
+      <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()" matTooltip="Refresh data">
         <i class="zmdi zmdi-replay"></i>
       </a>
       <ng-content select="[extra-options]"></ng-content>
     </div>
     <div class="clearfix"></div>
   </div>
-  <div class="panel-wrapper collapse in" id="usersWidget">
+  <div class="panel-wrapper collapse in">
     <div class="panel-body pa-0">
       <div class="row" *ngIf="data">
         <div class="data-table table-responsive" *ngIf="data.length">
-          <table *ngIf="data" class="table">
+          <table class="table">
             <tbody>
               <tr *ngFor="let item of data" class="data-table__row">
                 <td>

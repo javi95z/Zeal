@@ -1,4 +1,4 @@
-<div class="widget panel panel-default card-view panel-refresh" id="tasksWidget">
+<div class="widget panel panel-default card-view panel-refresh">
   <z-loading *ngIf="refresh"></z-loading>
   <div class="panel-heading">
     <div class="pull-left">
@@ -11,11 +11,11 @@
     </div>
     <div class="right-menu">
       <!-- Create new -->
-      <a *ngIf="canCreate" class="menu-option" (click)="createNew()">
+      <a *ngIf="canCreate" class="menu-option" (click)="createNew()" matTooltip="Create new">
         <i class="zmdi zmdi-plus"></i>
       </a>
       <!-- Refresh widget -->
-      <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()">
+      <a *ngIf="canRefresh" class="menu-option" (click)="refreshData()" matTooltip="Refresh data">
         <i class="zmdi zmdi-replay"></i>
       </a>
     </div>

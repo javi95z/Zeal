@@ -1,0 +1,16 @@
+.dashboard {
+  &-row {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    &__item {
+      flex: 1 1 0;
+      margin: 0 15px;
+      .panel.card-view {
+        height: 100%;
+        max-height: none;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from "@angular/core";
+import { Component, OnInit, Input, Injector } from "@angular/core";
 import { ListClass } from "@core/classes";
 import { User, Project } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
@@ -8,6 +8,8 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   templateUrl: "./projects.component.html",
 })
 export class ProjectsComponent extends ListClass<Project> implements OnInit {
+  @Input() canCreate = true;
+  @Input() canRefresh = true;
   currentUser: User;
 
   constructor(injector: Injector) {
