@@ -1,3 +1,4 @@
+export * from "./activitylog";
 export * from "./contact";
 export * from "./favorite";
 export * from "./project";

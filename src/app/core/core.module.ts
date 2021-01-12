@@ -33,9 +33,10 @@ import {
   ProjectListWidget,
   TaskListWidget,
   TeamListWidget,
+  ActivityWidget,
   UserListWidget,
 } from "./widgets";
-import { CapitalizePipe, SingularPipe } from "./pipes";
+import { CapitalizePipe, SingularPipe, TimeAgoPipe } from "./pipes";
 import { MaterialModule } from "@zeal/material.module";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 
@@ -69,6 +70,7 @@ const widgets = [
   ProjectListWidget,
   TaskListWidget,
   TeamListWidget,
+  ActivityWidget,
   UserListWidget,
 ];
 const modules = [
@@ -79,7 +81,7 @@ const modules = [
   RouterModule,
   NgxChartsModule,
 ];
-const pipes = [CapitalizePipe, SingularPipe];
+const pipes = [CapitalizePipe, SingularPipe, TimeAgoPipe];
 
 @NgModule({
   declarations: [components, widgets, pipes],

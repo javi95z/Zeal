@@ -27,9 +27,11 @@ export class ProjectProfile extends DetailClass<Project> implements OnInit {
   }
 
   async ngOnInit() {
-    await this.getResource();
-    this.buildProgressTrack();
-    this.hasPermissions = this.checkPermissions();
+    this.getResource().then((o) => {
+      if (!o) return;
+      this.buildProgressTrack();
+      this.hasPermissions = this.checkPermissions();
+    });
   }
 
   protected countTasks = (n: number) => (this.tasksCount = n);
