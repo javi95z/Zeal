@@ -1,14 +1,11 @@
-<div class="table-struct full-width full-height">
-  <div class="table-cell vertical-align-middle auth-form-wrap">
-    <div class="auth-form ml-auto mr-auto no-float">
-      <div class="row">
-        <div class="col-sm-12 col-xs-12 text-center">
-          <span class="block error-head text-zeal mb-10">{{ status }}</span>
-          <span class="block error-comment mb-20">{{ title }}</span>
-          <p class="mb-20">The page you're looking for was not found or is not available.</p>
-          <button mat-raised-button (click)="goBack()">Go back</button>
-        </div>
-      </div>
+<div class="error-message">
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 text-center">
+      <img src="assets/img/illustrations/empty.svg" />
+      <span class="block error-head text-zeal mb-10">{{ status }}</span>
+      <span class="block error-comment mb-20">{{ title }}</span>
+      <p class="mb-20">The page you're looking for was not found or is not available.</p>
+      <button mat-raised-button (click)="goBack()">Go back</button>
     </div>
   </div>
 </div>

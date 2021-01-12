@@ -4,6 +4,19 @@ import { Location } from "@angular/common";
 @Component({
   selector: "z-error-message",
   templateUrl: "./error-message.component.html",
+  styles: [
+    `
+      .error-message {
+        padding: 2em;
+      }
+      img {
+        display: block;
+        margin: auto;
+        padding-bottom: 3em;
+        width: 400px;
+      }
+    `,
+  ],
 })
 export class ErrorMessageComponent implements OnInit {
   status: string;
@@ -16,7 +29,7 @@ export class ErrorMessageComponent implements OnInit {
     this.title = "Page not found";
   }
 
-  goBack(): void {
+  protected goBack(): void {
     this.location.back();
   }
 }

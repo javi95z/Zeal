@@ -9,11 +9,8 @@ export class LayoutService {
   private sidebar: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private mobileNav: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private fullScreen: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  private elem: any;
 
-  constructor(@Inject(DOCUMENT) private document: any) {
-    this.elem = document.documentElement;
-  }
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   getSidebar(): Observable<boolean> {
     return this.sidebar.asObservable();
