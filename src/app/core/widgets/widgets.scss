@@ -28,6 +28,9 @@
       overflow-y: scroll;
       &__row {
         font-size: small;
+        td {
+          white-space: unset;
+        }
       }
     }
   }
