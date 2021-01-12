@@ -35,7 +35,7 @@ import {
   TeamListWidget,
   UserListWidget,
 } from "./widgets";
-import { CapitalizePipe } from "./pipes";
+import { CapitalizePipe, SingularPipe } from "./pipes";
 import { MaterialModule } from "@zeal/material.module";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 
@@ -79,11 +79,12 @@ const modules = [
   RouterModule,
   NgxChartsModule,
 ];
+const pipes = [CapitalizePipe, SingularPipe];
 
 @NgModule({
-  declarations: [components, widgets],
+  declarations: [components, widgets, pipes],
   imports: modules,
-  exports: [modules, components, widgets, LabelComponent, ProfileBoxComponent],
+  exports: [modules, components, widgets],
   entryComponents: [ConfirmationDialogComponent, EditDialogComponent],
 })
 export class CoreModule {}
