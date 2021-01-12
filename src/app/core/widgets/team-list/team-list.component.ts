@@ -18,7 +18,10 @@ export class TeamListWidget extends DataWidgetClass<Team> implements OnInit {
   }
 
   ngOnInit(): void {
-    this.params = { user: this.user };
+    this.params = {
+      limit: this.limit || null,
+      user: this.user,
+    };
     this.refreshData();
   }
 

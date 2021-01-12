@@ -1,23 +1,23 @@
 <div class="dashboard">
   <div class="dashboard-row" *ngIf="user">
     <!-- Projects widget -->
-    <div class="dashboard-row__item">
-      <z-project-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
+    <div class="dashboard-row__item dashboard-widget">
+      <z-project-list [user]="user.id" [limit]="settings.widgetItems" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
         title="My projects">
       </z-project-list>
     </div>
     <!-- Teams widget -->
-    <div class="dashboard-row__item">
-      <z-team-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" title="My teams">
+    <div class="dashboard-row__item dashboard-widget">
+      <z-team-list [user]="user.id" [limit]="settings.widgetItems" canCreate="true" canCollapse="true" canRefresh="true" title="My teams">
       </z-team-list>
     </div>
     <!-- Tasks widget -->
-    <div class="dashboard-row__item">
-      <z-task-list [user]="user.id" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
+    <div class="dashboard-row__item dashboard-widget">
+      <z-task-list [user]="user.id" [limit]="settings.widgetItems" canCreate="true" canCollapse="true" canRefresh="true" canFilter="true"
         title="My tasks"></z-task-list>
     </div>
     <!-- Profile box -->
-    <div class="dashboard-row__item">
+    <div class="dashboard-row__item dashboard-widget">
       <z-profile-box [data]="buildProfileBox()" hasImage="true" hasBackground="true" canEdit="true"
         [canFavorite]="false" (editAction)="editCurrentUser()">
       </z-profile-box>

@@ -28,6 +28,10 @@
       overflow-y: scroll;
       &__row {
         font-size: small;
+        &-more {
+          background-color: #f5f5f5;
+          text-align: center;
+        }
         td {
           white-space: unset;
         }

@@ -5,7 +5,6 @@
       <h6 class="panel-title txt-dark">
         <a [routerLink]="['/content/projects']">
           <i class="zmdi zmdi-case"></i>{{ title || 'Projects' }}
-          <z-label [value]="masterData?.length" *ngIf="data"></z-label>
         </a>
       </h6>
     </div>
@@ -50,11 +49,19 @@
         <div class="data-table table-responsive" *ngIf="data.length">
           <table class="table">
             <tbody>
+              <!-- Show all row -->
+              <tr *ngIf="data.length === limit" class="data-table__row-more">
+                <td colspan="2">
+                  <a [routerLink]="['/content/projects']">
+                    <i class="zmdi zmdi-open-in-new mr-5"></i>
+                    Show all projects
+                  </a>
+                </td>
+              </tr>
+              <!-- Data rows -->
               <tr *ngFor="let item of data" class="data-table__row">
                 <td>
-                  <a [routerLink]="['/content/projects/profile', item.id]">
-                    {{ item.name }}
-                  </a>
+                  <a [routerLink]="['/content/projects/profile', item.id]">{{ item.name }}</a>
                 </td>
                 <td>
                   <div [zStatus]="item.status"></div>

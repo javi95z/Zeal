@@ -20,6 +20,7 @@ export class TaskListWidget extends DataWidgetClass<Task> implements OnInit {
 
   ngOnInit(): void {
     this.params = {
+      limit: this.limit || null,
       user: this.user ? [this.user] : null,
       project: this.project ? [this.project] : null,
     };

@@ -25,11 +25,19 @@
         <div class="data-table table-responsive" *ngIf="data.length">
           <table class="table">
             <tbody>
+              <!-- Show all row -->
+              <tr *ngIf="data.length === limit" class="data-table__row-more">
+                <td colspan="2">
+                  <a [routerLink]="['/content/teams']">
+                    <i class="zmdi zmdi-open-in-new mr-5"></i>
+                    Show all teams
+                  </a>
+                </td>
+              </tr>
+              <!-- Data rows -->
               <tr *ngFor="let item of data" class="data-table__row">
                 <td>
-                  <a [routerLink]="['/teams/profile', item.id]">
-                    {{ item.name }}
-                  </a>
+                  <a [routerLink]="['/teams/profile', item.id]">{{ item.name }}</a>
                 </td>
                 <td class="text-right">
                   <z-user-icons [listValues]="item.users" path="/users/profile" size="30" overlap="true"></z-user-icons>

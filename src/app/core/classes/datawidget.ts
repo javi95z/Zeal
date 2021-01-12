@@ -5,6 +5,7 @@ import { MasterClass } from "./master";
 export class DataWidgetClass<T> extends MasterClass<T> {
   @Input() title?: string;
   @Output() countValues = new EventEmitter<number>();
+  @Input() limit: number;
   @Input() canCreate?: boolean;
   @Input() canFilter?: boolean;
   @Input() canRefresh?: boolean;

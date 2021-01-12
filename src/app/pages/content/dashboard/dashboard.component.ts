@@ -1,7 +1,8 @@
 import { Component, Injector } from "@angular/core";
 import { User, ActivityLog } from "@models";
 import { MasterClass } from "@core/classes";
-import { USER_FIELDS, DASHBOARD_SETTINGS } from "@zeal/variables";
+import { USER_FIELDS } from "@zeal/variables";
+import { environment as env } from "@env/environment";
 import { Observable } from "rxjs";
 
 @Component({
@@ -9,7 +10,7 @@ import { Observable } from "rxjs";
   styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent extends MasterClass<User> {
-  settings = DASHBOARD_SETTINGS;
+  settings = env.dashboardSettings;
   user: User;
   activityLogs: Observable<ActivityLog>;
 
@@ -39,7 +40,7 @@ export class DashboardComponent extends MasterClass<User> {
   }
 
   protected getTimeline() {
-    const body = { amount: this.settings.activity_items || null };
+    const body = { amount: this.settings.activityItems || null };
     this.activityLogs = this.api.getActivityLogs(this.user.id, body);
   }
 }

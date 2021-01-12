@@ -22,7 +22,10 @@ export class ProjectListWidget
   }
 
   ngOnInit(): void {
-    this.params = { user: [this.user] };
+    this.params = {
+      limit: this.limit || null,
+      user: [this.user],
+    };
     this.refreshData();
   }
 
