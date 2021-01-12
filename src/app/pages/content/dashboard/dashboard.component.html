@@ -23,4 +23,12 @@
       </z-profile-box>
     </div>
   </div>
+
+  <div class="dashboard-row">
+    <!-- Activity timeline -->
+    <div class="dashboard-row__item">
+      <z-activity [data]="activityLogs | async"></z-activity>
+    </div>
+  </div>
+
 </div>

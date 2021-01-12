@@ -1,0 +1,34 @@
+<div class="activity panel panel-default card-view" *ngIf="data">
+  <div class="panel-heading">
+    <div class="pull-left">
+      <h6 class="panel-title txt-dark">
+        <i class="zmdi zmdi-calendar-note"></i>Timeline
+      </h6>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-wrapper collapse in">
+    <div class="panel-body">
+      <div class="streamline user-activity">
+        <div class="sl-item activity-item" *ngFor="let a of data.data; let i = index">
+          <!-- Profile image - Hide for the same repeated user -->
+          <div *ngIf="!isSameAsPrevious(i)"
+            class="sl-avatar avatar avatar-sm avatar-circle">
+            <img *ngIf="a.user" class="img-responsive img-circle" [src]="a.user.profile_img" alt="avatar">
+          </div>
+          <div class="activity-item-content">
+            <p class="txt-dark inline-block">
+              <a *ngIf="a.user" class="activity-item-content__link" [routerLink]="['/content/users/', a.user.id ]">
+                {{ a.user.name }}
+              </a>
+              <span>{{ a.description }} {{ a.item_type | singular }}</span>
+              <a *ngIf="a.item_id && a.item_name" class="activity-item-content__link"
+                [routerLink]="['/content/', a.item_type, a.item_id ]">{{ a.item_name }}</a>
+            </p>
+            <time class="activity-item-content__time" [attr.datetime]="a.created_at">{{ a.created_at | timeago }}</time>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

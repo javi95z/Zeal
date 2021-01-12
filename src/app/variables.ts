@@ -5,6 +5,9 @@ export const PROJECT_PRIORITY = ["low", "medium", "high"];
 export const PROJECT_STATUS = ["open", "completed", "canceled"];
 export const CONTACT_TYPES = ["customer", "supplier"];
 export const GENDER = ["female", "male"];
+export const DASHBOARD_SETTINGS = {
+  activity_items: 5,
+};
 export const STANDARD_MENU = [
   {
     name: "Dashboard",
@@ -275,7 +278,7 @@ export const PANEL_ACTIONS: PanelAction[] = [
 export const RESOURCE_ICONS: any[] = [
   {
     key: "user",
-    icon: "accounts-alt"
+    icon: "accounts-alt",
   },
   {
     key: "projects",
@@ -291,11 +294,11 @@ export const RESOURCE_ICONS: any[] = [
   },
   {
     key: "roles",
-    icon: "badge-check"
+    icon: "badge-check",
   },
   {
     key: "contacts",
-    icon: "account-box-phone"
+    icon: "account-box-phone",
   },
 ];
 export const COLORS = [

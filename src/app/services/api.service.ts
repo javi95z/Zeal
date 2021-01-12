@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment as env } from "@env/environment";
 import { ApiCollection, ApiResource } from "@models";
 import { ToastService } from "./toast.service";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -145,5 +146,9 @@ export class ApiService<T> {
         .then((res) => resolve(res))
         .catch((rej) => reject(rej));
     });
+  }
+
+  public getActivityLogs(id: number, body?: object): Observable<any> {
+    return this.http.post<object>(`${env.urlApi}/logs/${id}`, body);
   }
 }

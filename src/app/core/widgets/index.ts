@@ -1,3 +1,4 @@
+export * from "./activity/activity.component";
 export * from "./pie-chart/pie-chart.component";
 export * from "./profile-box/profile-box.component";
 export * from "./progress-track/progress-track.component";

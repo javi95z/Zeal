@@ -1,0 +1,25 @@
+@import "~app/variables";
+
+.activity {
+  &-item {
+    &-content {
+      border-bottom: 1px solid rgba(33, 33, 33, 0.05);
+      margin-left: 30px;
+      padding-bottom: 15px;
+      &__link {
+        color: $zeal;
+        font-weight: 500;
+        margin-right: 5px;
+        text-transform: capitalize;
+        &:last-child {
+          margin-left: 5px;
+        }
+      }
+      &__time {
+        color: $gray;
+        display: block;
+        font-size: small;
+      }
+    }
+  }
+}
