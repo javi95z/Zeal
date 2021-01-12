@@ -12,6 +12,6 @@ export class ActivityWidget {
   protected isSameAsPrevious(i: number) {
     if (i < 1) return false;
     const collection = this.data["data"];
-    return collection[i].user.id === collection[i - 1].user.id;
+    return collection[i].user?.id === collection[i - 1].user?.id;
   }
 }

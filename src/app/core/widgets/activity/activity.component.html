@@ -4,17 +4,17 @@
       <h6 class="panel-title txt-dark">
         <i class="zmdi zmdi-calendar-note"></i>Timeline
       </h6>
+      <small class="panel-subtitle">Latest activity from my network</small>
     </div>
     <div class="clearfix"></div>
   </div>
   <div class="panel-wrapper collapse in">
     <div class="panel-body">
       <div class="streamline user-activity">
-        <div class="sl-item activity-item" *ngFor="let a of data.data; let i = index">
+        <div class="activity-item" *ngFor="let a of data.data; let i = index">
           <!-- Profile image - Hide for the same repeated user -->
-          <div *ngIf="!isSameAsPrevious(i)"
-            class="sl-avatar avatar avatar-sm avatar-circle">
-            <img *ngIf="a.user" class="img-responsive img-circle" [src]="a.user.profile_img" alt="avatar">
+          <div *ngIf="!isSameAsPrevious(i)" class="activity-item-avatar">
+            <div *ngIf="a.user" [zAvatar]="a.user.profile_img" circled="40"></div>
           </div>
           <div class="activity-item-content">
             <p class="txt-dark inline-block">
