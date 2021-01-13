@@ -29,6 +29,7 @@ import {
 import {
   PieChartWidget,
   ProfileBoxComponent,
+  TextBoxComponent,
   ProgressTrackComponent,
   ProjectListWidget,
   TaskListWidget,
@@ -67,6 +68,7 @@ const widgets = [
   PieChartWidget,
   ProgressTrackComponent,
   ProfileBoxComponent,
+  TextBoxComponent,
   ProjectListWidget,
   TaskListWidget,
   TeamListWidget,

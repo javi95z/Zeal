@@ -1,0 +1,22 @@
+<div class="panel card-view" *ngIf="data">
+  <div class="panel-heading small-panel-heading relative">
+    <div class="pull-left">
+      <h6 class="panel-title">{{ data.title }}</h6>
+    </div>
+    <div class="clearfix"></div>
+    <div class="head-overlay"></div>
+  </div>
+  <div class="panel-wrapper collapse in">
+    <div class="panel-body row pa-0">
+      <div class="sm-data-box">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 text-center data-wrap-left">
+              <p>{{ data.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
