@@ -155,6 +155,11 @@ export const TASK_FIELDS: Field[] = [
     options: PROJECT_STATUS,
   },
   {
+    key: "estimated_hours",
+    label: "Estimated hours",
+    type: "number",
+  },
+  {
     key: "start_date",
     label: "Start date",
     type: "date",

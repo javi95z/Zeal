@@ -12,6 +12,7 @@ export class Task {
   name: string;
   priority: Priority;
   project?: any;
+  estimated_hours?: number;
   start_date?: string | Date;
   status: Status;
   user?: any;

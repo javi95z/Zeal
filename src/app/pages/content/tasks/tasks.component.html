@@ -68,6 +68,15 @@
             </td>
           </ng-container>
 
+          <!-- Estimated Hours Column -->
+          <ng-container matColumnDef="estimated_hours">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estimated</th>
+            <td *matCellDef="let element">
+              <ng-container *ngIf="element.estimated_hours">{{ element.estimated_hours }} hrs</ng-container>
+              <ng-container *ngIf="!element.estimated_hours">-</ng-container>
+            </td>
+          </ng-container>
+
           <!-- Status Column -->
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>

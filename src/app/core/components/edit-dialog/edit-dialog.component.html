@@ -7,6 +7,11 @@
         <input matInput type="text" [formControlName]="field.key" [placeholder]="field.label">
       </mat-form-field>
 
+      <!-- Number fields -->
+      <mat-form-field *ngSwitchCase="'number'">
+        <input matInput type="number" [formControlName]="field.key" [placeholder]="field.label">
+      </mat-form-field>
+
       <!-- Email fields -->
       <mat-form-field *ngSwitchCase="'email'">
         <input matInput type="email" [formControlName]="field.key" [placeholder]="field.label">

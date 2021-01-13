@@ -5,6 +5,7 @@ export interface Field {
   label: string;
   type:
     | "text"
+    | "number"
     | "email"
     | "textarea"
     | "select"

@@ -40,7 +40,7 @@ export class DashboardComponent extends MasterClass<User> {
   }
 
   protected getTimeline() {
-    const body = { amount: this.settings.activityItems || null };
+    const body = { limit: this.settings.activityItems || null };
     this.activityLogs = this.api.getActivityLogs(this.user.id, body);
   }
 }

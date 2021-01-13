@@ -27,6 +27,7 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
       "project",
       "priority",
       "owner",
+      "estimated_hours",
       "status",
       "start_date",
       "end_date",
