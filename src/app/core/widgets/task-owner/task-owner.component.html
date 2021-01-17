@@ -1,0 +1,28 @@
+<div class="panel card-view">
+  <div class="panel-heading small-panel-heading relative">
+    <div class="pull-left">
+      <h6 class="panel-title">{{ title || 'Task owner'}}</h6>
+    </div>
+    <div class="clearfix"></div>
+    <div class="head-overlay"></div>
+  </div>
+  <div class="panel-wrapper collapse in">
+    <div class="panel-body row pa-0">
+      <div class="sm-data-box">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 text-center data-wrap-right">
+              <z-user-icons [listValues]="[data]" [path]="['/content/users/profile/']" size="50" singleValue="true">
+              </z-user-icons>
+              <button *ngIf="canEdit" class="btn btn-default btn-block btn-outline btn-anim mt-15"
+                (click)="emitAction()">
+                <i class="fa fa-pencil"></i>
+                <span class="btn-text">Change</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,17 +2,10 @@
 <z-error-message *ngIf="error"></z-error-message>
 <div class="row" *ngIf="!isLoading">
   <div class="col-sm-12" *ngIf="!error">
-    <z-panel-header
-      [title]="resource?.name"
-      [menu]="menu"
-      (action)="onAction($event)"
-    ></z-panel-header>
+    <z-panel-header [title]="resource?.name" [menu]="menu" (action)="onAction($event)"></z-panel-header>
     <div class="panel-wrapper collapse in">
-      <mat-tab-group
-        animationDuration="0ms"
-        [selectedIndex]="tabs.selectedTab"
-        (selectedIndexChange)="tabs.tabChanged($event)"
-      >
+      <mat-tab-group animationDuration="0ms" [selectedIndex]="tabs.selectedTab"
+        (selectedIndexChange)="tabs.tabChanged($event)">
         <!-- Details tab -->
         <mat-tab label="Details">
           <div class="panel-body row">
@@ -27,13 +20,10 @@
                     <tr>
                       <td>Project</td>
                       <td>
-                        <a
-                          *ngIf="resource.project"
-                          [routerLink]="[
+                        <a *ngIf="resource.project" [routerLink]="[
                             '/admin/projects/profile',
                             resource.project.id
-                          ]"
-                        >
+                          ]">
                           {{ resource.project.name }}
                         </a>
                         <a class="table-button" (click)="editProject()">
@@ -44,13 +34,8 @@
                     <tr>
                       <td>Owner</td>
                       <td>
-                        <z-user-icons
-                          *ngIf="resource.user"
-                          [listValues]="[resource.user]"
-                          path="/admin/users/profile"
-                          size="25"
-                          singleValue="true"
-                        >
+                        <z-user-icons *ngIf="resource.user" [listValues]="[resource.user]" path="/admin/users/profile"
+                          size="25" singleValue="true">
                         </z-user-icons>
                         <a class="table-button" (click)="editOwner()">
                           <i class="zmdi zmdi-edit"></i>Change
