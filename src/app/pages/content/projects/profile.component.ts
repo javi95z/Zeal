@@ -12,11 +12,11 @@ import { Observable } from "rxjs";
 })
 export class ProjectProfile extends DetailClass<Project> implements OnInit {
   hasPermissions: Observable<boolean>;
-  project: Project;
   currentUser: User;
   progressData: object;
   tasksCount: number;
   membersCount: number;
+  estimatedHours: Observable<number>;
   @ViewChild("members") members: UserListWidget;
 
   constructor(injector: Injector) {
@@ -27,15 +27,14 @@ export class ProjectProfile extends DetailClass<Project> implements OnInit {
   }
 
   async ngOnInit() {
-    this.getResource().then((o) => {
-      if (!o) return;
-      this.buildProgressTrack();
-      this.hasPermissions = this.checkPermissions();
-    });
+    await this.getResource();
+    this.buildProgressTrack();
+    this.hasPermissions = this.checkPermissions();
   }
 
   protected countTasks = (n: number) => (this.tasksCount = n);
   protected countMembers = (n: number) => (this.membersCount = n);
+  protected countHours = (n) => (this.estimatedHours = n);
 
   protected buildProfileBox(): Observable<object> {
     return new Observable((observer) => {

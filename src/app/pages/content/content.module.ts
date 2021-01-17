@@ -6,6 +6,7 @@ import {
   ProjectsComponent,
   ProjectProfile,
   TasksComponent,
+  TaskProfile,
 } from "./";
 import { CoreModule } from "@core/core.module";
 import { LayoutModule } from "@pages/layout/layout.module";
@@ -16,6 +17,7 @@ import { LayoutModule } from "@pages/layout/layout.module";
     ProjectsComponent,
     ProjectProfile,
     TasksComponent,
+    TaskProfile,
   ],
   imports: [LayoutModule, CoreModule, RouterModule.forChild(routes)],
 })

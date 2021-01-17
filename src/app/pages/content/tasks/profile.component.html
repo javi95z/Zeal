@@ -1,0 +1,17 @@
+<z-error-message *ngIf="error"></z-error-message>
+<div class="row" *ngIf="resource">
+  <div class="col-lg-3 col-xs-12">
+    <!-- Profile box -->
+    <z-profile-box [data]="buildProfileBox() | async" hasIcon="true" [canEdit]="hasPermissions | async"
+      (editAction)="editResource()">
+    </z-profile-box>
+
+    <!-- Description widget -->
+    <z-text-box [data]="buildTextBox() | async"></z-text-box>
+  </div>
+
+  <div class="col-lg-3 col-xs-12">
+    <!-- Task owner -->
+    <z-task-owner [data]="resource.user" [canEdit]="hasPermissions | async" (action)="editOwner()"></z-task-owner>
+  </div>
+</div>
