@@ -8,7 +8,7 @@ import { ADMIN_MENU } from "@zeal/variables";
   styleUrls: ["./sidebar.component.scss"]
 })
 export class SidebarAdmin {
-  protected menuItems: MenuItem[];
+  menuItems: MenuItem[];
 
   constructor() {
     this.menuItems = ADMIN_MENU;

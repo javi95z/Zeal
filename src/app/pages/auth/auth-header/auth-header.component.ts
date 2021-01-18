@@ -9,8 +9,11 @@ import { Router } from "@angular/router";
 })
 export class AuthHeaderComponent implements OnInit {
   dict = AUTH_TEXTS;
+  currentUrl: string;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.currentUrl = this.router.url;
+  }
 
   ngOnInit() {}
 }

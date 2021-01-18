@@ -9,7 +9,7 @@ import { STANDARD_MENU, RESOURCE_ICONS } from "@zeal/variables";
   styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit {
-  protected menuItems: MenuItem[];
+  menuItems: MenuItem[];
   favorites: FavoriteMenuItem[];
 
   constructor(private fav: FavoritesService) {

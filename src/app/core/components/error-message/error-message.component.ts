@@ -29,7 +29,7 @@ export class ErrorMessageComponent implements OnInit {
     this.title = "Page not found";
   }
 
-  protected goBack(): void {
+  goBack(): void {
     this.location.back();
   }
 }

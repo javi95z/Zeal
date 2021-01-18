@@ -29,6 +29,7 @@ export class PieChartWidget implements OnInit {
 }
 
 interface PieChartData {
+  title: string;
   resource: string;
   labels: _Label[];
 }

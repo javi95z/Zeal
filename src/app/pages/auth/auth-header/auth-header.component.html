@@ -6,11 +6,11 @@
     </a>
   </div>
   <div class="form-group mb-0 pull-right">
-    <ng-container *ngIf="router.url == '/auth/login'">
+    <ng-container *ngIf="currentUrl == '/auth/login'">
       <span class="inline-block pr-10">{{ dict.noAccount }}</span>
       <a class="navbar-button btn" [routerLink]="['signup']">{{ dict.signUp }}</a>
     </ng-container>
-    <ng-container *ngIf="router.url == '/auth/signup'">
+    <ng-container *ngIf="currentUrl == '/auth/signup'">
       <span class="inline-block pr-10">{{ dict.alreadyAccount }}</span>
       <a class="navbar-button btn" [routerLink]="['login']">{{ dict.logIn }}</a>
     </ng-container>

@@ -7,8 +7,8 @@ import { Component, Output, EventEmitter } from "@angular/core";
 })
 export class PanelSearchComponent {
   @Output() searchQuery = new EventEmitter<string>();
-  private searchOn = false;
+  searchOn = false;
 
-  protected onSearch = (event: string) => this.searchQuery.next(event);
-  protected toggleSearch = () => (this.searchOn = !this.searchOn);
+  onSearch = (event: string) => this.searchQuery.next(event);
+  toggleSearch = () => (this.searchOn = !this.searchOn);
 }
