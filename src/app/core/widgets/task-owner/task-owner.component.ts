@@ -4,6 +4,7 @@ import { User } from "@models";
 @Component({
   selector: "z-task-owner",
   templateUrl: "./task-owner.component.html",
+  styleUrls: ["../widgets.scss"],
 })
 export class TaskOwnerWidget {
   @Input() data: User;
