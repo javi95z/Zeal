@@ -143,6 +143,16 @@ h6 {
     color: #fff;
   }
 }
+.btn-dashed {
+  border-bottom: 1px dashed $darkgray;
+  color: $darkgray;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 20px;
+  i {
+    margin-right: 5px;
+  }
+}
 
 // Panels
 .panel {
@@ -235,16 +245,6 @@ mat-tab-group {
     }
     &:last-of-type > td {
       border-bottom: none;
-    }
-  }
-  td .table-button {
-    border-bottom: 1px dashed $darkgray;
-    color: $darkgray;
-    cursor: pointer;
-    font-size: 12px;
-    margin-left: 20px;
-    i {
-      margin-right: 5px;
     }
   }
 }

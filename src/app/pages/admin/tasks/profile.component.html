@@ -26,7 +26,7 @@
                           ]">
                           {{ resource.project.name }}
                         </a>
-                        <a class="table-button" (click)="editProject()">
+                        <a class="btn-dashed" (click)="editProject()">
                           <i class="zmdi zmdi-edit"></i>Assign project
                         </a>
                       </td>
@@ -37,7 +37,7 @@
                         <z-user-icons *ngIf="resource.user" [listValues]="[resource.user]" path="/admin/users/profile"
                           size="25" singleValue="true">
                         </z-user-icons>
-                        <a class="table-button" (click)="editOwner()">
+                        <a class="btn-dashed" (click)="editOwner()">
                           <i class="zmdi zmdi-edit"></i>Change
                         </a>
                       </td>

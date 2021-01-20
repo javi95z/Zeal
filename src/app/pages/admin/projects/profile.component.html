@@ -27,7 +27,7 @@
                         <span *ngIf="resource.contact">
                           <a [routerLink]="['/admin/contacts/profile', resource.contact.id]">{{ resource.contact.name }}</a>
                         </span>
-                        <a class="table-button" (click)="editContact()">
+                        <a class="btn-dashed" (click)="editContact()">
                           <i class="zmdi zmdi-edit"></i>Change
                         </a>
                       </td>

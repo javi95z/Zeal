@@ -33,7 +33,7 @@ export class TaskProfile extends DetailClass<Task> implements OnInit {
         title: this.resource.name,
         resourceName: this.resourceName.slice(0, -1),
         subtitle: this.resource.code,
-        icon: "case",
+        icon: "arrow-merge",
         stats: [
           {
             label: "estimated hours",

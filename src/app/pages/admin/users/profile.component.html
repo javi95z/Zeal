@@ -35,7 +35,7 @@
                         <span *ngIf="resource.role">
                           <a [routerLink]="['/admin/roles/profile', resource.role.id]">{{ resource.role.name }}</a>
                         </span>
-                        <a class="table-button" (click)="editRole()">
+                        <a class="btn-dashed" (click)="editRole()">
                           <i class="zmdi zmdi-edit"></i>Change
                         </a>
                       </td>
@@ -49,7 +49,7 @@
                       <td>
                         <span *ngIf="resource.active">Yes</span>
                         <span *ngIf="!resource.active">No</span>
-                        <a class="table-button" (click)="toggleActive()">
+                        <a class="btn-dashed" (click)="toggleActive()">
                           <i class="zmdi zmdi-edit"></i>
                           <span *ngIf="resource.active">Deactivate</span>
                           <span *ngIf="!resource.active">Activate</span>
