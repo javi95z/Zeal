@@ -12,6 +12,30 @@
 
   <div class="col-lg-3 col-xs-12">
     <!-- Task owner -->
-    <z-task-owner [data]="resource.user" [canEdit]="hasPermissions | async" (action)="editOwner()"></z-task-owner>
+    <z-small-well title="Task owner" [canEdit]="hasPermissions | async" (action)="editOwner()">
+      <ng-container extra-content>
+        <z-user-icons [listValues]="[resource.user]" [path]="['/content/users/profile/']" size="50" singleValue="true">
+        </z-user-icons>
+      </ng-container>
+    </z-small-well>
+
+    <div class="row">
+      <!-- Task status -->
+      <div class="col-lg-6 col-xs-12">
+        <z-small-well title="Status">
+          <ng-container extra-content>
+            <div [zStatus]="resource.status" class="fs-lg"></div>
+          </ng-container>
+        </z-small-well>
+      </div>
+      <!-- Task priority -->
+      <div class="col-lg-6 col-xs-12">
+        <z-small-well title="Priority">
+          <ng-container extra-content>
+            <div [zPriority]="resource.priority" class="fs-lgr"></div>
+          </ng-container>
+        </z-small-well>
+      </div>
+    </div>
   </div>
 </div>

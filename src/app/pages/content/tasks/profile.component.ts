@@ -35,7 +35,10 @@ export class TaskProfile extends DetailClass<Task> implements OnInit {
         subtitle: this.resource.code,
         icon: "case",
         stats: [
-          { label: "estimated hours", number: this.resource.estimated_hours | 0 },
+          {
+            label: "estimated hours",
+            number: this.resource.estimated_hours | 0,
+          },
         ],
       };
       observer.next(pb);

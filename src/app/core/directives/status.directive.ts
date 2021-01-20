@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from "@angular/core";
 
 @Directive({
-  selector: "[zStatus]"
+  selector: "[zStatus]",
 })
 export class StatusDirective implements OnInit {
   @Input("zStatus") value: string;
@@ -21,6 +21,7 @@ export class StatusDirective implements OnInit {
     const color = this.getColor();
     container.classList.add("label");
     container.classList.add(`bg-${color}`);
+    container.style.fontSize = "inherit";
     container.textContent = this.value;
     return container;
   }
