@@ -1,0 +1,21 @@
+$lightgray: #d6d6d6;
+
+.range-dates {
+  p {
+    font-size: larger;
+  }
+  .divider {
+    align-items: center;
+    color: $lightgray;
+    display: flex;
+    margin: 12px 0;
+    &::before,
+    &::after {
+      content: "";
+      background-color: $lightgray;
+      flex-grow: 1;
+      height: 1px;
+      margin: 10px;
+    }
+  }
+}

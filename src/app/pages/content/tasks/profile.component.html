@@ -37,5 +37,27 @@
         </z-small-well>
       </div>
     </div>
+
+    <!-- Range of dates -->
+    <z-small-well title="Range of dates" class="range-dates">
+      <ng-container extra-content>
+        <div class="">
+          <p class="">{{ resource.start_date | date: "shortDate" || '-' }}</p>
+          <div class="divider">Until</div>
+          <p class="">{{ resource.end_date | date: "shortDate" || '-' }}</p>
+        </div>
+      </ng-container>
+    </z-small-well>
+
+    <!-- Parent project -->
+    <z-small-well title="Project" *ngIf="resource.project">
+      <ng-container extra-content>
+        <i class="zmdi zmdi-case mb-10 fs-xxlg"></i>
+        <h5>{{ resource.project.name }}</h5>
+        <a class="btn-dashed" [routerLink]="['/content/projects/profile/', resource.project.id]">
+          <i class="zmdi zmdi-eye"></i>Go to project
+        </a>
+      </ng-container>
+    </z-small-well>
   </div>
 </div>
