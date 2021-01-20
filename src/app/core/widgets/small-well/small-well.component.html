@@ -1,7 +1,7 @@
 <div class="panel card-view">
   <div class="panel-heading">
     <div class="pull-left">
-      <h6 class="panel-title">{{ title || 'Task owner'}}</h6>
+      <h6 class="panel-title">{{ title }}</h6>
     </div>
     <div class="right-menu">
       <a *ngIf="canEdit" class="menu-option" (click)="emitAction()" matTooltip="Edit">
@@ -16,8 +16,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-xs-12 text-center data-wrap-right">
-              <z-user-icons [listValues]="[data]" [path]="['/content/users/profile/']" size="50" singleValue="true">
-              </z-user-icons>
+              <ng-content select="[extra-content]"></ng-content>
             </div>
           </div>
         </div>

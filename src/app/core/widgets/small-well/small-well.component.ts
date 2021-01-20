@@ -2,12 +2,11 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { User } from "@models";
 
 @Component({
-  selector: "z-task-owner",
-  templateUrl: "./task-owner.component.html",
+  selector: "z-small-well",
+  templateUrl: "./small-well.component.html",
   styleUrls: ["../widgets.scss"],
 })
-export class TaskOwnerWidget {
-  @Input() data: User;
+export class SmallWellWidget {
   @Input() title: string;
   @Input() canEdit = false;
   @Output() action = new EventEmitter<boolean>();
