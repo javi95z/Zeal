@@ -3,7 +3,7 @@
   <div class="panel-heading">
     <div class="pull-left">
       <h6 class="panel-title txt-dark">
-        <i class="zmdi zmdi-case"></i>Projects
+        <i class="zmdi zmdi-case"></i>Task reports
       </h6>
     </div>
     <div class="right-menu" *ngIf="!isLoading">
@@ -25,55 +25,38 @@
       <div class="table-responsive" *ngIf="dataSource.data.length">
         <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
           (matSortChange)="sortData($event)">
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <!-- User Column -->
+          <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
             <td *matCellDef="let element">
-              <i class="zmdi zmdi-case zmdi-hc-lg ml-10 mr-15"></i>
-              <a [routerLink]="['/content/projects/profile', element.id]">{{ element.name }}</a>
-              <p class="fs-sm" zOverflow="600">{{ element?.description }}</p>
+              <z-user-icons *ngIf="element?.user" [listValues]="[element.user]" [path]="['/content/users/profile/']"
+                singleValue="true">
+              </z-user-icons>
             </td>
           </ng-container>
 
-          <!-- Contact Column -->
-          <ng-container matColumnDef="contact">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
-            <td *matCellDef="let element">
-              <a *ngIf="element?.contact" [routerLink]="['/admin/contacts/profile', element.id]">
-                {{ element?.contact.name }}
-              </a>
-            </td>
-          </ng-container>
-
-          <!-- Priority Column -->
-          <ng-container matColumnDef="priority">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Priority</th>
+          <!-- Invested hours Column -->
+          <ng-container matColumnDef="invested_hours">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Invested hours</th>
             <td *matCellDef="let element" class="text-center">
-              <div [zPriority]="element.priority"></div>
+              <ng-container *ngIf="element.invested_hours">{{ element.invested_hours }} hrs</ng-container>
+              <ng-container *ngIf="!element.invested_hours">-</ng-container>
             </td>
           </ng-container>
 
-          <!-- Status Column -->
-          <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+          <!-- Comment Column -->
+          <ng-container matColumnDef="comment">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Comment</th>
             <td *matCellDef="let element">
-              <div [zStatus]="element.status"></div>
+              {{ element?.comment }}
             </td>
           </ng-container>
 
-          <!-- Start date Column -->
-          <ng-container matColumnDef="start_date">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Start date</th>
+          <!-- Date Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
             <td *matCellDef="let element">
-              <span>{{ element?.start_date | date: "shortDate" }}</span>
-            </td>
-          </ng-container>
-
-          <!-- End date Column -->
-          <ng-container matColumnDef="end_date">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>End date</th>
-            <td *matCellDef="let element">
-              <span [zExpiredDate]="element?.end_date">{{ element?.end_date | date: "shortDate" }}</span>
+              {{ element?.created_at | date: "shortDate" }}
             </td>
           </ng-container>
 
@@ -89,7 +72,7 @@
           <tr mat-header-row *matHeaderRowDef="columns"></tr>
           <tr mat-row *matRowDef="let row; columns: columns"></tr>
         </table>
-        <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
+        <mat-paginator [length]="dataSource.data.length" [pageSize]="4" [pageSizeOptions]="[4, 8, 12]"
           showFirstLastButtons>
         </mat-paginator>
       </div>

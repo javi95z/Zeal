@@ -46,7 +46,7 @@
           <div class="divider">Until</div>
           <p [zExpiredDate]="resource.end_date">{{ resource.end_date | date: "shortDate" || '-' }}</p>
           <p class="mt-10 fs-sm">
-            {{ getDateDifference(resource.start_date, resource.end_date) }}
+            {{ getDateDifference(resource.start_date, resource.end_date) | async }}
           </p>
         </div>
       </ng-container>
@@ -62,5 +62,9 @@
         </a>
       </ng-container>
     </z-small-well>
+  </div>
+
+  <div class="col-lg-6 col-xs-12">
+    <z-reports [task]="resource?.id"></z-reports>
   </div>
 </div>

@@ -5,6 +5,7 @@ import {
   DashboardComponent,
   ProjectsComponent,
   ProjectProfile,
+  ReportsComponent,
   TasksComponent,
   TaskProfile,
 } from "./";
@@ -16,6 +17,7 @@ import { LayoutModule } from "@pages/layout/layout.module";
     DashboardComponent,
     ProjectsComponent,
     ProjectProfile,
+    ReportsComponent,
     TasksComponent,
     TaskProfile,
   ],
