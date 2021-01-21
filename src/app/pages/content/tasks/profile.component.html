@@ -41,10 +41,13 @@
     <!-- Range of dates -->
     <z-small-well title="Range of dates" class="range-dates">
       <ng-container extra-content>
-        <div class="">
-          <p class="">{{ resource.start_date | date: "shortDate" || '-' }}</p>
+        <div>
+          <p>{{ resource.start_date | date: "shortDate" || '-' }}</p>
           <div class="divider">Until</div>
-          <p class="">{{ resource.end_date | date: "shortDate" || '-' }}</p>
+          <p [zExpiredDate]="resource.end_date">{{ resource.end_date | date: "shortDate" || '-' }}</p>
+          <p class="mt-10 fs-sm">
+            {{ getDateDifference(resource.start_date, resource.end_date) }}
+          </p>
         </div>
       </ng-container>
     </z-small-well>
