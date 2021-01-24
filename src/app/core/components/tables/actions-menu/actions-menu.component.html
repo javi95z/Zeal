@@ -4,7 +4,7 @@
     <i class="zmdi zmdi-more"></i>
   </button>
   <ul class="dropdown-menu" role="menu">
-    <li>
+    <li *ngIf="actions.includes('FAVORITE')">
       <a (click)="onEvent('FAVORITE')" [routerLink]="">
         <ng-container *ngIf="isFavorite; else elseTemplate">
           <i class="zmdi zmdi-star"></i>Unfavorite
@@ -14,13 +14,14 @@
         </ng-template>
       </a>
     </li>
-    <li>
+    <li *ngIf="actions.includes('EDIT')">
+
       <a (click)="onEvent('EDIT')" [routerLink]="">
         <i class="zmdi zmdi-edit"></i>Edit
       </a>
     </li>
-    <li class="divider"></li>
-    <li>
+    <li *ngIf="actions.length > 1" class="divider"></li>
+    <li *ngIf="actions.includes('DELETE')">
       <a (click)="onEvent('DELETE')" [routerLink]="">
         <i class="zmdi zmdi-delete"></i>Delete
       </a>

@@ -62,9 +62,9 @@
 
           <!-- Actions Column -->
           <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td *matCellDef="let element; let i = index" class="action-buttons">
-              <z-actions-menu [isFavorite]="checkFavorite(element.id)" (event)="onAction($event, element, i)">
+              <z-actions-menu [isFavorite]="checkFavorite(element.id)" [hide]="['FAVORITE', 'EDIT']" (event)="onAction($event, element, i)">
               </z-actions-menu>
             </td>
           </ng-container>

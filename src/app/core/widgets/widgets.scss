@@ -1,6 +1,7 @@
 @import "~app/variables";
 
 .widget {
+  overflow: hidden;
   .panel-heading {
     .panel-title {
       .zmdi {
