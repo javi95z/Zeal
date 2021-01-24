@@ -55,7 +55,7 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
       project: this.project ? this.project : null,
     };
     super.createData(data).then((res) => {
-      if (!res) return;
+      if (_.isEmpty(res.data)) return;
       this.suggestToSelfAssignTask().then((o) => {
         if (o) this.selfAssign(res.data.id, res.index);
       });
@@ -63,9 +63,7 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
   }
 
   protected selfAssign(id: number, index: number) {
-    const obj = {
-      user: this.currentUser.id,
-    };
+    const obj = { user: this.currentUser.id };
     this.api.updateOne(this.resourceName, obj, id).then((res) => {
       this.editDataTable(res.data, index);
     });

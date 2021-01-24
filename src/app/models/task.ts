@@ -16,6 +16,7 @@ export class Task {
   start_date?: string | Date;
   status: Status;
   user?: any;
+  times?: any;
   updated_at?: string | Date;
   created_at?: string | Date;
 

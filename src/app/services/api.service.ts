@@ -31,10 +31,10 @@ export class ApiService<T> {
    * @param uri URI Resource name
    * @param id Resource identifier
    */
-  public getOne(uri: string, id: number): Promise<ApiResource<any>> {
+  public getOne(uri: string, id: number, params?: object): Promise<ApiResource<any>> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<ApiResource<any>>(`${env.urlApi}/${uri}/${id}`, null)
+        .post<ApiResource<any>>(`${env.urlApi}/${uri}/${id}`, params)
         .toPromise()
         .then((res) => resolve(res))
         .catch((rej) => reject(rej));

@@ -17,12 +17,14 @@ export class TaskProfile extends DetailClass<Task> implements OnInit {
     super(injector);
     this.resourceName = "tasks";
     this.fields = TASK_FIELDS;
-    this.auth.user$.subscribe((e) => (this.currentUser = e));
   }
 
-  async ngOnInit() {
-    await this.getResource();
-    this.hasPermissions = this.checkPermissions();
+  ngOnInit() {
+    this.auth.user$.subscribe(async (e) => {
+      this.currentUser = e;
+      await this.getResource({ with: ["times"] });
+      this.hasPermissions = this.checkPermissions();
+    });
   }
 
   protected buildProfileBox(): Observable<object> {
@@ -38,6 +40,10 @@ export class TaskProfile extends DetailClass<Task> implements OnInit {
           {
             label: "estimated hours",
             number: this.resource.estimated_hours | 0,
+          },
+          {
+            label: "invested hours",
+            number: this.resource.times.invested_hours | 0,
           },
         ],
       };

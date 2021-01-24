@@ -32,12 +32,12 @@ export class DetailClass<T> extends MasterClass<T> {
   }
 
   // Get one resource from route parameters
-  public async getResource(): Promise<T> {
+  public async getResource(params?: object): Promise<T> {
     const id = this.route.snapshot.params.id;
     if (!id) return;
     await this.api
-      .getOne(this.resourceName, id)
-      .then((res) => (this.resource = res.data as T))
+      .getOne(this.resourceName, id, params)
+      .then((res) => (this.resource = {...res.data, ...res?.meta}))
       .catch(() => (this.error = true))
       .finally(() => (this.isLoading = false));
     return this.resource || null;
