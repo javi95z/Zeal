@@ -48,7 +48,12 @@ export class ListClass<T> extends MasterClass<T> {
     if (!sort.active || sort.direction === "") return;
     this.dataSource.data = data.sort((a, b) => {
       const isAsc = sort.direction === "asc";
-      return this.compare(a[sort.active], b[sort.active], isAsc);
+      if (sort.active.includes("date") && sort.direction === "desc") {
+        const getTime = (e) => new Date(e["created_at"]).getTime();
+        return this.compare(getTime(a), getTime(b), isAsc);
+      } else {
+        return this.compare(a[sort.active], b[sort.active], isAsc);
+      }
     });
   }
 

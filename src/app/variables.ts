@@ -260,6 +260,19 @@ export const CONTACT_FIELDS: Field[] = [
     validators: [Validators.maxLength(100)],
   },
 ];
+export const REPORT_FIELDS: Field[] = [
+  {
+    key: "invested_hours",
+    label: "Invested Hours",
+    type: "number",
+    validators: [Validators.required],
+  },
+  {
+    key: "comment",
+    label: "Comment",
+    type: "textarea",
+  },
+];
 export const PANEL_ACTIONS: PanelAction[] = [
   {
     name: "Edit",

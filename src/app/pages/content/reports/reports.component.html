@@ -10,7 +10,7 @@
       <!-- Filter in results -->
       <z-panel-search (searchQuery)="doFilter($event)"></z-panel-search>
       <!-- Create new item -->
-      <a *ngIf="canCreate" class="menu-option" (click)="createData()" matTooltip="Create new">
+      <a *ngIf="canCreate" class="menu-option" (click)="create()" matTooltip="Create new">
         <i class="zmdi zmdi-plus"></i>
       </a>
       <!-- Refresh content -->
@@ -24,7 +24,7 @@
     <div class="table-wrap">
       <div class="table-responsive" *ngIf="dataSource.data.length">
         <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
-          (matSortChange)="sortData($event)">
+          (matSortChange)="sortData($event)" matSortActive="date" matSortDirection="desc" matSortDisableClear>
           <!-- User Column -->
           <ng-container matColumnDef="user">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
@@ -64,7 +64,8 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef></th>
             <td *matCellDef="let element; let i = index" class="action-buttons">
-              <z-actions-menu [isFavorite]="checkFavorite(element.id)" [hide]="['FAVORITE', 'EDIT']" (event)="onAction($event, element, i)">
+              <z-actions-menu [isFavorite]="checkFavorite(element.id)" [hide]="['FAVORITE', 'EDIT']"
+                (event)="onAction($event, element, i)">
               </z-actions-menu>
             </td>
           </ng-container>
@@ -72,7 +73,7 @@
           <tr mat-header-row *matHeaderRowDef="columns"></tr>
           <tr mat-row *matRowDef="let row; columns: columns"></tr>
         </table>
-        <mat-paginator [length]="dataSource.data.length" [pageSize]="4" [pageSizeOptions]="[4, 8, 12]"
+        <mat-paginator [length]="dataSource.data.length" [pageSize]="6" [pageSizeOptions]="[6, 10]"
           showFirstLastButtons>
         </mat-paginator>
       </div>
