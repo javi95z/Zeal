@@ -16,7 +16,7 @@ export class ProjectProfile extends DetailClass<Project> implements OnInit {
   progressData: object;
   tasksCount: number;
   membersCount: number;
-  estimatedHours: Observable<number>;
+  hoursManagement: object;
   @ViewChild("members") members: UserListWidget;
 
   constructor(injector: Injector) {
@@ -34,7 +34,7 @@ export class ProjectProfile extends DetailClass<Project> implements OnInit {
 
   protected countTasks = (n: number) => (this.tasksCount = n);
   protected countMembers = (n: number) => (this.membersCount = n);
-  protected countHours = (n) => (this.estimatedHours = n);
+  protected countHours = (n: object) => (this.hoursManagement = n);
 
   protected buildProfileBox(): Observable<object> {
     return new Observable((observer) => {

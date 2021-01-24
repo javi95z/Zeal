@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Injector } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Injector,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 import { ListClass } from "@core/classes";
 import { Task, User, Field } from "@models";
 import { TASK_FIELDS } from "@zeal/variables";
@@ -14,6 +21,7 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
   @Input() canCreate = true;
   @Input() canRefresh = true;
   @Input() canAssign = false;
+  @Output() hoursManagement = new EventEmitter<HoursManagement>();
   currentUser: User;
   statusWidget: any;
   priorityWidget: any;
@@ -47,6 +55,7 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     this.initData(this.buildParams()).finally(() => {
       this.buildStatusWidget();
       this.buildPriorityWidget();
+      this.countHours();
     });
   }
 
@@ -102,30 +111,39 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     return {
       user: this.currentUser && !this.project ? [this.currentUser.id] : null,
       project: this.project ? [this.project] : userProjects,
-      with: !this.project ? ["stats"] : null,
+      with: !this.project ? ["stats"] : ["times"],
     };
   }
 
   // Build data to populate status widget
   protected buildStatusWidget() {
-    if (!this.stats) return;
-    this.stats["status"].map((o) => (o.color = getColor(o.name)));
+    if (!this.meta["stats"]) return;
+    this.meta["stats"]["status"].map((o) => (o.color = getColor(o.name)));
     this.statusWidget = {
       title: "Status of tasks",
       resource: this.resourceName,
-      labels: this.stats["status"],
+      labels: this.meta["stats"]["status"],
     };
   }
 
   // Build data to populate priority widget
   protected buildPriorityWidget() {
-    if (!this.stats) return;
-    this.stats["priority"].map((o) => (o.color = getColor(o.name)));
+    if (!this.meta["stats"]) return;
+    this.meta["stats"]["priority"].map((o) => (o.color = getColor(o.name)));
     this.priorityWidget = {
       title: "Priority of tasks",
       resource: this.resourceName,
-      labels: this.stats["priority"],
+      labels: this.meta["stats"]["priority"],
     };
+  }
+
+  protected countHours() {
+    if (_.isEmpty(this.meta["times"])) return;
+    const res: HoursManagement = {
+      invested_hours: this.meta["times"]["invested_hours"],
+      estimated_hours: this.meta["times"]["estimated_hours"],
+    };
+    this.hoursManagement.next(res);
   }
 
   // Suggest to self assign task to current user
@@ -137,4 +155,9 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
       .then((o) => (response = !!o));
     return response;
   }
+}
+
+export interface HoursManagement {
+  estimated_hours: number;
+  invested_hours: number;
 }

@@ -5,13 +5,29 @@
     <z-profile-box [data]="buildProfileBox() | async" hasIcon="true" [canEdit]="hasPermissions | async"
       (editAction)="editResource()">
     </z-profile-box>
+    <!-- Hours control -->
+    <z-small-well title="Hours management" *ngIf="hoursManagement">
+      <ng-container extra-content>
+        <div class="row">
+          <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+            <span class="weight-500 uppercase-font block">Estimated</span>
+            <span class="txt-dark block counter">{{ hoursManagement.estimated_hours }} hours</span>
+          </div>
+          <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+            <span class="weight-500 uppercase-font block">Invested</span>
+            <span class="txt-dark block counter">{{ hoursManagement.invested_hours }} hours</span>
+          </div>
+        </div>
+      </ng-container>
+    </z-small-well>
     <!-- Progress tracking -->
     <z-progress-track *ngIf="progressData" [data]="progressData"></z-progress-track>
   </div>
   <div class="col-lg-9 col-xs-12">
     <!-- Project tasks -->
     <z-tasks [project]="resource.id" [hideCols]="['project', 'start_date']" [canCreate]="hasPermissions | async"
-      canRefresh="true" [canAssign]="hasPermissions | async" (countValues)="countTasks($event)">
+      canRefresh="true" [canAssign]="hasPermissions | async" (countValues)="countTasks($event)"
+      (hoursManagement)="countHours($event)">
     </z-tasks>
     <!-- Project members -->
     <z-user-list #members [project]="resource.id" altTitle="Members" (countValues)="countMembers($event)">

@@ -15,7 +15,7 @@ export class ListClass<T> extends MasterClass<T> {
   @Input() hideCols?: string[];
   @Output() countValues = new EventEmitter<number>();
   public columns: string[];
-  public stats: [];
+  public meta: object[];
   selection: SelectionModel<T>;
   dataSource = new MatTableDataSource<T>();
   isLoading = true;
@@ -70,7 +70,7 @@ export class ListClass<T> extends MasterClass<T> {
       .getAll(this.resourceName, body || null)
       .then((res) => {
         this.renderView(res.data);
-        if (res.meta?.stats) this.stats = res.meta.stats;
+        if (res.meta) this.meta = res.meta;
       })
       .finally(() => (this.isLoading = false));
     return true;

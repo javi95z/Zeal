@@ -5,9 +5,5 @@ export interface ApiResource<T> {
 
 export interface ApiCollection<T> {
   data: T[];
-  meta?: MetaData;
-}
-
-interface MetaData {
-  stats?: [];
+  meta?: any;
 }
