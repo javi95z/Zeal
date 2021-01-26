@@ -73,7 +73,7 @@
         <!-- Teams tab -->
         <mat-tab label="Teams ({{teamsCount}})">
           <button mat-button (click)="addTeam()" zPanelButton>Add team</button>
-          <z-admin-teams [user]="resource.id" (countValues)="countTeams($event)"></z-admin-teams>
+          <z-admin-teams [users]="resource.id" (countValues)="countTeams($event)"></z-admin-teams>
         </mat-tab>
         <!-- Tasks tab -->
         <mat-tab label="Tasks ({{tasksCount}})">

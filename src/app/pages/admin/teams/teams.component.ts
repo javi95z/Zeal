@@ -8,7 +8,7 @@ import { TEAM_FIELDS } from "@zeal/variables";
   templateUrl: "./teams.component.html",
 })
 export class TeamsAdmin extends ListClass<Team> implements OnInit {
-  @Input() user?: number;
+  @Input() users: number[];
 
   constructor(injector: Injector) {
     super(injector);
@@ -19,7 +19,7 @@ export class TeamsAdmin extends ListClass<Team> implements OnInit {
 
   ngOnInit() {
     const body = {};
-    if (this.user) body["user"] = this.user;
+    if (this.users) body["user"] = [this.users];
     this.initData(body);
   }
 }

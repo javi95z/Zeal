@@ -9,7 +9,7 @@ import { TEAM_FIELDS } from "@zeal/variables";
   styleUrls: ["../widgets.scss"],
 })
 export class TeamListWidget extends DataWidgetClass<Team> implements OnInit {
-  @Input() user?: number;
+  @Input() users: number[];
 
   constructor(injector: Injector) {
     super(injector);
@@ -20,7 +20,7 @@ export class TeamListWidget extends DataWidgetClass<Team> implements OnInit {
   ngOnInit(): void {
     this.params = {
       limit: this.limit || null,
-      user: this.user,
+      user: this.users,
     };
     this.refreshData();
   }
@@ -31,7 +31,7 @@ export class TeamListWidget extends DataWidgetClass<Team> implements OnInit {
   }
 
   createNew() {
-    const body = { users: [this.user] };
+    const body = { users: this.users };
     super.createNew(body);
   }
 }

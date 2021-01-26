@@ -8,9 +8,9 @@ import { USER_FIELDS } from "@zeal/variables";
   templateUrl: "./users.component.html",
 })
 export class UsersAdmin extends ListClass<User> implements OnInit {
-  @Input() project?: number;
-  @Input() team?: number;
-  @Input() role?: number;
+  @Input() projects: number[];
+  @Input() teams: number[];
+  @Input() role: number;
 
   constructor(injector: Injector) {
     super(injector);
@@ -21,16 +21,16 @@ export class UsersAdmin extends ListClass<User> implements OnInit {
 
   ngOnInit() {
     const body = {};
-    if (this.project) body["project"] = this.project;
-    if (this.team) body["team"] = this.team;
+    if (this.projects) body["project"] = [this.projects];
+    if (this.teams) body["team"] = [this.teams];
     if (this.role) body["role"] = this.role;
     this.initData(body);
   }
 
   createUser() {
     const data = {};
-    if (this.project) data["projects"] = [this.project];
-    if (this.team) data["teams"] = [this.team];
+    if (this.projects) data["projects"] = [this.projects];
+    if (this.teams) data["teams"] = [this.teams];
     if (this.role) data["role"] = this.role;
     this.createDialog(data);
   }

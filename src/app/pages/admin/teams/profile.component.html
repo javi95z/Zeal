@@ -38,7 +38,7 @@
         <!-- Members tab -->
         <mat-tab label="Members ({{membersCount}})">
           <button mat-button (click)="addMember()" zPanelButton>Add members</button>
-          <z-admin-users [team]="resource.id" (countValues)="countMembers($event)"></z-admin-users>
+          <z-admin-users [teams]="[resource.id]" (countValues)="countMembers($event)"></z-admin-users>
         </mat-tab>
       </mat-tab-group>
     </div>

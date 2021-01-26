@@ -9,7 +9,7 @@ import { USER_FIELDS } from "@zeal/variables";
   styleUrls: ["../widgets.scss"],
 })
 export class UserListWidget extends DataWidgetClass<User> implements OnInit {
-  @Input() project: number;
+  @Input() projects: number[];
   @Input() altTitle: string;
 
   constructor(injector: Injector) {
@@ -19,7 +19,7 @@ export class UserListWidget extends DataWidgetClass<User> implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.project) this.params = { project: this.project };
+    if (this.projects) this.params = { project: this.projects };
     this.refreshData();
   }
 

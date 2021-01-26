@@ -8,7 +8,7 @@
     </div>
     <!-- Teams widget -->
     <div class="dashboard-row__item dashboard-widget">
-      <z-team-list [user]="user.id" [limit]="settings.widgetItems" canCreate="true" canCollapse="true" canRefresh="true" title="My teams">
+      <z-team-list [users]="[user.id]" [limit]="settings.widgetItems" canCreate="true" canCollapse="true" canRefresh="true" title="My teams">
       </z-team-list>
     </div>
     <!-- Tasks widget -->

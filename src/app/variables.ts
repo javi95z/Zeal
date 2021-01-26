@@ -292,7 +292,7 @@ export const PANEL_ACTIONS: PanelAction[] = [
 ];
 export const RESOURCE_ICONS: any[] = [
   {
-    key: "user",
+    key: "users",
     icon: "accounts-alt",
   },
   {

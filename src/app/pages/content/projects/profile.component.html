@@ -30,7 +30,7 @@
       (hoursManagement)="countHours($event)">
     </z-tasks>
     <!-- Project members -->
-    <z-user-list #members [project]="resource.id" altTitle="Members" (countValues)="countMembers($event)">
+    <z-user-list #members [projects]="[resource.id]" altTitle="Members" (countValues)="countMembers($event)">
       <div class="menu-option" extra-options *ngIf="hasPermissions | async">
         <a (click)="addMembers()" matTooltip="Add member">
           <i class="zmdi zmdi-account-add"></i>
