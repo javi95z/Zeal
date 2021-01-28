@@ -5,6 +5,24 @@
     <z-profile-box [data]="buildProfileBox() | async" hasIcon="true" [canEdit]="hasPermissions | async"
       (editAction)="editResource()">
     </z-profile-box>
+    <div class="row">
+      <!-- Project status -->
+      <div class="col-lg-6 col-xs-12">
+        <z-small-well title="Status">
+          <ng-container extra-content>
+            <div [zStatus]="resource.status" class="fs-lg"></div>
+          </ng-container>
+        </z-small-well>
+      </div>
+      <!-- Project priority -->
+      <div class="col-lg-6 col-xs-12">
+        <z-small-well title="Priority">
+          <ng-container extra-content>
+            <div [zPriority]="resource.priority" class="fs-lgr"></div>
+          </ng-container>
+        </z-small-well>
+      </div>
+    </div>
     <!-- Hours control -->
     <z-small-well title="Hours management" *ngIf="hoursManagement">
       <ng-container extra-content>

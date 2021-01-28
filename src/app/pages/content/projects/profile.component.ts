@@ -82,7 +82,7 @@ export class ProjectProfile extends DetailClass<Project> implements OnInit {
    * Add members to project
    */
   protected addMembers() {
-    const params = { project: this.resource.id };
+    const params = { project: [this.resource.id] };
     this.editManyToMany<User>("users", params).then((a) => {
       if (!a) return;
       this.members.refreshData();

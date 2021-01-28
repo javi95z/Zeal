@@ -82,7 +82,7 @@ export class TasksComponent extends ListClass<Task> implements OnInit {
     // Fetch all resources
     let list: User[];
     await this.api
-      .getAll("users", { project: this.project })
+      .getAll("users", { project: [this.project] })
       .then((o) => (list = o.data));
 
     const field: Field = {
