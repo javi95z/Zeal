@@ -1,0 +1,67 @@
+<div class="auth-form ml-auto mr-auto no-float">
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <div class="mb-30">
+        <h3 class="text-center txt-light mb-10">Welcome to <strong class="txt-zeal">Zeal</strong></h3>
+        <h6 class="text-center txt-grey">{{ dict.enterDetails }}</h6>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-7">
+      <div class="form-wrap">
+        <form [formGroup]="loginForm" (ngSubmit)="logIn()">
+          <!-- Email field -->
+          <div class="form-group" [class.has-error]="f.email.errors && f.email.dirty">
+            <label class="txt-light mb-10" for="inputEmail">Email address</label>
+            <input type="email" class="form-control" formControlName="email" name="email" id="inputEmail"
+              placeholder="Enter email" />
+          </div>
+          <!-- Password field -->
+          <div class="form-group" [class.has-error]="f.password.errors && f.password.dirty">
+            <div class="clearfix"></div>
+            <a class="txt-light block mb-10 pull-right font-12" [routerLink]="['']">Forgot password?</a>
+            <label class="txt-light mb-10" for="inputPassword">Password</label>
+            <input type="password" class="form-control" formControlName="password" name="password" required
+              id="inputPassword" placeholder="Enter password">
+          </div>
+          <!-- Remember me field -->
+          <div class="form-group">
+            <mat-checkbox class="txt-light">{{ dict.keepLogin }}</mat-checkbox>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-zeal btn-rounded" [disabled]="!loginForm.valid">
+              {{ dict.logIn }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="demo mt-30">
+        <div class="panel panel-default card-view">
+          <div class="panel-wrapper collapse in">
+            <div class="panel-body text-center">
+              <p>This is a testing environment.</p>
+              <p>You can log in as an Administrator using <strong>admin@admin.com</strong>.</p>
+              <p>Every user password is <strong>password</strong>.</p>
+              <div class="demo-social">
+                <a class="btn btn-linkedin btn-icon-anim btn-square" href="https://www.linkedin.com/in/javier-monfort/"
+                  target="_blank" matTooltip="Go to LinkedIn">
+                  <i class="zmdi zmdi-linkedin"></i>
+                </a>
+                <a class="btn btn-github btn-icon-anim btn-square" href="https://github.com/javi95z" target="_blank"
+                  matTooltip="Go to GitHub">
+                  <i class="zmdi zmdi-github"></i>
+                </a>
+              </div>
+              <div class="demo-footer">
+                <p>Developed by Javier MS <i class="zmdi zmdi-lamp"></i></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

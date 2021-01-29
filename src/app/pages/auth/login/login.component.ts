@@ -1,21 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { AuthService, InitService } from "@services";
 import { AUTH_TEXTS } from "@zeal/dict";
 
 @Component({
   templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   dict = AUTH_TEXTS;
   loginForm: FormGroup;
 
-  constructor(
-    private router: Router,
-    private auth: AuthService,
-    private init: InitService
-  ) {}
+  constructor(private auth: AuthService, private init: InitService) {}
 
   get f() {
     return this.loginForm.controls;

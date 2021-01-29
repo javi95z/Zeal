@@ -1,0 +1,43 @@
+.auth-form {
+  width: 800px;
+  .demo {
+    color: #fff !important;
+    .panel {
+      background: rgb(255 255 255 / 18%);
+    }
+    &-social {
+      display: flex;
+      justify-content: space-evenly;
+      margin: 20px 0;
+      .btn {
+        &:hover,
+        &:focus {
+          color: white !important;
+        }
+        &:hover {
+          transform: translate(0px, -5px) scale(1.1);
+        }
+        &-linkedin {
+          background-color: #0e76a8;
+        }
+        &-github {
+          background-color: #171515;
+        }
+        i {
+          padding: 12px;
+        }
+      }
+    }
+    &-footer {
+      p {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 15px;
+        margin-top: 20px;
+        text-align: right;
+        i {
+          color: yellow;
+        }
+      }
+    }
+  }
+}
