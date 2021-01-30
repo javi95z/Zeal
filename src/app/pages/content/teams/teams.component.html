@@ -1,0 +1,76 @@
+<div class="panel panel-default card-view panel-refresh">
+  <z-loading *ngIf="isLoading"></z-loading>
+  <div class="panel-heading">
+    <div class="pull-left">
+      <h6 class="panel-title txt-dark">
+        <i class="zmdi zmdi-group-work"></i>Teams
+      </h6>
+    </div>
+    <div class="right-menu" *ngIf="!isLoading">
+      <!-- Filter in results -->
+      <z-panel-search (searchQuery)="doFilter($event)"></z-panel-search>
+      <!-- Create new item -->
+      <a *ngIf="canCreate" class="menu-option" (click)="create()" matTooltip="Create new">
+        <i class="zmdi zmdi-plus"></i>
+      </a>
+      <!-- Refresh content -->
+      <a *ngIf="canRefresh" class="menu-option" (click)="loadData()" matTooltip="Refresh data">
+        <i class="zmdi zmdi-replay"></i>
+      </a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-wrapper collapse in">
+    <div class="table-wrap">
+      <div class="table-responsive" *ngIf="dataSource.data.length">
+        <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
+          (matSortChange)="sortData($event)">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td *matCellDef="let element">
+              <i class="zmdi zmdi-group-work zmdi-hc-lg ml-10 mr-15"></i>
+              <a [routerLink]="['/content/teams/profile', element.id]">{{ element.name }}</a>
+              <p class="fs-sm" zOverflow="600">{{ element?.description }}</p>
+            </td>
+          </ng-container>
+
+          <!-- Members Column -->
+          <ng-container matColumnDef="members">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Members </th>
+            <td *matCellDef="let element">
+              <z-user-icons [listValues]="element?.users" path="/admin/users/profile"></z-user-icons>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td *matCellDef="let element; let i = index" class="action-buttons">
+              <z-actions-menu [isFavorite]="checkFavorite(element.id)" (event)="onAction($event, element, i)">
+              </z-actions-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columns"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns"></tr>
+        </table>
+        <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[8, 20, 50, 100]"
+          showFirstLastButtons>
+        </mat-paginator>
+      </div>
+      <z-no-results *ngIf="!isLoading && dataSource.data.length === 0"></z-no-results>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Status chart -->
+  <div class="col-lg-3" *ngIf="statusWidget">
+    <z-pie-chart [data]="statusWidget"></z-pie-chart>
+  </div>
+  <!-- Priority chart -->
+  <div class="col-lg-3" *ngIf="priorityWidget">
+    <z-pie-chart [data]="priorityWidget"></z-pie-chart>
+  </div>
+</div>

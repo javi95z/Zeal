@@ -21,6 +21,11 @@ export const STANDARD_MENU = [
     link: "tasks",
     icon: "arrow-merge",
   },
+  {
+    name: "Teams",
+    link: "teams",
+    icon: "group-work",
+  },
 ];
 export const ADMIN_MENU = [
   {

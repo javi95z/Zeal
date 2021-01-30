@@ -8,6 +8,7 @@ import {
   ReportsComponent,
   TasksComponent,
   TaskProfile,
+  TeamsComponent,
 } from "./";
 import { CoreModule } from "@core/core.module";
 import { LayoutModule } from "@pages/layout/layout.module";
@@ -20,6 +21,7 @@ import { LayoutModule } from "@pages/layout/layout.module";
     ReportsComponent,
     TasksComponent,
     TaskProfile,
+    TeamsComponent,
   ],
   imports: [LayoutModule, CoreModule, RouterModule.forChild(routes)],
 })

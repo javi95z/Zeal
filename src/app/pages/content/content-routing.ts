@@ -7,6 +7,7 @@ import {
   ProjectProfile,
   TasksComponent,
   TaskProfile,
+  TeamsComponent,
 } from "./";
 
 export const routes: Routes = [
@@ -20,6 +21,8 @@ export const routes: Routes = [
       { path: "tasks/profile/:id", component: TaskProfile },
       { path: "projects", component: ProjectsComponent },
       { path: "projects/profile/:id", component: ProjectProfile },
+      { path: "teams", component: TeamsComponent },
+      // { path: "teams/profile/:id", component: TeamProfile },
       { path: "**", redirectTo: "/content/dashboard" },
     ],
   },
