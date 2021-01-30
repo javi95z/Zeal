@@ -43,7 +43,7 @@ export class TeamProfileAdmin extends DetailClass<Team> implements OnInit {
    * Add members to team
    */
   addMember() {
-    const params = { team: this.resource.id };
+    const params = { team: [this.resource.id] };
     this.editManyToMany<User>("users", params);
   }
 }

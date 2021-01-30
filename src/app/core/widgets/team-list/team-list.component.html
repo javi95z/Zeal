@@ -3,8 +3,9 @@
   <div class="panel-heading">
     <div class="pull-left">
       <h6 class="panel-title txt-dark">
-        <i class="zmdi zmdi-group-work"></i>{{ title || 'Teams' }}
-        <z-label [value]="data?.length" *ngIf="data"></z-label>
+        <a [routerLink]="['/content/teams']">
+          <i class="zmdi zmdi-group-work"></i>{{ title || 'Teams' }}
+        </a>
       </h6>
     </div>
     <div class="right-menu">
@@ -37,7 +38,7 @@
               <!-- Data rows -->
               <tr *ngFor="let item of data" class="data-table__row">
                 <td>
-                  <a [routerLink]="['/teams/profile', item.id]">{{ item.name }}</a>
+                  <a [routerLink]="['/content/teams/profile', item.id]">{{ item.name }}</a>
                 </td>
                 <td class="text-right">
                   <z-user-icons [listValues]="item.users" path="/users/profile" size="30" overlap="true"></z-user-icons>

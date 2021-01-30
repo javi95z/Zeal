@@ -1,4 +1,5 @@
 <z-loading *ngIf="isLoading"></z-loading>
+<button mat-button (click)="createData()" *ngIf="!isLoading" zPanelButton>Create contact</button>
 <div class="table-wrap" *ngIf="!isLoading && dataSource.data.length">
   <div class="table-responsive">
     <table class="table table-hover display pb-30" mat-table [dataSource]="dataSource" matSort
