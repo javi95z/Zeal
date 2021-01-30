@@ -173,6 +173,11 @@ h6 {
     }
     .right-menu {
       float: right;
+      @media (max-width: 768px) {
+        .menu-option span {
+          display: none;
+        }
+      }
       .menu-option {
         align-items: center;
         cursor: pointer;
