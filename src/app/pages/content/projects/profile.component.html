@@ -38,8 +38,6 @@
         </div>
       </ng-container>
     </z-small-well>
-    <!-- Progress tracking -->
-    <z-progress-track *ngIf="progressData" [data]="progressData"></z-progress-track>
   </div>
   <div class="col-lg-9 col-xs-12">
     <!-- Project tasks -->
@@ -47,13 +45,22 @@
       canRefresh="true" [canAssign]="hasPermissions | async" (countValues)="countTasks($event)"
       (hoursManagement)="countHours($event)">
     </z-tasks>
-    <!-- Project members -->
-    <z-user-list #members [projects]="[resource.id]" altTitle="Members" (countValues)="countMembers($event)">
-      <div class="menu-option" extra-options *ngIf="hasPermissions | async">
-        <a (click)="addMembers()" matTooltip="Add member">
-          <i class="zmdi zmdi-account-add"></i>
-        </a>
+
+    <div class="row">
+      <!-- Progress tracking -->
+      <div class="col-lg-6 col-xs-12">
+        <z-progress-track *ngIf="progressData" [data]="progressData"></z-progress-track>
       </div>
-    </z-user-list>
+      <!-- Project members -->
+      <div class="col-lg-6 col-xs-12">
+        <z-user-list #members [projects]="[resource.id]" altTitle="Members" (countValues)="countMembers($event)">
+          <div class="menu-option" extra-options *ngIf="hasPermissions | async">
+            <a (click)="addMembers()" matTooltip="Add member">
+              <i class="zmdi zmdi-account-add"></i>
+            </a>
+          </div>
+        </z-user-list>
+      </div>
+    </div>
   </div>
 </div>
