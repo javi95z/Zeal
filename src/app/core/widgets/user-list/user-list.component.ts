@@ -10,6 +10,7 @@ import { USER_FIELDS } from "@zeal/variables";
 })
 export class UserListWidget extends DataWidgetClass<User> implements OnInit {
   @Input() projects: number[];
+  @Input() teams: number[];
   @Input() altTitle: string;
 
   constructor(injector: Injector) {
@@ -19,7 +20,10 @@ export class UserListWidget extends DataWidgetClass<User> implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.projects) this.params = { project: this.projects };
+    this.params = {
+      project: this.projects || null,
+      team: this.teams || null
+    };
     this.refreshData();
   }
 

@@ -9,6 +9,7 @@ import {
   TasksComponent,
   TaskProfile,
   TeamsComponent,
+  TeamProfile
 } from "./";
 import { CoreModule } from "@core/core.module";
 import { LayoutModule } from "@pages/layout/layout.module";
@@ -22,6 +23,7 @@ import { LayoutModule } from "@pages/layout/layout.module";
     TasksComponent,
     TaskProfile,
     TeamsComponent,
+    TeamProfile,
   ],
   imports: [LayoutModule, CoreModule, RouterModule.forChild(routes)],
 })

@@ -8,6 +8,7 @@ import { PROJECT_FIELDS } from "@zeal/variables";
   templateUrl: "./projects.component.html",
 })
 export class ProjectsComponent extends ListClass<Project> implements OnInit {
+  @Input() team: number[];
   @Input() canCreate = true;
   @Input() canRefresh = true;
   currentUser: User;
@@ -42,7 +43,8 @@ export class ProjectsComponent extends ListClass<Project> implements OnInit {
   // Build parameters to fetch data from API
   private buildParams(): object {
     return {
-      user: this.currentUser ? [this.currentUser.id] : null,
+      user: this.currentUser && !this.team ? [this.currentUser.id] : null,
+      team: this.team ? this.team : null,
     };
   }
 }

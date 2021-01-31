@@ -1,7 +1,7 @@
 import { Component, OnInit, Injector, ViewChild } from "@angular/core";
-import { Project, User } from "@models";
 import { DetailClass } from "@core/classes";
 import { UserListWidget } from "@core/widgets";
+import { Project, User } from "@models";
 import { PROJECT_FIELDS } from "@zeal/variables";
 import { Observable } from "rxjs";
 

@@ -1,0 +1,20 @@
+<z-error-message *ngIf="error"></z-error-message>
+<div class="row" *ngIf="resource">
+  <div class="col-lg-3 col-xs-12">
+    <!-- Profile box -->
+    <z-profile-box [data]="buildProfileBox() | async" hasIcon="true" [canEdit]="hasPermissions | async"
+      (editAction)="editResource()">
+    </z-profile-box>
+
+    <!-- Description widget -->
+    <z-text-box [data]="buildTextBox() | async"></z-text-box>
+
+    <!-- Team members -->
+    <z-user-list [teams]="[resource.id]" altTitle="Members"></z-user-list>
+  </div>
+
+  <div class="col-lg-9 col-xs-12">
+    <!-- Team projects -->
+    <z-projects [team]="[resource.id]"></z-projects>
+  </div>
+</div>
