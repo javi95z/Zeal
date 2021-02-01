@@ -20,7 +20,7 @@
           <span class="btn-text">edit</span>
           <input class="upload" type="file">
         </div>
-        <div class="profile-image-overlay"></div>
+        <div class="profile-cover-pic__background" [ngStyle]="{'background-image': 'url(' + data.backgroundImage + ')'}"></div>
       </div>
       <div class="profile-info text-center">
         <!-- Profile image -->

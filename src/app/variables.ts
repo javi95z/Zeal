@@ -57,12 +57,7 @@ export const ADMIN_MENU = [
     name: "Contacts",
     link: "contacts",
     icon: "account-box-phone",
-  },
-  {
-    name: "Other",
-    link: "other",
-    icon: "more",
-  },
+  }
 ];
 export const PROJECT_FIELDS: Field[] = [
   {

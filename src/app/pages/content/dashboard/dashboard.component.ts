@@ -31,6 +31,7 @@ export class DashboardComponent extends MasterClass<User> {
       title: this.user.name,
       subtitle: this.user.role?.name,
       profileImage: this.user.profile_img,
+      backgroundImage: this.user?.background_img
     };
     return pb;
   }
