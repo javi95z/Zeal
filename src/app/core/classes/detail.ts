@@ -37,7 +37,7 @@ export class DetailClass<T> extends MasterClass<T> {
     if (!id) return;
     await this.api
       .getOne(this.resourceName, id, params)
-      .then((res) => (this.resource = {...res.data, ...res?.meta}))
+      .then((res) => (this.resource = { ...res.data, ...res?.meta }))
       .catch(() => (this.error = true))
       .finally(() => (this.isLoading = false));
     return this.resource || null;
@@ -53,15 +53,18 @@ export class DetailClass<T> extends MasterClass<T> {
    * Show editing dialog
    * @param fields List of fields in variables
    */
-  public editResource() {
-    this.dialog
+  public async editResource(): Promise<boolean> {
+    let result : T;
+    await this.dialog
       .editDialog<T>({
         object: this.resource,
         fields: this.fields,
       })
-      .subscribe((result) => {
-        if (result) this.performUpdateRequest(result);
-      });
+      .toPromise()
+      .then(o => result = o);
+    if (!result) return;
+    await this.performUpdateRequest(result);
+    return true;
   }
 
   /**

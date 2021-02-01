@@ -3,7 +3,7 @@
   <div class="col-lg-3 col-xs-12">
     <!-- Profile box -->
     <z-profile-box [data]="buildProfileBox() | async" hasIcon="true" [canEdit]="hasPermissions | async"
-      (editAction)="editResource()">
+      (editAction)="edit()">
     </z-profile-box>
 
     <!-- Description widget -->
