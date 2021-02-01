@@ -1,6 +1,6 @@
 <div class="auth-form ml-auto mr-auto no-float">
   <div class="row">
-    <div class="col-sm-12 col-xs-12">
+    <div class="col-xs-12">
       <div class="mb-30">
         <h3 class="text-center txt-light mb-10">Welcome to <strong class="txt-zeal">Zeal</strong></h3>
         <h6 class="text-center txt-grey">{{ dict.enterDetails }}</h6>
@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-7">
+    <div class="col-md-7">
       <div class="form-wrap">
         <form [formGroup]="loginForm" (ngSubmit)="logIn()">
           <!-- Email field -->
@@ -20,7 +20,7 @@
           <!-- Password field -->
           <div class="form-group" [class.has-error]="f.password.errors && f.password.dirty">
             <div class="clearfix"></div>
-            <a class="txt-light block mb-10 pull-right font-12" [routerLink]="['']">Forgot password?</a>
+            <!-- <a class="txt-light block mb-10 pull-right font-12" [routerLink]="['']">Forgot password?</a> -->
             <label class="txt-light mb-10" for="inputPassword">Password</label>
             <input type="password" class="form-control" formControlName="password" name="password" required
               id="inputPassword" placeholder="Enter password">
@@ -37,8 +37,9 @@
         </form>
       </div>
     </div>
-    <div class="col-sm-5">
-      <div class="demo mt-30">
+    <div class="col-md-5">
+      <!-- Demo information -->
+      <div class="demo ma-30">
         <div class="panel panel-default card-view">
           <div class="panel-wrapper collapse in">
             <div class="panel-body text-center">

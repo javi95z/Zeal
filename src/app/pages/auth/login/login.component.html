@@ -1,6 +1,6 @@
 <div class="auth-form ml-auto mr-auto no-float" style="max-width: 400px;">
   <div class="row">
-    <div class="col-sm-12 col-xs-12">
+    <div class="col-xs-12">
       <div class="mb-30">
         <h3 class="text-center txt-light mb-10">Welcome to <strong class="txt-zeal">Zeal</strong></h3>
         <h6 class="text-center txt-grey">{{ dict.enterDetails }}</h6>
@@ -16,7 +16,7 @@
           <!-- Password field -->
           <div class="form-group" [class.has-error]="f.password.errors && f.password.dirty">
             <div class="clearfix"></div>
-            <a class="txt-light block mb-10 pull-right font-12" [routerLink]="['']">Forgot password?</a>
+            <!-- <a class="txt-light block mb-10 pull-right font-12" [routerLink]="['']">Forgot password?</a> -->
             <label class="txt-light mb-10" for="inputPassword">Password</label>
             <input type="password" class="form-control" formControlName="password" name="password" required
               id="inputPassword" placeholder="Enter password">
