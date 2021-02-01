@@ -37,7 +37,7 @@ export class AuthService {
 
   /**
    * Login with credentials
-   * @param loginData Object { user, password }
+   * @param loginData Object { email, password }
    */
   doLogin(loginData: object): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -64,9 +64,10 @@ export class AuthService {
    * @param loginData Object with sign up user
    */
   doSignUp(signupData: object): Promise<any> {
+    console.log(signupData);
     return new Promise((resolve, reject) => {
       this.http
-        .post(env.urlApi + "/users", signupData)
+        .post(env.urlApi + "/auth/signup", signupData)
         .toPromise()
         .then(
           (res) => resolve(res),

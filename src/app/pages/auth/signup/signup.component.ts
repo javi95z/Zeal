@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { AuthService, InitService } from "@services";
 import { AUTH_TEXTS } from "@zeal/dict";
 import { GENDER } from "@zeal/variables";
@@ -13,11 +12,7 @@ export class SignupComponent implements OnInit {
   genderOpts = GENDER;
   signupForm: FormGroup;
 
-  constructor(
-    private router: Router,
-    private auth: AuthService,
-    private init: InitService
-  ) {}
+  constructor(private auth: AuthService, private init: InitService) {}
 
   get f() {
     return this.signupForm.controls;
@@ -33,7 +28,11 @@ export class SignupComponent implements OnInit {
   signUp() {
     this.auth.doSignUp(this.signupForm.value).then((o) => {
       if (!o) return;
-      this.auth.doLogin(this.signupForm.value).then((res) => {
+      const loginData = {
+        email: this.f.email.value,
+        password: this.f.password.value,
+      };
+      this.auth.doLogin(loginData).then((res) => {
         if (!res) return;
         this.init.initAppRequests();
       });
